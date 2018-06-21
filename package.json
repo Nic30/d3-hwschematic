@@ -1,0 +1,31 @@
+{
+  "name": "d3-hwschematic",
+  "version": "0.0.1",
+  "description": "D3.js and ELK based schematic visualizer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nic30/d3-hwschematic.git"
+  },
+  "keywords": [
+    "D3.js",
+    "hardware",
+    "schematic",
+    "RTL",
+    "viewer",
+    "components",
+    "diagram"
+  ],
+  "author": "Michal Orsak",
+  "license": "EPL-1.0",
+  "bugs": {
+    "url": "https://github.com/Nic30/d3-hwschematic/issues"
+  },
+  "homepage": "https://github.com/Nic30/d3-hwschematic#readme",
+  "dependencies": {
+    "d3": "^5.5.0"
+  }
+}
