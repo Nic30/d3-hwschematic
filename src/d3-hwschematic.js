@@ -1,4 +1,4 @@
-
+var addMarkers = require("./markers").addMarkers; 
 var d3elk = require("./elk-d3.js").default;
 
 /**

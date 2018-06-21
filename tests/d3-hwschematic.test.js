@@ -10,5 +10,9 @@ describe('{unit}: Testing scheme rendering', () => {
     .attr("height", 500);  
 
   var sch = new HwSchematic(svg);
+  it("SVG has root g and markers", function() {
+	  var gs = svg.selectAll("g");
+	  expect(gs.size()).toBe(8 + 1); // markers + zoom
+  });
   
 });

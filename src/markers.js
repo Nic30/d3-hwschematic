@@ -13,7 +13,7 @@ var PORT_MARKERS = {
 	    	"OUTPUT": "#southOutPortMarker"},
 };
 
-function addMarkers(svg, PORT_PIN_SIZE) {
+export function addMarkers(svg, PORT_PIN_SIZE) {
     var defs = svg.append("defs");
     // real size of marker
     var w = 7;
@@ -59,7 +59,7 @@ function addMarkers(svg, PORT_PIN_SIZE) {
     addMarker("southOutPortMarker",[vertXOffet, 0], 90);
 }
 
-function getIOMarker(d) {
+export function getIOMarker(d) {
     var side = d.properties.portSide;
     var portType = d.direction;
     var marker = PORT_MARKERS[side][portType];
