@@ -1,1 +1,1 @@
-export {default as HwScheme} from "./src/hwscheme";
+export {default as HwSchematic} from "./src/hwschematic";

@@ -18,7 +18,7 @@ function PortConstraints_isSideFixed(val) {
  *  @param svg: root svg element where scheme will be rendered
  *  @note do specify size of svg to have optimal result
  * */
-export default function HwScheme(svg) {
+export default function HwSchematic(svg) {
     var self = this;
     self.PORT_PIN_SIZE = [7, 13];
     self.PORT_HEIGHT = self.PORT_PIN_SIZE[1];
