@@ -8,8 +8,8 @@
     "build": "babel src -D -d dist",
     "prepare": "npm run build",
     "test": "jest",
-    "coverage": "jest --coverage",
-    "coveralls": "jest --coverage && cat ./tests/coverage/lcov.info | coveralls",
+    "coverage": "jest --coverage --collectCoverageFrom=src/*.js",
+    "coveralls": "jest --coverage --collectCoverageFrom=src/*.js && cat ./tests/coverage/lcov.info | coveralls",
     "lint": "eslint src test --ignore-pattern tests/coverage*"
   },
   "repository": {
@@ -49,6 +49,7 @@
     "jest": "latest"
   },
   "jest": {
-    "coverageDirectory": "<rootDir>/tests/coverage"
+    "coverageDirectory": "<rootDir>/tests/coverage",
+    "verbose": true
   }
 }

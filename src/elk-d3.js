@@ -1,4 +1,4 @@
-var ElkWorker = require('./elk-worker.js').default;
+var ElkWorker = require('./elk/elk-worker.js').default;
 
 export default function d3elk() {
   var _d3elk = this; 
