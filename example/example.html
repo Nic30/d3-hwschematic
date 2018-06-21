@@ -2,7 +2,7 @@
 <meta charset="utf-8">
 <head>
   <title>elkjs d3 example ports</title>
-  <script type="text/javascript" src="../node_modules/d3/build/d3.js"></script>
+  <script type="text/javascript" src="../node_modules/d3/dist/d3.js"></script>
   <script type="text/javascript" src="../dist/d3-hwschematic.js"></script>
   <style>
     text {
@@ -80,7 +80,7 @@ var svg = d3.select("body")
     .on("dblclick.zoom", null) // disable zoom on doubleclick
     .append("g");
 
-var cGraph = new ComponentGraph(svg);
+var cGraph = new HwSchematic(svg);
 
 // load the data and render the elements
 d3.json("./example_scheme.json" + MODULE_NAME + "/" + IN_MODULE_NAME, function(error, graph) {
