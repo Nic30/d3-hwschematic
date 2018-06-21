@@ -1,0 +1,23 @@
+dist: trusty
+sudo: false
+git:
+  depth: 1
+cache:
+  apt: true
+language: node_js
+node_js:
+- '7'
+install:
+- npm install coveralls mocha istanbul
+- npm install mocha
+- npm install
+after_script:
+- NODE_ENV=test istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
+deploy:
+  provider: npm
+  user: nic30@seznam.cz
+  on:
+    tags: true
+    branch: master
+  api_key:
+    secure: YVn6OEdJj0FfInQkEzDnfkNEVYK8E0bpe26c4P6n8TjtC0SDxWo0uwRG10uzp17AjiSQwU84l+N1r5/Qw6M8H61pK+WU/e6ed+xutMtQPES09Eu0/3e+z4421zCswVaNEc4odIqcCsFI/fjJaavwl0F2MchwULk1jh+6nHKt07LXBQt2OUsFAv9O1R639efIaii+ScMuxYL8oMXO9lNZ+/bqzpX72UtINv0vRWN7AYkzM2NWv1r6x6abVnpxetqA+0YEetwJ/ww08iAQKnlJNO/rS0G9g498U0CQ59CNFzXxys0iEP0jIRJ+1QXkqo+HcYBnanwQmKkce7XUc9ujQWy28PDWKIk4M1hg/AahXybr8CnqUX1L1vKHKIyZcuO3EaK8jkl26b8PfNQZWsyuPq+m307fW2uR1E2LMaqIVJRFD9y4FIpRsxLbHORjxQb4b0Bk/aKPU8t6tc79kwZ1iR2ufSNEZsvopXz8nytuEU8/x/EUuu5iRl8LNJQDHcsEJrNMSAUii+F9jt9cR/rTFTtIMZw0jNQMEQVPnOKW5uRxmViACDqoXBQ2T+cv/YLatSk1QAhpAvZc//0+yP2m1OHAk7Wj+f37PFGgHMN3WNFDmsvpnzHYJr0ni1UkIkDgeNBq8p1WaoFwFp2NRFI4neJq1EtP389RdCYFK0dlxvE=
