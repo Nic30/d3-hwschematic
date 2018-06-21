@@ -17,7 +17,7 @@ script:
 #- NODE_ENV=test istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
 deploy:
   provider: npm
-  user: nic30@seznam.cz
+  email: nic30@seznam.cz
   on:
     tags: true
     branch: master
