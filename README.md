@@ -6,6 +6,7 @@ D3.js and ELK based schematic visualizer.
 
 ## Features:
 
+* automatic layout
 * hierarchical components expandable on click
 * net selection on click
 * zoom, drag
