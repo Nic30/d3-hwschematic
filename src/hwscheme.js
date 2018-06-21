@@ -1,4 +1,6 @@
 
+var d3elk = require("./elk-d3.js").default;
+
 /**
 * Returns whether the sides of ports are fixed.
 * 
@@ -10,8 +12,13 @@ function PortConstraints_isSideFixed(val) {
    return val == "FREE" || val != "UNDEFINED"
 }
 
-
-function ComponentGraph(svg) {
+/**
+ * HwScheme builds scheme diagrams after bindData(data) is called 
+ * 
+ *  @param svg: root svg element where scheme will be rendered
+ *  @note do specify size of svg to have optimal result
+ * */
+export default function HwScheme(svg) {
     var self = this;
     self.PORT_PIN_SIZE = [7, 13];
     self.PORT_HEIGHT = self.PORT_PIN_SIZE[1];
@@ -31,8 +38,10 @@ function ComponentGraph(svg) {
             return 0;
     }
 
-    /*
+    /**
      * Split bodyText of one to lines and resolve dimensions of body text
+     * 
+     * @param d component node
      * */
     function initBodyTextLines(d) {
         var max = Math.max
@@ -58,9 +67,11 @@ function ComponentGraph(svg) {
         return [bodyTextW, bodyTextH];
     }
 
-    /*
+    /**
      * Init bodyText and resolve size of node from body text and ports 
-     * */
+     * 
+     * @param d component node
+     * * */
     function initNodeSizes(d) {
     	if (d.properties["org.eclipse.elk.noLayout"])
     		return;
@@ -125,6 +136,9 @@ function ComponentGraph(svg) {
         			   max(south[1], north[1]) * self.CHAR_WIDTH);
     }
     
+    /**
+     * @param bodyTexts list of strings
+     * */
     function renderTextLines(bodyTexts) {
         var padTop = self.BODY_TEXT_PADDING[0];
         var padLeft = self.BODY_TEXT_PADDING[3];
@@ -154,10 +168,8 @@ function ComponentGraph(svg) {
     }
     
     self.root = svg.append("g");
-    self.layouter = elk.d3kgraph();
-    function toggleHideChildren(node) {
-    	var h = node.hideChildren = !node.hideChildren;
-    }
+    self.layouter = new d3elk();
+
     /*
      * Set bind graph data to graph rendering engine
      * */
@@ -218,6 +230,10 @@ function ComponentGraph(svg) {
             .enter()
             .append("path")
             .attr("class", "link")
+
+        function toggleHideChildren(node) {
+        	var h = node.hideChildren = !node.hideChildren;
+        }
 
         node.on("click", function (d) {
         	var children;
@@ -379,10 +395,6 @@ function ComponentGraph(svg) {
         // spot node body text
         node.append("text")
             .call(renderTextLines)
-        
-
-
-        
     }
     return self;
 }

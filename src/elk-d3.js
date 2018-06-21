@@ -1,12 +1,11 @@
-var elk;
-(function (elk) {
-  elk.d3kgraph = function() {
-    return init();
-  };
+var ElkWorker = require('./elk-worker.js').default;
+
+export default function d3elk() {
+  var _d3elk = this; 
   /**
    * Convert section from ELK json to svg path string
    */
-  elk.section2svgPath = function (section) {
+  _d3elk.section2svgPath = function (section) {
     var pathBuff = ["M", section.startPoint.x, section.startPoint.y];
     if (section.bendPoints)
       section.bendPoints.forEach(function (bp, i) {
@@ -22,7 +21,6 @@ var elk;
   }
   
   function init() {
-    var d3elk = {},
     dispatch = d3.dispatch("finish"),
     // containers
     nodes = [],
@@ -59,92 +57,73 @@ var elk;
         }
       }
       throw "elk.js library wasn't loaded!";
-    },
+    }
+    var worker = new ElkWorker(layouterScript());
     // the layouter instance
-    layouter;
-    
-    // try to use a worker?
-    if ('<%= worker %>' === 'true' && typeof(Worker) !== 'undefined') {
-      var worker = new Worker(layouterScript());
-      layouter = {
+    var layouter = {
         layout: function(data) {
           worker.postMessage({
             graph: data.graph,
             options: data.options
           });
         }
-      };
-      worker.addEventListener('message', function (e) {
-        graph = e.data;
-        applyLayout(graph);
-      }, false);
-    } 
+    };
+    worker.addEventListener('message', function (e) {
+      graph = e.data;
+      applyLayout(graph);
+    }, false);
 
-    // either we don't want a worker or the worker is not available
-    if (!layouter) {
-      if (typeof ELK !== "undefined") {
-          // elkjs already imported
-        layouter = new ELK({workerUrl:"/static/hls/connections_elk/elk-worker.js"});
-      } else if (typeof module === "object" && module.exports) {
-          layouter = require("elkjs");
-      } else if (typeof $elkjs !== "undefined") {
-        // try to get from global scope, e.g. loaded by bower
-          layouter = $elkjs;
-      } else {
-          throw "elkjs.js library wasn't loaded!"
-      }
-    }
     var NO_LAYOUT = "org.eclipse.elk.noLayout";
     /**
      * Setting the available area, the
      * positions of the layouted graph
      * are currently scaled down.
      */
-    d3elk.size = function(size) {
+    _d3elk.size = function(size) {
       if (!arguments.length) return [width, height];
       width = size[0];
       height = size[1];
       if(graph != null) {
-    	  graph.width = width;
-    	  graph.height = height;
+        graph.width = width;
+        graph.height = height;
       }
-      return d3elk;
+      return _d3elk;
     };
 
     /**
      * Sets the group used to perform 'zoomToFit'.
      */
-    d3elk.transformGroup = function(g) {
+    _d3elk.transformGroup = function(g) {
       if (!arguments.length) return transformGroup;
       transformGroup = g;
-      return d3elk;
+      return _d3elk;
     };
 
-    d3elk.options = function(opts) {
+    _d3elk.options = function(opts) {
       if (!arguments.length) return options;
       options = opts;
-      return d3elk;
+      return _d3elk;
     };
 
     /**
      * Start the layout process.
      */
-    d3elk.start = function() {
+    _d3elk.start = function() {
       // alias applyLayout method
       applyLayout = d3_kgraph_applyLayout;
      
       // start the layouter
       function onSuccess(kgraph)  {
-          graph = kgraph;
-          applyLayout(kgraph);
+        graph = kgraph;
+        applyLayout(kgraph);
       }
-      layouter.layout(graph, {layoutOptions: options}).then(onSuccess, d3elk.onError);
-      return d3elk;
+      layouter.layout(graph, {layoutOptions: options}).then(onSuccess, _d3elk.onError);
+      return _d3elk;
     };
 
-    d3elk.getNodes = function() {
-      if (d3elk.__nodeCache != null)
-        return d3elk.__nodeCache;
+    _d3elk.getNodes = function() {
+      if (_d3elk.__nodeCache != null)
+        return _d3elk.__nodeCache;
 
       var queue = [graph],
           nodes = [],
@@ -158,50 +137,50 @@ var elk;
             });
         }
       }
-      d3elk.__nodeCache = nodes;
+      _d3elk.__nodeCache = nodes;
       return nodes;
     };
 
-    d3elk.getPorts = function() {
-    	if (d3elk.__portsCache != null)
-    		return d3elk.__portsCache;
-    	
-    	var ports = d3.merge(d3elk.getNodes().map(function(n) {
-    		return n.ports || [];
-    	}));
-    	d3elk.__portsCache = ports; 
+    _d3elk.getPorts = function() {
+        if (_d3elk.__portsCache != null)
+            return _d3elk.__portsCache;
+        
+        var ports = d3.merge(_d3elk.getNodes().map(function(n) {
+            return n.ports || [];
+        }));
+        _d3elk.__portsCache = ports; 
     };
 
-    d3elk.getEdges = function() {
-      if (d3elk.__edgesCache != null)
-        return d3elk.__edgesCache;
+    _d3elk.getEdges = function() {
+      if (_d3elk.__edgesCache != null)
+        return _d3elk.__edgesCache;
 
-      d3elk.__edgesCache = graph.edges || [];
+      _d3elk.__edgesCache = graph.edges || [];
 
       var edgesOfChildren = d3.merge(
-    		  d3elk.getNodes()
-    		  .filter(function (n) {
-    			  return !n.hideChildren;
-    		  })
-    		  .map(function(n) {
-        return n.edges || [];
-      }));
+        _d3elk.getNodes()
+        .filter(function (n) {
+         return !n.hideChildren;
+        })
+        .map(function(n) {
+            return n.edges || [];
+        }));
 
-      d3elk.__edgesCache = d3elk.__edgesCache.concat(edgesOfChildren);
-      return d3elk.__edgesCache;
+      _d3elk.__edgesCache = _d3elk.__edgesCache.concat(edgesOfChildren);
+      return _d3elk.__edgesCache;
     };
 
-    d3elk.invalidateCaches = function() {
-        d3elk.__nodeCache = null;
-        d3elk.__portsCache = null;
-        d3elk.__edgesCache = null;
+    _d3elk.invalidateCaches = function() {
+       _d3elk.__nodeCache = null;
+       _d3elk.__portsCache = null;
+       _d3elk.__edgesCache = null;
     };
       
-    d3elk.kgraph = function(root) {
+    _d3elk.kgraph = function(root) {
       if (!arguments.length) return graph;
-    	
+        
       graph = root;
-      d3elk.invalidateCaches();
+      _d3elk.invalidateCaches();
       // alias applyLayout method
         applyLayout = d3_kgraph_applyLayout;
       if (!graph.id)
@@ -209,37 +188,37 @@ var elk;
       if (!graph.properties)
           graph.properties = { 'algorithm': 'layered' };
       if (!graph.properties.algorithm)
-    	  graph.properties.algorithm = 'layered';
+          graph.properties.algorithm = 'layered';
       if (!graph.width)
-    	  graph.width = width;
+          graph.width = width;
       if (!graph.height)
-    	  graph.height = height;
+          graph.height = height;
       
       
-      return d3elk;
+      return _d3elk;
     };
     
-    d3elk.onError = function (e) {
-    	throw e;
+    _d3elk.onError = function (e) {
+      throw e;
     }
     
     /**
      * Clean all layout possitions from nodes, nets and ports
      */
-    d3elk.cleanLayout = function (n) {
-    	if (!arguments.length) n = graph;
-    	delete n.x;
-    	delete n.y;
-    	(n.ports || []).forEach(function (p) {
-    		delete p.x;
-    		delete p.y;
+    _d3elk.cleanLayout = function (n) {
+        if (!arguments.length) n = graph;
+        delete n.x;
+        delete n.y;
+        (n.ports || []).forEach(function (p) {
+            delete p.x;
+            delete p.y;
         });
-    	(n.edges || []).forEach(function (e) { 
-    		delete e.sections;
-    		delete e.junctionPoints;
-    	});
-    	(n.children || []).forEach(function(c) {
-    		d3elk.cleanLayout(c)
+        (n.edges || []).forEach(function (e) { 
+            delete e.sections;
+            delete e.junctionPoints;
+        });
+        (n.children || []).forEach(function(c) {
+            _d3elk.cleanLayout(c)
         });
     }
     
@@ -304,26 +283,26 @@ var elk;
           offset.y += relative.padding.top || 0;
         }
         if (e.sections)
-        	e.sections.forEach(function (s) {
-	            // ... and apply it to the edge
-	            if (s.startPoint) {
-	              s.startPoint.x += offset.x;
-	              s.startPoint.y += offset.y;
-	            }
-	            if (s.endPoint) {
-	              s.endPoint.x += offset.x;
-	              s.endPoint.y += offset.y;
-	            }
-	            (s.bendPoints || []).forEach(function (bp) {
-	              bp.x += offset.x;
-	              bp.y += offset.y;
-	            });
+            e.sections.forEach(function (s) {
+                // ... and apply it to the edge
+                if (s.startPoint) {
+                  s.startPoint.x += offset.x;
+                  s.startPoint.y += offset.y;
+                }
+                if (s.endPoint) {
+                  s.endPoint.x += offset.x;
+                  s.endPoint.y += offset.y;
+                }
+                (s.bendPoints || []).forEach(function (bp) {
+                  bp.x += offset.x;
+                  bp.y += offset.y;
+                });
             });
         if (e.junctionPoints)
-        	e.junctionPoints.forEach(function (jp) {
-        		  jp.x += offset.x;
-	              jp.y += offset.y;
-        	});
+            e.junctionPoints.forEach(function (jp) {
+                  jp.x += offset.x;
+                  jp.y += offset.y;
+            });
       });
       // children
       (n.children || []).forEach(function(c) {
@@ -349,15 +328,13 @@ var elk;
       }
     }
     
-    d3elk.on = function() {
+    _d3elk.on = function() {
         var value = dispatch.on.apply(dispatch, arguments);
-        return value === dispatch ? d3elk : value;
+        return value === dispatch ? _d3elk : value;
     };
     // return the layouter object
-    return d3elk;
+    return _d3elk;
   }
-  if (typeof module === "object" && module.exports) {
-    module.exports = elk;
-  }
-  return elk;
-})(elk || (elk = {}));
+  
+  return _d3elk;
+};

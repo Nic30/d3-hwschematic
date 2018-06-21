@@ -170,15 +170,18 @@ var PromisedWorker = function () {
 
   return PromisedWorker;
 }();
-},{}],2:[function(require,module,exports){
-"use strict";
+},{}],
 
-var ELK = require('./elk-api.js').default;
-
-Object.defineProperty(module.exports, "__esModule", {
-  value: true
-});
-module.exports = ELK;
-ELK.default = ELK;
-},{"./elk-api.js":1}]},{},[2])(2)
+2:[function(require,module,exports){
+    "use strict";
+    
+    var ELK = require('./elk-api.js').default;
+    
+    Object.defineProperty(module.exports, "__esModule", {
+      value: true
+    });
+    module.exports = ELK;
+    ELK.default = ELK;
+  },
+{"./elk-api.js":1}]},{},[2])(2)
 });
