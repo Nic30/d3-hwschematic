@@ -1,3 +1,4 @@
+import * as d3 from "d3";
 var ElkWorker = require('./elk/elk-worker.js').default;
 
 export default function d3elk() {

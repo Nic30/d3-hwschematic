@@ -1,6 +1,6 @@
+import * as d3 from "d3";
 import HwSchematic from '../src/d3-hwschematic';
 
-var d3 = require("d3");
 
 describe('{unit}: Testing scheme rendering', () => {
   var svg = d3.select("body")
