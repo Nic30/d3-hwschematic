@@ -13,8 +13,6 @@ install:
 - npm install
 script:
 - npm run coveralls
-#after_script:
-#- NODE_ENV=test istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
 deploy:
   provider: npm
   email: nic30@seznam.cz
@@ -22,4 +20,4 @@ deploy:
     tags: true
     branch: master
   api_key:
-    secure: YVn6OEdJj0FfInQkEzDnfkNEVYK8E0bpe26c4P6n8TjtC0SDxWo0uwRG10uzp17AjiSQwU84l+N1r5/Qw6M8H61pK+WU/e6ed+xutMtQPES09Eu0/3e+z4421zCswVaNEc4odIqcCsFI/fjJaavwl0F2MchwULk1jh+6nHKt07LXBQt2OUsFAv9O1R639efIaii+ScMuxYL8oMXO9lNZ+/bqzpX72UtINv0vRWN7AYkzM2NWv1r6x6abVnpxetqA+0YEetwJ/ww08iAQKnlJNO/rS0G9g498U0CQ59CNFzXxys0iEP0jIRJ+1QXkqo+HcYBnanwQmKkce7XUc9ujQWy28PDWKIk4M1hg/AahXybr8CnqUX1L1vKHKIyZcuO3EaK8jkl26b8PfNQZWsyuPq+m307fW2uR1E2LMaqIVJRFD9y4FIpRsxLbHORjxQb4b0Bk/aKPU8t6tc79kwZ1iR2ufSNEZsvopXz8nytuEU8/x/EUuu5iRl8LNJQDHcsEJrNMSAUii+F9jt9cR/rTFTtIMZw0jNQMEQVPnOKW5uRxmViACDqoXBQ2T+cv/YLatSk1QAhpAvZc//0+yP2m1OHAk7Wj+f37PFGgHMN3WNFDmsvpnzHYJr0ni1UkIkDgeNBq8p1WaoFwFp2NRFI4neJq1EtP389RdCYFK0dlxvE=
+    secure: d81+3KThRO/vZmGIRdYMZdbKEwav8FJBrsP+hyGVykAfPWJoAMNwq2TgXHEzTwnlH4S0i0UACB2/QX4IdPIj9WQvMTV8lRQOjpqDZsUEawCN6b1cYs/6kEs1jVH0REFjbOJI0eTsOKoY+1rJRp+yiF6KX1lK9Kl3SYgbgrYnUppNZsZxm4GfSTuLuPcilh3pEhm5OwsvhyXfzPM+zSgGCgi8pKLgsHk+ZRbtpHu8qJT2ySNwySSrMsh3CCGXhi267p/UsUMDvaLhLjTOAjk7asTezTJgSoSTPaiW28F7exAkVTOzJcKh2vysxK9ME9nKXZqelimbrCojVYP0mBY6tpaiYtqKX8PoXWbiLrCWozc1wn4QcGjVINc3PMf7JGXRG3mfJqSVNMVf1182moGQFo2GYzfZtMCBJdTQyRTkXqaCMvZ2gXkkKtgJ/AqPn/qyXjwDcU/LdOTE5ckzST6/KNOmgGmcm1IoeAeGdEf6W6uVACInp/Mup3fxTgpsegN+kHeULaujuY9LLuJtiP8dtHsv93nyRuxuIhmJr5Y93RR1Ns7/KGadocPTCHGglHht7/sdD2gTaFtv0EGcrC/7HgeYJhyMkfK4+M1oMPSVYWh/dPXUAZr3WAtEisv0zVJYFoM2U0w+kwqOTiQJIIqwZmkLgU4kUlQ7mVTfIQgMWso=
