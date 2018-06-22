@@ -3,6 +3,7 @@
 
 D3.js and ELK based schematic visualizer.
 
+Use `npm install d3-hwschematic --save` to install this library and save it to your package.json file.
 
 ## Features:
 
