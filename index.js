@@ -1,1 +1,0 @@
-export {default as HwSchematic} from "./src/hwschematic";
