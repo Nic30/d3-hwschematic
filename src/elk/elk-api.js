@@ -1,14 +1,3 @@
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.ELK = f()}})(function(){var define,module,exports;return (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 /*******************************************************************************
  * Copyright (c) 2017 Kiel University and others.
  * All rights reserved. This program and the accompanying materials
@@ -16,172 +5,127 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-var ELK = function () {
-  function ELK() {
-    var _this = this;
+export default class ELK {
 
-    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-        _ref$defaultLayoutOpt = _ref.defaultLayoutOptions,
-        defaultLayoutOptions = _ref$defaultLayoutOpt === undefined ? {} : _ref$defaultLayoutOpt,
-        _ref$algorithms = _ref.algorithms,
-        algorithms = _ref$algorithms === undefined ? ['layered', 'stress', 'mrtree', 'radial', 'force', 'disco'] : _ref$algorithms,
-        workerFactory = _ref.workerFactory,
-        workerUrl = _ref.workerUrl;
-
-    _classCallCheck(this, ELK);
-
-    this.defaultLayoutOptions = defaultLayoutOptions;
-    this.initialized = false;
+  constructor({
+    defaultLayoutOptions = {},
+    algorithms = [ 'layered', 'stress', 'mrtree', 'radial', 'force', 'disco' ],
+    workerFactory,
+    workerUrl
+  } = {}) {
+    this.defaultLayoutOptions = defaultLayoutOptions
+    this.initialized = false
 
     // check valid worker construction possible
     if (typeof workerUrl === 'undefined' && typeof workerFactory === 'undefined') {
-      throw new Error("Cannot construct an ELK without both 'workerUrl' and 'workerFactory'.");
+      throw new Error("Cannot construct an ELK without both 'workerUrl' and 'workerFactory'.")
     }
-    var factory = workerFactory;
+    let factory = workerFactory
     if (typeof workerUrl !== 'undefined' && typeof workerFactory === 'undefined') {
       // use default Web Worker
-      factory = function factory(url) {
-        return new Worker(url);
-      };
+      factory = function(url) { return new Worker(url) }
     }
 
     // create the worker
-    var worker = factory(workerUrl);
-    if (typeof worker.postMessage !== 'function') {
-      throw new TypeError("Created worker does not provide" + " the required 'postMessage' function.");
+    let worker = factory(workerUrl)
+    if (typeof worker.postMessage !== 'function' ) {
+      throw new TypeError("Created worker does not provide"
+        + " the required 'postMessage' function.")
     }
 
     // wrap the worker to return promises
-    this.worker = new PromisedWorker(worker);
+    this.worker = new PromisedWorker(worker)
 
     // initially register algorithms
     this.worker.postMessage({
       cmd: 'register',
       algorithms: algorithms
-    }).then(function (r) {
-      return _this.initialized = true;
-    }).catch(console.err);
+    })
+      .then((r) => this.initialized = true)
+      .catch(console.err)
   }
 
-  _createClass(ELK, [{
-    key: 'layout',
-    value: function layout(graph) {
-      var _ref2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-          _ref2$layoutOptions = _ref2.layoutOptions,
-          layoutOptions = _ref2$layoutOptions === undefined ? this.defaultLayoutOptions : _ref2$layoutOptions;
-
-      if (!graph) {
-        return Promise.reject(new Error("Missing mandatory parameter 'graph'."));
-      }
-      return this.worker.postMessage({
-        cmd: 'layout',
-        graph: graph,
-        options: layoutOptions
-      });
+  layout(graph, { layoutOptions = this.defaultLayoutOptions } = {}) {
+    if (!graph) {
+      return Promise.reject(new Error("Missing mandatory parameter 'graph'."))
     }
-  }, {
-    key: 'knownLayoutAlgorithms',
-    value: function knownLayoutAlgorithms() {
-      return this.worker.postMessage({ cmd: 'algorithms' });
-    }
-  }, {
-    key: 'knownLayoutOptions',
-    value: function knownLayoutOptions() {
-      return this.worker.postMessage({ cmd: 'options' });
-    }
-  }, {
-    key: 'knownLayoutCategories',
-    value: function knownLayoutCategories() {
-      return this.worker.postMessage({ cmd: 'categories' });
-    }
-  }, {
-    key: 'terminateWorker',
-    value: function terminateWorker() {
-      this.worker.terminate();
-    }
-  }]);
+    return this.worker.postMessage({
+      cmd: 'layout',
+      graph: graph,
+      options: layoutOptions
+    })
+  }
 
-  return ELK;
-}();
+  knownLayoutAlgorithms() {
+    return this.worker.postMessage({ cmd: 'algorithms' })
+  }
 
-exports.default = ELK;
+  knownLayoutOptions() {
+    return this.worker.postMessage({ cmd: 'options' })
+  }
 
-var PromisedWorker = function () {
-  function PromisedWorker(worker) {
-    var _this2 = this;
+  knownLayoutCategories() {
+    return this.worker.postMessage({ cmd: 'categories' })
+  }
 
-    _classCallCheck(this, PromisedWorker);
+  terminateWorker() {
+    this.worker.terminate()
+  }
 
+}
+
+class PromisedWorker {
+
+  constructor(worker) {
     if (worker === undefined) {
-      throw new Error("Missing mandatory parameter 'worker'.");
+      throw new Error("Missing mandatory parameter 'worker'.")
     }
-    this.resolvers = {};
-    this.worker = worker;
-    this.worker.onmessage = function (answer) {
+    this.resolvers = {}
+    this.worker = worker
+    this.worker.onmessage = (answer) => {
       // why is this necessary?
-      setTimeout(function () {
-        _this2.receive(_this2, answer);
-      }, 0);
-    };
+      setTimeout(() => {
+        this.receive(this, answer)
+      }, 0)
+    }
   }
 
-  _createClass(PromisedWorker, [{
-    key: 'postMessage',
-    value: function postMessage(msg) {
-      var id = this.id || 0;
-      this.id = id + 1;
-      msg.id = id;
-      var self = this;
-      return new Promise(function (resolve, reject) {
-        // prepare the resolver
-        self.resolvers[id] = function (err, res) {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(res);
-          }
-        };
-        // post the message
-        self.worker.postMessage(msg);
-      });
-    }
-  }, {
-    key: 'receive',
-    value: function receive(self, answer) {
-      var json = answer.data;
-      var resolver = self.resolvers[json.id];
-      if (resolver) {
-        delete self.resolvers[json.id];
-        if (json.error) {
-          resolver(json.error);
+  postMessage(msg) {
+    let id = this.id || 0;
+    this.id = id + 1
+    msg.id = id
+    let self = this
+    return new Promise(function (resolve, reject) {
+      // prepare the resolver
+      self.resolvers[id] = function (err, res) {
+        if (err) {
+          reject(err)
         } else {
-          resolver(null, json.data);
+          resolve(res)
         }
       }
-    }
-  }, {
-    key: 'terminate',
-    value: function terminate() {
-      if (this.worker.terminate) {
-        this.worker.terminate();
+      // post the message
+      self.worker.postMessage(msg)
+    })
+  }
+
+  receive(self, answer) {
+    let json = answer.data
+    let resolver = self.resolvers[json.id]
+    if (resolver) {
+      delete self.resolvers[json.id]
+      if (json.error) {
+        resolver(json.error)
+      } else {
+        resolver(null, json.data)
       }
     }
-  }]);
+  }
 
-  return PromisedWorker;
-}();
-},{}],
+  terminate() {
+    if (this.worker.terminate) {
+      this.worker.terminate()
+    }
+  }
 
-2:[function(require,module,exports){
-    "use strict";
-    
-    var ELK = require('./elk-api.js').default;
-    
-    Object.defineProperty(module.exports, "__esModule", {
-      value: true
-    });
-    module.exports = ELK;
-    ELK.default = ELK;
-  },
-{"./elk-api.js":1}]},{},[2])(2)
-});
+}

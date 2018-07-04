@@ -1,5 +1,30 @@
-import * as d3 from "d3";
-var ElkWorker = require('./elk/elk-worker.js').default;
+import "d3";
+import "threads";
+import {default as ELK} from "./elk-api";
+
+const ELK_WORKER_NAME = "elk-worker.js";
+const NO_LAYOUT = "org.eclipse.elk.noLayout";
+
+function findElkWorkerURL() {
+    // find name of elk worker script URL
+    var elkWorkerScript;
+    var scripts = document.getElementsByTagName('script');
+    for(var i = 0; i < scripts.length; i++) {
+    	console.log(scripts[i].src);
+    	if(scripts[i].src.endsWith(ELK_WORKER_NAME)) {
+    		elkWorkerScript = scripts[i];
+    		break;
+    	}
+    }
+    if (typeof elkWorkerScript === "undefined")
+    	throw new Error("Can not locate elk-worker.js");
+    return elkWorkerScript.src;
+    //var blob = new Blob(Array.prototype.map.call(
+    //		document.querySelectorAll('script[type=\'text\/js-worker\']'),
+    //		function (oScript) { return oScript.textContent; }),{type: 'text/javascript'});
+
+    
+}
 
 export default function d3elk() {
   var _d3elk = this; 
@@ -20,23 +45,25 @@ export default function d3elk() {
     pathBuff.push(section.endPoint.y);
     return pathBuff.join(" ")
   }
+
   
   function init() {
-    dispatch = d3.dispatch("finish"),
+    var dispatch = d3.dispatch("finish");
     // containers
-    nodes = [],
-    edges = [],
-    graph = {}, // internal (hierarchical graph)
-    ports = function(n) {
+    var nodes = [];
+    var edges = [];
+    var graph = {}; // internal (hierarchical graph)
+    var ports = function(n) {
       // by default the 'ports' field
       return n.ports || [];
-    },
-    labels = function(n) {
+    };
+    
+    var labels = function(n) {
       return n.labels || [];
-    },
-    options = {},
+    }
+    var options = {};
     // dimensions
-    width = 0,
+    var width = 0,
     height = 0,
     transformGroup,
     // kgraph properties that shall be copied
@@ -45,36 +72,15 @@ export default function d3elk() {
       'width', 'height',
       'sourcePoint', 'targetPoint',
       'properties'
-    ].reduce(function(p, c) {p[c] = 1; return p;}, {}),
+    ].reduce(function(p, c) {p[c] = 1; return p;}, {});
     // a function applied after each layout run
-    applyLayout = function() {},
-    // location of the elk.js script
-    layouterScript = function() {
-      var scripts = document.getElementsByTagName('script');
-      for (var i = 0; i < scripts.length; ++i) {
-      var url = scripts[i].src;  
-        if (url.indexOf("elk.js") > -1 || url.indexOf("elk.bundled.js") > -1) {
-          return scripts[i].src;
-        }
-      }
-      throw "elk.js library wasn't loaded!";
-    }
-    var worker = new ElkWorker(layouterScript());
+    var applyLayout;
+    
     // the layouter instance
-    var layouter = {
-        layout: function(data) {
-          worker.postMessage({
-            graph: data.graph,
-            options: data.options
-          });
-        }
-    };
-    worker.addEventListener('message', function (e) {
-      graph = e.data;
-      applyLayout(graph);
-    }, false);
-
-    var NO_LAYOUT = "org.eclipse.elk.noLayout";
+    var layouter = new ELK({
+    		//algorithms: [ 'layered'],
+    		workerUrl:findElkWorkerURL()
+    });
     /**
      * Setting the available area, the
      * positions of the layouted graph
@@ -111,14 +117,16 @@ export default function d3elk() {
      */
     _d3elk.start = function() {
       // alias applyLayout method
-      applyLayout = d3_kgraph_applyLayout;
      
       // start the layouter
       function onSuccess(kgraph)  {
         graph = kgraph;
         applyLayout(kgraph);
       }
-      layouter.layout(graph, {layoutOptions: options}).then(onSuccess, _d3elk.onError);
+      layouter.layout(
+    		  graph,
+    		  {layoutOptions: options}
+      ).then(onSuccess, _d3elk.onError);
       return _d3elk;
     };
 
@@ -183,7 +191,6 @@ export default function d3elk() {
       graph = root;
       _d3elk.invalidateCaches();
       // alias applyLayout method
-        applyLayout = d3_kgraph_applyLayout;
       if (!graph.id)
           graph.id = "root";
       if (!graph.properties)
@@ -227,7 +234,7 @@ export default function d3elk() {
      * Apply layout for the kgraph style.
      * Converts relative positions to absolute positions.
      */
-    var d3_kgraph_applyLayout = function(kgraph) {
+    applyLayout = function(kgraph) {
       zoomToFit(kgraph);
       var nodeMap = {};
       // convert to absolute positions
@@ -336,6 +343,7 @@ export default function d3elk() {
     // return the layouter object
     return _d3elk;
   }
+  init();
   
   return _d3elk;
 };

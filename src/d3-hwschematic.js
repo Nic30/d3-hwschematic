@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 import {addMarkers, getIOMarker} from "./markers"; 
-var d3elk = require("./elk-d3.js").default;
+import {default as d3elk} from "./elk/elk-d3";
 
 /**
 * Returns whether the sides of ports are fixed.

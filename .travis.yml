@@ -8,8 +8,7 @@ language: node_js
 node_js:
 - '7'
 install:
-- npm install coveralls mocha istanbul
-- npm install mocha
+- npm install --only=dev --loglevel info
 - npm install
 script:
 - npm run coveralls
