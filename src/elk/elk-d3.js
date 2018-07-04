@@ -3,13 +3,23 @@ import {default as ELK} from "./elk-api";
 
 const ELK_WORKER_NAME = "elk-worker.js";
 const NO_LAYOUT = "org.eclipse.elk.noLayout";
+// kgraph properties that shall be copied
+const KGRAPH_KEYS = [
+  'x', 'y',
+  'width', 'height',
+  "sections",
+  'sourcePoint',
+  'targetPoint',
+  'junctionPoints',
+  'properties'
+].reduce(function(p, c) {p[c] = 1; return p;}, {});
+
 
 function findElkWorkerURL() {
     // find name of elk worker script URL
     var elkWorkerScript;
     var scripts = document.getElementsByTagName('script');
     for(var i = 0; i < scripts.length; i++) {
-    	console.log(scripts[i].src);
     	if(scripts[i].src.endsWith(ELK_WORKER_NAME)) {
     		elkWorkerScript = scripts[i];
     		break;
@@ -17,13 +27,12 @@ function findElkWorkerURL() {
     }
     if (typeof elkWorkerScript === "undefined")
     	throw new Error("Can not locate elk-worker.js");
+
     return elkWorkerScript.src;
     // var blob = new Blob(Array.prototype.map.call(
     // document.querySelectorAll('script[type=\'text\/js-worker\']'),
     // function (oScript) { return oScript.textContent; }),{type:
 	// 'text/javascript'});
-
-    
 }
 
 export default class d3elk {
@@ -34,17 +43,12 @@ export default class d3elk {
 	    this.edges = [];
 	    this.graph = {}; // internal (hierarchical graph)
 	    this._options = {};
+	    // {id(str): object from input graph}
+	    this._d3ObjMap = {};
 	    // dimensions
 	    this.width = 0;
 	    this.height = 0;
 	    this._transformGroup;
-	    // kgraph properties that shall be copied
-	    this.kgraphKeys = [
-	      'x', 'y',
-	      'width', 'height',
-	      'sourcePoint', 'targetPoint',
-	      'properties'
-	    ].reduce(function(p, c) {p[c] = 1; return p;}, {});
 	    // a function applied after each layout run
 	    var applyLayout;
 	    
@@ -120,15 +124,13 @@ export default class d3elk {
 	 */
     start() {
       // alias applyLayout method
-      var graph  = this.graph;
       var self = this;
       // start the layouter
       function onSuccess(kgraph)  {
-        graph = kgraph;
         self.applyLayout(kgraph);
       }
       this.layouter.layout(
-    		  graph,
+    		  this.graph,
     		  {layoutOptions: this._options}
       ).then(onSuccess,
     		 this.onError
@@ -186,6 +188,7 @@ export default class d3elk {
     }
 
     invalidateCaches() {
+       this._d3ObjMap = {}
        this.__nodeCache = null;
        this.__portsCache = null;
        this.__edgesCache = null;
@@ -221,8 +224,9 @@ export default class d3elk {
 	 */
     cleanLayout(n) {
         if (!arguments.length)
-        	var n = graph;
+        	var n = this.graph;
 
+        var cleanLayout = this.cleanLayout.bind(this);
         delete n.x;
         delete n.y;
         (n.ports || []).forEach(function (p) {
@@ -234,7 +238,7 @@ export default class d3elk {
             delete e.junctionPoints;
         });
         (n.children || []).forEach(function(c) {
-            this.cleanLayout(c)
+            cleanLayout(c)
         });
     }
     
@@ -248,8 +252,65 @@ export default class d3elk {
       // convert to absolute positions
       d3elk.toAbsolutePositions(kgraph, {x: 0, y:0}, nodeMap);
       d3elk.toAbsolutePositionsEdges(kgraph, nodeMap);
+      this.copyElkProps(kgraph, this.graph);
       // invoke the 'finish' event
       this.dispatch.call('finish', {graph: kgraph});
+    }
+    
+    /**
+     * Webworker creates new graph object and layout props has to be
+     * copied back to original graph
+     * 
+     * @param srcGraph: new graph from ELK worker
+     * @param dstGraph: original graph provided by user
+     **/
+    copyElkProps(srcGraph, dstGraph) {
+    	var d3Objs = this._d3ObjMap;
+    	// init d3Objs
+    	d3Objs[dstGraph.id] = d3Objs;
+    	(dstGraph.edges || []).forEach(function(e) {
+    		if (e.id in d3Objs)
+    			throw new Error();
+    		d3Objs[e.id] = e;
+    	});
+    	(dstGraph.children || []).forEach(function(n) {
+    		d3Objs[n.id] = n;
+    	});
+    	(dstGraph.ports || []).forEach(function(p) {
+    		d3Objs[p.id] = p;
+    	});
+    	
+    	var copyProps = d3elk.copyProps.bind(this);
+    	// copy props from this node
+        copyProps(srcGraph, dstGraph);
+        (srcGraph.ports || []).forEach(function(p) {
+          copyProps(p, d3Objs[p.id]);
+        });
+        (srcGraph.labels || []).forEach(function(l, i) {
+          copyProps(l, dstGraph.labels[i]);
+        });
+        // copy props from edges in this node
+        (srcGraph.edges || []).forEach(function(e) {
+            var l = d3Objs[e.id];
+            copyProps(e, l);
+            copyProps(e.source, l.source);
+  	        copyProps(e.target, l.target);
+            // make sure the bendpoint array is valid
+            l.bendPoints = e.bendPoints || [];
+    	});
+        // copy props of children
+        var copyElkProps = this.copyElkProps.bind(this);
+        (srcGraph.children || []).forEach(function(n) {
+    		copyElkProps(n, d3Objs[n.id])
+        });
+    }
+    static copyProps(src, dst) {
+        var keys = KGRAPH_KEYS;
+        for (var k in src) {
+          if (keys[k]) {
+        	  dst[k] = src[k];
+          }
+        }
     }
 
     static toAbsolutePositions(n, offset, nodeMap) {

@@ -14,6 +14,28 @@ function PortConstraints_isSideFixed(val) {
 }
 
 /**
+ * apply hideChildren flag no node
+ **/
+function applyHideChildren(n) {
+    if (n.hideChildren) {
+        if (n.children !== undefined) {
+            n.__children = n.children;
+            n.__edges = n.edges;
+            delete n.children;
+            delete n.edges;
+        }
+    } else {
+        if (n.__children !== undefined) {
+            n.children = n.__children;
+            n.edges = n.__edges;
+            delete n.__children;
+            delete n.__edges;
+        }
+    }
+    (n.children || []).forEach(applyHideChildren)
+}
+
+/**
  * HwScheme builds scheme diagrams after bindData(data) is called
  * 
  * @param svg:
@@ -191,27 +213,13 @@ export default class HwSchematic {
      * Set bind graph data to graph rendering engine
      */
     bindData(graph) {
-        function applyHideChildren(n) {
-            if (n.hideChildren) {
-                if (n.children !== undefined) {
-                    n.__children = n.children;
-                    n.__edges = n.edges;
-                    delete n.children;
-                    delete n.edges;
-                }
-            } else {
-                if (n.__children !== undefined) {
-                    n.children = n.__children;
-                    n.edges = n.__edges;
-                    delete n.__children;
-                    delete n.__edges;
-                }
-            }
-            (n.children || []).forEach(applyHideChildren)
-        }
         applyHideChildren(graph);
         var root = this.root;
         var layouter = this.layouter;
+        var bindData = this.bindData.bind(this);
+        var PORT_HEIGHT = this.PORT_HEIGHT;
+        var CHAR_WIDTH = this.CHAR_WIDTH;
+
 
         // config of layouter
         layouter
@@ -227,14 +235,12 @@ export default class HwSchematic {
         var nodes = layouter.getNodes().slice(1); // skip root node
         var edges = layouter.getEdges();
         nodes.forEach(this.initNodeSizes.bind(this));
-
             
         // by "g" we group nodes along with their ports
         var node = root.selectAll(".node")
             .data(nodes)
             .enter()
             .append("g");
-
         
         var nodeBody = node.append("rect");
         
@@ -262,11 +268,11 @@ export default class HwSchematic {
 
             if (!children || children.length == 0)
                 return; // does not have anything to expand
-            var graph = this.layouter.kgraph()
-            this.layouter.cleanLayout();
+            var graph = layouter.kgraph()
+            layouter.cleanLayout();
             root.selectAll("*").remove();
             toggleHideChildren(d);    
-            this.bindData(graph)
+            bindData(graph)
         });
         // Select net on click
         link.on("click", function(d) {
@@ -304,7 +310,7 @@ export default class HwSchematic {
                 d.junctionPoints.forEach(function (jp) {
                     junctionPoints.push(jp);
                 });
-            return elk.section2svgPath(d.sections[0]);
+            return d3elk.section2svgPath(d.sections[0]);
           });
 
           var junctionPoints = root.selectAll(".junction-point")
@@ -352,10 +358,10 @@ export default class HwSchematic {
           port.transition()
             .duration(0)
             .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"});
-        
+
           // spot port name
           port.append("text")
-            .attr("y", this.PORT_HEIGHT * 0.75)
+            .attr("y", PORT_HEIGHT * 0.75)
             .text(function(d) {
                 if (d.ignoreLabel)
                     return "";
@@ -377,7 +383,7 @@ export default class HwSchematic {
                 if (side == "WEST") {
                    return 7;
                 } else if (side == "EAST") {
-                   return -this.getBBox().width - this.CHAR_WIDTH / 2;
+                   return -this.getBBox().width - CHAR_WIDTH / 2;
                 } else if (side == "NORTH") {
                    return 0;
                 } else if (side == "SOUTH") {
