@@ -37,7 +37,7 @@ export default class d3elk {
 	    // dimensions
 	    this.width = 0;
 	    this.height = 0;
-	    this.transformGroup;
+	    this._transformGroup;
 	    // kgraph properties that shall be copied
 	    this.kgraphKeys = [
 	      'x', 'y',
@@ -103,8 +103,8 @@ export default class d3elk {
 	 */
     transformGroup(g) {
       if (!arguments.length)
-    	  return this.transformGroup;
-      this.transformGroup = g;
+    	  return this._transformGroup;
+      this._transformGroup = g;
       return this;
     }
 
@@ -343,8 +343,8 @@ export default class d3elk {
       }
       // if a transformation group was specified we
       // perform a 'zoomToFit'
-      if (this.transformGroup) {
-    	  this.transformGroup.attr("transform", "scale(" + scale + ")");
+      if (this._transformGroup) {
+    	  this._transformGroup.attr("transform", "scale(" + scale + ")");
       }
     }
     

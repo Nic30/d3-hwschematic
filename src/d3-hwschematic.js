@@ -3,38 +3,43 @@ import {addMarkers, getIOMarker} from "./markers";
 import {default as d3elk} from "./elk/elk-d3";
 
 /**
-* Returns whether the sides of ports are fixed.
-* 
-* @see PortSide
-* @return true if the port sides are fixed
-*/
+ * Returns whether the sides of ports are fixed.
+ * 
+ * @see PortSide
+ * @return true if the port sides are fixed
+ */
 
 function PortConstraints_isSideFixed(val) {
    return val == "FREE" || val != "UNDEFINED"
 }
 
 /**
- * HwScheme builds scheme diagrams after bindData(data) is called 
+ * HwScheme builds scheme diagrams after bindData(data) is called
  * 
- *  @param svg: root svg element where scheme will be rendered
- *  @note do specify size of svg to have optimal result
- * */
-export default function HwSchematic(svg) {
-    var self = this;
-    self.PORT_PIN_SIZE = [7, 13];
-    self.PORT_HEIGHT = self.PORT_PIN_SIZE[1];
-    self.CHAR_WIDTH = 7.55;
-    self.CHAR_HEIGHT = 13;
-    self.NODE_MIDDLE_PORT_SPACING = 20;
-    self.MAX_NODE_BODY_TEXT_SIZE = [400, 400];
-    // top, right, bottom, left
-    self.BODY_TEXT_PADDING = [15, 10, 0, 10];
+ * @param svg:
+ *            root svg element where scheme will be rendered
+ * @note do specify size of svg to have optimal result
+ */
+export default class HwSchematic {
+    constructor(svg) {
+        this.svg = svg;
+        this.PORT_PIN_SIZE = [7, 13];
+        this.PORT_HEIGHT = this.PORT_PIN_SIZE[1];
+        this.CHAR_WIDTH = 7.55;
+        this.CHAR_HEIGHT = 13;
+        this.NODE_MIDDLE_PORT_SPACING = 20;
+        this.MAX_NODE_BODY_TEXT_SIZE = [400, 400];
+        // top, right, bottom, left
+        this.BODY_TEXT_PADDING = [15, 10, 0, 10];
 
-    addMarkers(svg, self.PORT_PIN_SIZE);
-    
-    function widthOfText(text) {
+        addMarkers(svg, this.PORT_PIN_SIZE);
+        this.root = svg.append("g");
+        this.layouter = new d3elk();
+    }
+        
+    widthOfText(text) {
         if (text)
-            return text.length * self.CHAR_WIDTH;
+            return text.length * this.CHAR_WIDTH;
         else
             return 0;
     }
@@ -42,25 +47,26 @@ export default function HwSchematic(svg) {
     /**
      * Split bodyText of one to lines and resolve dimensions of body text
      * 
-     * @param d component node
-     * */
-    function initBodyTextLines(d) {
+     * @param d
+     *            component node
+     */
+    initBodyTextLines(d) {
         var max = Math.max
         if (d.bodyText) {
-        	if (typeof d.bodyText === "string") {
-        	    d.bodyText = d.bodyText.split("\n");
-        	}
+            if (typeof d.bodyText === "string") {
+                d.bodyText = d.bodyText.split("\n");
+            }
             var bodyTextW = 0;
             d.bodyText.forEach(function (line) {
                 bodyTextW = max(bodyTextW, line.length);
             })
-            bodyTextW *= self.CHAR_WIDTH;
-            var bodyTextH = d.bodyText.length * self.CHAR_HEIGHT;  
+            bodyTextW *= this.CHAR_WIDTH;
+            var bodyTextH = d.bodyText.length * this.CHAR_HEIGHT;  
         } else {
             var bodyTextW = 0;
             var bodyTextH = 0;
         }
-        var pad = self.BODY_TEXT_PADDING;
+        var pad = this.BODY_TEXT_PADDING;
         if (bodyTextW  > 0)
             bodyTextW += pad[1] + pad[3];
         if (bodyTextH  > 0)
@@ -69,41 +75,44 @@ export default function HwSchematic(svg) {
     }
 
     /**
-     * Init bodyText and resolve size of node from body text and ports 
+     * Init bodyText and resolve size of node from body text and ports
      * 
-     * @param d component node
-     * * */
-    function initNodeSizes(d) {
-    	if (d.properties["org.eclipse.elk.noLayout"])
-    		return;
-    	var ignorePortLabel = d.children && !d.hideChildren;
+     * @param d
+     *            component node *
+     */
+    initNodeSizes(d) {
+        if (d.properties["org.eclipse.elk.noLayout"])
+            return;
+        var ignorePortLabel = d.children && !d.hideChildren;
         if (d.ports != null)
             d.ports.forEach(function(p) {
-            	p.ignoreLabel = ignorePortLabel;
+                p.ignoreLabel = ignorePortLabel;
             });
-    	
+        var widthOfText = this.widthOfText.bind(this);
 
         var labelW = widthOfText(d.name)
         var max = Math.max
-        var bodyTextSize = initBodyTextLines(d);
-        var MBT = self.MAX_NODE_BODY_TEXT_SIZE;
+        var bodyTextSize = this.initBodyTextLines(d);
+        const MBT = this.MAX_NODE_BODY_TEXT_SIZE;
         bodyTextSize[0] = Math.min(bodyTextSize[0], MBT[0]);
         bodyTextSize[1] = Math.min(bodyTextSize[1], MBT[1]);
 
         // {PortSide: (portCnt, portWidth)}
         var portDim = {
-        		"WEST": [0, 0],
-        		"EAST": [0, 0],
-        		"SOUTH": [0, 0],
-        		"NORTH": [0, 0]
+                "WEST": [0, 0],
+                "EAST": [0, 0],
+                "SOUTH": [0, 0],
+                "NORTH": [0, 0]
         };
-
+        var PORT_PIN_SIZE_x = this.PORT_PIN_SIZE[0],
+            PORT_PIN_SIZE_y = this.PORT_PIN_SIZE[1];
+        var CHAR_WIDTH = this.CHAR_WIDTH;
         if (d.ports != null)
           d.ports.forEach(function(p) {
               var t = p.properties.portSide;
               var indent = 0;
               if (p.level > 0)
-            	  indent = (p.level + 1) * self.CHAR_WIDTH;
+                  indent = (p.level + 1) * CHAR_WIDTH;
               var portW = widthOfText(p.name) + indent;
               var pDim = portDim[t];
               if (pDim === undefined)
@@ -112,8 +121,8 @@ export default function HwSchematic(svg) {
               pDim[1] = max(pDim[1], portW);
               
               // dimension of connection pin
-              p.width = self.PORT_PIN_SIZE[0];
-              p.height = self.PORT_PIN_SIZE[1];
+              p.width = PORT_PIN_SIZE_x;
+              p.height = PORT_PIN_SIZE_y;
           })
          
         var west = portDim["WEST"],
@@ -122,39 +131,49 @@ export default function HwSchematic(svg) {
             north = portDim["NORTH"];
 
         var portColums = 0;
-        if (west[0]) portColums += 1;
-        if (east[0]) portColums += 1;
+        if (west[0])
+            portColums += 1;
+        if (east[0])
+            portColums += 1;
+
         var middleSpacing = 0;
-        if (portColums == 2) middleSpacing = self.NODE_MIDDLE_PORT_SPACING
+        if (portColums == 2)
+            middleSpacing = this.NODE_MIDDLE_PORT_SPACING
         var portW = max(west[1], east[1]);
         
         d.portLabelWidth = portW;
         d.width = max(portW * portColums + middleSpacing, labelW,
-        		      max(south[0], north[0]) * self.PORT_HEIGHT)
-        			+ bodyTextSize[0] + self.CHAR_WIDTH;
-        d.height = max(max(west[0], east[0]) * self.PORT_HEIGHT,
-        			   bodyTextSize[1],
-        			   max(south[1], north[1]) * self.CHAR_WIDTH);
+                      max(south[0], north[0]) * this.PORT_HEIGHT)
+                    + bodyTextSize[0] + CHAR_WIDTH;
+        d.height = max(max(west[0], east[0]) * this.PORT_HEIGHT,
+                       bodyTextSize[1],
+                       max(south[1], north[1]) * CHAR_WIDTH);
     }
     
     /**
-     * @param bodyTexts list of strings
-     * */
-    function renderTextLines(bodyTexts) {
-        var padTop = self.BODY_TEXT_PADDING[0];
-        var padLeft = self.BODY_TEXT_PADDING[3];
+     * @param bodyTexts
+     *            list of strings
+     */
+    renderTextLines(bodyTexts) {
+        const padTop = this.BODY_TEXT_PADDING[0];
+        const padLeft = this.BODY_TEXT_PADDING[3];
+        const MBT = this.MAX_NODE_BODY_TEXT_SIZE;
+        const CHAR_WIDTH = this.CHAR_WIDTH;
+        const CHAR_HEIGHT = this.CHAR_HEIGHT;
+
         bodyTexts.each(function() {
             var bodyText = d3.select(this)
             var d = bodyText.data()[0];
             var bodyTextLines = d.bodyText;
-            var MBT = self.MAX_NODE_BODY_TEXT_SIZE;
-            MBT = [MBT[0] /self.CHAR_WIDTH, MBT[1] / self.CHAR_HEIGHT];
+            var _MBT = [MBT[0] /CHAR_WIDTH, MBT[1] / this.CHAR_HEIGHT];
             
-            if (bodyTextLines && (d.children == null || d.children.length == 0 || d.hideChildren)) {
+            if (bodyTextLines && (d.children == null 
+                    || d.children.length == 0 
+                    || d.hideChildren)) {
                 bodyTextLines.forEach(function (line, dy) {
-                    if (line.length > MBT[0])
-                        line = line.slice(0, MBT[0] - 3) + "...";
-                    if (dy > MBT[1])
+                    if (line.length > _MBT[0])
+                        line = line.slice(0, _MBT[0] - 3) + "...";
+                    if (dy > _MBT[1])
                         return;
                     bodyText
                        .append("tspan")
@@ -168,48 +187,46 @@ export default function HwSchematic(svg) {
         
     }
     
-    self.root = svg.append("g");
-    self.layouter = new d3elk();
-
     /*
      * Set bind graph data to graph rendering engine
-     * */
-    self.bindData = function (graph) {
+     */
+    bindData(graph) {
         function applyHideChildren(n) {
-        	if (n.hideChildren) {
-        		if (n.children !== undefined) {
-        			n.__children = n.children;
-        			n.__edges = n.edges;
-        			delete n.children;
-        			delete n.edges;
-        		}
-        	} else {
-        		if (n.__children !== undefined) {
-        			n.children = n.__children;
-        			n.edges = n.__edges;
-        			delete n.__children;
-        			delete n.__edges;
-            	}
-        	}
-        	(n.children || []).forEach(applyHideChildren)
+            if (n.hideChildren) {
+                if (n.children !== undefined) {
+                    n.__children = n.children;
+                    n.__edges = n.edges;
+                    delete n.children;
+                    delete n.edges;
+                }
+            } else {
+                if (n.__children !== undefined) {
+                    n.children = n.__children;
+                    n.edges = n.__edges;
+                    delete n.__children;
+                    delete n.__edges;
+                }
+            }
+            (n.children || []).forEach(applyHideChildren)
         }
         applyHideChildren(graph);
-        var root = self.root;
-        var layouter = self.layouter;
+        var root = this.root;
+        var layouter = this.layouter;
 
         // config of layouter
         layouter
-	        .options({
-	        	edgeRouting: "ORTHOGONAL",
-	        	//"org.eclipse.elk.layered.crossingMinimization.strategy": "LAYER_EVO"
-	        })
+            .options({
+                edgeRouting: "ORTHOGONAL",
+                // "org.eclipse.elk.layered.crossingMinimization.strategy":
+                // "LAYER_EVO"
+            })
             .kgraph(graph)
             .size([width, height])
             .transformGroup(root)
 
         var nodes = layouter.getNodes().slice(1); // skip root node
         var edges = layouter.getEdges();
-        nodes.forEach(initNodeSizes);
+        nodes.forEach(this.initNodeSizes.bind(this));
 
             
         // by "g" we group nodes along with their ports
@@ -233,23 +250,23 @@ export default function HwSchematic(svg) {
             .attr("class", "link")
 
         function toggleHideChildren(node) {
-        	var h = node.hideChildren = !node.hideChildren;
+            var h = node.hideChildren = !node.hideChildren;
         }
 
         node.on("click", function (d) {
-        	var children;
-        	if (d.hideChildren)
-        		children = d.__children;
-        	else
-        		children = d.children;
+            var children;
+            if (d.hideChildren)
+                children = d.__children;
+            else
+                children = d.children;
 
-        	if (!children || children.length == 0)
-        		return; // does not have anything to expand
-        	var graph = self.layouter.kgraph()
-        	self.layouter.cleanLayout();
-        	root.selectAll("*").remove();
-        	toggleHideChildren(d);	
-        	self.bindData(graph)
+            if (!children || children.length == 0)
+                return; // does not have anything to expand
+            var graph = this.layouter.kgraph()
+            this.layouter.cleanLayout();
+            root.selectAll("*").remove();
+            toggleHideChildren(d);    
+            this.bindData(graph)
         });
         // Select net on click
         link.on("click", function(d) {
@@ -261,7 +278,7 @@ export default function HwSchematic(svg) {
           var srcP = data.sourcePort;
           link.classed("link-selected", function (d) {
               if (d.source == src && d.sourcePort == srcP) {
-              	d.selected = doSelect;
+                  d.selected = doSelect;
               }
               return d.selected;
           });
@@ -284,9 +301,9 @@ export default function HwSchematic(svg) {
                 throw new Error("NotImplemented");
             }
             if(d.junctionPoints)
-            	d.junctionPoints.forEach(function (jp) {
-            		junctionPoints.push(jp);
-            	});
+                d.junctionPoints.forEach(function (jp) {
+                    junctionPoints.push(jp);
+                });
             return elk.section2svgPath(d.sections[0]);
           });
 
@@ -296,10 +313,10 @@ export default function HwSchematic(svg) {
               .append("circle")
               .attr("r", "3")
               .attr("cx", function(d) {
-            	  return d.x;
+                  return d.x;
               })
               .attr("cy", function(d) {
-            	  return d.y;
+                  return d.y;
               })
               .attr("class", "junction-point");
           
@@ -307,42 +324,42 @@ export default function HwSchematic(svg) {
           node.transition()
             .duration(0)
             .attr("transform", function(d) {
-            	// if side of ports is not fixed resolve it from position
-            	var c = d.properties['"org.eclipse.elk.portConstraints"'];
-            	if (!PortConstraints_isSideFixed(c)) {
-            		var w = d.width;
-	            	var h = d.height;
-            		ports.forEach(function initPortSides(p) {
-	            		if (p.x < 0)
-	            			p.side = "WEST";
-	            		else if (p.y < 0)
-	            			p.side = "NORTH";
-	            		else if (p.x >= w)
-	            			p.side = "EAST";
-	            		else if (p.y >= h)
-	            			d.side = "SOUTH";
-	            		else
-	            			throw new Exception("wrong port position" + [p.x, p.y]);
-	            	});
-            	}
-            	if (typeof d.x === "undefined" || typeof d.x === "undefined") {
-            		throw new Error("Node with undefined position", d);
-            	}
-            	return "translate(" + d.x + " " + d.y + ")"
+                // if side of ports is not fixed resolve it from position
+                var c = d.properties['"org.eclipse.elk.portConstraints"'];
+                if (!PortConstraints_isSideFixed(c)) {
+                    var w = d.width;
+                    var h = d.height;
+                    ports.forEach(function initPortSides(p) {
+                        if (p.x < 0)
+                            p.side = "WEST";
+                        else if (p.y < 0)
+                            p.side = "NORTH";
+                        else if (p.x >= w)
+                            p.side = "EAST";
+                        else if (p.y >= h)
+                            d.side = "SOUTH";
+                        else
+                            throw new Exception("wrong port position" + [p.x, p.y]);
+                    });
+                }
+                if (typeof d.x === "undefined" || typeof d.x === "undefined") {
+                    throw new Error("Node with undefined position", d);
+                }
+                return "translate(" + d.x + " " + d.y + ")"
             });
           
-          // apply port positions  
+          // apply port positions
           port.transition()
             .duration(0)
             .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"});
         
           // spot port name
           port.append("text")
-            .attr("y", self.PORT_HEIGHT * 0.75)
+            .attr("y", this.PORT_HEIGHT * 0.75)
             .text(function(d) {
-          	  if (d.ignoreLabel)
-          		  return "";
-          	  else if (d.level) {
+                if (d.ignoreLabel)
+                    return "";
+                else if (d.level) {
                     var indent = '-'.repeat(d.level);
                     var side = d.properties.portSide;
                     if (side == "WEST") {
@@ -360,11 +377,11 @@ export default function HwSchematic(svg) {
                 if (side == "WEST") {
                    return 7;
                 } else if (side == "EAST") {
-                   return -this.getBBox().width - self.CHAR_WIDTH / 2;
+                   return -this.getBBox().width - this.CHAR_WIDTH / 2;
                 } else if (side == "NORTH") {
-              	 return 0;
+                   return 0;
                 } else if (side == "SOUTH") {
-               	 return 0;
+                    return 0;
                 } else {
                     throw new Error(side);
                 }
@@ -376,7 +393,7 @@ export default function HwSchematic(svg) {
         });
         
         layouter.start();
-        
+
         // set dimensions and style of node
         nodeBody
             .attr("class", function (d) { 
@@ -395,7 +412,6 @@ export default function HwSchematic(svg) {
         
         // spot node body text
         node.append("text")
-            .call(renderTextLines)
+            .call(this.renderTextLines.bind(this))
     }
-    return self;
 }
