@@ -1,10 +1,11 @@
 import * as d3 from "d3";
 import {default as ELK} from "./elk-api";
 
-const ELK_WORKER_NAME = "elk-worker.js";
-const IN_NODE_ELK_WORKER_NAME = __dirname + "/" + ELK_WORKER_NAME;
-const NO_LAYOUT = "org.eclipse.elk.noLayout";
 const RUNNING_IN_NODE = (typeof require !== "undefined");
+const ELK_WORKER_NAME = "elk-worker.js";
+if (RUNNING_IN_NODE)
+	var IN_NODE_ELK_WORKER_NAME = __dirname + "/" + ELK_WORKER_NAME;
+const NO_LAYOUT = "org.eclipse.elk.noLayout";
 // kgraph properties that shall be copied
 const KGRAPH_KEYS = [
   'x', 'y',

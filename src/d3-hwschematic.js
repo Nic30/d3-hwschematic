@@ -99,8 +99,7 @@ export default class HwSchematic {
     /**
      * Init bodyText and resolve size of node from body text and ports
      * 
-     * @param d
-     *            component node *
+     * @param d component node
      */
     initNodeSizes(d) {
         if (d.properties["org.eclipse.elk.noLayout"])
@@ -208,11 +207,16 @@ export default class HwSchematic {
         });
         
     }
+    removeGraph() {
+    	this.root.remove();
+    	this.root = svg.append("g");
+    }
     
-    /*
+    /**
      * Set bind graph data to graph rendering engine
      */
     bindData(graph) {
+    	this.removeGraph();
         applyHideChildren(graph);
         var root = this.root;
         var layouter = this.layouter;
