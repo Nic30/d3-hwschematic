@@ -1,0 +1,7 @@
+dist/*.zip
+node_modules/
+package.json.*
+tests/coverage/
+.travis.yml
+doc/
+examples/
