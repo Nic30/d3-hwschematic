@@ -1,5 +1,4 @@
 import "d3";
-import "threads";
 import {default as ELK} from "./elk-api";
 
 const ELK_WORKER_NAME = "elk-worker.js";

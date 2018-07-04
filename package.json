@@ -34,7 +34,7 @@
   "homepage": "https://github.com/Nic30/d3-hwschematic#readme",
   "dependencies": {
     "d3": "latest",
-    "threads": "latest"
+    "webworker-threads": "latest"
   },
   "devDependencies": {
     "coveralls": "latest",
