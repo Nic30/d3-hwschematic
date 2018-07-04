@@ -4,12 +4,13 @@
   "description": "D3.js and ELK based schematic visualizer",
   "main": "dist/d3-hwschematic.js",
   "scripts": {
-    "start": "babel src -D -d dist --watch",
-    "build": "babel src -D -d dist",
+    "init": "eslint --init",
+    "build": "rm -rf dist && mkdir dist && NODE_ENV=production rollup -c",
+    "clean": "rm -rf dist/ node_modules/",
     "prepare": "npm run build",
-    "test": "jest",
-    "coverage": "jest --coverage --collectCoverageFrom=src/*.js",
-    "coveralls": "jest --coverage --collectCoverageFrom=src/*.js && cat ./tests/coverage/lcov.info | coveralls",
+    "pretest": "npm run build",
+    "test": "NODE_ENV=development jest",
+    "coveralls": "NODE_ENV=development jest --coverage && cat ./tests/coverage/lcov.info | coveralls",
     "lint": "eslint src test --ignore-pattern tests/coverage*"
   },
   "repository": {
@@ -33,20 +34,25 @@
   "homepage": "https://github.com/Nic30/d3-hwschematic#readme",
   "dependencies": {
     "d3": "latest",
-    "webworker-threads": "latest"
+    "threads": "latest"
   },
   "devDependencies": {
-    "babel-cli": "latest",
-    "babel-eslint": "latest",
-    "babel-plugin-transform-object-rest-spread": "latest",
-    "babel-preset-env": "latest",
     "coveralls": "latest",
-    "eslint": "latest",
+    "eslint": "^4.19.1",
     "eslint-config-airbnb": "latest",
-    "eslint-plugin-import": "latest",
-    "eslint-plugin-jsx-a11y": "latest",
-    "eslint-plugin-react": "latest",
-    "jest": "latest"
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.9.1",
+    "babel-preset-flow": "latest",
+    "babel-preset-env": "latest",
+    "babel-preset-stage-0": "latest",
+    "jest": "latest",
+    "rollup": "0.52",
+    "rollup-plugin-node-resolve": "latest"
   },
   "jest": {
     "coverageDirectory": "<rootDir>/tests/coverage",

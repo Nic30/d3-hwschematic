@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
+<html>
 <head>
-  <title>elkjs d3 example ports</title>
+  <meta charset="utf-8">
+  <title>d3-hwschematic example</title>
   <script type="text/javascript" src="../node_modules/d3/dist/d3.js"></script>
   <script type="text/javascript" src="../dist/d3-hwschematic.js"></script>
+  <script type="text/javascript" src="../src/elk/elk-worker.js"></script>
   <style>
     text {
       font-family: monospace;
@@ -13,7 +15,7 @@
       stroke-width: 1px;
       fill: #e6ffff;
       border: 2px;
-	  /*.attr("fill", "url(#blue_grad)")*/
+      /*.attr("fill", "url(#blue_grad)")*/
     }
     
     .link {
@@ -46,51 +48,65 @@
     
     
   </style>
-  <script type="text/javascript">
-     var MODULE_NAME = "{{MODULE_NAME}}";
-     var IN_MODULE_NAME = "{{IN_MODULE_NAME}}";
-  </script>
-  
 </head>
 <body>
-<script>
-function viewport() {
-  var e = window,
-    a = 'inner';
-  if (!('innerWidth' in window)) {
-    a = 'client';
-    e = document.documentElement || document.body;
-  }
-  return {
-    width: e[a + 'Width'],
-    height: e[a + 'Height']
-  }
-}
-var width = viewport().width,
-    height = viewport().height;
-
-var zoom = d3.zoom()
-    .on("zoom", applyTransform);
-
-var svg = d3.select("body")
-    .append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .call(zoom)
-    .on("dblclick.zoom", null) // disable zoom on doubleclick
-    .append("g");
-
-var cGraph = new HwSchematic(svg);
-
-// load the data and render the elements
-d3.json("./example_scheme.json" + MODULE_NAME + "/" + IN_MODULE_NAME, function(error, graph) {
-  if (error) {
-    throw error;
-  }
-  cGraph.bindData(graph);
-});
-
-function applyTransform() {
-  svg.attr("transform", d3.event.transform)
-};
-</script>
+    <input type="file" id="file-input" />
+    <svg id="scheme-placeholder"></svg>
+    <script>
+        function viewport() {
+          var e = window,
+            a = 'inner';
+          if (!('innerWidth' in window)) {
+            a = 'client';
+            e = document.documentElement || document.body;
+          }
+          return {
+            width: e[a + 'Width'],
+            height: e[a + 'Height']
+          }
+        }
+        var width = viewport().width,
+            height = viewport().height;
+        
+        var zoom = d3.zoom()
+            .on("zoom", applyTransform);
+        
+        var svg = d3.select("#scheme-placeholder")
+            .attr("width", width)
+            .attr("height", height)
+            .call(zoom)
+            .on("dblclick.zoom", null) // disable zoom on doubleclick
+            .append("g");
+        
+        var g = new d3.HwSchematic(svg);
+        
+        function applyTransform() {
+          svg.attr("transform", d3.event.transform)
+        };
+    </script>
+    <script>
+        // file open handler
+        function readSingleFile(e) {
+            var file = e.target.files[0];
+            if (!file) {
+              return;
+            }
+            var reader = new FileReader();
+            reader.onload = function(e) {
+              var contents = e.target.result;
+              displayContents(contents);
+            };
+            reader.readAsText(file);
+          }
+        
+          function displayContents(contents) {
+            var graph = JSON.parse(contents);
+            // load the data and render the elements
+            g.bindData(graph);
+          }
+        
+          document.getElementById('file-input')
+            .addEventListener('change', readSingleFile, false);
+    </script>
+</body>
+</html>
