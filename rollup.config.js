@@ -1,5 +1,3 @@
-import resolve from 'rollup-plugin-node-resolve'
-
 const definition = require("./package.json");
 const dependencies = Object.keys(definition.dependencies);
 
@@ -16,5 +14,4 @@ export default {
     }, //dependencies.reduce((p, v) => (p[v] = "d3", p), {}),
     name: "d3",
   },
-  plugins: [ resolve() ],
 };
