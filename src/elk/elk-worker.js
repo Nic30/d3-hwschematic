@@ -45632,7 +45632,6 @@ _.process_0 = function process_62(layeredGraph, progressMonitor){
   minimizingMethod = (parent_0 = castTo($get_3(graphsToSweepOn, 0), 211) , parent_0.crossMinimizer.isDeterministic()?parent_0.crossMinimizer.alwaysImproves()?new LayerSweepCrossingMinimizer$lambda$2$Type(this):new LayerSweepCrossingMinimizer$lambda$3$Type(this):new LayerSweepCrossingMinimizer$lambda$1$Type(this));
   $minimizeCrossings_0(graphsToSweepOn, minimizingMethod);
   $transferNodeAndPortOrdersToGraph(this);
-  console.log('LayerSweepCrossingMinimizer done\n');
   $done_0(progressMonitor);
 }
 ;
