@@ -8,8 +8,11 @@ language: node_js
 node_js:
 - '7'
 install:
-- npm install --only=dev --loglevel info
 - npm install
+# for deploy
+- npm install rollup -g 
+# for build, test and coveralls
+- travis_wait 20 npm install --only=dev
 script:
 - npm run coveralls
 deploy:
