@@ -2,7 +2,7 @@ import * as d3 from "d3";
 import {default as ELK} from "./elk-api";
 
 const ELK_WORKER_NAME = "elk-worker.js";
-const IN_NODE_ELK_WORKER_NAME = "../src/" + ELK_WORKER_NAME;
+const IN_NODE_ELK_WORKER_NAME = __dirname + "/" + ELK_WORKER_NAME;
 const NO_LAYOUT = "org.eclipse.elk.noLayout";
 const RUNNING_IN_NODE = (typeof require !== "undefined");
 // kgraph properties that shall be copied
@@ -57,7 +57,9 @@ export default class d3elk {
 	    // a function applied after each layout run
 	    if (RUNNING_IN_NODE) {
 	    	const { Worker } = require('webworker-threads')
-	    	var workerFactory = function (url) { return new Worker(url) }
+	    	var workerFactory = function (url) { 
+	    		return new Worker(url)
+	    	}
 	    } else {
 	    	var workerFactory = undefined;
 	    }
@@ -424,6 +426,11 @@ export default class d3elk {
         var value = this.dispatch.on.apply(this.dispatch, arguments);
         return value === this.dispatch ? this: value;
     };
+    
+    terminate() {
+    	if (this.layouter)
+    		this.layouter.terminateWorker();
+    }
 
     // return the layouter object
 };

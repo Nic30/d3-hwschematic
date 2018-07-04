@@ -420,4 +420,8 @@ export default class HwSchematic {
         node.append("text")
             .call(this.renderTextLines.bind(this))
     }
+    terminate() {
+    	if (this.layouter)
+    		this.layouter.terminate();
+    }
 }

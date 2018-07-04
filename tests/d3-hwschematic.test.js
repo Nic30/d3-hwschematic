@@ -14,5 +14,5 @@ describe('{unit}: Testing scheme rendering', () => {
 	  var gs = svg.selectAll("g");
 	  expect(gs.size()).toBe(8 + 1); // markers + zoom
   });
-  
+  sch.terminate();
 });
