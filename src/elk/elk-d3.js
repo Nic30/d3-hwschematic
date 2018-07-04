@@ -1,8 +1,10 @@
-import "d3";
+import * as d3 from "d3";
 import {default as ELK} from "./elk-api";
 
 const ELK_WORKER_NAME = "elk-worker.js";
+const IN_NODE_ELK_WORKER_NAME = "../src/" + ELK_WORKER_NAME;
 const NO_LAYOUT = "org.eclipse.elk.noLayout";
+const RUNNING_IN_NODE = (typeof require !== "undefined");
 // kgraph properties that shall be copied
 const KGRAPH_KEYS = [
   'x', 'y',
@@ -16,6 +18,9 @@ const KGRAPH_KEYS = [
 
 
 function findElkWorkerURL() {
+	if (RUNNING_IN_NODE)
+		return IN_NODE_ELK_WORKER_NAME;
+		
     // find name of elk worker script URL
     var elkWorkerScript;
     var scripts = document.getElementsByTagName('script');
@@ -48,14 +53,19 @@ export default class d3elk {
 	    // dimensions
 	    this.width = 0;
 	    this.height = 0;
-	    this._transformGroup;
+	    this._transformGroup = undefined;
 	    // a function applied after each layout run
-	    var applyLayout;
-	    
+	    if (RUNNING_IN_NODE) {
+	    	const { Worker } = require('webworker-threads')
+	    	var workerFactory = function (url) { return new Worker(url) }
+	    } else {
+	    	var workerFactory = undefined;
+	    }
 	    // the layouter instance
 	    this.layouter = new ELK({
 	    	algorithms: [ 'layered'],
-	    	workerUrl:findElkWorkerURL()
+	    	workerUrl:findElkWorkerURL(),
+	    	workerFactory: workerFactory,
 	    });
 	}
 
