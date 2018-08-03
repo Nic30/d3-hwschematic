@@ -14,6 +14,30 @@ Use `npm install d3-hwschematic --save` to install this library and save it to y
 * input is [ELK json](https://www.eclipse.org/elk/documentation/tooldevelopers/graphdatastructure/jsonformat.html)
 
 
+## How to use examples
+
+1. download dependencies and build this library
+
+```bash
+npm install
+npm install --only=dev
+npm run build
+```
+
+2. then you can open examples, but current web browsers does not allow to load files from local disk (because of security).
+It has multiple solution 
+  * You can run chrome with --allow-file-access-from-files option
+  * (prefered) Or use webserver. One webserver implementation is part of standard python distribution. 
+
+```bash
+# (in root directory of this git)
+python3 -m http.server 8888
+```
+
+Now you should be able to view example application on http://0.0.0.0:8888/examples/example.html?schematic=/examples/schemes/Crc.json.
+Where part after schematic= is path to json file where schematic is sotored. 
+
+
 
 ## Similar opensource projects
 
