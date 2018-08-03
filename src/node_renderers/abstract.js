@@ -184,19 +184,26 @@ export class AbstractNodeRenderer {
 	 * */
 	render(root, nodeG) {
         var schematic = this.schematic;
-		var PORT_HEIGHT = schematic.PORT_HEIGHT;
-        var CHAR_WIDTH = schematic.CHAR_WIDTH;
         var node = nodeG;
         var nodeBody = node.append("rect");
-        
-        var port = node.selectAll(".port")
+        // set dimensions and style of node
+        nodeBody
+           .attr("width", function(d) { return d.width })
+           .attr("height", function(d) { return d.height })
+           .attr("class", function (d) { 
+               if (d.isExternalPort) {
+                   return "node-external-port";
+               } else {
+                   return "node";
+               }
+           })
+           .attr("rx", 5) // rounded corners
+           .attr("ry", 5);
+
+        var portG = node.selectAll(".port")
           .data(function(d) { return d.ports || []; })
           .enter()
           .append("g");
-        
-        nodeBody
-          .attr("width", function(d) { return d.width })
-          .attr("height", function(d) { return d.height });
 
         // apply node positions
         node.transition()
@@ -225,15 +232,31 @@ export class AbstractNodeRenderer {
               }
               return "translate(" + d.x + " " + d.y + ")"
           });
-        
-        // apply port positions
-        port.transition()
-          .duration(0)
-          .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"});
 
+        // spot node label
+        node.append("text")
+            .text(function(d) { return d.name; });
+
+        // spot node body text
+        node.append("text")
+            .call(this.renderTextLines.bind(this));
+        
+        this.renderPorts(portG);
+	}
+
+	renderPorts(portG) {
+		var schematic = this.schematic;
+		var PORT_HEIGHT = schematic.PORT_HEIGHT;
+        var CHAR_WIDTH = schematic.CHAR_WIDTH;
+        // apply port positions
+        portG.transition()
+          .duration(0)
+          .attr("transform", function(d) {
+        	  return "translate(" + d.x + "," + d.y + ")"
+          });
+        
         // spot port name
-        port.append("text")
-          .attr("y", PORT_HEIGHT * 0.75)
+        portG.append("text")
           .text(function(d) {
               if (d.ignoreLabel)
                   return "";
@@ -263,30 +286,11 @@ export class AbstractNodeRenderer {
               } else {
                   throw new Error(side);
               }
-          });
+          })
+          .attr("y", PORT_HEIGHT * 0.75);
         
         // spot input/output marker
-        port.append("use")
+        portG.append("use")
             .attr("href", getIOMarker)
-		
-        // set dimensions and style of node
-        nodeBody
-            .attr("class", function (d) { 
-                if (d.isExternalPort) {
-                    return "node-external-port";
-                } else {
-                    return "node";
-                }
-            })
-            .attr("rx", 5)
-            .attr("ry", 5);
-        
-        // spot node label
-        node.append("text")
-            .text(function(d) { return d.name; });
-        
-        // spot node body text
-        node.append("text")
-            .call(this.renderTextLines.bind(this));
 	}
 }
