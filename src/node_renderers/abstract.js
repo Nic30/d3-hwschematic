@@ -209,24 +209,6 @@ export class AbstractNodeRenderer {
         node.transition()
           .duration(0)
           .attr("transform", function(d) {
-              // if side of ports is not fixed resolve it from position
-              var c = d.properties['"org.eclipse.elk.portConstraints"'];
-              if (!PortConstraints_isSideFixed(c)) {
-                  var w = d.width;
-                  var h = d.height;
-                  ports.forEach(function initPortSides(p) {
-                      if (p.x < 0)
-                          p.side = "WEST";
-                      else if (p.y < 0)
-                          p.side = "NORTH";
-                      else if (p.x >= w)
-                          p.side = "EAST";
-                      else if (p.y >= h)
-                          d.side = "SOUTH";
-                      else
-                          throw new Exception("wrong port position" + [p.x, p.y]);
-                  });
-              }
               if (typeof d.x === "undefined" || typeof d.x === "undefined") {
                   throw new Error("Node with undefined position", d);
               }
