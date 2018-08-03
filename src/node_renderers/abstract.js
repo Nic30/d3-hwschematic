@@ -183,6 +183,7 @@ export class AbstractNodeRenderer {
 	 * @param nodeG svg g for each node with data binded
 	 * */
 	render(root, nodeG) {
+		console.log("rendering ", nodeG.size());
         var schematic = this.schematic;
         var node = nodeG;
         var nodeBody = node.append("rect");
