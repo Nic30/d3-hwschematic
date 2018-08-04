@@ -46,8 +46,8 @@ export default class HwSchematic {
         this.MAX_NODE_BODY_TEXT_SIZE = [400, 400];
         // top, right, bottom, left
         this.BODY_TEXT_PADDING = [15, 10, 0, 10];
-
-        addMarkers(svg, this.PORT_PIN_SIZE);
+        this.defs = svg.append("defs");
+        addMarkers(this.defs, this.PORT_PIN_SIZE);
         this.root = svg.append("g");
         this.layouter = new d3elk();
         this.nodeRenderers = new NodeRenderers();
