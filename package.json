@@ -51,7 +51,7 @@
     "babel-preset-env": "latest",
     "babel-preset-stage-0": "latest",
     "jest": "latest",
-    "rollup": "0.52"
+    "rollup": "^0.63"
   },
   "jest": {
     "coverageDirectory": "<rootDir>/tests/coverage",
