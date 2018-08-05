@@ -25,6 +25,12 @@ export class AbstractNodeRenderer {
 		return true;
 	}
 	
+	getNodeLabelWidth(d) {
+		var schematic = this.schematic;
+        var widthOfText = schematic.widthOfText.bind(schematic);
+		return widthOfText(d.name);
+	}
+	
 	/**
      * Init bodyText and resolve size of node from body text and ports
      * 
@@ -42,7 +48,7 @@ export class AbstractNodeRenderer {
             });
         var widthOfText = schematic.widthOfText.bind(schematic);
 
-        var labelW = widthOfText(d.name)
+        var labelW = this.getNodeLabelWidth(d);
         var max = Math.max
         var bodyTextSize = this.initBodyTextLines(d);
         const MBT = schematic.MAX_NODE_BODY_TEXT_SIZE;
@@ -83,9 +89,9 @@ export class AbstractNodeRenderer {
             north = portDim["NORTH"];
 
         var portColums = 0;
-        if (west[0])
+        if (west[0] && west[1] > 0)
             portColums += 1;
-        if (east[0])
+        if (east[0] && east[1] > 0)
             portColums += 1;
 
         var middleSpacing = 0;
@@ -183,7 +189,6 @@ export class AbstractNodeRenderer {
 	 * @param nodeG svg g for each node with data binded
 	 * */
 	render(root, nodeG) {
-		console.log("rendering ", nodeG.size());
         var schematic = this.schematic;
         var node = nodeG;
         var nodeBody = node.append("rect");
@@ -200,11 +205,6 @@ export class AbstractNodeRenderer {
            })
            .attr("rx", 5) // rounded corners
            .attr("ry", 5);
-
-        var portG = node.selectAll(".port")
-          .data(function(d) { return d.ports || []; })
-          .enter()
-          .append("g");
 
         // apply node positions
         node.transition()
@@ -224,13 +224,18 @@ export class AbstractNodeRenderer {
         node.append("text")
             .call(this.renderTextLines.bind(this));
         
-        this.renderPorts(portG);
+        this.renderPorts(node);
 	}
 
-	renderPorts(portG) {
+	renderPorts(node) {
 		var schematic = this.schematic;
 		var PORT_HEIGHT = schematic.PORT_HEIGHT;
         var CHAR_WIDTH = schematic.CHAR_WIDTH;
+        var portG = node.selectAll(".port")
+          .data(function(d) { return d.ports || []; })
+          .enter()
+          .append("g");
+  
         // apply port positions
         portG.transition()
           .duration(0)

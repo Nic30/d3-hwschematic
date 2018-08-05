@@ -2,7 +2,8 @@ import * as d3 from "d3";
 import {addMarkers} from "./markers"; 
 import {NodeRenderers} from "./node_renderers/selector"; 
 import {OperatorNodeRenderer} from "./node_renderers/operatorNode"; 
-import {MuxNodeRenderer} from "./node_renderers/muxNode"; 
+import {MuxNodeRenderer} from "./node_renderers/muxNode";
+import {SliceNodeRenderer} from "./node_renderers/sliceNode";
 import {AbstractNodeRenderer} from "./node_renderers/abstract"; 
 import {renderLinks} from "./linkRenderer"; 
 import {default as d3elk} from "./elk/elk-d3";
@@ -51,11 +52,12 @@ export default class HwSchematic {
         addMarkers(this.defs, this.PORT_PIN_SIZE);
         this.root = svg.append("g");
         this.layouter = new d3elk();
+
         this.nodeRenderers = new NodeRenderers();
         this.nodeRenderers.registerRenderer(new OperatorNodeRenderer(this));
         this.nodeRenderers.registerRenderer(new MuxNodeRenderer(this));
+        this.nodeRenderers.registerRenderer(new SliceNodeRenderer(this));
         this.nodeRenderers.registerRenderer(new AbstractNodeRenderer(this));
-        
     }
         
     widthOfText(text) {
