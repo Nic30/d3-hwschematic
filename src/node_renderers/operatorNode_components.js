@@ -40,6 +40,15 @@ function nodeCircleWithText(root, text) {
     .text(text)
 }
 
+function operatorBox(root) {
+  root.append("rect")
+   .attr("width", "25")
+   .attr("height", "25")
+   .attr("x", "0")
+   .attr("y", "0");
+}
+
+
 /**
  * Draw a AND gate symbol
  */
@@ -149,21 +158,34 @@ function NOT(root) {
  * Draw a FF register symbol
  */
 function FF(root) {
-// width="25" height="25"
-  root.append("rect")
-   .attr("width", "25")
-   .attr("height", "25")
-   .attr("x", "0")
-   .attr("y", "0");
-   
+  // width="25" height="25"
+  operatorBox(root);
+
   root.append("path")
     .attr("d","M0,2 L5,7 L0,12");
  
   root.append("text")
     .attr("x", 5)
     .attr("y", 16)
-    .text("FF")
+    .text("FF");
 }
+
+function RISING_EDGE(root) {
+	  // width="25" height="25"
+	  operatorBox(root);
+
+	  root.append("path")
+	    .attr("d", "M5,20 L12.5,20 L12.5,5 L20,5");
+	}
+
+function FALLING_EDGE(root) {
+  // width="25" height="25"
+  operatorBox(root);
+
+  root.append("path")
+    .attr("d", "M5,5 L12.5,5 L12.5,20 L20,20");
+}
+
 
 
 export const SHAPES = {
@@ -175,6 +197,8 @@ export const SHAPES = {
   "NOR": NOR ,
   "XOR": XOR ,
   "NXOR":NXOR,
+  "RISING_EDGE": RISING_EDGE,
+  "FALLING_EDGE": FALLING_EDGE,
   
   "ADD": function ADD(root) {
 	  nodeCircleWithText(root, ">=");
