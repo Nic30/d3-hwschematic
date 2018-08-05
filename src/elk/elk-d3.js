@@ -35,10 +35,6 @@ function findElkWorkerURL() {
     	throw new Error("Can not locate elk-worker.js");
 
     return elkWorkerScript.src;
-    // var blob = new Blob(Array.prototype.map.call(
-    // document.querySelectorAll('script[type=\'text\/js-worker\']'),
-    // function (oScript) { return oScript.textContent; }),{type:
-	// 'text/javascript'});
 }
 
 export default class d3elk {
@@ -136,19 +132,13 @@ export default class d3elk {
 	 * Start the layout process.
 	 */
     start() {
-      // alias applyLayout method
-      var self = this;
-      // start the layouter
-      function onSuccess(kgraph)  {
-        self.applyLayout(kgraph);
-      }
       this.layouter.layout(
-    		  this.graph,
-    		  {layoutOptions: this._options}
-      ).then(onSuccess,
-    		 this.onError
+  		  this.graph,
+   		  {layoutOptions: this._options}
+      ).then(this.applyLayout.bind(this),
+    		 this.onError.bind(this)
       );
-      return self;
+      return this;
     }
 
     getNodes() {
@@ -217,7 +207,7 @@ export default class d3elk {
       if (!g.id)
           g.id = "root";
       if (!g.properties)
-          g.properties = { 'algorithm': 'layered' };
+          g.properties = {'algorithm': 'layered'};
       if (!g.properties.algorithm)
           g.properties.algorithm = 'layered';
       if (!g.width)
@@ -236,23 +226,23 @@ export default class d3elk {
 	 * Clean all layout possitions from nodes, nets and ports
 	 */
     cleanLayout(n) {
-        if (!arguments.length)
-        	var n = this.graph;
+      if (!arguments.length)
+        var n = this.graph;
 
-        var cleanLayout = this.cleanLayout.bind(this);
-        delete n.x;
-        delete n.y;
-        (n.ports || []).forEach(function (p) {
-            delete p.x;
-            delete p.y;
-        });
-        (n.edges || []).forEach(function (e) { 
-            delete e.sections;
-            delete e.junctionPoints;
-        });
-        (n.children || []).forEach(function(c) {
-            cleanLayout(c)
-        });
+      var cleanLayout = this.cleanLayout.bind(this);
+      delete n.x;
+      delete n.y;
+      (n.ports || []).forEach(function (p) {
+          delete p.x;
+          delete p.y;
+      });
+      (n.edges || []).forEach(function (e) { 
+          delete e.sections;
+          delete e.junctionPoints;
+      });
+      (n.children || []).forEach(function(c) {
+          cleanLayout(c)
+      });
     }
     
     /**
