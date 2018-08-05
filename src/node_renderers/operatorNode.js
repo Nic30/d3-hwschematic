@@ -56,7 +56,5 @@ export class OperatorNodeRenderer extends AbstractNodeRenderer {
         .attr("href", function (d) {
         	return "#" + d.name
         });
-        
-
-	}
+ 	}
 }
