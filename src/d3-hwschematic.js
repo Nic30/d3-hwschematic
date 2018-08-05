@@ -49,11 +49,12 @@ export default class HwSchematic {
         // top, right, bottom, left
         this.BODY_TEXT_PADDING = [15, 10, 0, 10];
         this.defs = svg.append("defs");
-        addMarkers(this.defs, this.PORT_PIN_SIZE);
         this.root = svg.append("g");
         this.layouter = new d3elk();
 
         this.nodeRenderers = new NodeRenderers();
+
+        addMarkers(this.defs, this.PORT_PIN_SIZE);
         this.nodeRenderers.registerRenderer(new OperatorNodeRenderer(this));
         this.nodeRenderers.registerRenderer(new MuxNodeRenderer(this));
         this.nodeRenderers.registerRenderer(new SliceNodeRenderer(this));
@@ -71,19 +72,18 @@ export default class HwSchematic {
       this.root.remove();
       this.root = svg.append("g");
     }
-    
+
     /**
      * Set bind graph data to graph rendering engine
      */
     bindData(graph) {
-      this.removeGraph();
+        this.removeGraph();
         applyHideChildren(graph);
         var root = this.root;
         var layouter = this.layouter;
         var bindData = this.bindData.bind(this);
         var nodeRenderers = this.nodeRenderers
         var schematic = this;
-
 
         // config of layouter
         layouter
