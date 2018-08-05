@@ -146,10 +146,10 @@ function NXOR(root) {
 function NOT(root) {
   // width="30" height="20"
   root.append("path")
-    .attr("d", "M0,0 L0,20 L20,10 Z");
-  negationCircle(root, 23, 10);
+    .attr("d", "M0,2.5 L0,22.5 L20,12.5 Z");
+  negationCircle(root, 23, 12.5);
   root.append("text")
-    .attr("x", 8)
+    .attr("x", 2)
     .attr("y", 16)
     .text("!")
 }
