@@ -38,7 +38,8 @@ export class MuxNodeRenderer extends AbstractNodeRenderer {
         cont.attr("class", "node-operator");
         MUX_SHAPE(cont);
         cont.append("text")
-          .text("LATCH")
+          .text("LA")
+          .attr("y", "10")
           .attr("x", "10")
           .attr("style", "writing-mode: tb;")
 	}
