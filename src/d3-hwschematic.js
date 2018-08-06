@@ -60,7 +60,10 @@ export default class HwSchematic {
         this.nodeRenderers.registerRenderer(new SliceNodeRenderer(this));
         this.nodeRenderers.registerRenderer(new AbstractNodeRenderer(this));
     }
-        
+    getHtmlIdOfNode(node) {
+    	return "node-id-" + node.id;
+    }
+    
     widthOfText(text) {
         if (text)
             return text.length * this.CHAR_WIDTH;
@@ -105,7 +108,8 @@ export default class HwSchematic {
           var node = root.selectAll(".node")
               .data(nodes)
               .enter()
-              .append("g");
+              .append("g")
+              .attr("id", this.getHtmlIdOfNode);
           nodeRenderers.render(root, node);              
           
           function toggleHideChildren(node) {
