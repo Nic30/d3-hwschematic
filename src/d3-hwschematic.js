@@ -62,7 +62,7 @@ export default class HwSchematic {
     }
 
     getHtmlIdOfNode(node) {
-    	return "node-id-" + node.id;
+        return "node-id-" + node.id;
     }
     
     widthOfText(text) {
@@ -71,27 +71,71 @@ export default class HwSchematic {
         else
             return 0;
     }
+    
+    /**
+     * Get parent of node
+     * 
+     * @attention this methods expect that node.id is string of number which is DFS order
+     * */
+    getParentOfNode(node) {
+        var target = parseInt(node.id);
+        var root = this.layouter.kgraph();
+        
+        while(true) {
+           var ch = root.children;
+           var i = undefined;
+           var found = false;
+
+           ch.some(function (d, _i) {
+               if (parseInt(d.id) >= target) {
+                   found = d.id === node.id;
+                   i = _i;
+                   return true;
+               }
+               return false;
+           });
+
+           if (ch.length == 0 || typeof i === "undefined")
+               throw new Error("Can not find parent of node, because can not find node in graph node.id=" + node.id + ")");
+
+           if (found) {
+               return root;
+           } else {
+               // use last child with lower ID as potential parent;
+               root = ch[i - 1];
+           }
+        }
+    }
 
     removeGraph() {
       this.root.remove();
       this.root = svg.append("g");
     }
-    
-    setFocus(elm) {
-    	console.log(elm);
-    }
 
+    sortNodes(root) {
+      if (typeof root.children === "undefined")
+          return
+        
+      root.children.sort(function(a, b) {
+          return parseInt(a.id) - parseInt(b.id);
+      });
+      root.children.forEach(this.sortNodes.bind(this));
+    }
+    
     /**
      * Set bind graph data to graph rendering engine
+     * 
+     * @return promise for this job
      */
     bindData(graph) {
+        this.sortNodes(graph);
         this.removeGraph();
         applyHideChildren(graph);
         var root = this.root;
         var layouter = this.layouter;
         var bindData = this.bindData.bind(this);
-        var setFocus = this.setFocus.bind(this);
         var getHtmlIdOfNode = this.getHtmlIdOfNode.bind(this);
+        var getParentOfNode = this.getParentOfNode.bind(this);
         var nodeRenderers = this.nodeRenderers
         var schematic = this;
 
@@ -109,7 +153,7 @@ export default class HwSchematic {
         // nodes are ordered, childeren at the end
         nodes.forEach(nodeRenderers.prepare.bind(nodeRenderers));
       
-        layouter.start().then(function applyLayout() {
+        return layouter.start().then(function applyLayout() {
           // by "g" we group nodes along with their ports
           var node = root.selectAll(".node")
               .data(nodes)
@@ -124,20 +168,28 @@ export default class HwSchematic {
     
           node.on("click", function (d) {
               var children;
-              if (d.hideChildren)
+              var nextFocusTarget;
+              if (d.hideChildren) {
+                  // children are hidden, will expand
                   children = d.__children;
-              else
+                  nextFocusTarget = d;
+              } else {
+                  // children are visible, will collapse
                   children = d.children;
-    
+                  nextFocusTarget = getParentOfNode(d);
+              }
+
               if (!children || children.length == 0)
                   return; // does not have anything to expand
+
               var graph = layouter.kgraph()
               layouter.cleanLayout();
               root.selectAll("*").remove();
-              toggleHideChildren(d);    
-              bindData(graph);
-              var n = document.getElementById("#" + getHtmlIdOfNode(d));
-              setFocus(n);
+              toggleHideChildren(d); 
+
+              bindData(graph).then(function() {
+                 layouter.zoomToFit(nextFocusTarget);
+              });
           });
 
           var link = renderLinks(root, edges);  

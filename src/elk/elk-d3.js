@@ -4,7 +4,7 @@ import {default as ELK} from "./elk-api";
 const RUNNING_IN_NODE = (typeof require !== "undefined");
 const ELK_WORKER_NAME = "elk-worker.js";
 if (RUNNING_IN_NODE)
-	var IN_NODE_ELK_WORKER_NAME = __dirname + "/" + ELK_WORKER_NAME;
+   var IN_NODE_ELK_WORKER_NAME = __dirname + "/" + ELK_WORKER_NAME;
 const NO_LAYOUT = "org.eclipse.elk.noLayout";
 // kgraph properties that shall be copied
 const KGRAPH_KEYS = [
@@ -19,69 +19,69 @@ const KGRAPH_KEYS = [
 
 
 function findElkWorkerURL() {
-	if (RUNNING_IN_NODE)
-		return IN_NODE_ELK_WORKER_NAME;
-		
+   if (RUNNING_IN_NODE)
+      return IN_NODE_ELK_WORKER_NAME;
+      
     // find name of elk worker script URL
     var elkWorkerScript;
     var scripts = document.getElementsByTagName('script');
     for(var i = 0; i < scripts.length; i++) {
-    	if(scripts[i].src.endsWith(ELK_WORKER_NAME)) {
-    		elkWorkerScript = scripts[i];
-    		break;
-    	}
+       if(scripts[i].src.endsWith(ELK_WORKER_NAME)) {
+          elkWorkerScript = scripts[i];
+          break;
+       }
     }
     if (typeof elkWorkerScript === "undefined")
-    	throw new Error("Can not locate elk-worker.js");
+       throw new Error("Can not locate elk-worker.js");
 
     return elkWorkerScript.src;
 }
 
 export default class d3elk {
-	constructor() {
-	    // containers
-	    this.nodes = [];
-	    this.edges = [];
-	    this.graph = {}; // internal (hierarchical graph)
-	    this._options = {};
-	    // {id(str): object from input graph}
-	    this._d3ObjMap = {};
-	    // dimensions
-	    this.width = 0;
-	    this.height = 0;
-	    this._transformGroup = undefined;
-	    // a function applied after each layout run
-	    if (RUNNING_IN_NODE) {
-	    	const { Worker } = require('webworker-threads')
-	    	var workerFactory = function (url) { 
-	    		return new Worker(url)
-	    	}
-	    } else {
-	    	var workerFactory = undefined;
-	    }
-	    // the layouter instance
-	    this.layouter = new ELK({
-	    	algorithms: [ 'layered'],
-	    	workerUrl:findElkWorkerURL(),
-	    	workerFactory: workerFactory,
-	    });
-	}
+   constructor() {
+       // containers
+       this.nodes = [];
+       this.edges = [];
+       this.graph = {}; // internal (hierarchical graph)
+       this._options = {};
+       // {id(str): object from input graph}
+       this._d3ObjMap = {};
+       // dimensions
+       this.width = 0;
+       this.height = 0;
+       this._transformGroup = undefined;
+       // a function applied after each layout run
+       if (RUNNING_IN_NODE) {
+          const { Worker } = require('webworker-threads')
+          var workerFactory = function (url) { 
+             return new Worker(url)
+          }
+       } else {
+          var workerFactory = undefined;
+       }
+       // the layouter instance
+       this.layouter = new ELK({
+          algorithms: [ 'layered'],
+          workerUrl:findElkWorkerURL(),
+          workerFactory: workerFactory,
+       });
+   }
 
-	ports(n) {
-	  // by default the 'ports' field
-	  return n.ports || [];
-	}
+   ports(n) {
+     // by default the 'ports' field
+     return n.ports || [];
+   }
 
-	labels(n) {
-	  return n.labels || [];
-	}
+   labels(n) {
+     return n.labels || [];
+   }
     /**
-	 * Setting the available area, the positions of the layouted graph are
-	 * currently scaled down.
-	 */
+    * Setting the available area, the positions of the layouted graph are
+    * currently scaled down.
+    */
     size(size) {
       if (!arguments.length)
-    	  return [this.width, this.height];
+         return [this.width, this.height];
       this.width = size[0];
       this.height = size[1];
       
@@ -91,10 +91,10 @@ export default class d3elk {
       }
       return this;
     };
-	
+   
     /**
-	 * Convert section from ELK json to svg path string
-	 */
+    * Convert section from ELK json to svg path string
+    */
     static section2svgPath(section) {
       var pathBuff = ["M", section.startPoint.x, section.startPoint.y];
       if (section.bendPoints)
@@ -111,29 +111,29 @@ export default class d3elk {
      }
 
     /**
-	 * Sets the group used to perform 'zoomToFit'.
-	 */
+    * Sets the group used to perform 'zoomToFit'.
+    */
     transformGroup(g) {
       if (!arguments.length)
-    	  return this._transformGroup;
+         return this._transformGroup;
       this._transformGroup = g;
       return this;
     }
 
     options(opts) {
       if (!arguments.length)
-    	  return this._options;
+         return this._options;
       this._options = opts;
       return this;
     }
 
     /**
-	 * Start the layout process.
-	 */
+    * Start the layout process.
+    */
     start() {
       return this.layouter.layout(
-  		  this.graph,
-   		  {layoutOptions: this._options}
+          this.graph,
+           {layoutOptions: this._options}
       ).then(
           this.applyLayout.bind(this)
       );
@@ -197,7 +197,7 @@ export default class d3elk {
 
     kgraph(root) {
       if (!arguments.length)
-    	  return this.graph;
+         return this.graph;
         
       var g = this.graph = root;
       this.invalidateCaches();
@@ -221,8 +221,8 @@ export default class d3elk {
     }
     
     /**
-	 * Clean all layout possitions from nodes, nets and ports
-	 */
+    * Clean all layout possitions from nodes, nets and ports
+    */
     cleanLayout(n) {
       if (!arguments.length)
         var n = this.graph;
@@ -244,9 +244,9 @@ export default class d3elk {
     }
     
     /**
-	 * Apply layout for the kgraph style. Converts relative positions to
-	 * absolute positions.
-	 */
+    * Apply layout for the kgraph style. Converts relative positions to
+    * absolute positions.
+    */
     applyLayout(kgraph) {
       this.zoomToFit(kgraph);
       var nodeMap = {};
@@ -264,23 +264,23 @@ export default class d3elk {
      * @param dstGraph: original graph provided by user
      **/
     copyElkProps(srcGraph, dstGraph) {
-    	var d3Objs = this._d3ObjMap;
-    	// init d3Objs
-    	d3Objs[dstGraph.id] = d3Objs;
-    	(dstGraph.edges || []).forEach(function(e) {
-    		if (e.id in d3Objs)
-    			throw new Error();
-    		d3Objs[e.id] = e;
-    	});
-    	(dstGraph.children || []).forEach(function(n) {
-    		d3Objs[n.id] = n;
-    	});
-    	(dstGraph.ports || []).forEach(function(p) {
-    		d3Objs[p.id] = p;
-    	});
-    	
-    	var copyProps = d3elk.copyProps.bind(this);
-    	// copy props from this node
+       var d3Objs = this._d3ObjMap;
+       // init d3Objs
+       d3Objs[dstGraph.id] = d3Objs;
+       (dstGraph.edges || []).forEach(function(e) {
+          if (e.id in d3Objs)
+             throw new Error();
+          d3Objs[e.id] = e;
+       });
+       (dstGraph.children || []).forEach(function(n) {
+          d3Objs[n.id] = n;
+       });
+       (dstGraph.ports || []).forEach(function(p) {
+          d3Objs[p.id] = p;
+       });
+       
+       var copyProps = d3elk.copyProps.bind(this);
+       // copy props from this node
         copyProps(srcGraph, dstGraph);
         (srcGraph.ports || []).forEach(function(p) {
           copyProps(p, d3Objs[p.id]);
@@ -293,21 +293,21 @@ export default class d3elk {
             var l = d3Objs[e.id];
             copyProps(e, l);
             copyProps(e.source, l.source);
-  	        copyProps(e.target, l.target);
+             copyProps(e.target, l.target);
             // make sure the bendpoint array is valid
             l.bendPoints = e.bendPoints || [];
-    	});
+       });
         // copy props of children
         var copyElkProps = this.copyElkProps.bind(this);
         (srcGraph.children || []).forEach(function(n) {
-    		copyElkProps(n, d3Objs[n.id])
+          copyElkProps(n, d3Objs[n.id])
         });
     }
     static copyProps(src, dst) {
         var keys = KGRAPH_KEYS;
         for (var k in src) {
           if (keys[k]) {
-        	  dst[k] = src[k];
+             dst[k] = src[k];
           }
         }
     }
@@ -350,7 +350,7 @@ export default class d3elk {
         var srcNode = nodeMap[e.source];
         var tgtNode = nodeMap[e.target];
         var relative = d3elk.isDescendant(srcNode, tgtNode) ?
-                        	srcNode : srcNode.parent;
+                           srcNode : srcNode.parent;
         
         var offset = {x: 0, y: 0};
         if (relative) {
@@ -385,31 +385,47 @@ export default class d3elk {
       });
       // children
       (n.children || []).forEach(function(c) {
-    	  d3elk.toAbsolutePositionsEdges(c, nodeMap);
+         d3elk.toAbsolutePositionsEdges(c, nodeMap);
       });
     };
     
     
     /**
-	 * If a top level transform group is specified, we set the scale such that
-	 * the available space is used to its maximum.
-	 */
-    zoomToFit(kgraph) {
-      // scale everything so that it fits the specified size
-      var scale = this.width / (kgraph.width || 1);
-      var sh = this.height / (kgraph.height || 1);
-      if (sh < scale) {
-        scale = sh;
+    * If a top level transform group is specified, we set the scale such that
+    * the available space is used to its maximum.
+    */
+    zoomToFit(node) {
+      if (node === null) {
+         node = this.graph;
       }
+      var xOffset = -node.x;
+      var yOffset = -node.y;
+      var w = node.width || 1;
+      var h = node.height || 1;
+      // scale everything so that it fits the specified size
+      var scale = Math.min(this.width / w, this.height / h);
+      // centering
+      xOffset += ((this.width / scale - node.width) / 2);
+      yOffset += ((this.height / scale - node.height) / 2);
       // if a transformation group was specified we
       // perform a 'zoomToFit'
       if (this._transformGroup) {
-    	  this._transformGroup.attr("transform", "scale(" + scale + ")");
+         var t = "";
+
+         if (scale != 1) {
+             t += " scale(" + scale + ")";
+         }
+         
+         if (xOffset != 0 || yOffset != 0) {
+            t += " translate(" + xOffset + ", " + yOffset +")";
+         }
+
+         this._transformGroup.attr("transform", t);
       }
     }
     
     terminate() {
-    	if (this.layouter)
-    		this.layouter.terminateWorker();
+       if (this.layouter)
+          this.layouter.terminateWorker();
     }
 };
