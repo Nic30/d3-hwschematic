@@ -60,6 +60,7 @@ export default class HwSchematic {
         this.nodeRenderers.registerRenderer(new SliceNodeRenderer(this));
         this.nodeRenderers.registerRenderer(new AbstractNodeRenderer(this));
     }
+
     getHtmlIdOfNode(node) {
     	return "node-id-" + node.id;
     }
@@ -75,6 +76,10 @@ export default class HwSchematic {
       this.root.remove();
       this.root = svg.append("g");
     }
+    
+    setFocus(elm) {
+    	console.log(elm);
+    }
 
     /**
      * Set bind graph data to graph rendering engine
@@ -85,6 +90,8 @@ export default class HwSchematic {
         var root = this.root;
         var layouter = this.layouter;
         var bindData = this.bindData.bind(this);
+        var setFocus = this.setFocus.bind(this);
+        var getHtmlIdOfNode = this.getHtmlIdOfNode.bind(this);
         var nodeRenderers = this.nodeRenderers
         var schematic = this;
 
@@ -102,18 +109,17 @@ export default class HwSchematic {
         // nodes are ordered, childeren at the end
         nodes.forEach(nodeRenderers.prepare.bind(nodeRenderers));
       
-        // apply layout
-        layouter.on("finish", function applyLayout() {
+        layouter.start().then(function applyLayout() {
           // by "g" we group nodes along with their ports
           var node = root.selectAll(".node")
               .data(nodes)
               .enter()
               .append("g")
-              .attr("id", this.getHtmlIdOfNode);
+              .attr("id", getHtmlIdOfNode);
           nodeRenderers.render(root, node);              
           
           function toggleHideChildren(node) {
-              var h = node.hideChildren = !node.hideChildren;
+              node.hideChildren = !node.hideChildren;
           }
     
           node.on("click", function (d) {
@@ -129,7 +135,9 @@ export default class HwSchematic {
               layouter.cleanLayout();
               root.selectAll("*").remove();
               toggleHideChildren(d);    
-              bindData(graph)
+              bindData(graph);
+              var n = document.getElementById("#" + getHtmlIdOfNode(d));
+              setFocus(n);
           });
 
           var link = renderLinks(root, edges);  
@@ -150,8 +158,6 @@ export default class HwSchematic {
             d3.event.stopPropagation();
           });
         });
-        
-        layouter.start();
     }
     terminate() {
       if (this.layouter)

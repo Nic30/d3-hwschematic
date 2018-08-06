@@ -39,7 +39,6 @@ function findElkWorkerURL() {
 
 export default class d3elk {
 	constructor() {
-		this.dispatch = d3.dispatch("finish");
 	    // containers
 	    this.nodes = [];
 	    this.edges = [];
@@ -132,13 +131,12 @@ export default class d3elk {
 	 * Start the layout process.
 	 */
     start() {
-      this.layouter.layout(
+      return this.layouter.layout(
   		  this.graph,
    		  {layoutOptions: this._options}
-      ).then(this.applyLayout.bind(this),
-    		 this.onError.bind(this)
+      ).then(
+          this.applyLayout.bind(this)
       );
-      return this;
     }
 
     getNodes() {
@@ -256,8 +254,6 @@ export default class d3elk {
       d3elk.toAbsolutePositions(kgraph, {x: 0, y:0}, nodeMap);
       d3elk.toAbsolutePositionsEdges(kgraph, nodeMap);
       this.copyElkProps(kgraph, this.graph);
-      // invoke the 'finish' event
-      this.dispatch.call('finish', {graph: kgraph});
     }
     
     /**
@@ -412,16 +408,8 @@ export default class d3elk {
       }
     }
     
-    // event listener register method
-    on() {
-        var value = this.dispatch.on.apply(this.dispatch, arguments);
-        return value === this.dispatch ? this: value;
-    };
-    
     terminate() {
     	if (this.layouter)
     		this.layouter.terminateWorker();
     }
-
-    // return the layouter object
 };
