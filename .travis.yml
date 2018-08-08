@@ -9,17 +9,15 @@ node_js:
 - '7'
 install:
 - npm install
-# for deploy
-- npm install rollup -g 
-# for build, test and coveralls
+- npm install rollup -g
 - travis_wait 20 npm install --only=dev
 script:
 - npm run coveralls
 deploy:
   provider: npm
   email: nic30@seznam.cz
+  api_key:
+    secure: ViV3PqZ/mCpNDdjy/o01Vsn5JcW94v8Rv6Ux/la1c8UGSu6qQdaCd4lq7d1mhLtDqCQvk+K6NmJXCaYZjd1CY1QSgv04XrSyi6+6CHAdKK/DFAqVz0G15qMe7/cakt7xkLce+r2za4bO2fhuLFAzfEiogs4dG/ZaXX8FXo6HfAweaGFvOdU4ClZYltFzkJI5VFOkSREH0GK9znuQlyFNR1Ybz2nP3mMu4A6f+OS1TkBeaGrJt0Lc4zvpELpW+EsJAg0rR937sUXIIG43NfDvUDwLAgO0pg6jTXhP5SMmKa9Abudd6i9Bh3Ayh4NGW23D7cPMVqJoUc0IiqT3VsN8x7YeudTVcHqCUu03K24vGafF3081+AuBLuZ3u3M9lmCXPwhBkuOj1blKvmPWu3skEIqeTjZ411FhE23w65njthSzhDUFxPGa+GNZX1l3XVPWREmLD51OkaAqdfbuRcaOKXoqIKXtZj0SQoMLUjFVYF0NIXHgvTcZ+FPG3zyz4qtO2ZF8hO+qlg5jB/watPzMqSNFvTx7lYJsBMFxi1oCpl2UYImfef9dt6jOGuR7gvEhAcyUMVawVh7MCQHX98hsOZ/WCezgBJFO27EW9F3dWobAUkS70PT7i0HOdzCfjF9s1a4OOTPXX9GI8SqN23y+ckCHPdwoB6GCJdbptL/Fg+w=
   on:
     tags: true
-    branch: master
-  api_key:
-    secure: d81+3KThRO/vZmGIRdYMZdbKEwav8FJBrsP+hyGVykAfPWJoAMNwq2TgXHEzTwnlH4S0i0UACB2/QX4IdPIj9WQvMTV8lRQOjpqDZsUEawCN6b1cYs/6kEs1jVH0REFjbOJI0eTsOKoY+1rJRp+yiF6KX1lK9Kl3SYgbgrYnUppNZsZxm4GfSTuLuPcilh3pEhm5OwsvhyXfzPM+zSgGCgi8pKLgsHk+ZRbtpHu8qJT2ySNwySSrMsh3CCGXhi267p/UsUMDvaLhLjTOAjk7asTezTJgSoSTPaiW28F7exAkVTOzJcKh2vysxK9ME9nKXZqelimbrCojVYP0mBY6tpaiYtqKX8PoXWbiLrCWozc1wn4QcGjVINc3PMf7JGXRG3mfJqSVNMVf1182moGQFo2GYzfZtMCBJdTQyRTkXqaCMvZ2gXkkKtgJ/AqPn/qyXjwDcU/LdOTE5ckzST6/KNOmgGmcm1IoeAeGdEf6W6uVACInp/Mup3fxTgpsegN+kHeULaujuY9LLuJtiP8dtHsv93nyRuxuIhmJr5Y93RR1Ns7/KGadocPTCHGglHht7/sdD2gTaFtv0EGcrC/7HgeYJhyMkfK4+M1oMPSVYWh/dPXUAZr3WAtEisv0zVJYFoM2U0w+kwqOTiQJIIqwZmkLgU4kUlQ7mVTfIQgMWso=
+    repo: Nic30/d3-hwschematic
