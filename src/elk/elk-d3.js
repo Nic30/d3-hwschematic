@@ -50,6 +50,7 @@ export default class d3elk {
        this.width = 0;
        this.height = 0;
        this._transformGroup = undefined;
+
        // a function applied after each layout run
        if (RUNNING_IN_NODE) {
           const { Worker } = require('webworker-threads')
@@ -112,7 +113,7 @@ export default class d3elk {
 
     /**
     * Sets the group used to perform 'zoomToFit'.
-    */
+    * */
     transformGroup(g) {
       if (!arguments.length)
          return this._transformGroup;
@@ -388,8 +389,7 @@ export default class d3elk {
          d3elk.toAbsolutePositionsEdges(c, nodeMap);
       });
     };
-    
-    
+
     /**
     * If a top level transform group is specified, we set the scale such that
     * the available space is used to its maximum.
@@ -407,23 +407,21 @@ export default class d3elk {
       // centering
       xOffset += ((this.width / scale - node.width) / 2);
       yOffset += ((this.height / scale - node.height) / 2);
+
       // if a transformation group was specified we
       // perform a 'zoomToFit'
       if (this._transformGroup) {
-         var t = "";
-
-         if (scale != 1) {
-             t += " scale(" + scale + ")";
-         }
-         
-         if (xOffset != 0 || yOffset != 0) {
-            t += " translate(" + xOffset + ", " + yOffset +")";
-         }
-
-         this._transformGroup.attr("transform", t);
-      }
+          var g = this._transformGroup;
+    	  var t = d3.zoomTransform(g.node())
+    	  t.k = scale;
+    	  t.x = xOffset * scale;
+    	  t.y = yOffset * scale;
+    	  console.log(t);
+    	  
+    	  g.attr("transform", t);
+       }
     }
-    
+
     terminate() {
        if (this.layouter)
           this.layouter.terminateWorker();
