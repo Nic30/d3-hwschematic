@@ -190,19 +190,19 @@ export class AbstractNodeRenderer {
 	 * */
 	render(root, nodeG) {
         var schematic = this.schematic;
-        var node = nodeG;
+        var node = nodeG
+          .attr("class", function (d) { 
+              if (d.isExternalPort) {
+                  return "node-external-port";
+              } else {
+                  return "node";
+              }
+          });
         var nodeBody = node.append("rect");
         // set dimensions and style of node
         nodeBody
            .attr("width", function(d) { return d.width })
            .attr("height", function(d) { return d.height })
-           .attr("class", function (d) { 
-               if (d.isExternalPort) {
-                   return "node-external-port";
-               } else {
-                   return "node";
-               }
-           })
            .attr("rx", 5) // rounded corners
            .attr("ry", 5);
 

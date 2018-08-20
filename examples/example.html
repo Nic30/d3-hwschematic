@@ -16,6 +16,12 @@
       fill: #e6ffff;
       border: 2px;
     }
+    .node text {
+      font-style:normal;
+      font-family: monospace;
+      fill: black;
+      stroke-width: 0px;
+    }
     .node-operator {
       stroke: BLACK;
       stroke-width: 1px;
@@ -25,11 +31,21 @@
     .node-operator text {
       font-style:normal;
       font-family: monospace;
-      /*font-family:Verdana; 
-      font-size:55; */
       fill: black;
+      stroke-width: 0px;
     }
-    
+    .node-external-port {
+      stroke: #000;
+      stroke-width: 0px;
+      fill: #BDBDBD;
+      border: 1px;
+    }
+    .node-external-port text {
+      font-style:normal;
+      font-family: monospace;
+      fill: black;
+      stroke-width: 0px;
+    }
     .link {
       stroke: #000;
       stroke-opacity: .6;
@@ -57,12 +73,6 @@
     }
     tspan {
       white-space:pre;
-    }
-    .node-external-port {
-      stroke: #000;
-      stroke-width: 0px;
-      fill: #BDBDBD;
-      border: 1px;
     }
     body {
       margin: 0;

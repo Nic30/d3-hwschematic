@@ -70,10 +70,11 @@ export default class HwSchematic {
     }
     
     widthOfText(text) {
-        if (text)
+        if (text) {
             return text.length * this.CHAR_WIDTH;
-        else
+        } else {
             return 0;
+        }
     }
     
     /**
@@ -115,14 +116,17 @@ export default class HwSchematic {
       this.root.selectAll("*").remove();
     }
 
-    sortNodes(root) {
+    /**
+     * Sort nodes in graph by it's id
+     */
+    static sortNodes(root) {
       if (typeof root.children === "undefined")
           return
         
       root.children.sort(function(a, b) {
           return parseInt(a.id) - parseInt(b.id);
       });
-      root.children.forEach(this.sortNodes.bind(this));
+      root.children.forEach(HwSchematic.sortNodes);
     }
     
     /**
@@ -131,7 +135,10 @@ export default class HwSchematic {
      * @return promise for this job
      */
     bindData(graph) {
-        this.sortNodes(graph);
+    	if (!graph.__isSorted) {
+    		HwSchematic.sortNodes(graph);
+           graph.__isSorted = true;
+    	}
         this.removeGraph();
         applyHideChildren(graph);
         var root = this.root;
