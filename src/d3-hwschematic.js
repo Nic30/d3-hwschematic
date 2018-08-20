@@ -191,23 +191,35 @@ export default class HwSchematic {
               });
           });
 
-          var link = renderLinks(root, edges);  
-          // Select net on click
-          link.on("click", function(d) {
-            var doSelect = !d.selected;
-            var l = d3.select(this);
-            var data = l.data()[0];
-            // propagate click on all nets with same source
-            var src = data.source;
-            var srcP = data.sourcePort;
-            link.classed("link-selected", function (d) {
-                if (d.source == src && d.sourcePort == srcP) {
-                    d.selected = doSelect;
-                }
-                return d.selected;
-            });
-            d3.event.stopPropagation();
+          var [link, linkWrap, junctionPoint] = renderLinks(root, edges);
+          linkWrap.on("mouseover", function (d) {
+        	  d3.select(this)
+                .attr("class", "link-wrap-activated"); 
           });
+          linkWrap.on("mouseout", function (d) {
+        	  d3.select(this)
+              .attr("class", "link-wrap");
+          });
+          
+          function onLinkClick(d) {
+              var doSelect = !d.selected;
+              var l = d3.select(this);
+              var data = l.data()[0];
+              // propagate click on all nets with same source
+              var src = data.source;
+              var srcP = data.sourcePort;
+              link.classed("link-selected", function (d) {
+                  if (d.source == src && d.sourcePort == srcP) {
+                      d.selected = doSelect;
+                  }
+                  return d.selected;
+              });
+              d3.event.stopPropagation();
+            }
+          
+          // Select net on click
+          link.on("click", onLinkClick);
+          linkWrap.on("click", onLinkClick);
         });
     }
     terminate() {
