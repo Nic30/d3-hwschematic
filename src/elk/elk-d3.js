@@ -416,7 +416,6 @@ export default class d3elk {
     	  t.k = scale;
     	  t.x = xOffset * scale;
     	  t.y = yOffset * scale;
-    	  console.log(t);
     	  
     	  g.attr("transform", t);
        }
