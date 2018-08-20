@@ -1,6 +1,6 @@
 {
   "name": "d3-hwschematic",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "D3.js and ELK based schematic visualizer",
   "main": "dist/d3-hwschematic.js",
   "scripts": {
@@ -9,8 +9,8 @@
     "clean": "rm -rf dist/ node_modules/",
     "prepare": "npm run build",
     "pretest": "npm run build",
-    "test": "NODE_ENV=development jest",
-    "coveralls": "NODE_ENV=development jest --coverage && cat ./tests/coverage/lcov.info | coveralls",
+    "test": "NODE_ENV=development jest --env=node",
+    "coveralls": "NODE_ENV=development jest --coverage --env=node && cat ./tests/coverage/lcov.info | coveralls",
     "lint": "eslint src test --ignore-pattern tests/coverage*"
   },
   "repository": {

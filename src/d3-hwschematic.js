@@ -33,8 +33,8 @@ function applyHideChildren(n) {
 /**
  * HwScheme builds scheme diagrams after bindData(data) is called
  * 
- * @param svg:
- *            root svg element where scheme will be rendered
+ * @param svg: root svg element where scheme will be rendered
+ * @attention zoom is not applied it is only used for focusing on objects
  * @note do specify size of svg to have optimal result
  */
 export default class HwSchematic {
@@ -51,6 +51,10 @@ export default class HwSchematic {
         this.defs = svg.append("defs");
         this.root = svg.append("g");
         this.layouter = new d3elk();
+        this.layouter.options({
+            edgeRouting: "ORTHOGONAL",
+        });
+        this.layouter.transformGroup(this.root);
 
         this.nodeRenderers = new NodeRenderers();
 
@@ -108,8 +112,7 @@ export default class HwSchematic {
     }
 
     removeGraph() {
-      this.root.remove();
-      this.root = svg.append("g");
+      this.root.selectAll("*").remove();
     }
 
     sortNodes(root) {
@@ -141,12 +144,8 @@ export default class HwSchematic {
 
         // config of layouter
         layouter
-            .options({
-                edgeRouting: "ORTHOGONAL",
-            })
-            .kgraph(graph)
-            .size([width, height])
-            .transformGroup(root)
+          .kgraph(graph)
+          .size([width, height]);
 
         var nodes = layouter.getNodes().slice(1); // skip root node
         var edges = layouter.getEdges();
