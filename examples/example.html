@@ -78,6 +78,13 @@
       margin: 0;
     }
     
+    .hwschematic-tooltip {
+      background: cornsilk;
+      border: 1px solid black;
+      border-radius: 5px;
+      padding: 5px;
+      position: fixed;
+    }
     
   </style>
 </head>
@@ -163,8 +170,8 @@
           if (schematic_url != null) {
              d3.json(schematic_url)
                .then(function(graph) {
-                   if (graph.name)
-                       document.title = graph.name;
+                   if (graph.hwt && graph.hwt.name)
+                       document.title = graph.hwt.name;
                    // load the data and render the elements
                    g.bindData(graph);
                 });

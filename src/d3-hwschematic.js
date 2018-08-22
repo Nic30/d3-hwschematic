@@ -5,29 +5,25 @@ import {OperatorNodeRenderer} from "./node_renderers/operatorNode";
 import {MuxNodeRenderer} from "./node_renderers/muxNode";
 import {SliceNodeRenderer} from "./node_renderers/sliceNode";
 import {AbstractNodeRenderer} from "./node_renderers/abstract"; 
-import {renderLinks} from "./linkRenderer"; 
+import {renderLinks} from "./linkRenderer";
+import {Tooltip} from "./tooltip";
+import {applyHideChildren, hyperEdgesToEdges} from "./dataPrepare";
 import {default as d3elk} from "./elk/elk-d3";
 
-/**
- * apply hideChildren flag no node
- **/
-function applyHideChildren(n) {
-    if (n.hideChildren) {
-        if (n.children !== undefined) {
-            n.__children = n.children;
-            n.__edges = n.edges;
-            delete n.children;
-            delete n.edges;
-        }
-    } else {
-        if (n.__children !== undefined) {
-            n.children = n.__children;
-            n.edges = n.__edges;
-            delete n.__children;
-            delete n.__edges;
-        }
+function getNameOfEdge(e) {
+    var name = "<tspan>unnamed</tspan>";
+    if (e.hwt) {
+       if (typeof e.hwt.name === "undefined") {
+           var p = e.hwt.parent;
+           var pIsHyperedge = typeof p.sources !== "undefined"
+           if (pIsHyperedge && p.hwt) {
+               name = p.hwt.name;
+           }
+       } else {
+           name = e.hwt.name;
+       }
     }
-    (n.children || []).forEach(applyHideChildren)
+    return name;
 }
 
 /**
@@ -48,6 +44,7 @@ export default class HwSchematic {
         this.MAX_NODE_BODY_TEXT_SIZE = [400, 400];
         // top, right, bottom, left
         this.BODY_TEXT_PADDING = [15, 10, 0, 10];
+        this.tooltip = document.getElem
         this.defs = svg.append("defs");
         this.root = svg.append("g");
         this.layouter = new d3elk();
@@ -55,7 +52,7 @@ export default class HwSchematic {
             edgeRouting: "ORTHOGONAL",
         });
         this.layouter.transformGroup(this.root);
-
+        this.tooltip = new Tooltip(document.getElementsByTagName('body')[0]);
         this.nodeRenderers = new NodeRenderers();
 
         addMarkers(this.defs, this.PORT_PIN_SIZE);
@@ -116,18 +113,6 @@ export default class HwSchematic {
       this.root.selectAll("*").remove();
     }
 
-    /**
-     * Sort nodes in graph by it's id
-     */
-    static sortNodes(root) {
-      if (typeof root.children === "undefined")
-          return
-        
-      root.children.sort(function(a, b) {
-          return parseInt(a.id) - parseInt(b.id);
-      });
-      root.children.forEach(HwSchematic.sortNodes);
-    }
     
     /**
      * Set bind graph data to graph rendering engine
@@ -135,11 +120,8 @@ export default class HwSchematic {
      * @return promise for this job
      */
     bindData(graph) {
-    	if (!graph.__isSorted) {
-    		HwSchematic.sortNodes(graph);
-           graph.__isSorted = true;
-    	}
         this.removeGraph();
+        hyperEdgesToEdges(graph, graph.hwt.maxId);
         applyHideChildren(graph);
         var root = this.root;
         var layouter = this.layouter;
@@ -200,12 +182,15 @@ export default class HwSchematic {
 
           var [link, linkWrap, junctionPoint] = renderLinks(root, edges);
           linkWrap.on("mouseover", function (d) {
-        	  d3.select(this)
-                .attr("class", "link-wrap-activated"); 
+              d3.select(this)
+                .attr("class", "link-wrap-activated");
+
+              schematic.tooltip.show(d3.event, getNameOfEdge(d));
           });
           linkWrap.on("mouseout", function (d) {
-        	  d3.select(this)
-              .attr("class", "link-wrap");
+              d3.select(this)
+                .attr("class", "link-wrap");
+              schematic.tooltip.hide();
           });
           
           function onLinkClick(d) {

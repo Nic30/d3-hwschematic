@@ -28,7 +28,7 @@ export class AbstractNodeRenderer {
 	getNodeLabelWidth(d) {
 		var schematic = this.schematic;
         var widthOfText = schematic.widthOfText.bind(schematic);
-		return widthOfText(d.name);
+		return widthOfText(d.hwt.name);
 	}
 	
 	/**
@@ -69,9 +69,9 @@ export class AbstractNodeRenderer {
           d.ports.forEach(function(p) {
               var t = p.properties.portSide;
               var indent = 0;
-              if (p.level > 0)
-                  indent = (p.level + 1) * CHAR_WIDTH;
-              var portW = widthOfText(p.name) + indent;
+              if (p.hwt.level > 0)
+                  indent = (p.hwt.level + 1) * CHAR_WIDTH;
+              var portW = widthOfText(p.hwt.name) + indent;
               var pDim = portDim[t];
               if (pDim === undefined)
                   throw new Error(t);
@@ -115,17 +115,18 @@ export class AbstractNodeRenderer {
      */
     initBodyTextLines(d) {
     	var schematic = this.schematic;
-        var max = Math.max
-        if (d.bodyText) {
-            if (typeof d.bodyText === "string") {
-                d.bodyText = d.bodyText.split("\n");
+        var max = Math.max;
+        var bt = d.hwt.bodyText
+        if (bt) {
+            if (typeof bt === "string") {
+                bt = d.hwt.bodyText = bt.split("\n");
             }
             var bodyTextW = 0;
-            d.bodyText.forEach(function (line) {
+            bt.forEach(function (line) {
                 bodyTextW = max(bodyTextW, line.length);
             })
             bodyTextW *= schematic.CHAR_WIDTH;
-            var bodyTextH = d.bodyText.length * schematic.CHAR_HEIGHT;  
+            var bodyTextH = bt.length * schematic.CHAR_HEIGHT;  
         } else {
             var bodyTextW = 0;
             var bodyTextH = 0;
@@ -152,7 +153,7 @@ export class AbstractNodeRenderer {
         bodyTexts.each(function() {
             var bodyText = d3.select(this)
             var d = bodyText.data()[0];
-            var bodyTextLines = d.bodyText;
+            var bodyTextLines = d.hwt.bodyText;
             var _MBT = [MBT[0] /CHAR_WIDTH, MBT[1] / schematic.CHAR_HEIGHT];
             
             if (bodyTextLines && (d.children == null 
@@ -192,7 +193,7 @@ export class AbstractNodeRenderer {
         var schematic = this.schematic;
         var node = nodeG
           .attr("class", function (d) { 
-              if (d.isExternalPort) {
+              if (d.hwt && d.hwt.isExternalPort) {
                   return "node-external-port";
               } else {
                   return "node";
@@ -218,7 +219,13 @@ export class AbstractNodeRenderer {
 
         // spot node label
         node.append("text")
-            .text(function(d) { return d.name; });
+            .text(function(d) {
+                if (d.hwt && !d.hwt.isExternalPort) {
+            	    return d.hwt.name;
+                } else {
+                	return "";
+                }
+            });
 
         // spot node body text
         node.append("text")
@@ -248,18 +255,18 @@ export class AbstractNodeRenderer {
           .text(function(d) {
               if (d.ignoreLabel)
                   return "";
-              else if (d.level) {
-                  var indent = '-'.repeat(d.level);
+              else if (d.hwt.level) {
+                  var indent = '-'.repeat(d.hwt.level);
                   var side = d.properties.portSide;
                   if (side == "WEST") {
-                     return indent + d.name;;
+                     return indent + d.hwt.name;;
                   } else if (side == "EAST") {
-                     return d.name + indent;
+                     return d.hwt.name + indent;
                   } else {
                       throw new Error(side);
                   }
               } else
-                  return d.name; 
+                  return d.hwt.name; 
           })
           .attr("x", function(d) {
               var side = d.properties.portSide;
