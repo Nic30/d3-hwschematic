@@ -87,8 +87,8 @@ export default class d3elk {
       this.height = size[1];
       
       if(this.graph != null) {
-        this.graph.width = width;
-        this.graph.height = height;
+        this.graph.width = this.width;
+        this.graph.height = this.height;
       }
       return this;
     };
