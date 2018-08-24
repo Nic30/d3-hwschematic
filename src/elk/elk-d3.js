@@ -210,9 +210,9 @@ export default class d3elk {
       if (!g.properties.algorithm)
           g.properties.algorithm = 'layered';
       if (!g.width)
-          g.width = width;
+          g.width = this.width;
       if (!g.height)
-          g.height = height;
+          g.height = this.height;
       
       return this;
     };

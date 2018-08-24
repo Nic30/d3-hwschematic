@@ -134,7 +134,6 @@ export default class HwSchematic {
         // config of layouter
         layouter
           .kgraph(graph)
-          .size([width, height]);
 
         var nodes = layouter.getNodes().slice(1); // skip root node
         var edges = layouter.getEdges();

@@ -2,6 +2,11 @@ import * as d3 from "d3";
 import HwSchematic from '../src/d3-hwschematic';
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
+const fs = require("fs");
+const glob = require('glob');
+const path = require('path');
+
+const EXAMPLES = __dirname + "/../examples/schemes"
 
 describe('{unit}: Testing scheme rendering', () => {
   global.document = new JSDOM().window.document;
@@ -17,4 +22,19 @@ describe('{unit}: Testing scheme rendering', () => {
 	  expect(gs.size()).toBe(8 + 1); // markers + zoom
   });
   sch.terminate();
+  
+  var exampleFiles = glob.sync(EXAMPLES + "/*.json");
+  it("can find examples in " + EXAMPLES, () => {
+	  expect(exampleFiles .length).toBeGreaterThan(1);
+  });
+  exampleFiles.forEach(function (f) {
+	  it("can render " + path.basename(f), function() {
+	      var graphData = JSON.parse(fs.readFileSync(f));
+	      expect(graphData).not.toBeNull();
+	      var sch = new HwSchematic(svg);
+          sch.bindData(graphData)
+             .then(sch.terminate()); 
+	  });
+  });
+
 });
