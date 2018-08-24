@@ -130,10 +130,11 @@ export default class HwSchematic {
         var getParentOfNode = this.getParentOfNode.bind(this);
         var nodeRenderers = this.nodeRenderers
         var schematic = this;
-
+        
         // config of layouter
         layouter
           .kgraph(graph)
+          .size([this.svg.style("width"), this.svg.style("height")]);
 
         var nodes = layouter.getNodes().slice(1); // skip root node
         var edges = layouter.getEdges();
