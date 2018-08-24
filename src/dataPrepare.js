@@ -62,3 +62,14 @@ export function hyperEdgesToEdges(n, idOffset) {
     }
     return idOffset
 }
+
+/**
+ * Get parent of net for net
+ **/
+export function getNet(e) {
+	if (typeof e.hwt.parent !== "undefined") {
+		return e.hwt.parent;
+	} else {
+		return e;
+	}
+}

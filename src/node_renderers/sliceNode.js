@@ -25,7 +25,7 @@ export class SliceNodeRenderer extends AbstractNodeRenderer {
         // black thick line 
         node.append("rect")
           .attr("x", function (d) {
-        	  if (node.hwt.name == "SLICE") {
+        	  if (d.hwt.name == "SLICE") {
         		  return 0;
         	  } else {
         		  return d.width - 3;

@@ -7,7 +7,7 @@ import {SliceNodeRenderer} from "./node_renderers/sliceNode";
 import {AbstractNodeRenderer} from "./node_renderers/abstract"; 
 import {renderLinks} from "./linkRenderer";
 import {Tooltip} from "./tooltip";
-import {applyHideChildren, hyperEdgesToEdges} from "./dataPrepare";
+import {applyHideChildren, hyperEdgesToEdges, getNet} from "./dataPrepare";
 import {default as d3elk} from "./elk/elk-d3";
 
 function getNameOfEdge(e) {
@@ -181,31 +181,49 @@ export default class HwSchematic {
           });
 
           var [link, linkWrap, junctionPoint] = renderLinks(root, edges);
+          var netToLink = {};
+          edges.forEach(function (e) {
+          	netToLink[getNet(e).id] = {
+          			"core": [],
+          			"wrap": []
+          	};
+          });
+          linkWrap._groups.forEach(function (lg) {
+        	  lg.forEach(function (l) {
+        	     var e = d3.select(l).data()[0];
+                 netToLink[getNet(e).id]["wrap"].push(l);
+        	  });
+          });
+          link._groups.forEach(function (lg) {
+        	  lg.forEach(function (l) {
+         	     var e = d3.select(l).data()[0];
+                  netToLink[getNet(e).id]["core"].push(l);
+         	  });
+          });
+          
           linkWrap.on("mouseover", function (d) {
-              d3.select(this)
+              var netWrap = netToLink[getNet(d).id]["wrap"];
+        	  d3.selectAll(netWrap)
                 .attr("class", "link-wrap-activated");
 
               schematic.tooltip.show(d3.event, getNameOfEdge(d));
           });
           linkWrap.on("mouseout", function (d) {
-              d3.select(this)
+              var netWrap = netToLink[getNet(d).id]["wrap"];
+        	  d3.selectAll(netWrap)
                 .attr("class", "link-wrap");
+
               schematic.tooltip.hide();
           });
           
           function onLinkClick(d) {
-              var doSelect = !d.selected;
-              var l = d3.select(this);
-              var data = l.data()[0];
+        	  var net = getNet(d);
+              var doSelect = net.selected = !net.selected;
               // propagate click on all nets with same source
-              var src = data.source;
-              var srcP = data.sourcePort;
-              link.classed("link-selected", function (d) {
-                  if (d.source == src && d.sourcePort == srcP) {
-                      d.selected = doSelect;
-                  }
-                  return d.selected;
-              });
+              
+              var netCore = netToLink[net.id]["core"];
+        	  d3.selectAll(netCore)
+        	    .classed("link-selected", doSelect);
               d3.event.stopPropagation();
             }
           
