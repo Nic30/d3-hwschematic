@@ -10,7 +10,6 @@ export default {
     format: "umd",
     globals: {
     	"d3": "d3",
-    	'webworker-threads':'webworker-threads',
     }, //dependencies.reduce((p, v) => (p[v] = "d3", p), {}),
     name: "d3",
   },

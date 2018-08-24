@@ -6,16 +6,16 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 export default class ELK {
-
   constructor({
     defaultLayoutOptions = {},
     algorithms = [ 'layered', 'stress', 'mrtree', 'radial', 'force', 'disco' ],
     workerFactory,
     workerUrl
-  } = {}) {
-    this.defaultLayoutOptions = defaultLayoutOptions
-    this.initialized = false
-
+    } = {}) {
+    this.defaultLayoutOptions = defaultLayoutOptions;
+    this.initialized = false;
+    this.algorithms = algorithms;
+  
     // check valid worker construction possible
     if (typeof workerUrl === 'undefined' && typeof workerFactory === 'undefined') {
       throw new Error("Cannot construct an ELK without both 'workerUrl' and 'workerFactory'.")
@@ -25,53 +25,62 @@ export default class ELK {
       // use default Web Worker
       factory = function(url) { return new Worker(url) }
     }
-
+  
     // create the worker
     let worker = factory(workerUrl)
     if (typeof worker.postMessage !== 'function' ) {
       throw new TypeError("Created worker does not provide"
         + " the required 'postMessage' function.")
     }
-
+  
     // wrap the worker to return promises
     this.worker = new PromisedWorker(worker)
-
-    // initially register algorithms
-    this.worker.postMessage({
-      cmd: 'register',
-      algorithms: algorithms
-    })
-      .then((r) => this.initialized = true)
-      .catch(console.err)
   }
-
+  
   layout(graph, { layoutOptions = this.defaultLayoutOptions } = {}) {
-    if (!graph) {
-      return Promise.reject(new Error("Missing mandatory parameter 'graph'."))
-    }
-    return this.worker.postMessage({
-      cmd: 'layout',
-      graph: graph,
-      options: layoutOptions
-    })
-  }
+      var self = this;
+      function postLayout() {
+          if (!graph) {
+            return Promise.reject(new Error("Missing mandatory parameter 'graph'."));
+          }
+          return self.worker.postMessage({
+            cmd: 'layout',
+            graph: graph,
+            options: layoutOptions
+          });
+      }
 
+      if (!this.initialized) {
+        var self = this;
+        // initially register algorithms
+        return this.worker.postMessage({
+          cmd: 'register',
+          algorithms: this.algorithms
+        })
+        .then((r) => {
+            self.initialized = true;
+        }).then(postLayout.bind(this));
+    } else {
+	return postLayout();
+    }
+  }
+  
   knownLayoutAlgorithms() {
     return this.worker.postMessage({ cmd: 'algorithms' })
   }
-
+  
   knownLayoutOptions() {
     return this.worker.postMessage({ cmd: 'options' })
   }
-
+  
   knownLayoutCategories() {
     return this.worker.postMessage({ cmd: 'categories' })
   }
-
+  
   terminateWorker() {
     this.worker.terminate()
   }
-
+  
 }
 
 class PromisedWorker {
@@ -85,7 +94,7 @@ class PromisedWorker {
     this.worker.onmessage = (answer) => {
       // why is this necessary?
       setTimeout(() => {
-        this.receive(this, answer)
+        this.receive(this, answer);
       }, 0)
     }
   }
@@ -99,13 +108,13 @@ class PromisedWorker {
       // prepare the resolver
       self.resolvers[id] = function (err, res) {
         if (err) {
-          reject(err)
+          reject(err);
         } else {
-          resolve(res)
+          resolve(res);
         }
       }
       // post the message
-      self.worker.postMessage(msg)
+      self.worker.postMessage(msg);
     })
   }
 

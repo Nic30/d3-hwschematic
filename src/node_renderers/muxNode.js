@@ -54,8 +54,9 @@ export class MuxNodeRenderer extends AbstractNodeRenderer {
         var schematic = this.schematic;
         
         // apply node positions
-        nodeG.transition()
-          .duration(0)
+        nodeG
+          //.transition()
+          //.duration(0)
           .attr("transform", function(d) {
               if (typeof d.x === "undefined" || typeof d.x === "undefined") {
                   throw new Error("Node with undefined position", d);

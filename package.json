@@ -11,7 +11,8 @@
     "pretest": "npm run build",
     "test": "NODE_ENV=development jest --env=node",
     "coveralls": "NODE_ENV=development jest --coverage --env=node && cat ./tests/coverage/lcov.info | coveralls",
-    "lint": "eslint src test --ignore-pattern tests/coverage*"
+    "lint": "eslint src test --ignore-pattern tests/coverage*",
+    "debug-remote": "NODE_ENV=development node --inspect-brk node_modules/.bin/jest --env=node"
   },
   "repository": {
     "type": "git",
@@ -33,8 +34,7 @@
   },
   "homepage": "https://github.com/Nic30/d3-hwschematic#readme",
   "dependencies": {
-    "d3": "latest",
-    "webworker-threads": "latest"
+    "d3": "latest"
   },
   "devDependencies": {
     "coveralls": "latest",
@@ -54,7 +54,16 @@
     "rollup": "^0.63"
   },
   "jest": {
+    "transformIgnorePatterns": [
+       "node_modules/.*",
+       "src/elk/elk-worker.js"
+    ],
+    "cacheDirectory": ".jest-cache",
     "coverageDirectory": "<rootDir>/tests/coverage",
+    "coveragePathIgnorePatterns": [
+      "node_modules/",
+       "src/elk/elk-worker.js"
+    ],
     "verbose": true
   }
 }

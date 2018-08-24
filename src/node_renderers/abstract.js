@@ -1,3 +1,4 @@
+import * as d3 from "d3";
 import {getIOMarker} from "../markers"; 
 
 /**
@@ -12,33 +13,33 @@ function PortConstraints_isSideFixed(val) {
 }
 
 export class AbstractNodeRenderer {
-	/**
-	 * @param schematic instance of HwSchematic
-	 **/
-	constructor(schematic) {
-		this.schematic = schematic;
-	}
-	/**
-	 * check if this selector should be used for this node 
-	 **/
-	selector(node) {
-		return true;
-	}
-	
-	getNodeLabelWidth(d) {
-		var schematic = this.schematic;
+    /**
+     * @param schematic instance of HwSchematic
+     **/
+    constructor(schematic) {
+        this.schematic = schematic;
+    }
+    /**
+     * check if this selector should be used for this node 
+     **/
+    selector(node) {
+        return true;
+    }
+    
+    getNodeLabelWidth(d) {
+        var schematic = this.schematic;
         var widthOfText = schematic.widthOfText.bind(schematic);
-		return widthOfText(d.hwt.name);
-	}
-	
-	/**
+        return widthOfText(d.hwt.name);
+    }
+    
+    /**
      * Init bodyText and resolve size of node from body text and ports
      * 
      * @param d component node
      * 
      */
     initNodeSizes(d) {
-    	var schematic = this.schematic;
+        var schematic = this.schematic;
         if (d.properties["org.eclipse.elk.noLayout"])
             return;
         var ignorePortLabel = d.children && !d.hideChildren;
@@ -114,7 +115,7 @@ export class AbstractNodeRenderer {
      * @param d component node
      */
     initBodyTextLines(d) {
-    	var schematic = this.schematic;
+        var schematic = this.schematic;
         var max = Math.max;
         var bt = d.hwt.bodyText
         if (bt) {
@@ -143,7 +144,7 @@ export class AbstractNodeRenderer {
      * @param bodyTexts list of strings
      */
     renderTextLines(bodyTexts) {
-    	var schematic = this.schematic;
+        var schematic = this.schematic;
         const padTop = schematic.BODY_TEXT_PADDING[0];
         const padLeft = schematic.BODY_TEXT_PADDING[3];
         const MBT = schematic.MAX_NODE_BODY_TEXT_SIZE;
@@ -176,20 +177,20 @@ export class AbstractNodeRenderer {
         
     }
     
-	/**
-	 * Prepare node before ELK processing 
-	 * */
-	prepare(node) {
-		this.initNodeSizes(node)
-	}
-	
-	/**
-	 * Render svg of node
-	 * 
-	 * @param root root svg element where nodes should be rendered
-	 * @param nodeG svg g for each node with data binded
-	 * */
-	render(root, nodeG) {
+    /**
+     * Prepare node before ELK processing 
+     * */
+    prepare(node) {
+        this.initNodeSizes(node)
+    }
+    
+    /**
+     * Render svg of node
+     * 
+     * @param root root svg element where nodes should be rendered
+     * @param nodeG svg g for each node with data binded
+     * */
+    render(root, nodeG) {
         var schematic = this.schematic;
         var node = nodeG
           .attr("class", function (d) { 
@@ -208,8 +209,9 @@ export class AbstractNodeRenderer {
            .attr("ry", 5);
 
         // apply node positions
-        node.transition()
-          .duration(0)
+        node
+          //.transition()
+          //.duration(0)
           .attr("transform", function(d) {
               if (typeof d.x === "undefined" || typeof d.x === "undefined") {
                   throw new Error("Node with undefined position", d);
@@ -221,9 +223,9 @@ export class AbstractNodeRenderer {
         node.append("text")
             .text(function(d) {
                 if (d.hwt && !d.hwt.isExternalPort) {
-            	    return d.hwt.name;
+                    return d.hwt.name;
                 } else {
-                	return "";
+                    return "";
                 }
             });
 
@@ -232,22 +234,23 @@ export class AbstractNodeRenderer {
             .call(this.renderTextLines.bind(this));
         
         this.renderPorts(node);
-	}
+    }
 
-	renderPorts(node) {
-		var schematic = this.schematic;
-		var PORT_HEIGHT = schematic.PORT_HEIGHT;
+    renderPorts(node) {
+        var schematic = this.schematic;
+        var PORT_HEIGHT = schematic.PORT_HEIGHT;
         var CHAR_WIDTH = schematic.CHAR_WIDTH;
         var portG = node.selectAll(".port")
           .data(function(d) { return d.ports || []; })
           .enter()
           .append("g");
-  
+        
         // apply port positions
-        portG.transition()
-          .duration(0)
+        portG
+          //.transition()
+          //.duration(0)
           .attr("transform", function(d) {
-        	  return "translate(" + d.x + "," + d.y + ")"
+              return "translate(" + d.x + "," + d.y + ")"
           });
         
         // spot port name
@@ -269,23 +272,30 @@ export class AbstractNodeRenderer {
                   return d.hwt.name; 
           })
           .attr("x", function(d) {
-              var side = d.properties.portSide;
-              if (side == "WEST") {
-                 return 7;
-              } else if (side == "EAST") {
-                 return -this.getBBox().width - CHAR_WIDTH / 2;
-              } else if (side == "NORTH") {
+             var side = d.properties.portSide;
+             if (side == "WEST") {
+                return 7;
+             } else if (side == "EAST") {
+                //if (d.hwt.name === null || d.hwt.name.length == 0) {
+                //    return 0;
+                //}
+                if (typeof this.getBBox  == "undefined") {
+                    // JSDOM under nodejs
+                    return -this.textContent.length * CHAR_WIDTH - CHAR_WIDTH / 2
+                }
+                return -this.getBBox().width - CHAR_WIDTH / 2;
+             } else if (side == "NORTH") {
+                return 0;
+             } else if (side == "SOUTH") {
                  return 0;
-              } else if (side == "SOUTH") {
-                  return 0;
-              } else {
-                  throw new Error(side);
-              }
+             } else {
+                 throw new Error(side);
+             }
           })
           .attr("y", PORT_HEIGHT * 0.75);
         
         // spot input/output marker
         portG.append("use")
             .attr("href", getIOMarker)
-	}
+    }
 }

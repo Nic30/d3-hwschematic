@@ -36,8 +36,9 @@ export class SliceNodeRenderer extends AbstractNodeRenderer {
           .attr("style", "fill:black;") 
 
         // apply node positions
-        node.transition()
-          .duration(0)
+        node
+          //.transition()
+          //.duration(0)
           .attr("transform", function(d) {
               if (typeof d.x === "undefined" || typeof d.x === "undefined") {
                   throw new Error("Node with undefined position", d);

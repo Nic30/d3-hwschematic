@@ -47,6 +47,8 @@ export default class HwSchematic {
         this.tooltip = document.getElem
         this.defs = svg.append("defs");
         this.root = svg.append("g");
+        this._nodes = null;
+        this._edges = null;
         this.layouter = new d3elk();
         this.layouter.options({
             edgeRouting: "ORTHOGONAL",
@@ -112,7 +114,6 @@ export default class HwSchematic {
     removeGraph() {
       this.root.selectAll("*").remove();
     }
-
     
     /**
      * Set bind graph data to graph rendering engine
@@ -123,114 +124,124 @@ export default class HwSchematic {
         this.removeGraph();
         hyperEdgesToEdges(graph, graph.hwt.maxId);
         applyHideChildren(graph);
-        var root = this.root;
-        var layouter = this.layouter;
-        var bindData = this.bindData.bind(this);
-        var getHtmlIdOfNode = this.getHtmlIdOfNode.bind(this);
-        var getParentOfNode = this.getParentOfNode.bind(this);
         var nodeRenderers = this.nodeRenderers
-        var schematic = this;
-        
+        var layouter = this.layouter;
         // config of layouter
         layouter
           .kgraph(graph)
-          .size([this.svg.style("width"), this.svg.style("height")]);
-
+          .size([
+            parseInt(this.svg.style("width"), 10),
+            parseInt(this.svg.style("height"), 10)
+          ]);
         var nodes = layouter.getNodes().slice(1); // skip root node
-        var edges = layouter.getEdges();
         // nodes are ordered, childeren at the end
         nodes.forEach(nodeRenderers.prepare.bind(nodeRenderers));
-      
-        return layouter.start().then(function applyLayout() {
-          // by "g" we group nodes along with their ports
-          var node = root.selectAll(".node")
-              .data(nodes)
-              .enter()
-              .append("g")
-              .attr("id", getHtmlIdOfNode);
-          nodeRenderers.render(root, node);              
-          
-          function toggleHideChildren(node) {
-              node.hideChildren = !node.hideChildren;
-          }
-    
-          node.on("click", function (d) {
-              var children;
-              var nextFocusTarget;
-              if (d.hideChildren) {
-                  // children are hidden, will expand
-                  children = d.__children;
-                  nextFocusTarget = d;
-              } else {
-                  // children are visible, will collapse
-                  children = d.children;
-                  nextFocusTarget = getParentOfNode(d);
-              }
+        // by "g" we group nodes along with their ports
+        var edges = layouter.getEdges();
+        this._nodes = nodes;
+        this._edges = edges;
+        return layouter.start()
+             .then(this.applyLayout.bind(this));
+    }
 
-              if (!children || children.length == 0)
-                  return; // does not have anything to expand
+    applyLayout() {
+        var root = this.root;
+        var schematic = this;
+        var layouter = this.layouter;
+        var nodeRenderers = this.nodeRenderers
+        var bindData = this.bindData.bind(this);
+        var getHtmlIdOfNode = this.getHtmlIdOfNode.bind(this);
+        var getParentOfNode = this.getParentOfNode.bind(this);
+        var nodes = this._nodes;
+        var edges = this._edges;
 
-              var graph = layouter.kgraph()
-              layouter.cleanLayout();
-              root.selectAll("*").remove();
-              toggleHideChildren(d); 
-
-              bindData(graph).then(function() {
-                 layouter.zoomToFit(nextFocusTarget);
-              });
-          });
-
-          var [link, linkWrap, junctionPoint] = renderLinks(root, edges);
-          var netToLink = {};
-          edges.forEach(function (e) {
-          	netToLink[getNet(e).id] = {
-          			"core": [],
-          			"wrap": []
-          	};
-          });
-          linkWrap._groups.forEach(function (lg) {
-        	  lg.forEach(function (l) {
-        	     var e = d3.select(l).data()[0];
-                 netToLink[getNet(e).id]["wrap"].push(l);
-        	  });
-          });
-          link._groups.forEach(function (lg) {
-        	  lg.forEach(function (l) {
-         	     var e = d3.select(l).data()[0];
-                  netToLink[getNet(e).id]["core"].push(l);
-         	  });
-          });
-          
-          linkWrap.on("mouseover", function (d) {
-              var netWrap = netToLink[getNet(d).id]["wrap"];
-        	  d3.selectAll(netWrap)
-                .attr("class", "link-wrap-activated");
-
-              schematic.tooltip.show(d3.event, getNameOfEdge(d));
-          });
-          linkWrap.on("mouseout", function (d) {
-              var netWrap = netToLink[getNet(d).id]["wrap"];
-        	  d3.selectAll(netWrap)
-                .attr("class", "link-wrap");
-
-              schematic.tooltip.hide();
-          });
-          
-          function onLinkClick(d) {
-        	  var net = getNet(d);
-              var doSelect = net.selected = !net.selected;
-              // propagate click on all nets with same source
-              
-              var netCore = netToLink[net.id]["core"];
-        	  d3.selectAll(netCore)
-        	    .classed("link-selected", doSelect);
-              d3.event.stopPropagation();
+        var node = root.selectAll(".node")
+            .data(nodes)
+            .enter()
+            .append("g")
+            .attr("id", getHtmlIdOfNode);
+        nodeRenderers.render(root, node);              
+        
+        function toggleHideChildren(node) {
+            node.hideChildren = !node.hideChildren;
+        }
+  
+        node.on("click", function (d) {
+            var children;
+            var nextFocusTarget;
+            if (d.hideChildren) {
+                // children are hidden, will expand
+                children = d.__children;
+                nextFocusTarget = d;
+            } else {
+                // children are visible, will collapse
+                children = d.children;
+                nextFocusTarget = getParentOfNode(d);
             }
-          
-          // Select net on click
-          link.on("click", onLinkClick);
-          linkWrap.on("click", onLinkClick);
+
+            if (!children || children.length == 0)
+                return; // does not have anything to expand
+
+            var graph = layouter.kgraph()
+            layouter.cleanLayout();
+            root.selectAll("*").remove();
+            toggleHideChildren(d); 
+
+            bindData(graph).then(function() {
+               layouter.zoomToFit(nextFocusTarget);
+            });
         });
+
+        var [link, linkWrap, junctionPoint] = renderLinks(root, edges);
+        var netToLink = {};
+        edges.forEach(function (e) {
+            netToLink[getNet(e).id] = {
+                    "core": [],
+                    "wrap": []
+            };
+        });
+        linkWrap._groups.forEach(function (lg) {
+            lg.forEach(function (l) {
+               var e = d3.select(l).data()[0];
+               netToLink[getNet(e).id]["wrap"].push(l);
+            });
+        });
+        link._groups.forEach(function (lg) {
+            lg.forEach(function (l) {
+                var e = d3.select(l).data()[0];
+                netToLink[getNet(e).id]["core"].push(l);
+             });
+        });
+        
+        linkWrap.on("mouseover", function (d) {
+            var netWrap = netToLink[getNet(d).id]["wrap"];
+              d3.selectAll(netWrap)
+              .attr("class", "link-wrap-activated");
+
+            schematic.tooltip.show(d3.event, getNameOfEdge(d));
+        });
+        linkWrap.on("mouseout", function (d) {
+            var netWrap = netToLink[getNet(d).id]["wrap"];
+              d3.selectAll(netWrap)
+              .attr("class", "link-wrap");
+
+            schematic.tooltip.hide();
+        });
+        
+        function onLinkClick(d) {
+            var net = getNet(d);
+            var doSelect = net.selected = !net.selected;
+            // propagate click on all nets with same source
+            
+            var netCore = netToLink[net.id]["core"];
+            d3.selectAll(netCore)
+              .classed("link-selected", doSelect);
+            d3.event.stopPropagation();
+        }
+        
+        // Select net on click
+        link.on("click", onLinkClick);
+        linkWrap.on("click", onLinkClick);
     }
     terminate() {
       if (this.layouter)
