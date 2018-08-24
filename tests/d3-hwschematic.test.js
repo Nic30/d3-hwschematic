@@ -32,8 +32,8 @@ describe('{unit}: Testing scheme rendering', () => {
 	      var graphData = JSON.parse(fs.readFileSync(f));
 	      expect(graphData).not.toBeNull();
 	      var sch = new HwSchematic(svg);
-          sch.bindData(graphData)
-             .then(sch.terminate()); 
+	      var rendering = sch.bindData(graphData)
+                             .then(sch.terminate()); 
 	  });
   });
 
