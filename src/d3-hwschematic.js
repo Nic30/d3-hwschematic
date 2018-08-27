@@ -63,7 +63,12 @@ export default class HwSchematic {
         this.nodeRenderers.registerRenderer(new MuxNodeRenderer(this));
         this.nodeRenderers.registerRenderer(new SliceNodeRenderer(this));
         this.nodeRenderers.registerRenderer(new AbstractNodeRenderer(this));
+        
+        //this.svg.on("resize", this.onresize.bind(this));
     }
+    //onresize(ev) {
+//	console.log(ev);
+    //}
 
     getHtmlIdOfNode(node) {
         return "node-id-" + node.id;

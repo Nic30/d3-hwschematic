@@ -26,15 +26,25 @@
             height: e[a + 'Height']
           }
         }
+
         var width = viewport().width,
             height = viewport().height;
-        
-        
+		
+        var orig = document.body.onresize;
+        document.body.onresize = function(ev) {
+            if (orig)
+        	    orig(ev);
+
+            var w = viewport();
+            svg.attr("width", w.width);
+			svg.attr("height", w.height);
+        }
+
         var svg = d3.select("#scheme-placeholder")
             .attr("width", width)
             .attr("height", height)
             //.append("g");
-        
+
         var zoom = d3.zoom();
         zoom.on("zoom", function applyTransform() {
             g.root.attr("transform", d3.event.transform)
