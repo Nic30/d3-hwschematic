@@ -407,7 +407,8 @@ export default class d3elk {
    	  t.x = xOffset * scale;
    	  t.y = yOffset * scale;
    	  
-   	  g.attr("transform", t);
+   	  g.transition()
+           .duration(200).attr("transform", t);
       }
    }
 
