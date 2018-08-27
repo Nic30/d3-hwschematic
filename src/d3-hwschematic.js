@@ -7,7 +7,8 @@ import {SliceNodeRenderer} from "./node_renderers/sliceNode";
 import {AbstractNodeRenderer} from "./node_renderers/abstract"; 
 import {renderLinks} from "./linkRenderer";
 import {Tooltip} from "./tooltip";
-import {applyHideChildren, hyperEdgesToEdges, getNet} from "./dataPrepare";
+import {applyHideChildren, hyperEdgesToEdges,
+        getNet, initParents} from "./dataPrepare";
 import {default as d3elk} from "./elk/elk-d3";
 
 function getNameOfEdge(e) {
@@ -76,41 +77,6 @@ export default class HwSchematic {
         }
     }
     
-    /**
-     * Get parent of node
-     * 
-     * @attention this methods expect that node.id is string of number which is DFS order
-     * */
-    getParentOfNode(node) {
-        var target = parseInt(node.id);
-        var root = this.layouter.kgraph();
-        
-        while(true) {
-           var ch = root.children;
-           var i = undefined;
-           var found = false;
-
-           ch.some(function (d, _i) {
-               if (parseInt(d.id) >= target) {
-                   found = d.id === node.id;
-                   i = _i;
-                   return true;
-               }
-               return false;
-           });
-
-           if (ch.length == 0 || typeof i === "undefined")
-               throw new Error("Can not find parent of node, because can not find node in graph node.id=" + node.id + ")");
-
-           if (found) {
-               return root;
-           } else {
-               // use last child with lower ID as potential parent;
-               root = ch[i - 1];
-           }
-        }
-    }
-
     removeGraph() {
       this.root.selectAll("*").remove();
     }
@@ -123,7 +89,9 @@ export default class HwSchematic {
     bindData(graph) {
         this.removeGraph();
         hyperEdgesToEdges(graph, graph.hwt.maxId);
+        initParents(graph, null);
         applyHideChildren(graph);
+
         var nodeRenderers = this.nodeRenderers
         var layouter = this.layouter;
         // config of layouter
@@ -151,7 +119,6 @@ export default class HwSchematic {
         var nodeRenderers = this.nodeRenderers
         var bindData = this.bindData.bind(this);
         var getHtmlIdOfNode = this.getHtmlIdOfNode.bind(this);
-        var getParentOfNode = this.getParentOfNode.bind(this);
         var nodes = this._nodes;
         var edges = this._edges;
 
@@ -176,7 +143,7 @@ export default class HwSchematic {
             } else {
                 // children are visible, will collapse
                 children = d.children;
-                nextFocusTarget = getParentOfNode(d);
+                nextFocusTarget = d.hwt.parent;
             }
 
             if (!children || children.length == 0)

@@ -30,15 +30,15 @@ export function applyHideChildren(n) {
 
 export function hyperEdgesToEdges(n, idOffset) {
     if (typeof n.edges !== "undefined") {
-	    var newEdges = [];
+        var newEdges = [];
         n.edges.forEach(function (e) {
             var isHyperEdge = typeof e.sources !== "undefined";
             if (isHyperEdge) {
                 for (var s = 0; s < e.sources.length; s++) {
-                	var src = e.sources[s];
+                    var src = e.sources[s];
                     for (var t = 0; t < e.targets.length; t++) {
-                    	var dst = e.targets[t];
-                    	idOffset += 1;
+                        var dst = e.targets[t];
+                        idOffset += 1;
                         newEdges.push({
                             "hwt": {"parent": e},
                             "id": "" + idOffset, 
@@ -67,9 +67,16 @@ export function hyperEdgesToEdges(n, idOffset) {
  * Get parent of net for net
  **/
 export function getNet(e) {
-	if (typeof e.hwt.parent !== "undefined") {
-		return e.hwt.parent;
-	} else {
-		return e;
-	}
+    if (typeof e.hwt.parent !== "undefined") {
+        return e.hwt.parent;
+    } else {
+        return e;
+    }
+}
+
+export function initParents(node, parent) {
+    node.hwt.parent = parent;
+    (node.children || []).forEach(function (n) {
+	initParents(n, node);
+    });
 }
