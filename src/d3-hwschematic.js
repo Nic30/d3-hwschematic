@@ -4,7 +4,7 @@ import {NodeRenderers} from "./node_renderers/selector";
 import {OperatorNodeRenderer} from "./node_renderers/operatorNode"; 
 import {MuxNodeRenderer} from "./node_renderers/muxNode";
 import {SliceNodeRenderer} from "./node_renderers/sliceNode";
-import {AbstractNodeRenderer} from "./node_renderers/abstract"; 
+import {GenericNodeRenderer} from "./node_renderers/generic"; 
 import {renderLinks} from "./linkRenderer";
 import {Tooltip} from "./tooltip";
 import {applyHideChildren, hyperEdgesToEdges,
@@ -62,7 +62,7 @@ export default class HwSchematic {
         this.nodeRenderers.registerRenderer(new OperatorNodeRenderer(this));
         this.nodeRenderers.registerRenderer(new MuxNodeRenderer(this));
         this.nodeRenderers.registerRenderer(new SliceNodeRenderer(this));
-        this.nodeRenderers.registerRenderer(new AbstractNodeRenderer(this));
+        this.nodeRenderers.registerRenderer(new GenericNodeRenderer(this));
         
         //this.svg.on("resize", this.onresize.bind(this));
     }

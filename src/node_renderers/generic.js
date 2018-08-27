@@ -12,7 +12,7 @@ function PortConstraints_isSideFixed(val) {
    return val == "FREE" || val != "UNDEFINED"
 }
 
-export class AbstractNodeRenderer {
+export class GenericNodeRenderer {
     /**
      * @param schematic instance of HwSchematic
      **/
@@ -210,8 +210,6 @@ export class AbstractNodeRenderer {
 
         // apply node positions
         node
-          //.transition()
-          //.duration(0)
           .attr("transform", function(d) {
               if (typeof d.x === "undefined" || typeof d.x === "undefined") {
                   throw new Error("Node with undefined position", d);

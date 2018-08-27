@@ -1,7 +1,7 @@
-import {AbstractNodeRenderer} from "./abstract"; 
+import {GenericNodeRenderer} from "./generic"; 
 import {SHAPES} from "./operatorNode_components";
 
-export class OperatorNodeRenderer extends AbstractNodeRenderer {
+export class OperatorNodeRenderer extends GenericNodeRenderer {
 	constructor(schematic) {
 		super(schematic);
 

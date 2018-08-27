@@ -1,5 +1,4 @@
-import {AbstractNodeRenderer} from "./abstract"; 
-
+import {GenericNodeRenderer} from "./generic"
 
 /**
  * Draw a multiplexer operator symbol
@@ -10,24 +9,24 @@ function MUX_SHAPE(root) {
       .attr("d","M0,0 L20,10 L20,30 L0,40 Z");
 }
 
-export class MuxNodeRenderer extends AbstractNodeRenderer {
-	constructor(schematic) {
-		super(schematic);
-		this.DEFULT_NODE_SIZE = [20, 40];
-	}
+export class MuxNodeRenderer extends GenericNodeRenderer {
+    constructor(schematic) {
+        super(schematic);
+        this.DEFULT_NODE_SIZE = [20, 40];
+    }
 
-	prepare(node) {
-		var defs = this.schematic.defs;
+    prepare(node) {
+        var defs = this.schematic.defs;
         this.addShapeToDefs(defs);
-		node.width = this.DEFULT_NODE_SIZE[0];
-		node.height = this.DEFULT_NODE_SIZE[1];
-	}
-	
-	selector(node) {
-		return node.hwt.name === "MUX" ||  node.hwt.name === "LATCHED_MUX";
-	}
-	
-	addShapeToDefs(defs) {
+        node.width = this.DEFULT_NODE_SIZE[0];
+        node.height = this.DEFULT_NODE_SIZE[1];
+    }
+    
+    selector(node) {
+        return node.hwt.name === "MUX" ||  node.hwt.name === "LATCHED_MUX";
+    }
+    
+    addShapeToDefs(defs) {
         var cont = defs.append("g");
         cont.attr("id", "MUX");
         cont.attr("class", "node-operator");
@@ -42,21 +41,19 @@ export class MuxNodeRenderer extends AbstractNodeRenderer {
           .attr("y", "10")
           .attr("x", "10")
           .attr("style", "writing-mode: tb;")
-	}
-		
-	/**
-	 * Render svg of node
-	 * 
-	 * @param root root svg element where nodes should be rendered
-	 * @param nodeG svg g for each node with data binded
-	 * */
-	render(root, nodeG) {
+    }
+        
+    /**
+     * Render svg of node
+     * 
+     * @param root root svg element where nodes should be rendered
+     * @param nodeG svg g for each node with data binded
+     * */
+    render(root, nodeG) {
         var schematic = this.schematic;
         
         // apply node positions
         nodeG
-          //.transition()
-          //.duration(0)
           .attr("transform", function(d) {
               if (typeof d.x === "undefined" || typeof d.x === "undefined") {
                   throw new Error("Node with undefined position", d);
@@ -66,9 +63,9 @@ export class MuxNodeRenderer extends AbstractNodeRenderer {
         
         nodeG.append("use")
         .attr("href", function (d) {
-        	return "#" + d.hwt.name;
+            return "#" + d.hwt.name;
         });
         
 
-	}
+    }
 }

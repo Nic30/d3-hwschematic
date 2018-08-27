@@ -260,7 +260,7 @@ export default class d3elk {
       d3Objs[dstGraph.id] = d3Objs;
       (dstGraph.edges || []).forEach(function(e) {
          if (e.id in d3Objs)
-            throw new Error();
+           throw new Error();
          d3Objs[e.id] = e;
       });
       (dstGraph.children || []).forEach(function(n) {
@@ -284,7 +284,7 @@ export default class d3elk {
            var l = d3Objs[e.id];
            copyProps(e, l);
            copyProps(e.source, l.source);
-            copyProps(e.target, l.target);
+           copyProps(e.target, l.target);
            // make sure the bendpoint array is valid
            l.bendPoints = e.bendPoints || [];
       });
@@ -353,26 +353,26 @@ export default class d3elk {
          offset.y += relative.padding.top || 0;
        }
        if (e.sections)
-           e.sections.forEach(function (s) {
-               // ... and apply it to the edge
-               if (s.startPoint) {
-                 s.startPoint.x += offset.x;
-                 s.startPoint.y += offset.y;
-               }
-               if (s.endPoint) {
-                 s.endPoint.x += offset.x;
-                 s.endPoint.y += offset.y;
-               }
-               (s.bendPoints || []).forEach(function (bp) {
-                 bp.x += offset.x;
-                 bp.y += offset.y;
-               });
-           });
+         e.sections.forEach(function (s) {
+             // ... and apply it to the edge
+             if (s.startPoint) {
+               s.startPoint.x += offset.x;
+               s.startPoint.y += offset.y;
+             }
+             if (s.endPoint) {
+               s.endPoint.x += offset.x;
+               s.endPoint.y += offset.y;
+             }
+             (s.bendPoints || []).forEach(function (bp) {
+               bp.x += offset.x;
+               bp.y += offset.y;
+             });
+         });
        if (e.junctionPoints)
-           e.junctionPoints.forEach(function (jp) {
-                 jp.x += offset.x;
-                 jp.y += offset.y;
-           });
+         e.junctionPoints.forEach(function (jp) {
+            jp.x += offset.x;
+            jp.y += offset.y;
+         });
      });
      // children
      (n.children || []).forEach(function(c) {
@@ -401,19 +401,21 @@ export default class d3elk {
      // if a transformation group was specified we
      // perform a 'zoomToFit'
      if (this._transformGroup) {
-         var g = this._transformGroup;
-   	  var t = d3.zoomTransform(g.node())
-   	  t.k = scale;
-   	  t.x = xOffset * scale;
-   	  t.y = yOffset * scale;
-   	  
-   	  g.transition()
-           .duration(200).attr("transform", t);
+       var g = this._transformGroup;
+       var t = d3.zoomTransform(g.node())
+       t.k = scale;
+       t.x = xOffset * scale;
+       t.y = yOffset * scale;
+       if (!RUNNING_IN_NODE) {
+             g = g.transition()
+                  .duration(200)
+       }
+       g.attr("transform", t);
       }
    }
 
    terminate() {
-      if (this.layouter)
-         this.layouter.terminateWorker();
+     if (this.layouter)
+       this.layouter.terminateWorker();
    }
 };

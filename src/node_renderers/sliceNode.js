@@ -1,7 +1,7 @@
-import {AbstractNodeRenderer} from "./abstract"; 
+import {GenericNodeRenderer} from "./generic"; 
 
 
-export class SliceNodeRenderer extends AbstractNodeRenderer {
+export class SliceNodeRenderer extends GenericNodeRenderer {
 	selector(node) {
 		return node.hwt.name === "SLICE" || node.hwt.name === "CONCAT";
 	}
