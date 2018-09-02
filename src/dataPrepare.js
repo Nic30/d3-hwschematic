@@ -77,6 +77,6 @@ export function getNet(e) {
 export function initParents(node, parent) {
     node.hwt.parent = parent;
     (node.children || []).forEach(function (n) {
-	initParents(n, node);
+	    initParents(n, node);
     });
 }
