@@ -1,0 +1,90 @@
+text {
+	font-family: monospace;
+}
+
+.node {
+	stroke: #BDBDBD;
+	stroke-width: 1px;
+	fill: #e6ffff;
+	border: 2px;
+}
+
+.node text {
+	font-style: normal;
+	font-family: monospace;
+	fill: black;
+	stroke-width: 0px;
+}
+
+.node-operator {
+	stroke: BLACK;
+	stroke-width: 1px;
+	fill: #e6ffff;
+	border: 2px;
+}
+
+.node-operator text {
+	font-style: normal;
+	font-family: monospace;
+	fill: black;
+	stroke-width: 0px;
+}
+
+.node-external-port {
+	stroke: #000;
+	stroke-width: 0px;
+	fill: #BDBDBD;
+	border: 1px;
+}
+
+.node-external-port text {
+	font-style: normal;
+	font-family: monospace;
+	fill: black;
+	stroke-width: 0px;
+}
+
+.link {
+	stroke: #000;
+	stroke-opacity: .6;
+	fill: none;
+}
+
+.link-selected {
+	stroke: orange;
+	/*stroke-opacity: .9;*/
+	fill: none;
+}
+
+.link-wrap-activated {
+	stroke-width: 8;
+	fill: none;
+	stroke: deepskyblue;
+}
+
+.link-wrap {
+	stroke-width: 8;
+	fill: none;
+	stroke: white;
+}
+
+.port {
+	stroke: #000;
+	opacity: .6;
+}
+
+tspan {
+	white-space: pre;
+}
+
+body {
+	margin: 0;
+}
+
+.hwschematic-tooltip {
+	background: cornsilk;
+	border: 1px solid black;
+	border-radius: 5px;
+	padding: 5px;
+	position: fixed;
+}

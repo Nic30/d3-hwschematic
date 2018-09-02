@@ -15,7 +15,9 @@ export function renderLinks(root, edges) {
 
     var junctionPoints = [];
     // apply edge routes
-    linkWrap.transition().attr("d", function(d) {
+    linkWrap
+      //.transition()
+      .attr("d", function(d) {
       var path = "";
       if (!d.sections) {
     	  d._svgPath = "";
@@ -31,9 +33,11 @@ export function renderLinks(root, edges) {
       d._svgPath = d3elk.section2svgPath(d.sections[0]);
       return d._svgPath;
     });
-    link.transition().attr("d", function(d) {
+    link
+    //.transition()
+      .attr("d", function(d) {
     	return d._svgPath;
-    });
+      });
     
     var junctionPoint = root.selectAll(".junction-point")
       .data(junctionPoints)

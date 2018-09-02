@@ -2,3 +2,5 @@ dist/
 node_modules/
 package.json.*
 tests/coverage/
+.jest-cache/
+npm-debug.log

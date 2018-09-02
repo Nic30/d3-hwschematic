@@ -39,7 +39,7 @@ export class NodeRenderers {
     }
     
     render(root, nodeG) {
-    	// [TODO] find out how o construct d3.selection from list of html objects
+    	// [TODO] find out how to construct d3.selection from list of html objects
         //var nodes = this.nodesForRenderers;
         //for (var r in dictionary) {
         //    if (dictionary.hasOwnProperty(r)) {           

@@ -16,6 +16,17 @@ Use `npm install d3-hwschematic --save` to install this library and save it to y
 
 ## How to use examples
 
+### Online
+
+This library is used in generated documentation for HWToolkit projects.
+One of them is documentation of [CRC generator](https://hwtlib.readthedocs.io/en/latest/_static/schematic_viewer/schematic_viewer.html?schematic=../../_static/hwt_schematics/hwtLib.logic.crc.Crc.json).
+There is much more in [hwtLib](https://hwtlib.readthedocs.io/en/latest/?badge=latest).
+
+This documentations usually use some older version of this library.
+
+
+### From this git
+
 1. download dependencies and build this library
 
 ```bash

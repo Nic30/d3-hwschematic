@@ -1,9 +1,9 @@
-import {AbstractNodeRenderer} from "./abstract"; 
+import {GenericNodeRenderer} from "./generic"; 
 
 
-export class SliceNodeRenderer extends AbstractNodeRenderer {
+export class SliceNodeRenderer extends GenericNodeRenderer {
 	selector(node) {
-		return node.name === "SLICE" || node.name === "CONCAT";
+		return node.hwt.name === "SLICE" || node.hwt.name === "CONCAT";
 	}
 	
 	getNodeLabelWidth(node) {
@@ -25,7 +25,7 @@ export class SliceNodeRenderer extends AbstractNodeRenderer {
         // black thick line 
         node.append("rect")
           .attr("x", function (d) {
-        	  if (node.name == "SLICE") {
+        	  if (d.hwt.name == "SLICE") {
         		  return 0;
         	  } else {
         		  return d.width - 3;
@@ -36,8 +36,9 @@ export class SliceNodeRenderer extends AbstractNodeRenderer {
           .attr("style", "fill:black;") 
 
         // apply node positions
-        node.transition()
-          .duration(0)
+        node
+          //.transition()
+          //.duration(0)
           .attr("transform", function(d) {
               if (typeof d.x === "undefined" || typeof d.x === "undefined") {
                   throw new Error("Node with undefined position", d);

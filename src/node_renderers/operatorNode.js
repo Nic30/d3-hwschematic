@@ -1,7 +1,7 @@
-import {AbstractNodeRenderer} from "./abstract"; 
+import {GenericNodeRenderer} from "./generic"; 
 import {SHAPES} from "./operatorNode_components";
 
-export class OperatorNodeRenderer extends AbstractNodeRenderer {
+export class OperatorNodeRenderer extends GenericNodeRenderer {
 	constructor(schematic) {
 		super(schematic);
 
@@ -22,7 +22,7 @@ export class OperatorNodeRenderer extends AbstractNodeRenderer {
 	}
 	
 	selector(node) {
-		return typeof this.SHAPES[node.name] !== "undefined";
+		return typeof this.SHAPES[node.hwt.name] !== "undefined";
 	}
 	
 	addShapeToDefs(defs, id, shape) {
@@ -43,8 +43,9 @@ export class OperatorNodeRenderer extends AbstractNodeRenderer {
         var schematic = this.schematic;
         
         // apply node positions
-        nodeG.transition()
-          .duration(0)
+        nodeG
+          //.transition()
+          //.duration(0)
           .attr("transform", function(d) {
               if (typeof d.x === "undefined" || typeof d.x === "undefined") {
                   throw new Error("Node with undefined position", d);
@@ -54,7 +55,7 @@ export class OperatorNodeRenderer extends AbstractNodeRenderer {
         
         nodeG.append("use")
         .attr("href", function (d) {
-        	return "#" + d.name
+        	return "#" + d.hwt.name
         });
  	}
 }
