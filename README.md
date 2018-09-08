@@ -18,7 +18,7 @@ Use `npm install d3-hwschematic --save` to install this library and save it to y
 
 ### Online
 
-This library is used in generated documentation for HWToolkit projects.
+This library is used in the generated documentation for HWToolkit projects.
 One of them is documentation of [CRC generator](https://hwtlib.readthedocs.io/en/latest/_static/schematic_viewer/schematic_viewer.html?schematic=../../_static/hwt_schematics/hwtLib.logic.crc.Crc.json).
 There is much more in [hwtLib](https://hwtlib.readthedocs.io/en/latest/?badge=latest).
 
@@ -35,7 +35,7 @@ npm install --only=dev
 npm run build
 ```
 
-2. then you can open examples, but current web browsers does not allow to load files from local disk (because of security).
+2. Then you can open examples, but current web browsers does not allow to load files from local disk (because of security).
 It has multiple solution 
   * You can run chrome with --allow-file-access-from-files option
   * (prefered) Or use webserver. One webserver implementation is part of standard python distribution. 
@@ -45,8 +45,8 @@ It has multiple solution
 python3 -m http.server 8888
 ```
 
-Now you should be able to view example application on http://0.0.0.0:8888/examples/example.html?schematic=/examples/schemes/Crc.json.
-Where part after schematic= is path to json file where schematic is sotored. 
+Now you should be able to view the example application on http://0.0.0.0:8888/examples/example.html?schematic=/examples/schemes/Crc.json.
+Where part after schematic= is path to json file where schematic is stored. 
 
 
 
