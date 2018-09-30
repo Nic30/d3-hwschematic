@@ -52,4 +52,4 @@ Where part after schematic= is path to json file where schematic is stored.
 
 ## Similar opensource projects
 
-https://github.com/nturley/netlistsvg
+* [netlistsvg](https://github.com/nturley/netlistsvg)
