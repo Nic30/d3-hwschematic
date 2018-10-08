@@ -53,5 +53,4 @@ Where part after schematic= is path to json file where schematic is stored.
 ## Similar opensource projects
 
 * [netlistsvg](https://github.com/nturley/netlistsvg) - draws an SVG schematic from a JSON netlist 
-
 * [pyVhdl2Sch](https://github.com/LaurentCabaret/pyVhdl2Sch) -  Python based VHDL to (pdf) schematic converter 
