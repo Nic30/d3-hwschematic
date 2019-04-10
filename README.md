@@ -55,3 +55,4 @@ Where part after schematic= is path to json file where schematic is stored.
 * [netlistsvg](https://github.com/nturley/netlistsvg) - draws an SVG schematic from a JSON netlist 
 * [pyVhdl2Sch](https://github.com/LaurentCabaret/pyVhdl2Sch) -  Python based VHDL to (pdf) schematic converter
 * [verilog-dot](https://github.com/ben-marshall/verilog-dot) - Python, A simple dot file / graph generator for Verilog syntax trees. 
+* [diagrammer](https://github.com/freechipsproject/diagrammer) - Scala, Very simple visualizer for chisel3.
