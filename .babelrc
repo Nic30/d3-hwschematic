@@ -5,7 +5,6 @@
   "env": {
     "development": {
       "presets": [
-        "@babel/node",
         "@babel/flow", 
         "@babel/env",
         "@babel/stage-0"
@@ -13,7 +12,6 @@
     },
     "production": {
       "presets": [
-        "@babel/node",
         "@babel/flow", 
         ["@babel/env", { "modules": false }],
         "@babel/stage-0"
