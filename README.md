@@ -19,7 +19,7 @@ Use `npm install d3-hwschematic --save` to install this library and save it to y
 ### Online
 
 This library is used in the generated documentation for HWToolkit projects.
-One of them is documentation of [CRC generator](https://hwtlib.readthedocs.io/en/latest/_static/schematic_viewer/schematic_viewer.html?schematic=../../_static/hwt_schematics/hwtLib.logic.crc.Crc.json).
+One of them is documentation of [CRC generator](https://hwtlib.readthedocs.io/en/latest/_static/schematic_viewer/schematic_viewer.html?schematic=../../_static/hwt_schematics/hwtLib.logic.crc.Crc-3.json).
 There is much more in [hwtLib](https://hwtlib.readthedocs.io/en/latest/?badge=latest).
 
 This documentations usually use some older version of this library.
@@ -52,4 +52,7 @@ Where part after schematic= is path to json file where schematic is stored.
 
 ## Similar opensource projects
 
-https://github.com/nturley/netlistsvg
+* [netlistsvg](https://github.com/nturley/netlistsvg) - draws an SVG schematic from a JSON netlist 
+* [pyVhdl2Sch](https://github.com/LaurentCabaret/pyVhdl2Sch) -  Python based VHDL to (pdf) schematic converter
+* [verilog-dot](https://github.com/ben-marshall/verilog-dot) - Python, A simple dot file / graph generator for Verilog syntax trees. 
+* [diagrammer](https://github.com/freechipsproject/diagrammer) - Scala, Very simple visualizer for chisel3.
