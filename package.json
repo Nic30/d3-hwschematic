@@ -47,6 +47,10 @@
     "eslint-plugin-standard": "^3.1.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.9.1",
+    "@babel/preset-node": "latest",
+    "@babel/preset-flow": "latest",
+    "@babel/preset-env": "latest",
+    "@babel/preset-stage-0": "latest",
     "jest": "latest",
     "rollup": "^0.63"
   },
