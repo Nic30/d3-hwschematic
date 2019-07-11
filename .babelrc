@@ -7,14 +7,12 @@
       "presets": [
         "@babel/flow", 
         "@babel/env",
-        "@babel/stage-0"
       ]
     },
     "production": {
       "presets": [
         "@babel/flow", 
         ["@babel/env", { "modules": false }],
-        "@babel/stage-0"
       ],
       "plugins": [
         "external-helpers"
