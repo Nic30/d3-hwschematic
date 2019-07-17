@@ -5,16 +5,14 @@
   "env": {
     "development": {
       "presets": [
-        "flow",
-        "env",
-        "stage-0"
+        "@babel/flow", 
+        "@babel/env",
       ]
     },
     "production": {
       "presets": [
-        "flow", 
-        ["env", { "modules": false }],
-        "stage-0"
+        "@babel/flow", 
+        ["@babel/env", { "modules": false }],
       ],
       "plugins": [
         "external-helpers"
