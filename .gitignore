@@ -4,3 +4,9 @@ package.json.*
 tests/coverage/
 .jest-cache/
 npm-debug.log
+package-lock.json
+
+# eclipse project
+.project
+.settings/
+
