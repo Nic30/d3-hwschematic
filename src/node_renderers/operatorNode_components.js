@@ -201,7 +201,7 @@ export const SHAPES = {
   "FALLING_EDGE": FALLING_EDGE,
   
   "ADD": function ADD(root) {
-	  nodeCircleWithText(root, ">=");
+	  nodeCircleWithText(root, "+");
   },
   "SUB": function SUB(root) {
 	  nodeCircleWithText(root, "-");
