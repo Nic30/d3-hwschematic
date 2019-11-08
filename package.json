@@ -54,14 +54,14 @@
   },
   "jest": {
     "transformIgnorePatterns": [
-       "node_modules/.*",
-       "src/elk/elk-worker.js"
+      "node_modules/.*",
+      "src/elk/elk-worker.js"
     ],
     "cacheDirectory": ".jest-cache",
     "coverageDirectory": "<rootDir>/tests/coverage",
     "coveragePathIgnorePatterns": [
       "node_modules/",
-       "src/elk/elk-worker.js"
+      "src/elk/elk-worker.js"
     ],
     "verbose": true
   }
