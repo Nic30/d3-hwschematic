@@ -197,6 +197,7 @@ export const SHAPES = {
   "NOR": NOR ,
   "XOR": XOR ,
   "NXOR":NXOR,
+
   "RISING_EDGE": RISING_EDGE,
   "FALLING_EDGE": FALLING_EDGE,
   
@@ -225,7 +226,14 @@ export const SHAPES = {
   "GT": function GT(root) {
 	  nodeCircleWithText(root, ">");
   },
-  
+
+  "MUL": function GT(root) {
+	  nodeCircleWithText(root, "*");
+  },
+  "DIV": function GT(root) {
+	  nodeCircleWithText(root, "/");
+  },
+
   "FF": FF,
 };
 
