@@ -58,3 +58,4 @@ Where part after schematic= is path to json file where schematic is stored.
 * [diagrammer](https://github.com/freechipsproject/diagrammer) - Scala, Very simple visualizer for chisel3.
 * [Spyce](https://github.com/imec-myhdl/Spyce) - Python, Simple circuit editor, MyHDL output (only prototype)
 * [circuitsandbox](http://bitbucket.org/kwellwood/circuitsandbox) - Java, Boolean network editor and simulator
+* [BreadboardSim](https://github.com/daveshah1/BreadboardSim) - C#, Circuit Simulator with Breadboard UI 
