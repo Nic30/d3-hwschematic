@@ -23,7 +23,7 @@ export class MuxNodeRenderer extends GenericNodeRenderer {
     }
     
     selector(node) {
-        return node.hwt.name === "MUX" ||  node.hwt.name === "LATCHED_MUX";
+        return node.hwMeta.name === "MUX" ||  node.hwMeta.name === "LATCHED_MUX";
     }
     
     addShapeToDefs(defs) {
@@ -63,7 +63,7 @@ export class MuxNodeRenderer extends GenericNodeRenderer {
         
         nodeG.append("use")
         .attr("href", function (d) {
-            return "#" + d.hwt.name;
+            return "#" + d.hwMeta.name;
         });
         
 

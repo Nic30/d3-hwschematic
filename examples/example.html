@@ -99,8 +99,8 @@
           if (schematic_url != null) {
              d3.json(schematic_url)
                .then(function(graph) {
-                   if (graph.hwt && graph.hwt.name)
-                       document.title = graph.hwt.name;
+                   if (graph.hwMeta && graph.hwMeta.name)
+                       document.title = graph.hwMeta.name;
                    // load the data and render the elements
                    g.bindData(graph);
                 });

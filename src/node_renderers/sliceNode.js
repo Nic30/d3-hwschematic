@@ -3,7 +3,7 @@ import {GenericNodeRenderer} from "./generic";
 
 export class SliceNodeRenderer extends GenericNodeRenderer {
 	selector(node) {
-		return node.hwt.name === "SLICE" || node.hwt.name === "CONCAT";
+		return node.hwMeta.name === "SLICE" || node.hwMeta.name === "CONCAT";
 	}
 	
 	getNodeLabelWidth(node) {
@@ -25,7 +25,7 @@ export class SliceNodeRenderer extends GenericNodeRenderer {
         // black thick line 
         node.append("rect")
           .attr("x", function (d) {
-        	  if (d.hwt.name == "SLICE") {
+        	  if (d.hwMeta.name == "SLICE") {
         		  return 0;
         	  } else {
         		  return d.width - 3;
