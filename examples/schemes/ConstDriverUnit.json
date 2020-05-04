@@ -13,7 +13,7 @@
     {
       "hwMeta": {
         "name": null,
-        "bodyText": "0",
+        "bodyText": "1",
         "maxId": 8
       },
       "properties": {
@@ -40,7 +40,7 @@
     {
       "hwMeta": {
         "name": null,
-        "bodyText": "1",
+        "bodyText": "0",
         "maxId": 8
       },
       "properties": {
@@ -125,21 +125,21 @@
     {
       "source": "1",
       "sourcePort": "5",
-      "target": "3",
-      "targetPort": "7",
+      "target": "4",
+      "targetPort": "8",
       "id": "9",
       "hwMeta": {
-        "name": "out0"
+        "name": "out1"
       }
     },
     {
       "source": "2",
       "sourcePort": "6",
-      "target": "4",
-      "targetPort": "8",
+      "target": "3",
+      "targetPort": "7",
       "id": "10",
       "hwMeta": {
-        "name": "out1"
+        "name": "out0"
       }
     }
   ]

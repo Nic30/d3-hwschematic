@@ -2690,8 +2690,8 @@
     {
       "source": "1",
       "sourcePort": "48",
-      "target": "33",
-      "targetPort": "143",
+      "target": "22",
+      "targetPort": "110",
       "id": "214",
       "hwMeta": {
         "name": "fin_bits"
@@ -2706,8 +2706,8 @@
       ],
       "targets": [
         [
-          "33",
-          "144"
+          "22",
+          "111"
         ],
         [
           "9",
@@ -2720,7 +2720,7 @@
       ],
       "id": "215",
       "hwMeta": {
-        "name": "sig_8"
+        "name": "c[0]"
       }
     },
     {
@@ -2774,18 +2774,18 @@
       }
     },
     {
-      "source": "34",
-      "sourcePort": "145",
+      "source": "27",
+      "sourcePort": "124",
       "target": "9",
       "targetPort": "71",
       "id": "221",
       "hwMeta": {
-        "name": "crc_1"
+        "name": "sig_9 ^ sig_11 ^ sig_12 ^ sig_1 ^ sig_4 ^ sig_6 ^ sig_7"
       }
     },
     {
-      "source": "20",
-      "sourcePort": "103",
+      "source": "33",
+      "sourcePort": "142",
       "target": "9",
       "targetPort": "72",
       "id": "222",
@@ -2794,8 +2794,8 @@
       }
     },
     {
-      "source": "27",
-      "sourcePort": "124",
+      "source": "16",
+      "sourcePort": "91",
       "target": "9",
       "targetPort": "73",
       "id": "223",
@@ -2804,8 +2804,8 @@
       }
     },
     {
-      "source": "16",
-      "sourcePort": "91",
+      "source": "23",
+      "sourcePort": "112",
       "target": "9",
       "targetPort": "74",
       "id": "224",
@@ -2820,12 +2820,12 @@
       "targetPort": "189",
       "id": "225",
       "hwMeta": {
-        "name": "sig_0"
+        "name": "d[0]"
       }
     },
     {
-      "source": "33",
-      "sourcePort": "142",
+      "source": "22",
+      "sourcePort": "109",
       "target": "15",
       "targetPort": "90",
       "id": "226",
@@ -2837,7 +2837,7 @@
       "sources": [
         [
           "46",
-          "183"
+          "181"
         ]
       ],
       "targets": [
@@ -2846,13 +2846,17 @@
           "92"
         ],
         [
-          "41",
-          "167"
+          "27",
+          "125"
+        ],
+        [
+          "33",
+          "143"
         ]
       ],
       "id": "227",
       "hwMeta": {
-        "name": "sig_5"
+        "name": "sig_7"
       }
     },
     {
@@ -2862,7 +2866,7 @@
       "targetPort": "93",
       "id": "228",
       "hwMeta": {
-        "name": "sig_9 ^ sig_10 ^ sig_2 ^ sig_4"
+        "name": "sig_8 ^ sig_9 ^ sig_12 ^ sig_1 ^ sig_3 ^ sig_4"
       }
     },
     {
@@ -2878,12 +2882,12 @@
           "95"
         ],
         [
-          "28",
-          "128"
+          "24",
+          "116"
         ],
         [
-          "36",
-          "152"
+          "29",
+          "131"
         ]
       ],
       "id": "229",
@@ -2898,159 +2902,7 @@
       "targetPort": "96",
       "id": "230",
       "hwMeta": {
-        "name": "sig_9 ^ sig_10 ^ sig_2"
-      }
-    },
-    {
-      "sources": [
-        [
-          "46",
-          "186"
-        ]
-      ],
-      "targets": [
-        [
-          "18",
-          "98"
-        ],
-        [
-          "23",
-          "113"
-        ]
-      ],
-      "id": "231",
-      "hwMeta": {
-        "name": "sig_2"
-      }
-    },
-    {
-      "source": "19",
-      "sourcePort": "100",
-      "target": "18",
-      "targetPort": "99",
-      "id": "232",
-      "hwMeta": {
-        "name": "sig_9 ^ sig_10"
-      }
-    },
-    {
-      "sources": [
-        [
-          "47",
-          "192"
-        ]
-      ],
-      "targets": [
-        [
-          "19",
-          "101"
-        ],
-        [
-          "45",
-          "179"
-        ]
-      ],
-      "id": "233",
-      "hwMeta": {
-        "name": "sig_10"
-      }
-    },
-    {
-      "sources": [
-        [
-          "47",
-          "193"
-        ]
-      ],
-      "targets": [
-        [
-          "19",
-          "102"
-        ],
-        [
-          "32",
-          "140"
-        ],
-        [
-          "39",
-          "162"
-        ]
-      ],
-      "id": "234",
-      "hwMeta": {
-        "name": "sig_9"
-      }
-    },
-    {
-      "sources": [
-        [
-          "46",
-          "181"
-        ]
-      ],
-      "targets": [
-        [
-          "20",
-          "104"
-        ],
-        [
-          "27",
-          "125"
-        ],
-        [
-          "34",
-          "146"
-        ]
-      ],
-      "id": "235",
-      "hwMeta": {
-        "name": "d[7]"
-      }
-    },
-    {
-      "source": "21",
-      "sourcePort": "106",
-      "target": "20",
-      "targetPort": "105",
-      "id": "236",
-      "hwMeta": {
-        "name": "sig_8 ^ sig_11 ^ sig_12 ^ sig_0 ^ sig_2 ^ sig_3 ^ sig_6"
-      }
-    },
-    {
-      "sources": [
-        [
-          "46",
-          "182"
-        ]
-      ],
-      "targets": [
-        [
-          "21",
-          "107"
-        ],
-        [
-          "35",
-          "149"
-        ],
-        [
-          "40",
-          "164"
-        ]
-      ],
-      "id": "237",
-      "hwMeta": {
-        "name": "sig_6"
-      }
-    },
-    {
-      "source": "22",
-      "sourcePort": "109",
-      "target": "21",
-      "targetPort": "108",
-      "id": "238",
-      "hwMeta": {
-        "name": "sig_8 ^ sig_11 ^ sig_12 ^ sig_0 ^ sig_2 ^ sig_3"
+        "name": "sig_8 ^ sig_9 ^ sig_12 ^ sig_1 ^ sig_3"
       }
     },
     {
@@ -3062,189 +2914,29 @@
       ],
       "targets": [
         [
-          "22",
-          "110"
+          "18",
+          "98"
         ],
         [
-          "29",
-          "131"
+          "35",
+          "149"
         ],
         [
           "42",
           "170"
         ]
       ],
-      "id": "239",
+      "id": "231",
       "hwMeta": {
         "name": "d[3]"
       }
     },
     {
-      "source": "23",
-      "sourcePort": "112",
-      "target": "22",
-      "targetPort": "111",
-      "id": "240",
-      "hwMeta": {
-        "name": "sig_8 ^ sig_11 ^ sig_12 ^ sig_0 ^ sig_2"
-      }
-    },
-    {
-      "source": "24",
-      "sourcePort": "115",
-      "target": "23",
-      "targetPort": "114",
-      "id": "241",
-      "hwMeta": {
-        "name": "sig_8 ^ sig_11 ^ sig_12 ^ sig_0"
-      }
-    },
-    {
-      "sources": [
-        [
-          "46",
-          "188"
-        ]
-      ],
-      "targets": [
-        [
-          "24",
-          "116"
-        ],
-        [
-          "43",
-          "173"
-        ]
-      ],
-      "id": "242",
-      "hwMeta": {
-        "name": "sig_0"
-      }
-    },
-    {
-      "source": "25",
-      "sourcePort": "118",
-      "target": "24",
-      "targetPort": "117",
-      "id": "243",
-      "hwMeta": {
-        "name": "sig_8 ^ sig_11 ^ sig_12"
-      }
-    },
-    {
-      "sources": [
-        [
-          "47",
-          "190"
-        ]
-      ],
-      "targets": [
-        [
-          "25",
-          "119"
-        ],
-        [
-          "31",
-          "137"
-        ],
-        [
-          "38",
-          "158"
-        ]
-      ],
-      "id": "244",
-      "hwMeta": {
-        "name": "sig_12"
-      }
-    },
-    {
-      "source": "26",
-      "sourcePort": "121",
-      "target": "25",
-      "targetPort": "120",
-      "id": "245",
-      "hwMeta": {
-        "name": "sig_8 ^ sig_11"
-      }
-    },
-    {
-      "sources": [
-        [
-          "47",
-          "191"
-        ]
-      ],
-      "targets": [
-        [
-          "26",
-          "122"
-        ],
-        [
-          "39",
-          "161"
-        ],
-        [
-          "44",
-          "176"
-        ]
-      ],
-      "id": "246",
-      "hwMeta": {
-        "name": "sig_11"
-      }
-    },
-    {
-      "sources": [
-        [
-          "47",
-          "194"
-        ]
-      ],
-      "targets": [
-        [
-          "26",
-          "123"
-        ],
-        [
-          "32",
-          "141"
-        ],
-        [
-          "45",
-          "180"
-        ]
-      ],
-      "id": "247",
-      "hwMeta": {
-        "name": "sig_8"
-      }
-    },
-    {
-      "source": "28",
-      "sourcePort": "127",
-      "target": "27",
-      "targetPort": "126",
-      "id": "248",
-      "hwMeta": {
-        "name": "sig_8 ^ sig_9 ^ sig_12 ^ sig_1 ^ sig_3 ^ sig_4"
-      }
-    },
-    {
-      "source": "29",
-      "sourcePort": "130",
-      "target": "28",
-      "targetPort": "129",
-      "id": "249",
-      "hwMeta": {
-        "name": "sig_8 ^ sig_9 ^ sig_12 ^ sig_1 ^ sig_3"
-      }
-    },
-    {
-      "source": "30",
-      "sourcePort": "133",
-      "target": "29",
-      "targetPort": "132",
-      "id": "250",
+      "source": "19",
+      "sourcePort": "100",
+      "target": "18",
+      "targetPort": "99",
+      "id": "232",
       "hwMeta": {
         "name": "sig_8 ^ sig_9 ^ sig_12 ^ sig_1"
       }
@@ -3258,17 +2950,267 @@
       ],
       "targets": [
         [
-          "30",
-          "134"
+          "19",
+          "101"
         ],
         [
-          "37",
-          "155"
+          "30",
+          "134"
         ]
       ],
-      "id": "251",
+      "id": "233",
       "hwMeta": {
-        "name": "d[1]"
+        "name": "sig_1"
+      }
+    },
+    {
+      "source": "20",
+      "sourcePort": "103",
+      "target": "19",
+      "targetPort": "102",
+      "id": "234",
+      "hwMeta": {
+        "name": "sig_8 ^ sig_9 ^ sig_12"
+      }
+    },
+    {
+      "sources": [
+        [
+          "47",
+          "190"
+        ]
+      ],
+      "targets": [
+        [
+          "20",
+          "104"
+        ],
+        [
+          "31",
+          "137"
+        ],
+        [
+          "38",
+          "158"
+        ]
+      ],
+      "id": "235",
+      "hwMeta": {
+        "name": "sig_12"
+      }
+    },
+    {
+      "source": "21",
+      "sourcePort": "106",
+      "target": "20",
+      "targetPort": "105",
+      "id": "236",
+      "hwMeta": {
+        "name": "sig_8 ^ sig_9"
+      }
+    },
+    {
+      "sources": [
+        [
+          "47",
+          "193"
+        ]
+      ],
+      "targets": [
+        [
+          "21",
+          "107"
+        ],
+        [
+          "26",
+          "123"
+        ],
+        [
+          "32",
+          "141"
+        ]
+      ],
+      "id": "237",
+      "hwMeta": {
+        "name": "sig_9"
+      }
+    },
+    {
+      "sources": [
+        [
+          "47",
+          "194"
+        ]
+      ],
+      "targets": [
+        [
+          "21",
+          "108"
+        ],
+        [
+          "39",
+          "162"
+        ],
+        [
+          "45",
+          "180"
+        ]
+      ],
+      "id": "238",
+      "hwMeta": {
+        "name": "c[0]"
+      }
+    },
+    {
+      "sources": [
+        [
+          "46",
+          "183"
+        ]
+      ],
+      "targets": [
+        [
+          "23",
+          "113"
+        ],
+        [
+          "41",
+          "167"
+        ]
+      ],
+      "id": "239",
+      "hwMeta": {
+        "name": "d[5]"
+      }
+    },
+    {
+      "source": "24",
+      "sourcePort": "115",
+      "target": "23",
+      "targetPort": "114",
+      "id": "240",
+      "hwMeta": {
+        "name": "sig_9 ^ sig_10 ^ sig_2 ^ sig_4"
+      }
+    },
+    {
+      "source": "25",
+      "sourcePort": "118",
+      "target": "24",
+      "targetPort": "117",
+      "id": "241",
+      "hwMeta": {
+        "name": "sig_9 ^ sig_10 ^ sig_2"
+      }
+    },
+    {
+      "sources": [
+        [
+          "46",
+          "186"
+        ]
+      ],
+      "targets": [
+        [
+          "25",
+          "119"
+        ],
+        [
+          "36",
+          "152"
+        ]
+      ],
+      "id": "242",
+      "hwMeta": {
+        "name": "d[2]"
+      }
+    },
+    {
+      "source": "26",
+      "sourcePort": "121",
+      "target": "25",
+      "targetPort": "120",
+      "id": "243",
+      "hwMeta": {
+        "name": "sig_9 ^ sig_10"
+      }
+    },
+    {
+      "sources": [
+        [
+          "47",
+          "192"
+        ]
+      ],
+      "targets": [
+        [
+          "26",
+          "122"
+        ],
+        [
+          "45",
+          "179"
+        ]
+      ],
+      "id": "244",
+      "hwMeta": {
+        "name": "c[2]"
+      }
+    },
+    {
+      "source": "28",
+      "sourcePort": "127",
+      "target": "27",
+      "targetPort": "126",
+      "id": "245",
+      "hwMeta": {
+        "name": "sig_9 ^ sig_11 ^ sig_12 ^ sig_1 ^ sig_4 ^ sig_6"
+      }
+    },
+    {
+      "sources": [
+        [
+          "46",
+          "182"
+        ]
+      ],
+      "targets": [
+        [
+          "28",
+          "128"
+        ],
+        [
+          "34",
+          "146"
+        ],
+        [
+          "40",
+          "164"
+        ]
+      ],
+      "id": "246",
+      "hwMeta": {
+        "name": "d[6]"
+      }
+    },
+    {
+      "source": "29",
+      "sourcePort": "130",
+      "target": "28",
+      "targetPort": "129",
+      "id": "247",
+      "hwMeta": {
+        "name": "sig_9 ^ sig_11 ^ sig_12 ^ sig_1 ^ sig_4"
+      }
+    },
+    {
+      "source": "30",
+      "sourcePort": "133",
+      "target": "29",
+      "targetPort": "132",
+      "id": "248",
+      "hwMeta": {
+        "name": "sig_9 ^ sig_11 ^ sig_12 ^ sig_1"
       }
     },
     {
@@ -3276,9 +3218,9 @@
       "sourcePort": "136",
       "target": "30",
       "targetPort": "135",
-      "id": "252",
+      "id": "249",
       "hwMeta": {
-        "name": "sig_8 ^ sig_9 ^ sig_12"
+        "name": "sig_9 ^ sig_11 ^ sig_12"
       }
     },
     {
@@ -3286,9 +3228,45 @@
       "sourcePort": "139",
       "target": "31",
       "targetPort": "138",
-      "id": "253",
+      "id": "250",
       "hwMeta": {
-        "name": "sig_8 ^ sig_9"
+        "name": "sig_9 ^ sig_11"
+      }
+    },
+    {
+      "sources": [
+        [
+          "47",
+          "191"
+        ]
+      ],
+      "targets": [
+        [
+          "32",
+          "140"
+        ],
+        [
+          "39",
+          "161"
+        ],
+        [
+          "44",
+          "176"
+        ]
+      ],
+      "id": "251",
+      "hwMeta": {
+        "name": "sig_11"
+      }
+    },
+    {
+      "source": "34",
+      "sourcePort": "145",
+      "target": "33",
+      "targetPort": "144",
+      "id": "252",
+      "hwMeta": {
+        "name": "sig_8 ^ sig_11 ^ sig_12 ^ sig_0 ^ sig_2 ^ sig_3 ^ sig_6"
       }
     },
     {
@@ -3296,9 +3274,9 @@
       "sourcePort": "148",
       "target": "34",
       "targetPort": "147",
-      "id": "254",
+      "id": "253",
       "hwMeta": {
-        "name": "sig_9 ^ sig_11 ^ sig_12 ^ sig_1 ^ sig_4 ^ sig_6"
+        "name": "sig_8 ^ sig_11 ^ sig_12 ^ sig_0 ^ sig_2 ^ sig_3"
       }
     },
     {
@@ -3306,9 +3284,9 @@
       "sourcePort": "151",
       "target": "35",
       "targetPort": "150",
-      "id": "255",
+      "id": "254",
       "hwMeta": {
-        "name": "sig_9 ^ sig_11 ^ sig_12 ^ sig_1 ^ sig_4"
+        "name": "sig_8 ^ sig_11 ^ sig_12 ^ sig_0 ^ sig_2"
       }
     },
     {
@@ -3316,9 +3294,31 @@
       "sourcePort": "154",
       "target": "36",
       "targetPort": "153",
+      "id": "255",
+      "hwMeta": {
+        "name": "sig_8 ^ sig_11 ^ sig_12 ^ sig_0"
+      }
+    },
+    {
+      "sources": [
+        [
+          "46",
+          "188"
+        ]
+      ],
+      "targets": [
+        [
+          "37",
+          "155"
+        ],
+        [
+          "43",
+          "173"
+        ]
+      ],
       "id": "256",
       "hwMeta": {
-        "name": "sig_9 ^ sig_11 ^ sig_12 ^ sig_1"
+        "name": "d[0]"
       }
     },
     {
@@ -3328,7 +3328,7 @@
       "targetPort": "156",
       "id": "257",
       "hwMeta": {
-        "name": "sig_9 ^ sig_11 ^ sig_12"
+        "name": "sig_8 ^ sig_11 ^ sig_12"
       }
     },
     {
@@ -3338,7 +3338,7 @@
       "targetPort": "159",
       "id": "258",
       "hwMeta": {
-        "name": "sig_9 ^ sig_11"
+        "name": "sig_8 ^ sig_11"
       }
     },
     {
