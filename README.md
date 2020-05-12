@@ -14,6 +14,11 @@ Use `npm install d3-hwschematic --save` to install this library and save it to y
 * input is [ELK json](https://www.eclipse.org/elk/documentation/tooldevelopers/graphdatastructure/jsonformat.html)
 
 ![cdc_pulse_gen](https://github.com/Nic30/d3-hwschematic/tree/master/docs/cdc_pulse_gen.png "cdc_pulse_gen")
+![cdc_pulse_gen][cdc_pulse_gen]
+
+[cdc_pulse_gen]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
+
+
 
 ## How to use examples
 
