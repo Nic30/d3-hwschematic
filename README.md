@@ -13,16 +13,14 @@ Use `npm install d3-hwschematic --save` to install this library and save it to y
 * zoom, drag
 * input is [ELK json](https://www.eclipse.org/elk/documentation/tooldevelopers/graphdatastructure/jsonformat.html)
 
+![cdc_pulse_gen](https://github.com/Nic30/d3-hwschematic/tree/master/docs/cdc_pulse_gen.png)
 
 ## How to use examples
 
 ### Online
 
-This library is used in the generated documentation for HWToolkit projects.
-One of them is documentation of [CRC generator](https://hwtlib.readthedocs.io/en/latest/_static/schematic_viewer/schematic_viewer.html?schematic=../../_static/hwt_schematics/hwtLib.logic.crc.Crc-3.json).
-There is much more in [hwtLib](https://hwtlib.readthedocs.io/en/latest/?badge=latest).
-
-This documentations usually use some older version of this library.
+Documentation of [hwtLib](https://hwtlib.readthedocs.io/en/latest/?badge=latest) compoents uses this library to render schemes.
+(Look for scheme href under component name.)
 
 
 ### From this git
