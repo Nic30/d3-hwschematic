@@ -13,15 +13,15 @@ import {default as d3elk} from "./elk/elk-d3";
 
 function getNameOfEdge(e) {
     var name = "<tspan>unnamed</tspan>";
-    if (e.hwt) {
-       if (typeof e.hwt.name === "undefined") {
-           var p = e.hwt.parent;
+    if (e.hwMeta) {
+       if (typeof e.hwMeta.name === "undefined") {
+           var p = e.hwMeta.parent;
            var pIsHyperedge = typeof p.sources !== "undefined"
-           if (pIsHyperedge && p.hwt) {
-               name = p.hwt.name;
+           if (pIsHyperedge && p.hwMeta) {
+               name = p.hwMeta.name;
            }
        } else {
-           name = e.hwt.name;
+           name = e.hwMeta.name;
        }
     }
     return name;
@@ -93,7 +93,7 @@ export default class HwSchematic {
      */
     bindData(graph) {
         this.removeGraph();
-        hyperEdgesToEdges(graph, graph.hwt.maxId);
+        hyperEdgesToEdges(graph, graph.hwMeta.maxId);
         initParents(graph, null);
         applyHideChildren(graph);
 
@@ -148,7 +148,7 @@ export default class HwSchematic {
             } else {
                 // children are visible, will collapse
                 children = d.children;
-                nextFocusTarget = d.hwt.parent;
+                nextFocusTarget = d.hwMeta.parent;
             }
 
             if (!children || children.length == 0)

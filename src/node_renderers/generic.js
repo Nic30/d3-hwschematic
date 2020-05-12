@@ -29,7 +29,7 @@ export class GenericNodeRenderer {
     getNodeLabelWidth(d) {
         var schematic = this.schematic;
         var widthOfText = schematic.widthOfText.bind(schematic);
-        return widthOfText(d.hwt.name);
+        return widthOfText(d.hwMeta.name);
     }
     
     /**
@@ -70,9 +70,9 @@ export class GenericNodeRenderer {
           d.ports.forEach(function(p) {
               var t = p.properties.portSide;
               var indent = 0;
-              if (p.hwt.level > 0)
-                  indent = (p.hwt.level + 1) * CHAR_WIDTH;
-              var portW = widthOfText(p.hwt.name) + indent;
+              if (p.hwMeta.level > 0)
+                  indent = (p.hwMeta.level + 1) * CHAR_WIDTH;
+              var portW = widthOfText(p.hwMeta.name) + indent;
               var pDim = portDim[t];
               if (pDim === undefined)
                   throw new Error(t);
@@ -117,10 +117,10 @@ export class GenericNodeRenderer {
     initBodyTextLines(d) {
         var schematic = this.schematic;
         var max = Math.max;
-        var bt = d.hwt.bodyText
+        var bt = d.hwMeta.bodyText
         if (bt) {
             if (typeof bt === "string") {
-                bt = d.hwt.bodyText = bt.split("\n");
+                bt = d.hwMeta.bodyText = bt.split("\n");
             }
             var bodyTextW = 0;
             bt.forEach(function (line) {
@@ -154,7 +154,7 @@ export class GenericNodeRenderer {
         bodyTexts.each(function() {
             var bodyText = d3.select(this)
             var d = bodyText.data()[0];
-            var bodyTextLines = d.hwt.bodyText;
+            var bodyTextLines = d.hwMeta.bodyText;
             var _MBT = [MBT[0] /CHAR_WIDTH, MBT[1] / schematic.CHAR_HEIGHT];
             
             if (bodyTextLines && (d.children == null 
@@ -194,7 +194,7 @@ export class GenericNodeRenderer {
         var schematic = this.schematic;
         var node = nodeG
           .attr("class", function (d) { 
-              if (d.hwt && d.hwt.isExternalPort) {
+              if (d.hwMeta && d.hwMeta.isExternalPort) {
                   return "node-external-port";
               } else {
                   return "node";
@@ -220,8 +220,8 @@ export class GenericNodeRenderer {
         // spot node label
         node.append("text")
             .text(function(d) {
-                if (d.hwt && !d.hwt.isExternalPort) {
-                    return d.hwt.name;
+                if (d.hwMeta && !d.hwMeta.isExternalPort) {
+                    return d.hwMeta.name;
                 } else {
                     return "";
                 }
@@ -256,25 +256,25 @@ export class GenericNodeRenderer {
           .text(function(d) {
               if (d.ignoreLabel)
                   return "";
-              else if (d.hwt.level) {
-                  var indent = '-'.repeat(d.hwt.level);
+              else if (d.hwMeta.level) {
+                  var indent = '-'.repeat(d.hwMeta.level);
                   var side = d.properties.portSide;
                   if (side == "WEST") {
-                     return indent + d.hwt.name;;
+                     return indent + d.hwMeta.name;;
                   } else if (side == "EAST") {
-                     return d.hwt.name + indent;
+                     return d.hwMeta.name + indent;
                   } else {
                       throw new Error(side);
                   }
               } else
-                  return d.hwt.name; 
+                  return d.hwMeta.name; 
           })
           .attr("x", function(d) {
              var side = d.properties.portSide;
              if (side == "WEST") {
                 return 7;
              } else if (side == "EAST") {
-                //if (d.hwt.name === null || d.hwt.name.length == 0) {
+                //if (d.hwMeta.name === null || d.hwMeta.name.length == 0) {
                 //    return 0;
                 //}
                 if (typeof this.getBBox  == "undefined") {

@@ -40,7 +40,7 @@ export function hyperEdgesToEdges(n, idOffset) {
                         var dst = e.targets[t];
                         idOffset += 1;
                         newEdges.push({
-                            "hwt": {"parent": e},
+                            "hwMeta": {"parent": e},
                             "id": "" + idOffset, 
                             "source": src[0],
                             "sourcePort": src[1],
@@ -67,15 +67,15 @@ export function hyperEdgesToEdges(n, idOffset) {
  * Get parent of net for net
  **/
 export function getNet(e) {
-    if (typeof e.hwt.parent !== "undefined") {
-        return e.hwt.parent;
+    if (typeof e.hwMeta.parent !== "undefined") {
+        return e.hwMeta.parent;
     } else {
         return e;
     }
 }
 
 export function initParents(node, parent) {
-    node.hwt.parent = parent;
+    node.hwMeta.parent = parent;
     (node.children || []).forEach(function (n) {
 	    initParents(n, node);
     });

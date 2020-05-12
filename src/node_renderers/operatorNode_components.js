@@ -197,11 +197,12 @@ export const SHAPES = {
   "NOR": NOR ,
   "XOR": XOR ,
   "NXOR":NXOR,
+
   "RISING_EDGE": RISING_EDGE,
   "FALLING_EDGE": FALLING_EDGE,
   
   "ADD": function ADD(root) {
-	  nodeCircleWithText(root, ">=");
+	  nodeCircleWithText(root, "+");
   },
   "SUB": function SUB(root) {
 	  nodeCircleWithText(root, "-");
@@ -225,7 +226,14 @@ export const SHAPES = {
   "GT": function GT(root) {
 	  nodeCircleWithText(root, ">");
   },
-  
+
+  "MUL": function GT(root) {
+	  nodeCircleWithText(root, "*");
+  },
+  "DIV": function GT(root) {
+	  nodeCircleWithText(root, "/");
+  },
+
   "FF": FF,
 };
 

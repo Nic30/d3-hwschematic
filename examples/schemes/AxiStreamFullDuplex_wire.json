@@ -1,0 +1,82 @@
+{
+  "hwMeta": {
+    "name": "AxiStreamFullDuplex_wire",
+    "maxId": 5
+  },
+  "properties": {
+    "org.eclipse.elk.portConstraints": "FIXED_ORDER",
+    "org.eclipse.elk.randomSeed": 0,
+    "org.eclipse.elk.layered.mergeEdges": 1
+  },
+  "ports": [],
+  "children": [
+    {
+      "hwMeta": {
+        "name": "dataIn",
+        "maxId": 4,
+        "isExternalPort": true
+      },
+      "properties": {
+        "org.eclipse.elk.portConstraints": "FIXED_ORDER",
+        "org.eclipse.elk.randomSeed": 0,
+        "org.eclipse.elk.layered.mergeEdges": 1
+      },
+      "id": "1",
+      "hideChildren": true,
+      "ports": [
+        {
+          "id": "3",
+          "hwMeta": {
+            "level": 0,
+            "name": "dataIn"
+          },
+          "direction": "OUTPUT",
+          "properties": {
+            "portSide": "EAST",
+            "portIndex": 0
+          }
+        }
+      ]
+    },
+    {
+      "hwMeta": {
+        "name": "dataOut",
+        "maxId": 4,
+        "isExternalPort": true
+      },
+      "properties": {
+        "org.eclipse.elk.portConstraints": "FIXED_ORDER",
+        "org.eclipse.elk.randomSeed": 0,
+        "org.eclipse.elk.layered.mergeEdges": 1
+      },
+      "id": "2",
+      "hideChildren": true,
+      "ports": [
+        {
+          "id": "4",
+          "hwMeta": {
+            "level": 0,
+            "name": "dataOut"
+          },
+          "direction": "INPUT",
+          "properties": {
+            "portSide": "WEST",
+            "portIndex": 0
+          }
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "1",
+      "sourcePort": "3",
+      "target": "2",
+      "targetPort": "4",
+      "id": "5",
+      "hwMeta": {
+        "name": null
+      }
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-dist: trusty
+dist: bionic
 sudo: false
 git:
   depth: 1
@@ -6,7 +6,7 @@ cache:
   apt: true
 language: node_js
 node_js:
-- '7'
+- '12'
 install:
 - npm install
 - npm install rollup -g
@@ -17,7 +17,7 @@ deploy:
   provider: npm
   email: nic30@seznam.cz
   api_key:
-    secure: ViV3PqZ/mCpNDdjy/o01Vsn5JcW94v8Rv6Ux/la1c8UGSu6qQdaCd4lq7d1mhLtDqCQvk+K6NmJXCaYZjd1CY1QSgv04XrSyi6+6CHAdKK/DFAqVz0G15qMe7/cakt7xkLce+r2za4bO2fhuLFAzfEiogs4dG/ZaXX8FXo6HfAweaGFvOdU4ClZYltFzkJI5VFOkSREH0GK9znuQlyFNR1Ybz2nP3mMu4A6f+OS1TkBeaGrJt0Lc4zvpELpW+EsJAg0rR937sUXIIG43NfDvUDwLAgO0pg6jTXhP5SMmKa9Abudd6i9Bh3Ayh4NGW23D7cPMVqJoUc0IiqT3VsN8x7YeudTVcHqCUu03K24vGafF3081+AuBLuZ3u3M9lmCXPwhBkuOj1blKvmPWu3skEIqeTjZ411FhE23w65njthSzhDUFxPGa+GNZX1l3XVPWREmLD51OkaAqdfbuRcaOKXoqIKXtZj0SQoMLUjFVYF0NIXHgvTcZ+FPG3zyz4qtO2ZF8hO+qlg5jB/watPzMqSNFvTx7lYJsBMFxi1oCpl2UYImfef9dt6jOGuR7gvEhAcyUMVawVh7MCQHX98hsOZ/WCezgBJFO27EW9F3dWobAUkS70PT7i0HOdzCfjF9s1a4OOTPXX9GI8SqN23y+ckCHPdwoB6GCJdbptL/Fg+w=
+    secure: w7VbtF83SGXA6Yq3ValX1Bmp2ieqDFw2RNksaQhCOCqBulVzYUSljdgnhZPomKaGw33Kcu87Q3n1lkfzFJZ1FlLurFM5NiEXNrKd/yhv7Fm4WGfTLPydH+6Z0E9dLVumhW0pdFEQPn8h7xXFeLkkdW2G2F6B9RVX5OVygvrfIUZpM+/ntORN82LCRJCSLzkIxz/mbrlGYvSvEjKELTPoDgmodHgQZLeNoc4jIRivFTg/+dctS1YLcGieYc2VhUZYZRj5ZXcuEZkHk0jcqdgmz0cr3xYXyKWxPT8QC9mw8ggzsxKNZQbmJ9VW/Sg3BV3B6SHAZ5oWHEMuS1WHkeWQojLHcjqnh0Gfk4Y02QzmhiKz5dbY1WI1dkA4WI0IV3ZKw1/tL1rJ6JM1BKqb0uzto99jfFs5oA/U60LtHvy4BXhiy4qEqxRDTk7cWSNb/V0vxU8CYR1KFBFquXOZEcfYBRBAI1YicBidOqX2E/HanW3yZN5IUOW1RASfsxoQfct55ah3mc19R1GCoeNaCcVMAywsPePI8sf3u/iSt+4g8IQ5hv9QGl4kfDwJ8glIUD2F0PLpNJt8Q/Ziw5Tq/1mg/haGkCqKfYwVp3OyC1G9aFak4MgQOhmtOjqqPirXf5z7ZWMh4aJjOj5bsnDgnMA1v8ue/MAiSKUMJD8TsXLCVZw=
   on:
     tags: true
     repo: Nic30/d3-hwschematic

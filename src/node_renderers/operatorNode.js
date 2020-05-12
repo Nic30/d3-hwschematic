@@ -22,7 +22,7 @@ export class OperatorNodeRenderer extends GenericNodeRenderer {
 	}
 	
 	selector(node) {
-		return typeof this.SHAPES[node.hwt.name] !== "undefined";
+		return typeof this.SHAPES[node.hwMeta.name] !== "undefined";
 	}
 	
 	addShapeToDefs(defs, id, shape) {
@@ -55,7 +55,7 @@ export class OperatorNodeRenderer extends GenericNodeRenderer {
         
         nodeG.append("use")
         .attr("href", function (d) {
-        	return "#" + d.hwt.name
+        	return "#" + d.hwMeta.name
         });
  	}
 }
