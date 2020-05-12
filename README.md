@@ -11,7 +11,7 @@ Use `npm install d3-hwschematic --save` to install this library and save it to y
 * hierarchical components expandable on click
 * net selection on click
 * zoom, drag
-* input is [ELK json](https://www.eclipse.org/elk/documentation/tooldevelopers/graphdatastructure/jsonformat.html)
+* input is [ELK json](https://www.eclipse.org/elk/documentation/tooldevelopers/graphdatastructure/jsonformat.html) with hwMeta propoperty which contains name and body text for the component
 
 ![cdc_pulse_gen](https://github.com/Nic30/d3-hwschematic/raw/master/docs/cdc_pulse_gen.png "cdc_pulse_gen")
 
