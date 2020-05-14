@@ -44,6 +44,7 @@
 			svg.attr("height", w.height);
         }
 
+        var g = new d3.HwSchematic(svg);
         var zoom = d3.zoom();
         zoom.on("zoom", function applyTransform() {
             g.root.attr("transform", d3.event.transform)
@@ -53,8 +54,6 @@
         // because it interferes with component expanding/collapsing
         svg.call(zoom)
            .on("dblclick.zoom", null)
-
-        var g = new d3.HwSchematic(svg);
 
     </script>
     <script>
