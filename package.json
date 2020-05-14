@@ -5,7 +5,7 @@
   "main": "dist/d3-hwschematic.js",
   "scripts": {
     "init": "eslint --init",
-    "build": "rm -rf dist && mkdir dist && NODE_ENV=production rollup -c",
+    "build": "rm -rf dist && mkdir dist && NODE_ENV=production rollup -c && cp src/elk/elk-worker.js dist/",
     "clean": "rm -rf dist/ node_modules/",
     "prepare": "npm run build",
     "pretest": "npm run build",
