@@ -67,7 +67,7 @@ export default class HwSchematic {
         //this.svg.on("resize", this.onresize.bind(this));
     }
     //onresize(ev) {
-//	console.log(ev);
+//    console.log(ev);
     //}
 
     getHtmlIdOfNode(node) {
@@ -103,8 +103,8 @@ export default class HwSchematic {
         layouter
           .kgraph(graph)
           .size([
-            parseInt(this.svg.style("width"), 10),
-            parseInt(this.svg.style("height"), 10)
+            parseInt(this.svg.style("width") || this.svg.attr("width"), 10),
+            parseInt(this.svg.style("height") || this.svg.attr("height"), 10)
           ]);
         var nodes = layouter.getNodes().slice(1); // skip root node
         // nodes are ordered, childeren at the end
