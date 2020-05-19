@@ -159,7 +159,7 @@
           "id": "506",
           "hwMeta": {
             "level": 1,
-            "name": "vldFlag"
+            "name": "item_vld"
           },
           "direction": "INPUT",
           "properties": {
@@ -6011,7 +6011,7 @@
               "id": "998",
               "hwMeta": {
                 "level": 1,
-                "name": "vldFlag"
+                "name": "item_vld"
               },
               "direction": "OUTPUT",
               "properties": {
@@ -12695,7 +12695,7 @@
           "targetPort": "551",
           "id": "2404",
           "hwMeta": {
-            "name": "Concat(Concat(insert_key, insert_data), insert_vldFlag)"
+            "name": "Concat(Concat(insert_key, insert_data), insert_item_vld)"
           }
         },
         {
@@ -13099,7 +13099,7 @@
           "targetPort": "1080",
           "id": "2430",
           "hwMeta": {
-            "name": "insert_vldFlag"
+            "name": "insert_item_vld"
           }
         },
         {
@@ -13537,7 +13537,7 @@
           "id": "1092",
           "hwMeta": {
             "level": 1,
-            "name": "vldFlag"
+            "name": "item_vld"
           },
           "direction": "INPUT",
           "properties": {
@@ -24831,7 +24831,7 @@
               "id": "1594",
               "hwMeta": {
                 "level": 1,
-                "name": "vldFlag"
+                "name": "item_vld"
               },
               "direction": "OUTPUT",
               "properties": {
@@ -26285,7 +26285,7 @@
           "targetPort": "1137",
           "id": "2685",
           "hwMeta": {
-            "name": "Concat(Concat(insert_key, insert_data), insert_vldFlag)"
+            "name": "Concat(Concat(insert_key, insert_data), insert_item_vld)"
           }
         },
         {
@@ -26689,7 +26689,7 @@
           "targetPort": "1676",
           "id": "2711",
           "hwMeta": {
-            "name": "insert_vldFlag"
+            "name": "insert_item_vld"
           }
         },
         {
@@ -27450,7 +27450,7 @@
     {
       "hwMeta": {
         "name": null,
-        "bodyText": "If(insertFsm._eq(insertFsm_t.idle),\n    If(clean_vld._eq(1),\n        stash_vldFlag_next(0),\n        stash_key_next(stash_key),\n        lookupOrigin_next(lookupOrigin),\n        stash_data_next(stash_data)\n    ).Elif(delete_vld._eq(1),\n        stash_key_next(delete_key),\n        lookupOrigin_next(2),\n        stash_vldFlag_next(0),\n        stash_data_next(stash_data)\n    ).Elif(insert_vld._eq(1),\n        lookupOrigin_next(0),\n        stash_key_next(insert_key),\n        stash_data_next(insert_data),\n        stash_vldFlag_next(1)\n    ).Elif(lookup_vld._eq(1),\n        lookupOrigin_next(1),\n        stash_key_next(lookup_key),\n        stash_vldFlag_next(stash_vldFlag),\n        stash_data_next(stash_data)\n    ).Else(\n        stash_vldFlag_next(stash_vldFlag),\n        stash_key_next(stash_key),\n        lookupOrigin_next(lookupOrigin),\n        stash_data_next(stash_data)\n    )\n).Else(\n    stash_vldFlag_next(stash_vldFlag),\n    stash_key_next(stash_key),\n    lookupOrigin_next(lookupOrigin),\n    stash_data_next(stash_data)\n)",
+        "bodyText": "If(insertFsm._eq(insertFsm_t.idle),\n    If(clean_vld._eq(1),\n        stash_item_vld_next(0),\n        stash_key_next(stash_key),\n        lookupOrigin_next(lookupOrigin),\n        stash_data_next(stash_data)\n    ).Elif(delete_vld._eq(1),\n        stash_key_next(delete_key),\n        lookupOrigin_next(2),\n        stash_item_vld_next(0),\n        stash_data_next(stash_data)\n    ).Elif(insert_vld._eq(1),\n        lookupOrigin_next(0),\n        stash_key_next(insert_key),\n        stash_data_next(insert_data),\n        stash_item_vld_next(1)\n    ).Elif(lookup_vld._eq(1),\n        lookupOrigin_next(1),\n        stash_key_next(lookup_key),\n        stash_item_vld_next(stash_item_vld),\n        stash_data_next(stash_data)\n    ).Else(\n        stash_item_vld_next(stash_item_vld),\n        stash_key_next(stash_key),\n        lookupOrigin_next(lookupOrigin),\n        stash_data_next(stash_data)\n    )\n).Else(\n    stash_item_vld_next(stash_item_vld),\n    stash_key_next(stash_key),\n    lookupOrigin_next(lookupOrigin),\n    stash_data_next(stash_data)\n)",
         "maxId": 2772
       },
       "properties": {
@@ -27465,7 +27465,7 @@
           "id": "1699",
           "hwMeta": {
             "level": 0,
-            "name": "stash_vldFlag_next"
+            "name": "stash_item_vld_next"
           },
           "direction": "OUTPUT",
           "properties": {
@@ -27609,7 +27609,7 @@
           "id": "1711",
           "hwMeta": {
             "level": 0,
-            "name": "stash_vldFlag"
+            "name": "stash_item_vld"
           },
           "direction": "INPUT",
           "properties": {
@@ -28827,7 +28827,7 @@
           ],
           "id": "2750",
           "hwMeta": {
-            "name": "stash_vldFlag"
+            "name": "stash_item_vld"
           }
         },
         {
@@ -28869,7 +28869,7 @@
           "targetPort": "1699",
           "id": "2753",
           "hwMeta": {
-            "name": "stash_vldFlag_next"
+            "name": "stash_item_vld_next"
           }
         },
         {
@@ -29143,7 +29143,7 @@
     {
       "hwMeta": {
         "name": null,
-        "bodyText": "If(clk._onRisingEdge(),\n    targetOH(targetOH_next),\n    stash_vldFlag(stash_vldFlag_next),\n    stash_key(stash_key_next),\n    stash_data(stash_data_next),\n    lookupOrigin(lookupOrigin_next),\n    insertFinal(insertFinal_next)\n)",
+        "bodyText": "If(clk._onRisingEdge(),\n    targetOH(targetOH_next),\n    stash_item_vld(stash_item_vld_next),\n    stash_key(stash_key_next),\n    stash_data(stash_data_next),\n    lookupOrigin(lookupOrigin_next),\n    insertFinal(insertFinal_next)\n)",
         "maxId": 2786
       },
       "properties": {
@@ -29170,7 +29170,7 @@
           "id": "1782",
           "hwMeta": {
             "level": 0,
-            "name": "stash_vldFlag"
+            "name": "stash_item_vld"
           },
           "direction": "OUTPUT",
           "properties": {
@@ -29278,7 +29278,7 @@
           "id": "1791",
           "hwMeta": {
             "level": 0,
-            "name": "stash_vldFlag_next"
+            "name": "stash_item_vld_next"
           },
           "direction": "INPUT",
           "properties": {
@@ -29734,7 +29734,7 @@
           "targetPort": "1782",
           "id": "2777",
           "hwMeta": {
-            "name": "stash_vldFlag"
+            "name": "stash_item_vld"
           }
         },
         {
@@ -29744,7 +29744,7 @@
           "targetPort": "1800",
           "id": "2778",
           "hwMeta": {
-            "name": "stash_vldFlag_next"
+            "name": "stash_item_vld_next"
           }
         },
         {
@@ -37418,7 +37418,7 @@
       ],
       "id": "2893",
       "hwMeta": {
-        "name": "stash_vldFlag"
+        "name": "stash_item_vld"
       }
     },
     {
@@ -37848,7 +37848,7 @@
       "targetPort": "1791",
       "id": "2914",
       "hwMeta": {
-        "name": "stash_vldFlag_next"
+        "name": "stash_item_vld_next"
       }
     },
     {
