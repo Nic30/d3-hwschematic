@@ -5,7 +5,7 @@
   "main": "dist/d3-hwschematic.js",
   "scripts": {
     "init": "eslint --init",
-    "build": "rm -rf dist && mkdir dist && NODE_ENV=production rollup -c && cp src/elk/elk-worker.js dist/",
+    "build": "rm -rf dist && mkdir dist && NODE_ENV=production rollup -c",
     "clean": "rm -rf dist/ node_modules/",
     "prepare": "npm run build",
     "pretest": "npm run build",
@@ -34,7 +34,8 @@
   },
   "homepage": "https://github.com/Nic30/d3-hwschematic#readme",
   "dependencies": {
-    "d3": "latest"
+    "d3": "latest",
+    "elkjs": "^0.6.2"
   },
   "devDependencies": {
     "coveralls": "latest",
@@ -54,14 +55,12 @@
   },
   "jest": {
     "transformIgnorePatterns": [
-      "node_modules/.*",
-      "src/elk/elk-worker.js"
+      "node_modules/.*"
     ],
     "cacheDirectory": ".jest-cache",
     "coverageDirectory": "<rootDir>/tests/coverage",
     "coveragePathIgnorePatterns": [
-      "node_modules/",
-      "src/elk/elk-worker.js"
+      "node_modules/"
     ],
     "verbose": true
   }
