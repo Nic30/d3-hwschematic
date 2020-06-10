@@ -48,14 +48,14 @@ Now you should be able to view the example application on http://0.0.0.0:8888/ex
 Where part after schematic= is path to json file where schematic is stored.
 
 
-##ELK json format for d3-hwschematic
+## ELK json format for d3-hwschematic
 
 This libarary uses [ELK json](https://www.eclipse.org/elk/documentation/tooldevelopers/graphdatastructure/jsonformat.html).
 This format is basically a component tree stored in json.
 The json specifies not just the structure of circuit but also how the circuit should be rendered.
 It contains 3 object types `LNode`, `LPort` and `LEdge`.
 
-ELK LNode (component instance):
+ELK LNode (component instance)
 ```javascript
 {
   "id": "0",
@@ -78,7 +78,7 @@ ELK LNode (component instance):
 }
 ```
 
-ELK LPort:
+ELK LPort
 ```javascript
 {
   "id": "1",
@@ -95,7 +95,7 @@ ELK LPort:
 }
 ```
 
-ELK LEdge:
+ELK LEdge
 ```javascript
 { // simple LEdge
   "id": "62",
@@ -124,7 +124,7 @@ ELK LEdge:
 
 LNode represents all types of components. Top component ports are also represented as `LNode` because it looks better.
 
-##Component shapes
+## Component shapes
 
 The style and shape is determined by node renderers. Node renderers are defined in `src/node_renderers`.
 Renderer classes can be registered using  `HwSchematic.nodeRenderers.registerRenderer()` function on HwSchematic object.
