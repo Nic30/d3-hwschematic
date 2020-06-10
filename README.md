@@ -61,8 +61,8 @@ ELK LNode (component instance)
   "id": "0",
   "hwMeta": { // [d3-hwschematic specific]
     "name": "compoent instance name", // optional str
-    "cls_name": "compoent (module) name",
-    "bodyText": "", // str, optional
+    "cls_name": "compoent (module) name", // optional str
+    "bodyText": "", // optional str
     "maxId": 2, // max id of any object in this node used to avoid counting object in expand/collapse
     "isExternalPort": true // optional flag which set component style to external port
   },
