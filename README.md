@@ -48,6 +48,89 @@ Now you should be able to view the example application on http://0.0.0.0:8888/ex
 Where part after schematic= is path to json file where schematic is stored.
 
 
+##ELK json format for d3-hwschematic
+
+This libarary uses [ELK json](https://www.eclipse.org/elk/documentation/tooldevelopers/graphdatastructure/jsonformat.html).
+This format is basically a component tree stored in json.
+The json specifies not just the structure of circuit but also how the circuit should be rendered.
+It contains 3 object types `LNode`, `LPort` and `LEdge`.
+
+ELK LNode (component instance):
+```javascript
+{
+  "id": "0",
+  "hwMeta": { // [d3-hwschematic specific]
+    "name": "compoent instance name", // optional str
+    "cls_name": "compoent (module) name",
+    "bodyText": "", // str, optional
+    "maxId": 2, // max id of any object in this node used to avoid counting object in expand/collapse
+    "isExternalPort": true // optional flag which set component style to external port
+  },
+  "hideChildren": true, // [d3-hwschematic specific] optional flag, if true the body of component is collapsed
+  "properties": { // recommended renderer settings
+    "org.eclipse.elk.portConstraints": "FIXED_ORDER", // can be also "FREE" or other value accepted by ELK
+    "org.eclipse.elk.randomSeed": 0,
+    "org.eclipse.elk.layered.mergeEdges": 1
+  },
+  "ports": [],    // list of LPort
+  "children": [], // list of LNode
+  "edges": [],    // list of LEdge
+}
+```
+
+ELK LPort:
+```javascript
+{
+  "id": "1",
+  "hwMeta": { // [d3-hwschematic specific]
+    "level": 0, // used to mark nested ports, if level > prev. port.level port is member of prev. port
+    "name": "port name"
+  },
+  "direction": "OUTPUT", // [d3-hwschematic specific] controlls direction marker
+  "properties": {
+    "portSide": "EAST",
+    "portIndex": 0 // The order is assumed as clockwise, starting with the leftmost port on the top side.
+                   // Required only for components with "org.eclipse.elk.portConstraints": "FIXED_ORDER"
+  }
+}
+```
+
+ELK LEdge:
+```javascript
+{ // simple LEdge
+  "id": "62",
+  "source": "2", // id of component 
+  "sourcePort": "23", // id of component port
+  "target": "4", // id of component 
+  "targetPort": "29", // id of component port
+  "hwMeta": { // [d3-hwschematic specific]
+    "name": null // optional string, displayed on mouse over
+  }
+}
+{ // hyper LEdge
+  "id": "1119",
+  "sources": [
+    ["17", "343"]  // id of component, id of port
+  ],
+  "targets": [
+    [ "18", "346"],  // id of component, id of port
+    [ "21", "354"],
+  ],
+  "hwMeta": { // [d3-hwschematic specific] 
+    "name": "wr_ptr"
+  }
+}
+```
+
+LNode represents all types of components. Top component ports are also represented as `LNode` because it looks better.
+
+##Component shapes
+
+The style and shape is determined by node renderers. Node renderers are defined in `src/node_renderers`.
+Renderer classes can be registered using  `HwSchematic.nodeRenderers.registerRenderer()` function on HwSchematic object.
+The node renderer has function `select` which is used to determine if renderer should be used for for selected LNode.
+
+
 
 ## Similar opensource projects
 
