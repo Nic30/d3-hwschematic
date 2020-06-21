@@ -142,4 +142,5 @@ The node renderer has function `select` which is used to determine if renderer s
 * [circuitsandbox](http://bitbucket.org/kwellwood/circuitsandbox) - Java, Boolean network editor and simulator
 * [BreadboardSim](https://github.com/daveshah1/BreadboardSim) - C#, Circuit Simulator with Breadboard UI 
 * [adaptagrams](https://github.com/mjwybrow/adaptagrams) - C++, Libraries for constraint-based layout and connector routing for diagrams.
-* [sphinxcontrib-verilog-diagrams](https://github.com/SymbiFlow/sphinxcontrib-verilog-diagrams) - Python, Sphinx Extension which generates various types of diagrams from Verilog code. 
+* [sphinxcontrib-verilog-diagrams](https://github.com/SymbiFlow/sphinxcontrib-verilog-diagrams) - Python, Sphinx Extension which generates various types of diagrams from Verilog code.
+* [logidrom](https://github.com/wavedrom/logidrom) - JS, Digital circuit renderer for some specific circuits
