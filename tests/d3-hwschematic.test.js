@@ -1,4 +1,5 @@
-import * as d3 from "d3";
+import {select, selectAll} from 'd3-selection';
+const d3 = {select, selectAll};
 import HwSchematic from '../src/d3-hwschematic';
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
