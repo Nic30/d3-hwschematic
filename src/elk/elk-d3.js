@@ -1,4 +1,6 @@
-import * as d3 from "d3";
+import {merge} from 'd3-array';
+import {zoomTransform} from 'd3-zoom';
+const d3 = {merge, zoomTransform}; 
 import {default as ELK} from "elkjs";
 
 const RUNNING_IN_NODE = (typeof require !== "undefined");

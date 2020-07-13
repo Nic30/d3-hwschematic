@@ -1,4 +1,5 @@
-import * as d3 from "d3";
+import {select, selectAll, event} from 'd3-selection';
+const d3 = {select, selectAll, event};
 import {addMarkers} from "./markers"; 
 import {NodeRenderers} from "./node_renderers/selector"; 
 import {OperatorNodeRenderer} from "./node_renderers/operatorNode"; 
@@ -10,6 +11,7 @@ import {Tooltip} from "./tooltip";
 import {applyHideChildren, hyperEdgesToEdges,
         getNet, initParents} from "./dataPrepare";
 import {default as d3elk} from "./elk/elk-d3";
+
 
 function getNameOfEdge(e) {
     var name = "<tspan>unnamed</tspan>";
