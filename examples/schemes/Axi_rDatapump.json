@@ -3773,7 +3773,7 @@
             },
             {
               "hwMeta": {
-                "name": "NEQ",
+                "name": "NE",
                 "maxId": 905
               },
               "properties": {
@@ -12175,7 +12175,7 @@
         },
         {
           "hwMeta": {
-            "name": "NEQ",
+            "name": "NE",
             "maxId": 1084
           },
           "properties": {
