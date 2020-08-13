@@ -23,7 +23,10 @@ export class MuxNodeRenderer extends GenericNodeRenderer {
     }
     
     selector(node) {
-        return node.hwMeta.name === "MUX" ||  node.hwMeta.name === "LATCHED_MUX";
+        return node.hwMeta.cls == "Operator" && (
+        		node.hwMeta.name === "MUX" ||
+        		node.hwMeta.name === "LATCHED_MUX"
+        );
     }
     
     addShapeToDefs(defs) {

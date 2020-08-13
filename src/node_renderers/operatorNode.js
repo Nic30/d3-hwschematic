@@ -1,14 +1,16 @@
 import {GenericNodeRenderer} from "./generic"; 
 import {SHAPES} from "./operatorNode_components";
 
+/*
+ * Render a operator node using predefined shape
+ * */
 export class OperatorNodeRenderer extends GenericNodeRenderer {
 	constructor(schematic) {
 		super(schematic);
-
 		this.SHAPES = SHAPES;
 		this.DEFULT_NODE_SIZE = [25, 25]
-
 	}
+
 	prepare(node) {
 		var defs = this.schematic.defs;
 		var SHAPES = this.SHAPES;
@@ -22,7 +24,7 @@ export class OperatorNodeRenderer extends GenericNodeRenderer {
 	}
 	
 	selector(node) {
-		return typeof this.SHAPES[node.hwMeta.name] !== "undefined";
+		return node.hwMeta.cls == "Operator"  && typeof this.SHAPES[node.hwMeta.name] !== "undefined";
 	}
 	
 	addShapeToDefs(defs, id, shape) {
@@ -40,8 +42,6 @@ export class OperatorNodeRenderer extends GenericNodeRenderer {
 	 * @param nodeG svg g for each node with data binded
 	 * */
 	render(root, nodeG) {
-        var schematic = this.schematic;
-        
         // apply node positions
         nodeG
           //.transition()

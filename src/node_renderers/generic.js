@@ -23,6 +23,7 @@ export class GenericNodeRenderer {
      * check if this selector should be used for this node 
      **/
     selector(node) {
+    	// always return true, because this is a default renderer which just renders a box with ports
         return true;
     }
     
@@ -42,7 +43,7 @@ export class GenericNodeRenderer {
         var schematic = this.schematic;
         if (d.properties["org.eclipse.elk.noLayout"])
             return;
-        var ignorePortLabel = d.children && !d.hideChildren;
+        var ignorePortLabel = d.children;
         if (d.ports != null)
             d.ports.forEach(function(p) {
                 p.ignoreLabel = ignorePortLabel;
@@ -157,9 +158,8 @@ export class GenericNodeRenderer {
             var bodyTextLines = d.hwMeta.bodyText;
             var _MBT = [MBT[0] /CHAR_WIDTH, MBT[1] / schematic.CHAR_HEIGHT];
             
-            if (bodyTextLines && (d.children == null 
-                    || d.children.length == 0 
-                    || d.hideChildren)) {
+            if (bodyTextLines && (!d.children
+                    || d.children.length == 0)) {
                 bodyTextLines.forEach(function (line, dy) {
                     if (line.length > _MBT[0])
                         line = line.slice(0, _MBT[0] - 3) + "...";
