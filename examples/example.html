@@ -45,10 +45,10 @@
 			svg.attr("height", w.height);
         }
 
-        var g = new d3.HwSchematic(svg);
+        var hwSchematic = new d3.HwSchematic(svg);
         var zoom = d3.zoom();
         zoom.on("zoom", function applyTransform() {
-            g.root.attr("transform", d3.event.transform)
+        	hwSchematic.root.attr("transform", d3.event.transform)
         });
         
         // disable zoom on doubleclick 
@@ -79,7 +79,7 @@
             if (graph.name)
                  document.title = graph.name;
             // load the data and render the elements
-            g.bindData(graph);
+            hwSchematic.bindData(graph);
           }
         
           document.getElementById('file-input')
@@ -102,7 +102,7 @@
                    if (graph.hwMeta && graph.hwMeta.name)
                        document.title = graph.hwMeta.name;
                    // load the data and render the elements
-                   g.bindData(graph);
+                   hwSchematic.bindData(graph);
                 });
           }
     </script>
