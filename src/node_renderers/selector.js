@@ -1,6 +1,6 @@
 /**
  * Node renderer selector,
- * by specified selector functions select renderer object for node  
+ * by specified GenericNodeRenderer.selector functions select renderer object for node  
  */
 export class NodeRenderers {
     constructor() {
