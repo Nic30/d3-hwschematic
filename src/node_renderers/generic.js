@@ -174,7 +174,6 @@ export class GenericNodeRenderer {
                 });
             }
         });
-        
     }
     
     /**
@@ -191,7 +190,6 @@ export class GenericNodeRenderer {
      * @param nodeG svg g for each node with data binded
      * */
     render(root, nodeG) {
-        var schematic = this.schematic;
         var node = nodeG
           .attr("class", function (d) { 
               if (d.hwMeta && d.hwMeta.isExternalPort) {

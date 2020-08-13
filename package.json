@@ -65,5 +65,8 @@
       "node_modules/"
     ],
     "verbose": true
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

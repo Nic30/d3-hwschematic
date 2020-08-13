@@ -211,7 +211,7 @@ export const SHAPES = {
   "EQ": function EQ(root) {
 	  nodeCircleWithText(root, "=");
   },
-  "NEQ": function NEQ(root) {
+  "NE": function NE(root) {
 	  nodeCircleWithText(root, "!=");
   },
   "LT": function LT(root) {
