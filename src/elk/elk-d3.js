@@ -32,12 +32,19 @@ export default class d3elk {
        this.layouter = new ELK({
           algorithms: ['layered'],
        });
+       // cached used to avoid execuiton of elkjs to resolve the layout of
+		// graph if executed previously with same input
+       // {sorted list of expanded node ids: {nodeId: {"x": ..., "y": ...,
+		// "ports": {portId: [x, y]}},
+       // edgeId: [points] }}
+       this._layoutCache = {};
+       this._currentLayoutCacheKey = null;
    }
 
    /**
-   * Setting the available area, the positions of the layouted graph are
-   * currently scaled down.
-   */
+	 * Setting the available area, the positions of the layouted graph are
+	 * currently scaled down.
+	 */
    size(size) {
      if (!arguments.length)
         return [this.width, this.height];
@@ -52,8 +59,8 @@ export default class d3elk {
    };
    
    /**
-   * Convert section from ELK json to svg path string
-   */
+	 * Convert section from ELK json to svg path string
+	 */
    static section2svgPath(section) {
      var pathBuff = ["M", section.startPoint.x, section.startPoint.y];
      if (section.bendPoints)
@@ -70,8 +77,8 @@ export default class d3elk {
     }
 
    /**
-   * Sets the group used to perform 'zoomToFit'.
-   * */
+	 * Sets the group used to perform 'zoomToFit'.
+	 */
    transformGroup(g) {
      if (!arguments.length)
         return this._transformGroup;
@@ -85,17 +92,29 @@ export default class d3elk {
      this._options = opts;
      return this;
    }
-
+   
    /**
-   * Start the layout process.
-   */
+	 * Start the layout process.
+	 */
    start() {
-     return this.layouter.layout(
-         this.graph,
-          {layoutOptions: this._options}
-     ).then(
-         this.applyLayout.bind(this)
-     );
+	   var cacheKey = [];
+	   this.computeLayoutCacheKey(this.graph, cacheKey);
+	   var state = this._layoutCache[cacheKey];
+       if (state !== undefined) {
+    	   var applyCachedState = this.applyCachedState.bind(this);
+    	   return new Promise(function () {
+    		   applyCachedState(this.graph, state);
+    	   })
+       } else {
+		   this.cleanLayout();
+		   this._currentLayoutCacheKey = cacheKey;
+		   return this.layouter.layout(
+	            this.graph,
+	            {layoutOptions: this._options}
+	       ).then(
+	            this.applyLayout.bind(this)
+	       );
+       }
    }
 
    getNodes() {
@@ -137,7 +156,7 @@ export default class d3elk {
      var edgesOfChildren = d3.merge(
        this.getNodes()
        .filter(function (n) {
-        return !n.hideChildren;
+           return n.children;
        })
        .map(function(n) {
            return n.edges || [];
@@ -180,8 +199,8 @@ export default class d3elk {
    }
    
    /**
-   * Clean all layout possitions from nodes, nets and ports
-   */
+	 * Clean all layout possitions from nodes, nets and ports
+	 */
    cleanLayout(n) {
      if (!arguments.length)
        var n = this.graph;
@@ -201,11 +220,75 @@ export default class d3elk {
          cleanLayout(c)
      });
    }
-   
+   /*
+	 * Collect list of expanded nodes
+	 */
+   computeLayoutCacheKey(n, res) {
+	   res.push(n.id);
+	   if (n.children) {
+		   var computeLayoutCacheKey = this.computeLayoutCacheKey.bind(this);
+		   n.children.forEach((d) => { computeLayoutCacheKey(d, res); });
+	   }
+   }
+   /*
+	 * Store current state of layout
+	 */
+   serializeLayout(n) {
+	  var res = {"id": n.id, "x": n.x, "y": n.y}
+	  if (n.ports) {
+		  res["ports"] = n.ports.map(function (p) {
+			  return {"id": p.id, "x": p.x, "y": p.y};
+		  });
+	  }
+	  if (n.edges) {
+		  res["edges"] = n.edges.map(function (e) {
+			  return {"id": e.id, "sections": e.sections, "junctionPoints": e.junctionPoints};
+		  });
+	  }
+	  if (n.children) {
+		  var serializeLayout = this.serializeLayout.bind(this);
+		  res["children"]  = n.children.map(function(c) {
+		      return serializeLayout(c)
+		  });
+	  }
+	  return res;
+   }
+   applyCachedState(n, state) {
+	 if (n.id != state.id) {
+	   throw new Error("Cached state not matching current data");
+	 }
+	 if (n.ports) {
+	  state.ports.forEach(function (s, i) {
+		  var p = n.ports[i];
+		  if (p.id != s.id) {
+			  throw new Error("Cached state not matching current data");
+		  }
+		  p.x = s.x;
+		  p.y = s.y;
+	  });
+	 }
+	 if (n.edges) {
+		 state.edges.forEach(function (s, i) {
+			  var p = n.edges[i];
+			  if (p.id != s.id) {
+				  throw new Error("Cached state not matching current data");
+			  }
+			  p.sections = s.sections;
+			  p.junctionPoints = s.junctionPoints;
+		  });
+	 }
+	 if (n.children) {
+	   var applyCachedState = this.applyCachedState.bind(this);
+	   state.children.forEach(function(s, i) {
+	 	  var c = n.children[i];
+	       return applyCachedState(c, s);
+	   });
+	 }
+   }
    /**
-   * Apply layout for the kgraph style. Converts relative positions to
-   * absolute positions.
-   */
+	 * Apply layout for the kgraph style. Converts relative positions to
+	 * absolute positions.
+	 */
    applyLayout(kgraph) {
      this.zoomToFit(kgraph);
      var nodeMap = {};
@@ -213,15 +296,19 @@ export default class d3elk {
      d3elk.toAbsolutePositions(kgraph, {x: 0, y:0}, nodeMap);
      d3elk.toAbsolutePositionsEdges(kgraph, nodeMap);
      this.copyElkProps(kgraph, this.graph);
+     this._layoutCache[this._currentLayoutCacheKey] = this.serializeLayout(this.graph);
+     return this.graph;
    }
    
    /**
-    * Webworker creates new graph object and layout props has to be
-    * copied back to original graph
-    * 
-    * @param srcGraph: new graph from ELK worker
-    * @param dstGraph: original graph provided by user
-    **/
+	 * Webworker creates new graph object and layout props has to be copied back
+	 * to original graph
+	 * 
+	 * @param srcGraph:
+	 *            new graph from ELK worker
+	 * @param dstGraph:
+	 *            original graph provided by user
+	 */
    copyElkProps(srcGraph, dstGraph) {
       var d3Objs = this._d3ObjMap;
       // init d3Objs
@@ -349,9 +436,9 @@ export default class d3elk {
    };
 
    /**
-   * If a top level transform group is specified, we set the scale such that
-   * the available space is used to its maximum.
-   */
+	 * If a top level transform group is specified, we set the scale such that
+	 * the available space is used to its maximum.
+	 */
    zoomToFit(node) {
      if (node === null) {
         node = this.graph;
