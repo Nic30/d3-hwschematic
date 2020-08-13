@@ -1,6 +1,7 @@
 {
   "hwMeta": {
     "name": "RAM64X1S",
+    "cls": null,
     "maxId": 69
   },
   "properties": {
@@ -13,6 +14,7 @@
     {
       "hwMeta": {
         "name": null,
+        "cls": "Process",
         "bodyText": "If(wclk_in._onRisingEdge() & we_in._eq(1),\n    mem[a_in](d_in)\n)",
         "maxId": 57
       },
@@ -22,7 +24,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "1",
-      "hideChildren": true,
       "ports": [
         {
           "id": "17",
@@ -85,10 +86,11 @@
           }
         }
       ],
-      "children": [
+      "_children": [
         {
           "hwMeta": {
             "name": "RAM_WRITE",
+            "cls": "Operator",
             "maxId": 50
           },
           "properties": {
@@ -97,7 +99,6 @@
             "org.eclipse.elk.layered.mergeEdges": 1
           },
           "id": "2",
-          "hideChildren": true,
           "ports": [
             {
               "id": "22",
@@ -152,6 +153,7 @@
         {
           "hwMeta": {
             "name": "AND",
+            "cls": "Operator",
             "maxId": 50
           },
           "properties": {
@@ -160,7 +162,6 @@
             "org.eclipse.elk.layered.mergeEdges": 1
           },
           "id": "3",
-          "hideChildren": true,
           "ports": [
             {
               "id": "26",
@@ -203,6 +204,7 @@
         {
           "hwMeta": {
             "name": "RISING_EDGE",
+            "cls": "Operator",
             "maxId": 50
           },
           "properties": {
@@ -211,7 +213,6 @@
             "org.eclipse.elk.layered.mergeEdges": 1
           },
           "id": "4",
-          "hideChildren": true,
           "ports": [
             {
               "id": "29",
@@ -240,7 +241,7 @@
           ]
         }
       ],
-      "edges": [
+      "_edges": [
         {
           "source": "2",
           "sourcePort": "22",
@@ -316,6 +317,7 @@
     {
       "hwMeta": {
         "name": "a5",
+        "cls": null,
         "maxId": 57,
         "isExternalPort": true
       },
@@ -325,7 +327,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "10",
-      "hideChildren": true,
       "ports": [
         {
           "id": "36",
@@ -344,6 +345,7 @@
     {
       "hwMeta": {
         "name": "d",
+        "cls": null,
         "maxId": 57,
         "isExternalPort": true
       },
@@ -353,7 +355,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "11",
-      "hideChildren": true,
       "ports": [
         {
           "id": "37",
@@ -372,6 +373,7 @@
     {
       "hwMeta": {
         "name": "wclk",
+        "cls": null,
         "maxId": 57,
         "isExternalPort": true
       },
@@ -381,7 +383,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "12",
-      "hideChildren": true,
       "ports": [
         {
           "id": "38",
@@ -400,6 +401,7 @@
     {
       "hwMeta": {
         "name": "o",
+        "cls": null,
         "maxId": 57,
         "isExternalPort": true
       },
@@ -409,7 +411,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "13",
-      "hideChildren": true,
       "ports": [
         {
           "id": "39",
@@ -428,6 +429,7 @@
     {
       "hwMeta": {
         "name": "we",
+        "cls": null,
         "maxId": 57,
         "isExternalPort": true
       },
@@ -437,7 +439,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "14",
-      "hideChildren": true,
       "ports": [
         {
           "id": "40",
@@ -456,6 +457,7 @@
     {
       "hwMeta": {
         "name": "INDEX",
+        "cls": "Operator",
         "maxId": 57
       },
       "properties": {
@@ -464,7 +466,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "15",
-      "hideChildren": true,
       "ports": [
         {
           "id": "41",
@@ -507,6 +508,7 @@
     {
       "hwMeta": {
         "name": "CONCAT",
+        "cls": "Operator",
         "maxId": 57
       },
       "properties": {
@@ -515,7 +517,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "16",
-      "hideChildren": true,
       "ports": [
         {
           "id": "44",
@@ -606,6 +607,7 @@
     {
       "hwMeta": {
         "name": "a0",
+        "cls": null,
         "maxId": 57,
         "isExternalPort": true
       },
@@ -615,7 +617,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "5",
-      "hideChildren": true,
       "ports": [
         {
           "id": "31",
@@ -634,6 +635,7 @@
     {
       "hwMeta": {
         "name": "a1",
+        "cls": null,
         "maxId": 57,
         "isExternalPort": true
       },
@@ -643,7 +645,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "6",
-      "hideChildren": true,
       "ports": [
         {
           "id": "32",
@@ -662,6 +663,7 @@
     {
       "hwMeta": {
         "name": "a2",
+        "cls": null,
         "maxId": 57,
         "isExternalPort": true
       },
@@ -671,7 +673,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "7",
-      "hideChildren": true,
       "ports": [
         {
           "id": "33",
@@ -690,6 +691,7 @@
     {
       "hwMeta": {
         "name": "a3",
+        "cls": null,
         "maxId": 57,
         "isExternalPort": true
       },
@@ -699,7 +701,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "8",
-      "hideChildren": true,
       "ports": [
         {
           "id": "34",
@@ -718,6 +719,7 @@
     {
       "hwMeta": {
         "name": "a4",
+        "cls": null,
         "maxId": 57,
         "isExternalPort": true
       },
@@ -727,7 +729,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "9",
-      "hideChildren": true,
       "ports": [
         {
           "id": "35",
@@ -774,12 +775,12 @@
       ],
       "targets": [
         [
-          "1",
-          "19"
-        ],
-        [
           "15",
           "42"
+        ],
+        [
+          "1",
+          "19"
         ]
       ],
       "id": "60",

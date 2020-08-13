@@ -1,6 +1,7 @@
 {
   "hwMeta": {
     "name": "IndexingInernSplit",
+    "cls": null,
     "maxId": 16
   },
   "properties": {
@@ -13,6 +14,7 @@
     {
       "hwMeta": {
         "name": "a",
+        "cls": null,
         "maxId": 12,
         "isExternalPort": true
       },
@@ -22,7 +24,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "1",
-      "hideChildren": true,
       "ports": [
         {
           "id": "5",
@@ -41,6 +42,7 @@
     {
       "hwMeta": {
         "name": "b",
+        "cls": null,
         "maxId": 12,
         "isExternalPort": true
       },
@@ -50,7 +52,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "2",
-      "hideChildren": true,
       "ports": [
         {
           "id": "6",
@@ -69,6 +70,7 @@
     {
       "hwMeta": {
         "name": "CONCAT",
+        "cls": "Operator",
         "maxId": 12
       },
       "properties": {
@@ -77,7 +79,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "3",
-      "hideChildren": true,
       "ports": [
         {
           "id": "7",
@@ -120,6 +121,7 @@
     {
       "hwMeta": {
         "name": "SLICE",
+        "cls": "Operator",
         "maxId": 12
       },
       "properties": {
@@ -128,7 +130,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "4",
-      "hideChildren": true,
       "ports": [
         {
           "id": "10",
@@ -197,7 +198,7 @@
       "targetPort": "8",
       "id": "15",
       "hwMeta": {
-        "name": "internB"
+        "name": "a[1]"
       }
     },
     {

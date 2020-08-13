@@ -1,6 +1,7 @@
 {
   "hwMeta": {
     "name": "ArrayIntfExample",
+    "cls": null,
     "maxId": 22
   },
   "properties": {
@@ -13,6 +14,7 @@
     {
       "hwMeta": {
         "name": null,
+        "cls": "Operator",
         "bodyText": "1",
         "maxId": 20
       },
@@ -22,7 +24,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "1",
-      "hideChildren": true,
       "ports": [
         {
           "id": "7",
@@ -40,6 +41,7 @@
     {
       "hwMeta": {
         "name": null,
+        "cls": "Operator",
         "bodyText": "1",
         "maxId": 20
       },
@@ -49,7 +51,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "2",
-      "hideChildren": true,
       "ports": [
         {
           "id": "8",
@@ -67,6 +68,7 @@
     {
       "hwMeta": {
         "name": "clk",
+        "cls": null,
         "maxId": 20,
         "isExternalPort": true
       },
@@ -76,7 +78,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "3",
-      "hideChildren": true,
       "ports": [
         {
           "id": "9",
@@ -95,6 +96,7 @@
     {
       "hwMeta": {
         "name": "rst_n",
+        "cls": null,
         "maxId": 20,
         "isExternalPort": true
       },
@@ -104,7 +106,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "4",
-      "hideChildren": true,
       "ports": [
         {
           "id": "10",
@@ -123,6 +124,7 @@
     {
       "hwMeta": {
         "name": "a_0",
+        "cls": null,
         "maxId": 20,
         "isExternalPort": true
       },
@@ -132,7 +134,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "5",
-      "hideChildren": true,
       "ports": [
         {
           "id": "11",
@@ -199,6 +200,7 @@
     {
       "hwMeta": {
         "name": "a_1",
+        "cls": null,
         "maxId": 20,
         "isExternalPort": true
       },
@@ -208,7 +210,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "6",
-      "hideChildren": true,
       "ports": [
         {
           "id": "16",

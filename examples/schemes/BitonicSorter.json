@@ -1,6 +1,7 @@
 {
   "hwMeta": {
     "name": "BitonicSorter",
+    "cls": null,
     "maxId": 36
   },
   "properties": {
@@ -13,6 +14,7 @@
     {
       "hwMeta": {
         "name": null,
+        "cls": "Process",
         "bodyText": "If(inputs_0 < inputs_1,\n    sort_tmp_1_0(inputs_0),\n    sort_tmp_1_0_0(inputs_1)\n).Else(\n    sort_tmp_1_0(inputs_1),\n    sort_tmp_1_0_0(inputs_0)\n)",
         "maxId": 32
       },
@@ -22,7 +24,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "1",
-      "hideChildren": true,
       "ports": [
         {
           "id": "9",
@@ -73,10 +74,11 @@
           }
         }
       ],
-      "children": [
+      "_children": [
         {
           "hwMeta": {
             "name": "MUX",
+            "cls": "Operator",
             "maxId": 27
           },
           "properties": {
@@ -85,7 +87,6 @@
             "org.eclipse.elk.layered.mergeEdges": 1
           },
           "id": "2",
-          "hideChildren": true,
           "ports": [
             {
               "id": "13",
@@ -140,6 +141,7 @@
         {
           "hwMeta": {
             "name": "LT",
+            "cls": "Operator",
             "maxId": 27
           },
           "properties": {
@@ -148,7 +150,6 @@
             "org.eclipse.elk.layered.mergeEdges": 1
           },
           "id": "3",
-          "hideChildren": true,
           "ports": [
             {
               "id": "17",
@@ -191,6 +192,7 @@
         {
           "hwMeta": {
             "name": "MUX",
+            "cls": "Operator",
             "maxId": 27
           },
           "properties": {
@@ -199,7 +201,6 @@
             "org.eclipse.elk.layered.mergeEdges": 1
           },
           "id": "4",
-          "hideChildren": true,
           "ports": [
             {
               "id": "20",
@@ -252,7 +253,7 @@
           ]
         }
       ],
-      "edges": [
+      "_edges": [
         {
           "source": "2",
           "sourcePort": "13",
@@ -352,6 +353,7 @@
     {
       "hwMeta": {
         "name": "inputs_0",
+        "cls": null,
         "maxId": 32,
         "isExternalPort": true
       },
@@ -361,7 +363,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "5",
-      "hideChildren": true,
       "ports": [
         {
           "id": "24",
@@ -380,6 +381,7 @@
     {
       "hwMeta": {
         "name": "inputs_1",
+        "cls": null,
         "maxId": 32,
         "isExternalPort": true
       },
@@ -389,7 +391,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "6",
-      "hideChildren": true,
       "ports": [
         {
           "id": "25",
@@ -408,6 +409,7 @@
     {
       "hwMeta": {
         "name": "outputs_0",
+        "cls": null,
         "maxId": 32,
         "isExternalPort": true
       },
@@ -417,7 +419,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "7",
-      "hideChildren": true,
       "ports": [
         {
           "id": "26",
@@ -436,6 +437,7 @@
     {
       "hwMeta": {
         "name": "outputs_1",
+        "cls": null,
         "maxId": 32,
         "isExternalPort": true
       },
@@ -445,7 +447,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "8",
-      "hideChildren": true,
       "ports": [
         {
           "id": "27",
@@ -470,7 +471,7 @@
       "targetPort": "26",
       "id": "33",
       "hwMeta": {
-        "name": "outputs_0"
+        "name": "sort_tmp_1_0"
       }
     },
     {

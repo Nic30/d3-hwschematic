@@ -1,6 +1,7 @@
 {
   "hwMeta": {
     "name": "IndexingInernJoin",
+    "cls": null,
     "maxId": 21
   },
   "properties": {
@@ -13,6 +14,7 @@
     {
       "hwMeta": {
         "name": "a",
+        "cls": null,
         "maxId": 16,
         "isExternalPort": true
       },
@@ -22,7 +24,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "1",
-      "hideChildren": true,
       "ports": [
         {
           "id": "7",
@@ -41,6 +42,7 @@
     {
       "hwMeta": {
         "name": "b",
+        "cls": null,
         "maxId": 16,
         "isExternalPort": true
       },
@@ -50,7 +52,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "2",
-      "hideChildren": true,
       "ports": [
         {
           "id": "8",
@@ -69,6 +70,7 @@
     {
       "hwMeta": {
         "name": "c",
+        "cls": null,
         "maxId": 16,
         "isExternalPort": true
       },
@@ -78,7 +80,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "3",
-      "hideChildren": true,
       "ports": [
         {
           "id": "9",
@@ -97,6 +98,7 @@
     {
       "hwMeta": {
         "name": "d",
+        "cls": null,
         "maxId": 16,
         "isExternalPort": true
       },
@@ -106,7 +108,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "4",
-      "hideChildren": true,
       "ports": [
         {
           "id": "10",
@@ -125,6 +126,7 @@
     {
       "hwMeta": {
         "name": "CONCAT",
+        "cls": "Operator",
         "maxId": 16
       },
       "properties": {
@@ -133,7 +135,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "5",
-      "hideChildren": true,
       "ports": [
         {
           "id": "11",
@@ -176,6 +177,7 @@
     {
       "hwMeta": {
         "name": "SLICE",
+        "cls": "Operator",
         "maxId": 16
       },
       "properties": {
@@ -184,7 +186,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "6",
-      "hideChildren": true,
       "ports": [
         {
           "id": "14",
@@ -263,7 +264,7 @@
       "targetPort": "10",
       "id": "20",
       "hwMeta": {
-        "name": "d"
+        "name": "internSig[1]"
       }
     },
     {

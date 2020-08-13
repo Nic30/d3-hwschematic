@@ -1,6 +1,7 @@
 {
   "hwMeta": {
     "name": "DirectFF_sig",
+    "cls": null,
     "maxId": 21
   },
   "properties": {
@@ -13,6 +14,7 @@
     {
       "hwMeta": {
         "name": null,
+        "cls": "Process",
         "bodyText": "If(clk._onRisingEdge(),\n    r(r)\n)",
         "maxId": 19
       },
@@ -22,7 +24,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "1",
-      "hideChildren": true,
       "ports": [
         {
           "id": "6",
@@ -61,10 +62,11 @@
           }
         }
       ],
-      "children": [
+      "_children": [
         {
           "hwMeta": {
             "name": "FF",
+            "cls": "Operator",
             "maxId": 15
           },
           "properties": {
@@ -73,7 +75,6 @@
             "org.eclipse.elk.layered.mergeEdges": 1
           },
           "id": "2",
-          "hideChildren": true,
           "ports": [
             {
               "id": "9",
@@ -116,6 +117,7 @@
         {
           "hwMeta": {
             "name": "RISING_EDGE",
+            "cls": "Operator",
             "maxId": 15
           },
           "properties": {
@@ -124,7 +126,6 @@
             "org.eclipse.elk.layered.mergeEdges": 1
           },
           "id": "3",
-          "hideChildren": true,
           "ports": [
             {
               "id": "12",
@@ -153,7 +154,7 @@
           ]
         }
       ],
-      "edges": [
+      "_edges": [
         {
           "source": "2",
           "sourcePort": "9",
@@ -199,6 +200,7 @@
     {
       "hwMeta": {
         "name": "o",
+        "cls": null,
         "maxId": 19,
         "isExternalPort": true
       },
@@ -208,7 +210,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "4",
-      "hideChildren": true,
       "ports": [
         {
           "id": "14",
@@ -227,6 +228,7 @@
     {
       "hwMeta": {
         "name": "clk",
+        "cls": null,
         "maxId": 19,
         "isExternalPort": true
       },
@@ -236,7 +238,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "5",
-      "hideChildren": true,
       "ports": [
         {
           "id": "15",

@@ -1,6 +1,7 @@
 {
   "hwMeta": {
     "name": "SimpleUnitAxiStream",
+    "cls": null,
     "maxId": 5
   },
   "properties": {
@@ -13,6 +14,7 @@
     {
       "hwMeta": {
         "name": "a",
+        "cls": null,
         "maxId": 4,
         "isExternalPort": true
       },
@@ -22,7 +24,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "1",
-      "hideChildren": true,
       "ports": [
         {
           "id": "3",
@@ -41,6 +42,7 @@
     {
       "hwMeta": {
         "name": "b",
+        "cls": null,
         "maxId": 4,
         "isExternalPort": true
       },
@@ -50,7 +52,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "2",
-      "hideChildren": true,
       "ports": [
         {
           "id": "4",
