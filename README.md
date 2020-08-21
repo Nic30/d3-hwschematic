@@ -50,7 +50,7 @@ Where part after schematic= is path to json file where schematic is stored.
 
 ## ELK json format for d3-hwschematic
 
-This libarary uses [ELK json](https://www.eclipse.org/elk/documentation/tooldevelopers/graphdatastructure/jsonformat.html).
+This libarary uses [ELK json](https://www.eclipse.org/elk/documentation/tooldevelopers/graphdatastructure/jsonformat.html), [ELK options](https://www.eclipse.org/elk/reference/options.html).
 This format is basically a component tree stored in json.
 The json specifies not just the structure of circuit but also how the circuit should be rendered.
 It contains 3 object types `LNode`, `LPort` and `LEdge`.
@@ -123,6 +123,7 @@ ELK LEdge
 ```
 
 LNode represents all types of components. Top component ports are also represented as `LNode` because it looks better.
+
 
 ## Component shapes
 
