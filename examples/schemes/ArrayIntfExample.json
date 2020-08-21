@@ -33,7 +33,7 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST"
+            "side": "EAST"
           }
         }
       ]
@@ -60,7 +60,7 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST"
+            "side": "EAST"
           }
         }
       ]
@@ -87,8 +87,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 0
+            "side": "EAST",
+            "index": 0
           }
         }
       ]
@@ -115,8 +115,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 0
+            "side": "EAST",
+            "index": 0
           }
         }
       ]
@@ -143,8 +143,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 0
+            "side": "EAST",
+            "index": 0
           }
         },
         {
@@ -155,8 +155,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 1
+            "side": "EAST",
+            "index": 1
           }
         },
         {
@@ -167,8 +167,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 2
+            "side": "EAST",
+            "index": 2
           }
         },
         {
@@ -179,8 +179,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 3
+            "side": "EAST",
+            "index": 3
           }
         },
         {
@@ -191,8 +191,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 4
+            "side": "EAST",
+            "index": 4
           }
         }
       ]
@@ -219,8 +219,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 0
+            "side": "EAST",
+            "index": 0
           }
         },
         {
@@ -231,8 +231,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 1
+            "side": "EAST",
+            "index": 1
           }
         },
         {
@@ -243,8 +243,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 2
+            "side": "EAST",
+            "index": 2
           }
         },
         {
@@ -255,8 +255,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 3
+            "side": "EAST",
+            "index": 3
           }
         },
         {
@@ -267,8 +267,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 4
+            "side": "EAST",
+            "index": 4
           }
         }
       ]
