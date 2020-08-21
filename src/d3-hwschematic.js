@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 import { addMarkers } from "./markers";
-import { NodeRenderers } from "./node_renderers/selector";
+import { NodeRendererContainer } from "./nodeRendererContainer";
 import { OperatorNodeRenderer } from "./node_renderers/operatorNode";
 import { MuxNodeRenderer } from "./node_renderers/muxNode";
 import { SliceNodeRenderer } from "./node_renderers/sliceNode";
@@ -60,7 +60,11 @@ function toggleHideChildren(node) {
  */
 export default class HwSchematic {
 	constructor(svg) {
+		// flag for performance debug
+		this._PERF = false;
+		// main svg element
 		this.svg = svg;
+		// default sizes of elements
 		this.PORT_PIN_SIZE = [7, 13];
 		this.PORT_HEIGHT = this.PORT_PIN_SIZE[1];
 		this.CHAR_WIDTH = 7.55;
@@ -69,25 +73,30 @@ export default class HwSchematic {
 		this.MAX_NODE_BODY_TEXT_SIZE = [400, 400];
 		// top, right, bottom, left
 		this.BODY_TEXT_PADDING = [15, 10, 0, 10];
-		this.tooltip = document.getElem
 		this.defs = svg.append("defs");
 		this.root = svg.append("g");
 		this._nodes = null;
 		this._edges = null;
+
+		// graph layouter to resovbe posiions of elements 
 		this.layouter = new d3elk();
 		this.layouter
 			.options({
 				edgeRouting: "ORTHOGONAL",
 			})
 			.transformGroup(this.root);
-		this.tooltip = new Tooltip(document.getElementsByTagName('body')[0]);
-		this.nodeRenderers = new NodeRenderers();
 
+		// shared tooltip object
+		this.tooltip = new Tooltip(document.getElementsByTagName('body')[0]);
+
+		// renderer instances responsible for rendering of component nodes
+		this.nodeRenderers = new NodeRendererContainer();
 		addMarkers(this.defs, this.PORT_PIN_SIZE);
-		this.nodeRenderers.registerRenderer(new OperatorNodeRenderer(this));
-		this.nodeRenderers.registerRenderer(new MuxNodeRenderer(this));
-		this.nodeRenderers.registerRenderer(new SliceNodeRenderer(this));
-		this.nodeRenderers.registerRenderer(new GenericNodeRenderer(this));
+		var rs = this.nodeRenderers;
+		rs.registerRenderer(new OperatorNodeRenderer(this));
+		rs.registerRenderer(new MuxNodeRenderer(this));
+		rs.registerRenderer(new SliceNodeRenderer(this));
+		rs.registerRenderer(new GenericNodeRenderer(this));
 	}
 
 	widthOfText(text) {
@@ -101,6 +110,13 @@ export default class HwSchematic {
 	removeGraph() {
 		this.root.selectAll("*").remove();
 	}
+	updateGlobalSize() {
+		var width = parseInt(this.svg.style("width") || this.svg.attr("width"), 10);
+		var height = parseInt(this.svg.style("height") || this.svg.attr("height"), 10);
+
+		this.layouter
+			.size([width, height]);
+	}
 
     /**
      * Set bind graph data to graph rendering engine
@@ -111,33 +127,56 @@ export default class HwSchematic {
 		this.removeGraph();
 		hyperEdgesToEdges(graph, graph.hwMeta.maxId);
 		initParents(graph, null);
+		this.removeGraph();
 
-		var nodeRenderers = this.nodeRenderers
-		var layouter = this.layouter;
-		// config of layouter
-		layouter
-			.kgraph(graph)
-			.size([
-				parseInt(this.svg.style("width") || this.svg.attr("width"), 10),
-				parseInt(this.svg.style("height") || this.svg.attr("height"), 10)
-			]);
-		var nodes = layouter.getNodes().slice(1); // skip root node
+		if (this._PERF) {
+			var t0 = new Date().getTime();
+		}
 		// nodes are ordered, childeren at the end
-		nodes.forEach(nodeRenderers.prepare.bind(nodeRenderers));
-		// by "g" we group nodes along with their ports
-		var edges = layouter.getEdges();
-		this._nodes = nodes;
-		this._edges = edges;
+		this.nodeRenderers.prepare(graph);
+		if (this._PERF) {
+			var t1 = new Date().getTime();
+			console.log("> nodeRenderers.prepare() : " + (t1 - t0) + " ms");
+		}
+		this.layouter
+			.kgraph(graph);
+		return this._draw();
+	}
+	_draw() {
+		this.updateGlobalSize();
+
+		var layouter = this.layouter;
+		this._nodes = layouter.getNodes().slice(1); // skip root node
+		this._edges = layouter.getEdges();;
+
+		if (this._PERF) {
+			var t0 = new Date().getTime();
+		}
+		var _this = this;
 		return layouter.start()
-			.then(this.applyLayout.bind(this));
+			.then(
+				function(g) {
+					if (_this._PERF) {
+						var t1 = new Date().getTime();
+						console.log("> layouter.start() : " + (t1 - t0) + " ms");
+						t0 = t1;
+					}
+					_this._applyLayout(g);
+					if (_this._PERF) {
+						var t1 = new Date().getTime();
+						console.log("> HwSchematic._applyLayout() : " + (t1 - t0) + " ms");
+					}
+				},
+				function(e) {
+					// Error while running d3-elkjs layourter
+					throw e;
+				}
+			);
 	}
 
-	applyLayout() {
+	_applyLayout() {
 		var root = this.root;
 		var schematic = this;
-		var layouter = this.layouter;
-		var nodeRenderers = this.nodeRenderers
-		var bindData = this.bindData.bind(this);
 		var nodes = this._nodes;
 		var edges = this._edges;
 
@@ -145,19 +184,25 @@ export default class HwSchematic {
 			.data(nodes)
 			.enter()
 			.append("g");
-		nodeRenderers.render(root, node);
+		this.nodeRenderers.render(root, node);
 
+		var _this = this;
 		node.on("click", function(d) {
 			var [children, nextFocusTarget] = toggleHideChildren(d);
 			if (!children || children.length == 0)
 				return; // does not have anything to expand
 
-			var graph = layouter.kgraph()
-			root.selectAll("*").remove();
-
-			bindData(graph).then(function() {
-				layouter.zoomToFit(nextFocusTarget);
-			});
+			_this.layouter.markLayoutDirty();
+			_this.removeGraph();
+			_this._draw().then(
+				function() {
+					_this.layouter.zoomToFit(nextFocusTarget);
+				},
+				function(e) {
+					// Error while applying of layout
+					throw e;
+				}
+			);
 		});
 
 		var [link, linkWrap, junctionPoint] = renderLinks(root, edges);

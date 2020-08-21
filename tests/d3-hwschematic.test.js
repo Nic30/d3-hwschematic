@@ -33,7 +33,7 @@ describe('{unit}: Testing scheme rendering', () => {
       expect(exampleFiles.length).toBeGreaterThan(0);
   });
   //exampleFiles = [exampleFiles[0],]
-  var applyLayoutSpy = jest.spyOn(HwSchematic.prototype, "applyLayout");
+  var applyLayoutSpy = jest.spyOn(HwSchematic.prototype, "_applyLayout");
 
   exampleFiles.forEach(function (f) {
       it("can render " + path.basename(f), () => {

@@ -13,11 +13,15 @@ export class MuxNodeRenderer extends GenericNodeRenderer {
     constructor(schematic) {
         super(schematic);
         this.DEFULT_NODE_SIZE = [20, 40];
+		this._defsAdded = false;
     }
 
     prepare(node) {
-        var defs = this.schematic.defs;
-        this.addShapeToDefs(defs);
+		if (!this._defsAdded) {
+	        var defs = this.schematic.defs;
+	        this.addShapeToDefs(defs);
+			this._defsAdded = true;
+		}
         node.width = this.DEFULT_NODE_SIZE[0];
         node.height = this.DEFULT_NODE_SIZE[1];
     }
