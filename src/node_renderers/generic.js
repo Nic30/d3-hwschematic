@@ -64,7 +64,7 @@ export class GenericNodeRenderer {
 		var CHAR_WIDTH = schematic.CHAR_WIDTH;
 		if (d.ports != null)
 			d.ports.forEach(function(p) {
-				var t = p.properties.portSide;
+				var t = p.properties.side;
 				var indent = 0;
 				if (p.hwMeta.level > 0)
 					indent = (p.hwMeta.level + 1) * CHAR_WIDTH;
@@ -232,7 +232,9 @@ export class GenericNodeRenderer {
 		var PORT_HEIGHT = schematic.PORT_HEIGHT;
 		var CHAR_WIDTH = schematic.CHAR_WIDTH;
 		var portG = node.selectAll(".port")
-			.data(function(d) { return d.ports || []; })
+			.data(function(d) { 
+				return d.ports || []; 
+			})
 			.enter()
 			.append("g");
 
@@ -257,7 +259,7 @@ export class GenericNodeRenderer {
 					return "";
 				else if (d.hwMeta.level) {
 					var indent = '-'.repeat(d.hwMeta.level);
-					var side = d.properties.portSide;
+					var side = d.properties.side;
 					if (side == "WEST") {
 						return indent + d.hwMeta.name;;
 					} else if (side == "EAST") {
@@ -269,7 +271,7 @@ export class GenericNodeRenderer {
 					return d.hwMeta.name;
 			})
 			.attr("x", function(d) {
-				var side = d.properties.portSide;
+				var side = d.properties.side;
 				if (side == "WEST") {
 					return 7;
 				} else if (side == "EAST") {

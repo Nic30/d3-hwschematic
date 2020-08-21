@@ -26,7 +26,7 @@ export class NodeRendererContainer {
 		if (r == null) {
 			throw new Error("Can not resolve renderer for node " + node);
 		}
-		node.renderer = r;
+		node.hwMeta.renderer = r;
 		r.prepare(node);
 		var prep = this.prepare.bind(this);
 		if (node.children) {
@@ -45,7 +45,7 @@ export class NodeRendererContainer {
 		nodeG.each(function(d) {
 			var n = this;
 			renderers.forEach(function(r, i) {
-				if (d.renderer === r) {
+				if (d.hwMeta.renderer === r) {
 					nodesForRenderer[i].push(n);
 				}
 			})
