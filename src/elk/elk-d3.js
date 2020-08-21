@@ -30,10 +30,15 @@ export default class d3elk {
 	size(size) {
 		if (!arguments.length)
 			return [this.width, this.height];
+		var old_w = this.width;
+		var old_h = this.height;
 		this.width = size[0];
 		this.height = size[1];
 
 		if (this.graph != null) {
+			if (old_w !== this.width || old_h !== this.height) {
+				this._layoutCache = {};
+			}
 			this.graph.width = this.width;
 			this.graph.height = this.height;
 		}
@@ -64,9 +69,9 @@ export default class d3elk {
 		var cacheKey = [];
 		computeLayoutCacheKey(this.graph, cacheKey);
 		var state = this._layoutCache[cacheKey];
+		var _this = this;
 		if (typeof state !== 'undefined') {
 			// load layout from cache
-			var _this = this;
 			return new Promise((resolve, reject) => {
 				resolve();
 			}).then(
@@ -85,6 +90,7 @@ export default class d3elk {
 				this._applyLayout.bind(this),
 				function(e) {
 					// Error while running elkjs layouter
+					_this._currentLayoutCacheKey = null;
 					throw e;
 				}
 			);
