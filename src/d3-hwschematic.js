@@ -48,6 +48,7 @@ function toggleHideChildren(node) {
 	var tmpEdges = node.edges;
 	node.edges = node._edges;
 	node._edges = tmpEdges;
+	node.hwMeta.renderer.prepare(node);
 	return [children, nextFocusTarget];
 }
 
@@ -127,7 +128,6 @@ export default class HwSchematic {
 		this.removeGraph();
 		hyperEdgesToEdges(graph, graph.hwMeta.maxId);
 		initParents(graph, null);
-		this.removeGraph();
 
 		if (this._PERF) {
 			var t0 = new Date().getTime();
@@ -142,6 +142,9 @@ export default class HwSchematic {
 			.kgraph(graph);
 		return this._draw();
 	}
+	/*
+     * Resolve layout and draw a component graph from layout data
+	 */
 	_draw() {
 		this.updateGlobalSize();
 
@@ -173,7 +176,9 @@ export default class HwSchematic {
 				}
 			);
 	}
-
+	/**
+     * Draw a component graph from layout data
+	 */
 	_applyLayout() {
 		var root = this.root;
 		var schematic = this;
