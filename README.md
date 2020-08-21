@@ -23,7 +23,7 @@ Use `npm install d3-hwschematic --save` to install this library and save it to y
 * Documentation of [hwtLib](https://hwtlib.readthedocs.io/en/latest/?badge=latest).
   (Look for scheme href under component name.)
 
-* [https://github.com/Nic30/jupyter_widget_hwt] - Jupyter widgets for hw developement.
+* [jupyter_widget_hwt](https://github.com/Nic30/jupyter_widget_hwt) - Jupyter widgets for hw developement.
 
 
 ### From this git
