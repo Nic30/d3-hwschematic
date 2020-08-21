@@ -9,8 +9,8 @@
     "clean": "rm -rf dist/ node_modules/",
     "prepare": "npm run build",
     "pretest": "npm run build",
-    "test": "NODE_ENV=development jest --env=node",
-    "coveralls": "NODE_ENV=development jest --coverage --env=node && cat ./tests/coverage/lcov.info | coveralls",
+    "test": "NODE_ENV=development jest",
+    "coveralls": "NODE_ENV=development jest --coverage && cat ./tests/coverage/lcov.info | coveralls",
     "lint": "eslint src test --ignore-pattern tests/coverage*",
     "debug-remote": "NODE_ENV=development node --inspect-brk node_modules/.bin/jest --env=node"
   },
@@ -55,7 +55,6 @@
     "transformIgnorePatterns": [
       "node_modules/.*"
     ],
-    "cacheDirectory": ".jest-cache",
     "coverageDirectory": "<rootDir>/tests/coverage",
     "coveragePathIgnorePatterns": [
       "node_modules/"
