@@ -148,3 +148,8 @@ The node renderer has function `select` which is used to determine if renderer s
 * [sphinxcontrib-verilog-diagrams](https://github.com/SymbiFlow/sphinxcontrib-verilog-diagrams) - Python, Sphinx Extension which generates various types of diagrams from Verilog code.
 * [logidrom](https://github.com/wavedrom/logidrom) - JS, Digital circuit renderer for some specific circuits
 * [dkilfoyle/logic](https://github.com/dkilfoyle/logic) - JS, IDE for digital circuit simulation
+* [Eclipse Layout Kernel (ELK)](https://github.com/eclipse/elk) - Java, Libary focused on automatic graph drawing.
+* [elkjs](https://github.com/kieler/elkjs) - JS, ELK transpiled to JS, (used in this project)
+* [ogdf](https://github.com/ogdf/ogdf) - C++, Libary focused on automatic graph drawing.
+
+
