@@ -79,6 +79,7 @@ ELK LNode (component instance)
   "edges": [],    // list of LEdge
 }
 ```
+If the children should be collapsed by default, the children `children` and `edges` property should be renamed to `_children` and `_edges`.
 
 ELK LPort
 ```javascript
