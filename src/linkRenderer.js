@@ -1,4 +1,4 @@
-import {default as d3elk} from "./elk/elk-d3";
+import {section2svgPath} from "./elk/elk-d3-utils.js";
 
 export function renderLinks(root, edges) {
     var linkWrap = root.selectAll(".link-wrap")
@@ -30,7 +30,7 @@ export function renderLinks(root, edges) {
           d.junctionPoints.forEach(function (jp) {
               junctionPoints.push(jp);
           });
-      d._svgPath = d3elk.section2svgPath(d.sections[0]);
+      d._svgPath = section2svgPath(d.sections[0]);
       return d._svgPath;
     });
     link

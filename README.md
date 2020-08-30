@@ -20,8 +20,10 @@ Use `npm install d3-hwschematic --save` to install this library and save it to y
 
 ### Online
 
-Documentation of [hwtLib](https://hwtlib.readthedocs.io/en/latest/?badge=latest) compoents uses this library to render schemes.
-(Look for scheme href under component name.)
+* Documentation of [hwtLib](https://hwtlib.readthedocs.io/en/latest/?badge=latest).
+  (Look for scheme href under component name.)
+
+* [jupyter_widget_hwt](https://github.com/Nic30/jupyter_widget_hwt) - Jupyter widgets for hw developement.
 
 
 ### From this git
@@ -50,7 +52,7 @@ Where part after schematic= is path to json file where schematic is stored.
 
 ## ELK json format for d3-hwschematic
 
-This libarary uses [ELK json](https://www.eclipse.org/elk/documentation/tooldevelopers/graphdatastructure/jsonformat.html).
+This libarary uses [ELK json](https://www.eclipse.org/elk/documentation/tooldevelopers/graphdatastructure/jsonformat.html), [ELK options](https://www.eclipse.org/elk/reference/options.html).
 This format is basically a component tree stored in json.
 The json specifies not just the structure of circuit but also how the circuit should be rendered.
 It contains 3 object types `LNode`, `LPort` and `LEdge`.
@@ -61,7 +63,7 @@ ELK LNode (component instance)
   "id": "0",
   "hwMeta": { // [d3-hwschematic specific]
     "name": "compoent instance name", // optional str
-    "cls_name": "compoent (module) name", // optional str
+    "cls": "compoent (module) name", // optional str
     "bodyText": "", // optional str
     "maxId": 2, // max id of any object in this node used to avoid counting object in expand/collapse
     "isExternalPort": true // optional flag which set component style to external port
@@ -77,6 +79,7 @@ ELK LNode (component instance)
   "edges": [],    // list of LEdge
 }
 ```
+If the children should be collapsed by default, the children `children` and `edges` property should be renamed to `_children` and `_edges`.
 
 ELK LPort
 ```javascript
@@ -124,6 +127,7 @@ ELK LEdge
 
 LNode represents all types of components. Top component ports are also represented as `LNode` because it looks better.
 
+
 ## Component shapes
 
 The style and shape is determined by node renderers. Node renderers are defined in `src/node_renderers`.
@@ -145,3 +149,8 @@ The node renderer has function `select` which is used to determine if renderer s
 * [sphinxcontrib-verilog-diagrams](https://github.com/SymbiFlow/sphinxcontrib-verilog-diagrams) - Python, Sphinx Extension which generates various types of diagrams from Verilog code.
 * [logidrom](https://github.com/wavedrom/logidrom) - JS, Digital circuit renderer for some specific circuits
 * [dkilfoyle/logic](https://github.com/dkilfoyle/logic) - JS, IDE for digital circuit simulation
+* [Eclipse Layout Kernel (ELK)](https://github.com/eclipse/elk) - Java, Libary focused on automatic graph drawing.
+* [elkjs](https://github.com/kieler/elkjs) - JS, ELK transpiled to JS, (used in this project)
+* [ogdf](https://github.com/ogdf/ogdf) - C++, Libary focused on automatic graph drawing.
+
+

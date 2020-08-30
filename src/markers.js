@@ -59,7 +59,7 @@ export function addMarkers(defs, PORT_PIN_SIZE) {
 }
 
 export function getIOMarker(d) {
-    var side = d.properties.portSide;
+    var side = d.properties.side;
     var portType = d.direction;
     var marker = PORT_MARKERS[side][portType];
     if (marker === undefined) {

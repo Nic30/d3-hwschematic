@@ -1,6 +1,7 @@
 {
   "hwMeta": {
     "name": "SimpleAsyncRam",
+    "cls": null,
     "maxId": 22
   },
   "properties": {
@@ -13,6 +14,7 @@
     {
       "hwMeta": {
         "name": "addr_in",
+        "cls": null,
         "maxId": 17,
         "isExternalPort": true
       },
@@ -22,7 +24,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "1",
-      "hideChildren": true,
       "ports": [
         {
           "id": "7",
@@ -32,8 +33,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 0
+            "side": "EAST",
+            "index": 0
           }
         }
       ]
@@ -41,6 +42,7 @@
     {
       "hwMeta": {
         "name": "din",
+        "cls": null,
         "maxId": 17,
         "isExternalPort": true
       },
@@ -50,7 +52,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "2",
-      "hideChildren": true,
       "ports": [
         {
           "id": "8",
@@ -60,8 +61,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 0
+            "side": "EAST",
+            "index": 0
           }
         }
       ]
@@ -69,6 +70,7 @@
     {
       "hwMeta": {
         "name": "addr_out",
+        "cls": null,
         "maxId": 17,
         "isExternalPort": true
       },
@@ -78,7 +80,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "3",
-      "hideChildren": true,
       "ports": [
         {
           "id": "9",
@@ -88,8 +89,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 0
+            "side": "EAST",
+            "index": 0
           }
         }
       ]
@@ -97,6 +98,7 @@
     {
       "hwMeta": {
         "name": "dout",
+        "cls": null,
         "maxId": 17,
         "isExternalPort": true
       },
@@ -106,7 +108,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "4",
-      "hideChildren": true,
       "ports": [
         {
           "id": "10",
@@ -116,8 +117,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 0
+            "side": "WEST",
+            "index": 0
           }
         }
       ]
@@ -125,6 +126,7 @@
     {
       "hwMeta": {
         "name": "MUX",
+        "cls": "Operator",
         "maxId": 17
       },
       "properties": {
@@ -133,7 +135,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "5",
-      "hideChildren": true,
       "ports": [
         {
           "id": "11",
@@ -143,8 +144,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 0
+            "side": "EAST",
+            "index": 0
           }
         },
         {
@@ -155,8 +156,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "SOUTH",
-            "portIndex": 1
+            "side": "SOUTH",
+            "index": 1
           }
         },
         {
@@ -167,8 +168,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 2
+            "side": "WEST",
+            "index": 2
           }
         },
         {
@@ -179,8 +180,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 3
+            "side": "WEST",
+            "index": 3
           }
         }
       ]
@@ -188,6 +189,7 @@
     {
       "hwMeta": {
         "name": "INDEX",
+        "cls": "Operator",
         "maxId": 17
       },
       "properties": {
@@ -196,7 +198,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "6",
-      "hideChildren": true,
       "ports": [
         {
           "id": "15",
@@ -206,8 +207,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 0
+            "side": "EAST",
+            "index": 0
           }
         },
         {
@@ -218,8 +219,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 1
+            "side": "WEST",
+            "index": 1
           }
         },
         {
@@ -230,8 +231,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 2
+            "side": "WEST",
+            "index": 2
           }
         }
       ]
@@ -287,7 +288,7 @@
       "targetPort": "10",
       "id": "21",
       "hwMeta": {
-        "name": "dout"
+        "name": "ram_data[addr_out]"
       }
     },
     {

@@ -1,6 +1,7 @@
 {
   "hwMeta": {
     "name": "ConstDriverUnit",
+    "cls": null,
     "maxId": 10
   },
   "properties": {
@@ -13,7 +14,8 @@
     {
       "hwMeta": {
         "name": null,
-        "bodyText": "1",
+        "cls": "Operator",
+        "bodyText": "0",
         "maxId": 8
       },
       "properties": {
@@ -22,7 +24,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "1",
-      "hideChildren": true,
       "ports": [
         {
           "id": "5",
@@ -32,7 +33,7 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST"
+            "side": "EAST"
           }
         }
       ]
@@ -40,7 +41,8 @@
     {
       "hwMeta": {
         "name": null,
-        "bodyText": "0",
+        "cls": "Operator",
+        "bodyText": "1",
         "maxId": 8
       },
       "properties": {
@@ -49,7 +51,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "2",
-      "hideChildren": true,
       "ports": [
         {
           "id": "6",
@@ -59,7 +60,7 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST"
+            "side": "EAST"
           }
         }
       ]
@@ -67,6 +68,7 @@
     {
       "hwMeta": {
         "name": "out0",
+        "cls": null,
         "maxId": 8,
         "isExternalPort": true
       },
@@ -76,7 +78,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "3",
-      "hideChildren": true,
       "ports": [
         {
           "id": "7",
@@ -86,8 +87,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 0
+            "side": "WEST",
+            "index": 0
           }
         }
       ]
@@ -95,6 +96,7 @@
     {
       "hwMeta": {
         "name": "out1",
+        "cls": null,
         "maxId": 8,
         "isExternalPort": true
       },
@@ -104,7 +106,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "4",
-      "hideChildren": true,
       "ports": [
         {
           "id": "8",
@@ -114,8 +115,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 0
+            "side": "WEST",
+            "index": 0
           }
         }
       ]
@@ -125,21 +126,21 @@
     {
       "source": "1",
       "sourcePort": "5",
-      "target": "4",
-      "targetPort": "8",
+      "target": "3",
+      "targetPort": "7",
       "id": "9",
       "hwMeta": {
-        "name": "out1"
+        "name": "out0"
       }
     },
     {
       "source": "2",
       "sourcePort": "6",
-      "target": "3",
-      "targetPort": "7",
+      "target": "4",
+      "targetPort": "8",
       "id": "10",
       "hwMeta": {
-        "name": "out0"
+        "name": "out1"
       }
     }
   ]

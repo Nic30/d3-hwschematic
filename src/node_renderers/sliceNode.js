@@ -11,7 +11,6 @@ export class SliceNodeRenderer extends GenericNodeRenderer {
 	}
 	
 	render(root, nodeG) {
-        var schematic = this.schematic;
         var node = nodeG;
         var nodeBody = node.append("rect");
         // set dimensions and style of node

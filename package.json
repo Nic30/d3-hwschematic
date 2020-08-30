@@ -1,6 +1,6 @@
 {
   "name": "d3-hwschematic",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "D3.js and ELK based schematic visualizer",
   "main": "dist/d3-hwschematic.js",
   "scripts": {
@@ -9,8 +9,8 @@
     "clean": "rm -rf dist/ node_modules/",
     "prepare": "npm run build",
     "pretest": "npm run build",
-    "test": "NODE_ENV=development jest --env=node",
-    "coveralls": "NODE_ENV=development jest --coverage --env=node && cat ./tests/coverage/lcov.info | coveralls",
+    "test": "NODE_ENV=development jest",
+    "coveralls": "NODE_ENV=development jest --coverage && cat ./tests/coverage/lcov.info | coveralls",
     "lint": "eslint src test --ignore-pattern tests/coverage*",
     "debug-remote": "NODE_ENV=development node --inspect-brk node_modules/.bin/jest --env=node"
   },
@@ -19,6 +19,7 @@
     "url": "git+https://github.com/Nic30/d3-hwschematic.git"
   },
   "keywords": [
+    "d3",
     "D3.js",
     "elkjs",
     "ELK",
@@ -36,30 +37,24 @@
   },
   "homepage": "https://github.com/Nic30/d3-hwschematic#readme",
   "dependencies": {
-    "d3": "latest",
-    "elkjs": "^0.6.2"
+    "d3": "^5.16.0",
+    "elkjs": "^0.7.0"
   },
   "devDependencies": {
-    "coveralls": "latest",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb": "latest",
-    "eslint-config-standard": "^11.0.0",
-    "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-node": "^6.0.1",
-    "eslint-plugin-promise": "^3.8.0",
-    "eslint-plugin-standard": "^3.1.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.9.1",
-    "@babel/preset-flow": "latest",
     "@babel/preset-env": "latest",
+    "@babel/preset-flow": "latest",
+    "@rollup/plugin-node-resolve": "^8.4.0",
+    "coveralls": "latest",
+    "eslint": "^7.4.0",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "latest",
-    "rollup": "^0.63"
+    "rollup": "latest",
+    "rollup-plugin-postcss": "^3.1.4"
   },
   "jest": {
     "transformIgnorePatterns": [
       "node_modules/.*"
     ],
-    "cacheDirectory": ".jest-cache",
     "coverageDirectory": "<rootDir>/tests/coverage",
     "coveragePathIgnorePatterns": [
       "node_modules/"

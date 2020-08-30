@@ -1,6 +1,7 @@
 {
   "hwMeta": {
     "name": "BinToOneHot",
+    "cls": null,
     "maxId": 123
   },
   "properties": {
@@ -13,6 +14,7 @@
     {
       "hwMeta": {
         "name": "din",
+        "cls": null,
         "maxId": 96,
         "isExternalPort": true
       },
@@ -22,7 +24,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "1",
-      "hideChildren": true,
       "ports": [
         {
           "id": "29",
@@ -32,8 +33,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 0
+            "side": "EAST",
+            "index": 0
           }
         }
       ]
@@ -41,6 +42,7 @@
     {
       "hwMeta": {
         "name": "AND",
+        "cls": "Operator",
         "maxId": 96
       },
       "properties": {
@@ -49,7 +51,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "10",
-      "hideChildren": true,
       "ports": [
         {
           "id": "46",
@@ -59,8 +60,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 0
+            "side": "EAST",
+            "index": 0
           }
         },
         {
@@ -71,8 +72,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 1
+            "side": "WEST",
+            "index": 1
           }
         },
         {
@@ -83,8 +84,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 2
+            "side": "WEST",
+            "index": 2
           }
         }
       ]
@@ -92,6 +93,7 @@
     {
       "hwMeta": {
         "name": "EQ",
+        "cls": "Operator",
         "maxId": 96
       },
       "properties": {
@@ -100,7 +102,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "11",
-      "hideChildren": true,
       "ports": [
         {
           "id": "49",
@@ -110,8 +111,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 0
+            "side": "EAST",
+            "index": 0
           }
         },
         {
@@ -122,8 +123,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 1
+            "side": "WEST",
+            "index": 1
           }
         },
         {
@@ -134,8 +135,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 2
+            "side": "WEST",
+            "index": 2
           }
         }
       ]
@@ -143,6 +144,7 @@
     {
       "hwMeta": {
         "name": null,
+        "cls": "Operator",
         "bodyText": "2",
         "maxId": 96
       },
@@ -152,7 +154,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "12",
-      "hideChildren": true,
       "ports": [
         {
           "id": "52",
@@ -162,7 +163,7 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST"
+            "side": "EAST"
           }
         }
       ]
@@ -170,6 +171,7 @@
     {
       "hwMeta": {
         "name": "AND",
+        "cls": "Operator",
         "maxId": 96
       },
       "properties": {
@@ -178,7 +180,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "13",
-      "hideChildren": true,
       "ports": [
         {
           "id": "53",
@@ -188,8 +189,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 0
+            "side": "EAST",
+            "index": 0
           }
         },
         {
@@ -200,8 +201,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 1
+            "side": "WEST",
+            "index": 1
           }
         },
         {
@@ -212,8 +213,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 2
+            "side": "WEST",
+            "index": 2
           }
         }
       ]
@@ -221,6 +222,7 @@
     {
       "hwMeta": {
         "name": "EQ",
+        "cls": "Operator",
         "maxId": 96
       },
       "properties": {
@@ -229,7 +231,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "14",
-      "hideChildren": true,
       "ports": [
         {
           "id": "56",
@@ -239,8 +240,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 0
+            "side": "EAST",
+            "index": 0
           }
         },
         {
@@ -251,8 +252,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 1
+            "side": "WEST",
+            "index": 1
           }
         },
         {
@@ -263,8 +264,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 2
+            "side": "WEST",
+            "index": 2
           }
         }
       ]
@@ -272,6 +273,7 @@
     {
       "hwMeta": {
         "name": null,
+        "cls": "Operator",
         "bodyText": "3",
         "maxId": 96
       },
@@ -281,7 +283,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "15",
-      "hideChildren": true,
       "ports": [
         {
           "id": "59",
@@ -291,7 +292,7 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST"
+            "side": "EAST"
           }
         }
       ]
@@ -299,6 +300,7 @@
     {
       "hwMeta": {
         "name": "AND",
+        "cls": "Operator",
         "maxId": 96
       },
       "properties": {
@@ -307,7 +309,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "16",
-      "hideChildren": true,
       "ports": [
         {
           "id": "60",
@@ -317,8 +318,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 0
+            "side": "EAST",
+            "index": 0
           }
         },
         {
@@ -329,8 +330,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 1
+            "side": "WEST",
+            "index": 1
           }
         },
         {
@@ -341,8 +342,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 2
+            "side": "WEST",
+            "index": 2
           }
         }
       ]
@@ -350,6 +351,7 @@
     {
       "hwMeta": {
         "name": "EQ",
+        "cls": "Operator",
         "maxId": 96
       },
       "properties": {
@@ -358,7 +360,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "17",
-      "hideChildren": true,
       "ports": [
         {
           "id": "63",
@@ -368,8 +369,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 0
+            "side": "EAST",
+            "index": 0
           }
         },
         {
@@ -380,8 +381,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 1
+            "side": "WEST",
+            "index": 1
           }
         },
         {
@@ -392,8 +393,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 2
+            "side": "WEST",
+            "index": 2
           }
         }
       ]
@@ -401,6 +402,7 @@
     {
       "hwMeta": {
         "name": null,
+        "cls": "Operator",
         "bodyText": "4",
         "maxId": 96
       },
@@ -410,7 +412,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "18",
-      "hideChildren": true,
       "ports": [
         {
           "id": "66",
@@ -420,7 +421,7 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST"
+            "side": "EAST"
           }
         }
       ]
@@ -428,6 +429,7 @@
     {
       "hwMeta": {
         "name": "AND",
+        "cls": "Operator",
         "maxId": 96
       },
       "properties": {
@@ -436,7 +438,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "19",
-      "hideChildren": true,
       "ports": [
         {
           "id": "67",
@@ -446,8 +447,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 0
+            "side": "EAST",
+            "index": 0
           }
         },
         {
@@ -458,8 +459,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 1
+            "side": "WEST",
+            "index": 1
           }
         },
         {
@@ -470,8 +471,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 2
+            "side": "WEST",
+            "index": 2
           }
         }
       ]
@@ -479,6 +480,7 @@
     {
       "hwMeta": {
         "name": "en",
+        "cls": null,
         "maxId": 96,
         "isExternalPort": true
       },
@@ -488,7 +490,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "2",
-      "hideChildren": true,
       "ports": [
         {
           "id": "30",
@@ -498,8 +499,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 0
+            "side": "EAST",
+            "index": 0
           }
         }
       ]
@@ -507,6 +508,7 @@
     {
       "hwMeta": {
         "name": "EQ",
+        "cls": "Operator",
         "maxId": 96
       },
       "properties": {
@@ -515,7 +517,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "20",
-      "hideChildren": true,
       "ports": [
         {
           "id": "70",
@@ -525,8 +526,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 0
+            "side": "EAST",
+            "index": 0
           }
         },
         {
@@ -537,8 +538,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 1
+            "side": "WEST",
+            "index": 1
           }
         },
         {
@@ -549,8 +550,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 2
+            "side": "WEST",
+            "index": 2
           }
         }
       ]
@@ -558,6 +559,7 @@
     {
       "hwMeta": {
         "name": null,
+        "cls": "Operator",
         "bodyText": "5",
         "maxId": 96
       },
@@ -567,7 +569,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "21",
-      "hideChildren": true,
       "ports": [
         {
           "id": "73",
@@ -577,7 +578,7 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST"
+            "side": "EAST"
           }
         }
       ]
@@ -585,6 +586,7 @@
     {
       "hwMeta": {
         "name": "AND",
+        "cls": "Operator",
         "maxId": 96
       },
       "properties": {
@@ -593,7 +595,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "22",
-      "hideChildren": true,
       "ports": [
         {
           "id": "74",
@@ -603,8 +604,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 0
+            "side": "EAST",
+            "index": 0
           }
         },
         {
@@ -615,8 +616,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 1
+            "side": "WEST",
+            "index": 1
           }
         },
         {
@@ -627,8 +628,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 2
+            "side": "WEST",
+            "index": 2
           }
         }
       ]
@@ -636,6 +637,7 @@
     {
       "hwMeta": {
         "name": "EQ",
+        "cls": "Operator",
         "maxId": 96
       },
       "properties": {
@@ -644,7 +646,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "23",
-      "hideChildren": true,
       "ports": [
         {
           "id": "77",
@@ -654,8 +655,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 0
+            "side": "EAST",
+            "index": 0
           }
         },
         {
@@ -666,8 +667,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 1
+            "side": "WEST",
+            "index": 1
           }
         },
         {
@@ -678,8 +679,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 2
+            "side": "WEST",
+            "index": 2
           }
         }
       ]
@@ -687,6 +688,7 @@
     {
       "hwMeta": {
         "name": null,
+        "cls": "Operator",
         "bodyText": "6",
         "maxId": 96
       },
@@ -696,7 +698,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "24",
-      "hideChildren": true,
       "ports": [
         {
           "id": "80",
@@ -706,7 +707,7 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST"
+            "side": "EAST"
           }
         }
       ]
@@ -714,6 +715,7 @@
     {
       "hwMeta": {
         "name": "AND",
+        "cls": "Operator",
         "maxId": 96
       },
       "properties": {
@@ -722,7 +724,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "25",
-      "hideChildren": true,
       "ports": [
         {
           "id": "81",
@@ -732,8 +733,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 0
+            "side": "EAST",
+            "index": 0
           }
         },
         {
@@ -744,8 +745,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 1
+            "side": "WEST",
+            "index": 1
           }
         },
         {
@@ -756,8 +757,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 2
+            "side": "WEST",
+            "index": 2
           }
         }
       ]
@@ -765,6 +766,7 @@
     {
       "hwMeta": {
         "name": "EQ",
+        "cls": "Operator",
         "maxId": 96
       },
       "properties": {
@@ -773,7 +775,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "26",
-      "hideChildren": true,
       "ports": [
         {
           "id": "84",
@@ -783,8 +784,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 0
+            "side": "EAST",
+            "index": 0
           }
         },
         {
@@ -795,8 +796,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 1
+            "side": "WEST",
+            "index": 1
           }
         },
         {
@@ -807,8 +808,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 2
+            "side": "WEST",
+            "index": 2
           }
         }
       ]
@@ -816,6 +817,7 @@
     {
       "hwMeta": {
         "name": null,
+        "cls": "Operator",
         "bodyText": "7",
         "maxId": 96
       },
@@ -825,7 +827,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "27",
-      "hideChildren": true,
       "ports": [
         {
           "id": "87",
@@ -835,7 +836,7 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST"
+            "side": "EAST"
           }
         }
       ]
@@ -843,6 +844,7 @@
     {
       "hwMeta": {
         "name": "CONCAT",
+        "cls": "Operator",
         "maxId": 96
       },
       "properties": {
@@ -851,7 +853,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "28",
-      "hideChildren": true,
       "ports": [
         {
           "id": "88",
@@ -861,8 +862,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 0
+            "side": "EAST",
+            "index": 0
           }
         },
         {
@@ -873,8 +874,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 1
+            "side": "WEST",
+            "index": 1
           }
         },
         {
@@ -885,8 +886,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 2
+            "side": "WEST",
+            "index": 2
           }
         },
         {
@@ -897,8 +898,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 3
+            "side": "WEST",
+            "index": 3
           }
         },
         {
@@ -909,8 +910,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 4
+            "side": "WEST",
+            "index": 4
           }
         },
         {
@@ -921,8 +922,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 5
+            "side": "WEST",
+            "index": 5
           }
         },
         {
@@ -933,8 +934,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 6
+            "side": "WEST",
+            "index": 6
           }
         },
         {
@@ -945,8 +946,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 7
+            "side": "WEST",
+            "index": 7
           }
         },
         {
@@ -957,8 +958,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 8
+            "side": "WEST",
+            "index": 8
           }
         }
       ]
@@ -966,6 +967,7 @@
     {
       "hwMeta": {
         "name": "dout",
+        "cls": null,
         "maxId": 96,
         "isExternalPort": true
       },
@@ -975,7 +977,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "3",
-      "hideChildren": true,
       "ports": [
         {
           "id": "31",
@@ -985,8 +986,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 0
+            "side": "WEST",
+            "index": 0
           }
         }
       ]
@@ -994,6 +995,7 @@
     {
       "hwMeta": {
         "name": "AND",
+        "cls": "Operator",
         "maxId": 96
       },
       "properties": {
@@ -1002,7 +1004,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "4",
-      "hideChildren": true,
       "ports": [
         {
           "id": "32",
@@ -1012,8 +1013,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 0
+            "side": "EAST",
+            "index": 0
           }
         },
         {
@@ -1024,8 +1025,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 1
+            "side": "WEST",
+            "index": 1
           }
         },
         {
@@ -1036,8 +1037,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 2
+            "side": "WEST",
+            "index": 2
           }
         }
       ]
@@ -1045,6 +1046,7 @@
     {
       "hwMeta": {
         "name": "EQ",
+        "cls": "Operator",
         "maxId": 96
       },
       "properties": {
@@ -1053,7 +1055,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "5",
-      "hideChildren": true,
       "ports": [
         {
           "id": "35",
@@ -1063,8 +1064,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 0
+            "side": "EAST",
+            "index": 0
           }
         },
         {
@@ -1075,8 +1076,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 1
+            "side": "WEST",
+            "index": 1
           }
         },
         {
@@ -1087,8 +1088,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 2
+            "side": "WEST",
+            "index": 2
           }
         }
       ]
@@ -1096,6 +1097,7 @@
     {
       "hwMeta": {
         "name": null,
+        "cls": "Operator",
         "bodyText": "0",
         "maxId": 96
       },
@@ -1105,7 +1107,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "6",
-      "hideChildren": true,
       "ports": [
         {
           "id": "38",
@@ -1115,7 +1116,7 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST"
+            "side": "EAST"
           }
         }
       ]
@@ -1123,6 +1124,7 @@
     {
       "hwMeta": {
         "name": "AND",
+        "cls": "Operator",
         "maxId": 96
       },
       "properties": {
@@ -1131,7 +1133,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "7",
-      "hideChildren": true,
       "ports": [
         {
           "id": "39",
@@ -1141,8 +1142,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 0
+            "side": "EAST",
+            "index": 0
           }
         },
         {
@@ -1153,8 +1154,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 1
+            "side": "WEST",
+            "index": 1
           }
         },
         {
@@ -1165,8 +1166,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 2
+            "side": "WEST",
+            "index": 2
           }
         }
       ]
@@ -1174,6 +1175,7 @@
     {
       "hwMeta": {
         "name": "EQ",
+        "cls": "Operator",
         "maxId": 96
       },
       "properties": {
@@ -1182,7 +1184,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "8",
-      "hideChildren": true,
       "ports": [
         {
           "id": "42",
@@ -1192,8 +1193,8 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST",
-            "portIndex": 0
+            "side": "EAST",
+            "index": 0
           }
         },
         {
@@ -1204,8 +1205,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 1
+            "side": "WEST",
+            "index": 1
           }
         },
         {
@@ -1216,8 +1217,8 @@
           },
           "direction": "INPUT",
           "properties": {
-            "portSide": "WEST",
-            "portIndex": 2
+            "side": "WEST",
+            "index": 2
           }
         }
       ]
@@ -1225,6 +1226,7 @@
     {
       "hwMeta": {
         "name": null,
+        "cls": "Operator",
         "bodyText": "1",
         "maxId": 96
       },
@@ -1234,7 +1236,6 @@
         "org.eclipse.elk.layered.mergeEdges": 1
       },
       "id": "9",
-      "hideChildren": true,
       "ports": [
         {
           "id": "45",
@@ -1244,7 +1245,7 @@
           },
           "direction": "OUTPUT",
           "properties": {
-            "portSide": "EAST"
+            "side": "EAST"
           }
         }
       ]
