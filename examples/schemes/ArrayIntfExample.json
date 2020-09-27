@@ -278,21 +278,21 @@
     {
       "source": "1",
       "sourcePort": "7",
-      "target": "6",
-      "targetPort": "19",
+      "target": "5",
+      "targetPort": "14",
       "id": "21",
       "hwMeta": {
-        "name": "a_1_ready"
+        "name": "a_0_ready"
       }
     },
     {
       "source": "2",
       "sourcePort": "8",
-      "target": "5",
-      "targetPort": "14",
+      "target": "6",
+      "targetPort": "19",
       "id": "22",
       "hwMeta": {
-        "name": "a_0_ready"
+        "name": "a_1_ready"
       }
     }
   ]

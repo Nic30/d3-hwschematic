@@ -96,7 +96,7 @@
           "id": "8",
           "hwMeta": {
             "level": 0,
-            "name": null
+            "name": "[1]"
           },
           "direction": "INPUT",
           "properties": {
@@ -108,7 +108,7 @@
           "id": "9",
           "hwMeta": {
             "level": 0,
-            "name": null
+            "name": "[0]"
           },
           "direction": "INPUT",
           "properties": {
@@ -135,7 +135,7 @@
           "id": "10",
           "hwMeta": {
             "level": 0,
-            "name": "[1]"
+            "name": "[0]"
           },
           "direction": "OUTPUT",
           "properties": {
@@ -147,7 +147,7 @@
           "id": "11",
           "hwMeta": {
             "level": 0,
-            "name": "[0]"
+            "name": "[1]"
           },
           "direction": "OUTPUT",
           "properties": {
@@ -178,7 +178,7 @@
       "targetPort": "12",
       "id": "13",
       "hwMeta": {
-        "name": "a[0]"
+        "name": "internB"
       }
     },
     {
@@ -193,7 +193,7 @@
     },
     {
       "source": "4",
-      "sourcePort": "10",
+      "sourcePort": "11",
       "target": "3",
       "targetPort": "8",
       "id": "15",
@@ -203,7 +203,7 @@
     },
     {
       "source": "4",
-      "sourcePort": "11",
+      "sourcePort": "10",
       "target": "3",
       "targetPort": "9",
       "id": "16",

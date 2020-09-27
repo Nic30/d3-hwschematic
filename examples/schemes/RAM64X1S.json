@@ -534,7 +534,7 @@
           "id": "45",
           "hwMeta": {
             "level": 0,
-            "name": "[0]"
+            "name": "[5]"
           },
           "direction": "INPUT",
           "properties": {
@@ -546,7 +546,7 @@
           "id": "46",
           "hwMeta": {
             "level": 0,
-            "name": "[1]"
+            "name": "[4]"
           },
           "direction": "INPUT",
           "properties": {
@@ -558,7 +558,7 @@
           "id": "47",
           "hwMeta": {
             "level": 0,
-            "name": "[2]"
+            "name": "[3]"
           },
           "direction": "INPUT",
           "properties": {
@@ -570,7 +570,7 @@
           "id": "48",
           "hwMeta": {
             "level": 0,
-            "name": "[3]"
+            "name": "[2]"
           },
           "direction": "INPUT",
           "properties": {
@@ -582,7 +582,7 @@
           "id": "49",
           "hwMeta": {
             "level": 0,
-            "name": "[4]"
+            "name": "[1]"
           },
           "direction": "INPUT",
           "properties": {
@@ -594,7 +594,7 @@
           "id": "50",
           "hwMeta": {
             "level": 0,
-            "name": "[5]"
+            "name": "[0]"
           },
           "direction": "INPUT",
           "properties": {
@@ -785,7 +785,7 @@
       ],
       "id": "60",
       "hwMeta": {
-        "name": "Concat(Concat(Concat(Concat(Concat(a5, a4), a3), a2), a1), a0)"
+        "name": "a_in"
       }
     },
     {

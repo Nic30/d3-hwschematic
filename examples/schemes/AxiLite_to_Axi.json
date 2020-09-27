@@ -15,7 +15,7 @@
       "hwMeta": {
         "name": null,
         "cls": "Operator",
-        "bodyText": "3",
+        "bodyText": "0",
         "maxId": 52
       },
       "properties": {
@@ -69,7 +69,7 @@
       "hwMeta": {
         "name": null,
         "cls": "Operator",
-        "bodyText": "1",
+        "bodyText": "0",
         "maxId": 52
       },
       "properties": {
@@ -96,7 +96,7 @@
       "hwMeta": {
         "name": null,
         "cls": "Operator",
-        "bodyText": "3",
+        "bodyText": "0",
         "maxId": 52
       },
       "properties": {
@@ -123,7 +123,7 @@
       "hwMeta": {
         "name": null,
         "cls": "Operator",
-        "bodyText": "0",
+        "bodyText": "1",
         "maxId": 52
       },
       "properties": {
@@ -354,9 +354,9 @@
           "id": "43",
           "hwMeta": {
             "level": 1,
-            "name": "ar.qos"
+            "name": "b.id"
           },
-          "direction": "INPUT",
+          "direction": "OUTPUT",
           "properties": {
             "side": "WEST",
             "index": 9
@@ -366,7 +366,7 @@
           "id": "44",
           "hwMeta": {
             "level": 1,
-            "name": "ar.size"
+            "name": "ar.qos"
           },
           "direction": "INPUT",
           "properties": {
@@ -378,7 +378,7 @@
           "id": "45",
           "hwMeta": {
             "level": 1,
-            "name": "ar.lock"
+            "name": "ar.size"
           },
           "direction": "INPUT",
           "properties": {
@@ -390,7 +390,7 @@
           "id": "46",
           "hwMeta": {
             "level": 1,
-            "name": "ar.len"
+            "name": "ar.lock"
           },
           "direction": "INPUT",
           "properties": {
@@ -402,7 +402,7 @@
           "id": "47",
           "hwMeta": {
             "level": 1,
-            "name": "ar.cache"
+            "name": "ar.len"
           },
           "direction": "INPUT",
           "properties": {
@@ -414,7 +414,7 @@
           "id": "48",
           "hwMeta": {
             "level": 1,
-            "name": "ar.burst"
+            "name": "ar.cache"
           },
           "direction": "INPUT",
           "properties": {
@@ -426,7 +426,7 @@
           "id": "49",
           "hwMeta": {
             "level": 1,
-            "name": "ar.id"
+            "name": "ar.burst"
           },
           "direction": "INPUT",
           "properties": {
@@ -438,9 +438,9 @@
           "id": "50",
           "hwMeta": {
             "level": 1,
-            "name": "b.id"
+            "name": "ar.id"
           },
-          "direction": "OUTPUT",
+          "direction": "INPUT",
           "properties": {
             "side": "WEST",
             "index": 16
@@ -557,7 +557,7 @@
       "hwMeta": {
         "name": null,
         "cls": "Operator",
-        "bodyText": "0",
+        "bodyText": "1",
         "maxId": 52
       },
       "properties": {
@@ -611,7 +611,7 @@
       "hwMeta": {
         "name": null,
         "cls": "Operator",
-        "bodyText": "1",
+        "bodyText": "3",
         "maxId": 52
       },
       "properties": {
@@ -638,7 +638,7 @@
       "hwMeta": {
         "name": null,
         "cls": "Operator",
-        "bodyText": "0",
+        "bodyText": "3",
         "maxId": 52
       },
       "properties": {
@@ -694,137 +694,137 @@
       "source": "1",
       "sourcePort": "18",
       "target": "17",
-      "targetPort": "47",
+      "targetPort": "40",
       "id": "53",
       "hwMeta": {
-        "name": "m_ar_cache"
+        "name": "m_aw_id"
       }
     },
     {
       "source": "2",
       "sourcePort": "19",
       "target": "17",
-      "targetPort": "48",
+      "targetPort": "39",
       "id": "54",
       "hwMeta": {
-        "name": "m_ar_burst"
+        "name": "m_aw_burst"
       }
     },
     {
       "source": "3",
       "sourcePort": "20",
       "target": "17",
-      "targetPort": "35",
+      "targetPort": "38",
       "id": "55",
       "hwMeta": {
-        "name": "m_aw_size"
+        "name": "m_aw_cache"
       }
     },
     {
       "source": "4",
       "sourcePort": "21",
       "target": "17",
-      "targetPort": "40",
+      "targetPort": "37",
       "id": "56",
       "hwMeta": {
-        "name": "m_aw_id"
+        "name": "m_aw_len"
       }
     },
     {
       "source": "5",
       "sourcePort": "22",
       "target": "17",
-      "targetPort": "34",
+      "targetPort": "49",
       "id": "57",
       "hwMeta": {
-        "name": "m_aw_qos"
+        "name": "m_ar_burst"
       }
     },
     {
       "source": "6",
       "sourcePort": "23",
       "target": "17",
-      "targetPort": "37",
+      "targetPort": "36",
       "id": "58",
       "hwMeta": {
-        "name": "m_aw_len"
+        "name": "m_aw_lock"
       }
     },
     {
       "source": "7",
       "sourcePort": "24",
       "target": "17",
-      "targetPort": "51",
+      "targetPort": "48",
       "id": "59",
       "hwMeta": {
-        "name": "m_w_last"
+        "name": "m_ar_cache"
       }
     },
     {
       "source": "8",
       "sourcePort": "25",
       "target": "17",
-      "targetPort": "49",
+      "targetPort": "35",
       "id": "60",
       "hwMeta": {
-        "name": "m_ar_id"
+        "name": "m_aw_size"
       }
     },
     {
       "source": "9",
       "sourcePort": "26",
       "target": "17",
-      "targetPort": "36",
+      "targetPort": "47",
       "id": "61",
       "hwMeta": {
-        "name": "m_aw_lock"
+        "name": "m_ar_len"
       }
     },
     {
       "source": "10",
       "sourcePort": "27",
       "target": "17",
-      "targetPort": "46",
+      "targetPort": "34",
       "id": "62",
       "hwMeta": {
-        "name": "m_ar_len"
+        "name": "m_aw_qos"
       }
     },
     {
       "source": "11",
       "sourcePort": "28",
       "target": "17",
-      "targetPort": "39",
+      "targetPort": "50",
       "id": "63",
       "hwMeta": {
-        "name": "m_aw_burst"
+        "name": "m_ar_id"
       }
     },
     {
       "source": "12",
       "sourcePort": "29",
       "target": "17",
-      "targetPort": "38",
+      "targetPort": "46",
       "id": "64",
       "hwMeta": {
-        "name": "m_aw_cache"
+        "name": "m_ar_lock"
       }
     },
     {
       "source": "13",
       "sourcePort": "30",
       "target": "17",
-      "targetPort": "45",
+      "targetPort": "51",
       "id": "65",
       "hwMeta": {
-        "name": "m_ar_lock"
+        "name": "m_w_last"
       }
     },
     {
       "source": "14",
       "sourcePort": "31",
       "target": "17",
-      "targetPort": "44",
+      "targetPort": "45",
       "id": "66",
       "hwMeta": {
         "name": "m_ar_size"
@@ -834,7 +834,7 @@
       "source": "15",
       "sourcePort": "32",
       "target": "17",
-      "targetPort": "43",
+      "targetPort": "44",
       "id": "67",
       "hwMeta": {
         "name": "m_ar_qos"
