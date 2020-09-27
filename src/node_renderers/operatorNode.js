@@ -32,10 +32,10 @@ export class OperatorNodeRenderer extends GenericNodeRenderer {
 	}
 
 	addShapeToDefs(defs, id, shape) {
-		var cont = defs.append("g");
-
-		cont.attr("id", id);
-		cont.attr("class", "node-operator");
+		var cont = defs.append("g")
+		    .attr("id", id)
+            .attr("class", "d3-hwschematic node-operator");
+        // [note] we need to add d3-hwschematic as well because object in refs are recognized as outside objects when useds
 		shape(cont);
 	}
 
@@ -47,19 +47,17 @@ export class OperatorNodeRenderer extends GenericNodeRenderer {
 	 * */
 	render(root, nodeG) {
 		// apply node positions
-		nodeG
-			//.transition()
-			//.duration(0)
-			.attr("transform", function(d) {
-				if (typeof d.x === "undefined" || typeof d.x === "undefined") {
-					throw new Error("Node with undefined position", d);
-				}
-				return "translate(" + d.x + " " + d.y + ")"
-			});
-
-		nodeG.append("use")
-			.attr("href", function(d) {
-				return "#" + d.hwMeta.name
-			});
+		nodeG.attr("transform", function(d) {
+			if (typeof d.x === "undefined" || typeof d.x === "undefined") {
+				throw new Error("Node with undefined position", d);
+			}
+			return "translate(" + d.x + " " + d.y + ")"
+         })
+        .attr("class", (d) => d.hwMeta.cssClass)
+        .attr("style", (d) => d.hwMeta.cssStyle)
+		.append("use")
+		.attr("href", function(d) {
+			return "#" + d.hwMeta.name
+		});
 	}
 }

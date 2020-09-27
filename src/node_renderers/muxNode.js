@@ -36,12 +36,12 @@ export class MuxNodeRenderer extends GenericNodeRenderer {
     addShapeToDefs(defs) {
         var cont = defs.append("g");
         cont.attr("id", "MUX");
-        cont.attr("class", "node-operator");
+        cont.attr("class", "d3-hwschematic node-operator");
         MUX_SHAPE(cont);
         
         var cont = defs.append("g");
         cont.attr("id", "LATCHED_MUX");
-        cont.attr("class", "node-operator");
+        cont.attr("class", "d3-hwschematic node-operator");
         MUX_SHAPE(cont);
         cont.append("text")
           .text("LA")
@@ -57,18 +57,16 @@ export class MuxNodeRenderer extends GenericNodeRenderer {
      * @param nodeG svg g for each node with data binded
      * */
     render(root, nodeG) {
-        var schematic = this.schematic;
-        
         // apply node positions
-        nodeG
-          .attr("transform", function(d) {
-              if (typeof d.x === "undefined" || typeof d.x === "undefined") {
-                  throw new Error("Node with undefined position", d);
-              }
-              return "translate(" + d.x + " " + d.y + ")"
-          });
-        
-        nodeG.append("use")
+        nodeG.attr("transform", function(d) {
+            if (typeof d.x === "undefined" || typeof d.x === "undefined") {
+                throw new Error("Node with undefined position", d);
+            }
+            return "translate(" + d.x + " " + d.y + ")"
+        })
+        .attr("class", (d) => d.hwMeta.cssClass)
+        .attr("style", (d) => d.hwMeta.cssStyle)
+        .append("use")
         .attr("href", function (d) {
             return "#" + d.hwMeta.name;
         });

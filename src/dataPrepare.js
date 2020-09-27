@@ -1,3 +1,4 @@
+
 function hyperEdgeListToEdges(eList, newEdges, idOffset) {
 	for (var ei = 0; ei < eList.length; ei++) {
 		var e = eList[ei];
@@ -67,12 +68,12 @@ export function getNet(e) {
 	}
 }
 
-export function initParents(node, parent) {
+export function initNodeParents(node, parent) {
 	node.hwMeta.parent = parent;
 	(node.children || []).forEach(function(n) {
-		initParents(n, node);
+		initNodeParents(n, node);
 	});
 	(node._children || []).forEach(function(n) {
-		initParents(n, node);
+		initNodeParents(n, node);
 	});
 }

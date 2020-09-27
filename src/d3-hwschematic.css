@@ -1,88 +1,80 @@
-text {
+.d3-hwschematic text {
 	font-family: monospace;
 }
 
-.node {
+.d3-hwschematic .node {
 	stroke: #BDBDBD;
 	stroke-width: 1px;
 	fill: #e6ffff;
 	border: 2px;
 }
 
-.node text {
+.d3-hwschematic .node text {
 	font-style: normal;
 	font-family: monospace;
 	fill: black;
 	stroke-width: 0px;
 }
 
-.node-operator {
+.d3-hwschematic.node-operator {
 	stroke: BLACK;
 	stroke-width: 1px;
 	fill: #e6ffff;
 	border: 2px;
 }
 
-.node-operator text {
+.d3-hwschematic.node-operator text {
 	font-style: normal;
 	font-family: monospace;
 	fill: black;
 	stroke-width: 0px;
 }
 
-.node-external-port {
+.d3-hwschematic .node-external-port {
 	stroke: #000;
 	stroke-width: 0px;
 	fill: #BDBDBD;
 	border: 1px;
 }
 
-.node-external-port text {
+.d3-hwschematic .node-external-port text {
 	font-style: normal;
 	font-family: monospace;
 	fill: black;
 	stroke-width: 0px;
 }
 
-.link {
+.d3-hwschematic .link {
 	stroke: #000;
 	stroke-opacity: .6;
 	fill: none;
 }
 
-.link-selected {
+.d3-hwschematic .link-selected {
 	stroke: orange;
-	/*stroke-opacity: .9;*/
 	fill: none;
 }
 
-.link-wrap-activated {
+.d3-hwschematic .link-wrap {
 	stroke-width: 8;
 	fill: none;
+	stroke: transparent;
+}
+.d3-hwschematic .link-wrap.link-wrap-activated {
 	stroke: deepskyblue;
 }
 
-.link-wrap {
-	stroke-width: 8;
-	fill: none;
-	stroke: white;
-}
-
-.port {
+.d3-hwschematic .port {
 	stroke: #000;
 	opacity: .6;
 }
 
-tspan {
+.d3-hwschematic tspan {
 	white-space: pre;
 }
 
-body {
-	margin: 0;
-}
-
-.hwschematic-tooltip {
-    z-index: 2;
+.d3-hwschematic-tooltip {
+	z-index: 2;
 	background: cornsilk;
 	border: 1px solid black;
 	border-radius: 5px;

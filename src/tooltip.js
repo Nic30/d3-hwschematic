@@ -1,7 +1,7 @@
 export class Tooltip {
   constructor(root) {
     var t = this.tooltip = document.createElement("div");
-    t.className = "hwschematic-tooltip"
+    t.className = "d3-hwschematic-tooltip"
     t.style.display = "none";
     t.style.possition = "absolute"
     root.appendChild(t);

@@ -1,17 +1,9 @@
 import * as d3 from "d3";
 import { getIOMarker } from "../markers";
 
-/**
- * Returns whether the sides of ports are fixed.
- * 
- * @see PortSide
- * @return true if the port sides are fixed
+/*
+ * Basic renderer which renders node as a box with ports, optionally with the body text
  */
-
-function PortConstraints_isSideFixed(val) {
-	return val == "FREE" || val != "UNDEFINED"
-}
-
 export class GenericNodeRenderer {
     /**
      * @param schematic instance of HwSchematic
@@ -187,12 +179,18 @@ export class GenericNodeRenderer {
 	render(root, nodeG) {
 		var node = nodeG
 			.attr("class", function(d) {
+				var cssClass; 
 				if (d.hwMeta && d.hwMeta.isExternalPort) {
-					return "node-external-port";
+					cssClass = "node-external-port";
 				} else {
-					return "node";
+					cssClass = "node";
 				}
-			});
+				if (d.hwMeta.cssClass) {
+					cssClass += " " + d.hwMeta.cssClass;
+				}
+				return cssClass;
+			})
+			.attr("style", function(d) { return d.hwMeta.cssStyle; });
 		var nodeBody = node.append("rect");
 		// set dimensions and style of node
 		nodeBody

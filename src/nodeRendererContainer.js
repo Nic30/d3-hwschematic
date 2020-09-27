@@ -35,7 +35,6 @@ export class NodeRendererContainer {
 		if (node._children) {
 			node._children.forEach(prep);
 		}
-
 	}
 
 	// Render all nodes using selected renderer
@@ -56,6 +55,5 @@ export class NodeRendererContainer {
 				renderers[i].render(root, nodes);
 			}
 		});
-
 	}
 }

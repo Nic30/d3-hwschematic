@@ -67,6 +67,8 @@ ELK LNode (component instance)
     "bodyText": "", // optional str
     "maxId": 2, // max id of any object in this node used to avoid counting object in expand/collapse
     "isExternalPort": true // optional flag which set component style to external port
+    "cssClass": "node-style0", // optional string, css classes separated by space
+    "cssStyle": "fill:red", // css style specification separated by ;
   },
   "hideChildren": true, // [d3-hwschematic specific] optional flag, if true the body of component is collapsed
   "properties": { // recommended renderer settings
@@ -108,6 +110,8 @@ ELK LEdge
   "targetPort": "29", // id of component port
   "hwMeta": { // [d3-hwschematic specific]
     "name": null // optional string, displayed on mouse over
+    "cssClass": "link-style0", // optional string, css classes separated by space
+    "cssStyle": "stroke:red", // css style specification separated by ;
   }
 }
 { // hyper LEdge
@@ -120,11 +124,15 @@ ELK LEdge
     [ "21", "354"],
   ],
   "hwMeta": { // [d3-hwschematic specific] 
-    "name": "wr_ptr"
+    "name": "wr_ptr",
+    "cssClass": "link-style0", // optional string, css classes separated by space
+    "cssStyle": "stroke:red", // css style specification separated by ;
   }
 }
 ```
 
+LEdge souce destination has to always be directly visible from the LNode where the LEdge is instanciated.
+That means that LEdge may connect only to ports of current LNode or to ports of this LNode direct children LNOdes.
 LNode represents all types of components. Top component ports are also represented as `LNode` because it looks better.
 
 

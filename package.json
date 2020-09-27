@@ -38,7 +38,8 @@
   "homepage": "https://github.com/Nic30/d3-hwschematic#readme",
   "dependencies": {
     "d3": "^5.16.0",
-    "elkjs": "^0.7.0"
+    "elkjs": "^0.7.0",
+    "rollup-plugin-copy": "^3.3.0"
   },
   "devDependencies": {
     "@babel/preset-env": "latest",

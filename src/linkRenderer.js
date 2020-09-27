@@ -1,44 +1,56 @@
 import {section2svgPath} from "./elk/elk-d3-utils.js";
 
 export function renderLinks(root, edges) {
+    var junctionPoints = [];
     var linkWrap = root.selectAll(".link-wrap")
       .data(edges)
       .enter()
       .append("path")
-      .attr("class", "link-wrap");
+      .attr("class", function (d) {
+	       var cssClass;
+           if (d.hwMeta.parent) {
+	           cssClass = d.hwMeta.parent.cssClass;
+           } else {
+	           cssClass = d.hwMeta.cssClass
+           }
+           if (typeof cssClass !== 'undefined') {
+	           return "link-wrap " + cssClass;
+           } else {
+	           return "link-wrap";
+           }
+      })
+      .attr("style", function (d) {
+           if (d.hwMeta.parent) {
+	           return d.hwMeta.parent.cssStyle;
+           } else {
+	           return d.hwMeta.cssStyle
+           }
+      })
+      .attr("d", function(d) {
+          if (!d.sections) {
+              d._svgPath = "";
+              return "";
+          }
+          if (d.bendpoints || d.sections.length > 1) {
+              throw new Error("NotImplemented");
+          }
+          if(d.junctionPoints)
+              d.junctionPoints.forEach(function (jp) {
+                  junctionPoints.push(jp);
+              });
+          d._svgPath = section2svgPath(d.sections[0]);
+          return d._svgPath;
+      });
 
     var link = root.selectAll(".link")
       .data(edges)
       .enter()
       .append("path")
-      .attr("class", "link");
-
-    var junctionPoints = [];
-    // apply edge routes
-    linkWrap
-      //.transition()
+      .attr("class", "link")
       .attr("d", function(d) {
-      var path = "";
-      if (!d.sections) {
-    	  d._svgPath = "";
-          return "";
-      }
-      if (d.bendpoints || d.sections.length > 1) {
-          throw new Error("NotImplemented");
-      }
-      if(d.junctionPoints)
-          d.junctionPoints.forEach(function (jp) {
-              junctionPoints.push(jp);
-          });
-      d._svgPath = section2svgPath(d.sections[0]);
-      return d._svgPath;
-    });
-    link
-    //.transition()
-      .attr("d", function(d) {
-    	return d._svgPath;
+          return d._svgPath;
       });
-    
+   
     var junctionPoint = root.selectAll(".junction-point")
       .data(junctionPoints)
       .enter()
