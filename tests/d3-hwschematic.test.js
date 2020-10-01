@@ -20,6 +20,7 @@ function initSvg() {
 	return svg;
 }
 
+jest.setTimeout(10000);
 describe('Testing scheme rendering', () => {
 	it("SVG has root g and markers", function() {
 		var svg = initSvg();
