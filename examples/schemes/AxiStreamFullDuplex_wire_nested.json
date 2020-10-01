@@ -4,9 +4,10 @@
       "_children": [
         {
           "hwMeta": {
-            "cls": "Operator",
-            "maxId": 15,
-            "name": "FF"
+            "cls": null,
+            "isExternalPort": true,
+            "maxId": 13,
+            "name": "dataIn"
           },
           "id": "2",
           "ports": [
@@ -14,9 +15,9 @@
               "direction": "OUTPUT",
               "hwMeta": {
                 "level": 0,
-                "name": "o"
+                "name": "dataIn"
               },
-              "id": "9",
+              "id": "8",
               "properties": {
                 "index": 0,
                 "side": "EAST"
@@ -26,23 +27,11 @@
               "direction": "INPUT",
               "hwMeta": {
                 "level": 0,
-                "name": "i"
+                "name": ""
               },
-              "id": "10",
+              "id": "9",
               "properties": {
                 "index": 1,
-                "side": "WEST"
-              }
-            },
-            {
-              "direction": "INPUT",
-              "hwMeta": {
-                "level": 0,
-                "name": "clk"
-              },
-              "id": "11",
-              "properties": {
-                "index": 2,
                 "side": "WEST"
               }
             }
@@ -55,9 +44,10 @@
         },
         {
           "hwMeta": {
-            "cls": "Operator",
-            "maxId": 15,
-            "name": "RISING_EDGE"
+            "cls": null,
+            "isExternalPort": true,
+            "maxId": 13,
+            "name": "dataOut"
           },
           "id": "3",
           "ports": [
@@ -65,9 +55,9 @@
               "direction": "OUTPUT",
               "hwMeta": {
                 "level": 0,
-                "name": null
+                "name": ""
               },
-              "id": "12",
+              "id": "10",
               "properties": {
                 "index": 0,
                 "side": "EAST"
@@ -77,9 +67,9 @@
               "direction": "INPUT",
               "hwMeta": {
                 "level": 0,
-                "name": null
+                "name": "dataOut"
               },
-              "id": "13",
+              "id": "11",
               "properties": {
                 "index": 1,
                 "side": "WEST"
@@ -96,50 +86,39 @@
       "_edges": [
         {
           "hwMeta": {
-            "name": "r"
+            "name": null
           },
-          "id": "16",
+          "id": "14",
           "source": "2",
-          "sourcePort": "9",
-          "target": "1",
-          "targetPort": "6"
-        },
-        {
-          "hwMeta": {
-            "name": "r"
-          },
-          "id": "17",
-          "source": "1",
-          "sourcePort": "7",
-          "target": "2",
-          "targetPort": "10"
-        },
-        {
-          "hwMeta": {
-            "name": "clk._onRisingEdge()"
-          },
-          "id": "18",
-          "source": "3",
-          "sourcePort": "12",
-          "target": "2",
+          "sourcePort": "8",
+          "target": "3",
           "targetPort": "11"
         },
         {
           "hwMeta": {
-            "name": "clk"
+            "name": "<AxiStreamFullDuplex, name=dataIn, _masterDir=DIRECTION.OUT>"
           },
-          "id": "19",
+          "id": "15",
           "source": "1",
-          "sourcePort": "8",
-          "target": "3",
-          "targetPort": "13"
+          "sourcePort": "7",
+          "target": "2",
+          "targetPort": "9"
+        },
+        {
+          "hwMeta": {
+            "name": "<AxiStreamFullDuplex, name=dataOut, _masterDir=DIRECTION.OUT>"
+          },
+          "id": "16",
+          "source": "3",
+          "sourcePort": "10",
+          "target": "1",
+          "targetPort": "6"
         }
       ],
       "hwMeta": {
-        "bodyText": "If(clk._onRisingEdge(),\n    r(r)\n)",
-        "cls": "Process",
-        "maxId": 19,
-        "name": null
+        "cls": "Unit",
+        "maxId": 16,
+        "name": "core"
       },
       "id": "1",
       "ports": [
@@ -147,7 +126,7 @@
           "direction": "OUTPUT",
           "hwMeta": {
             "level": 0,
-            "name": "r"
+            "name": "dataOut"
           },
           "id": "6",
           "properties": {
@@ -159,25 +138,13 @@
           "direction": "INPUT",
           "hwMeta": {
             "level": 0,
-            "name": "r"
+            "name": "dataIn"
           },
           "id": "7",
           "properties": {
             "index": 1,
             "side": "WEST"
           }
-        },
-        {
-          "direction": "INPUT",
-          "hwMeta": {
-            "level": 0,
-            "name": "clk"
-          },
-          "id": "8",
-          "properties": {
-            "index": 2,
-            "side": "WEST"
-          }
         }
       ],
       "properties": {
@@ -190,49 +157,49 @@
       "hwMeta": {
         "cls": null,
         "isExternalPort": true,
-        "maxId": 19,
-        "name": "o"
+        "maxId": 16,
+        "name": "dataIn"
       },
       "id": "4",
-      "ports": [
-        {
-          "direction": "INPUT",
-          "hwMeta": {
-            "level": 0,
-            "name": "o"
-          },
-          "id": "14",
-          "properties": {
-            "index": 0,
-            "side": "WEST"
-          }
-        }
-      ],
-      "properties": {
-        "org.eclipse.elk.layered.mergeEdges": 1,
-        "org.eclipse.elk.portConstraints": "FIXED_ORDER",
-        "org.eclipse.elk.randomSeed": 0
-      }
-    },
-    {
-      "hwMeta": {
-        "cls": null,
-        "isExternalPort": true,
-        "maxId": 19,
-        "name": "clk"
-      },
-      "id": "5",
       "ports": [
         {
           "direction": "OUTPUT",
           "hwMeta": {
             "level": 0,
-            "name": "clk"
+            "name": "dataIn"
           },
-          "id": "15",
+          "id": "12",
           "properties": {
             "index": 0,
             "side": "EAST"
+          }
+        }
+      ],
+      "properties": {
+        "org.eclipse.elk.layered.mergeEdges": 1,
+        "org.eclipse.elk.portConstraints": "FIXED_ORDER",
+        "org.eclipse.elk.randomSeed": 0
+      }
+    },
+    {
+      "hwMeta": {
+        "cls": null,
+        "isExternalPort": true,
+        "maxId": 16,
+        "name": "dataOut"
+      },
+      "id": "5",
+      "ports": [
+        {
+          "direction": "INPUT",
+          "hwMeta": {
+            "level": 0,
+            "name": "dataOut"
+          },
+          "id": "13",
+          "properties": {
+            "index": 0,
+            "side": "WEST"
           }
         }
       ],
@@ -246,41 +213,29 @@
   "edges": [
     {
       "hwMeta": {
-        "name": "r"
+        "name": null
       },
-      "id": "20",
-      "sources": [
-        [
-          "1",
-          "6"
-        ]
-      ],
-      "targets": [
-        [
-          "1",
-          "7"
-        ],
-        [
-          "4",
-          "14"
-        ]
-      ]
+      "id": "17",
+      "source": "1",
+      "sourcePort": "6",
+      "target": "5",
+      "targetPort": "13"
     },
     {
       "hwMeta": {
-        "name": "clk"
+        "name": null
       },
-      "id": "21",
-      "source": "5",
-      "sourcePort": "15",
+      "id": "18",
+      "source": "4",
+      "sourcePort": "12",
       "target": "1",
-      "targetPort": "8"
+      "targetPort": "7"
     }
   ],
   "hwMeta": {
     "cls": null,
-    "maxId": 21,
-    "name": "DirectFF_sig"
+    "maxId": 18,
+    "name": "AxiStreamFullDuplex_wire_nested"
   },
   "ports": [],
   "properties": {
