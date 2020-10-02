@@ -9,6 +9,7 @@ language: node_js
 node_js:
 - '14'
 install:
+# [note] depending on configuration of NODE_ENV and access rights the npm install -g may fail silently for devDependencies
 - export NODE_ENV=dev
 - npm install --loglevel verbose
 - npm install --loglevel verbose --only=dev
