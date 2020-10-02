@@ -1,5 +1,5 @@
 dist: focal
-sudo: false
+sudo: true
 git:
   depth: 1
 cache:
@@ -8,7 +8,7 @@ language: node_js
 node_js:
 - '14'
 install:
-- npm install -g --only=dev --loglevel verbose
+- sudo npm install -g --only=dev --loglevel verbose
 - npm install --loglevel verbose
 script:
 - npm run coveralls
