@@ -1,4 +1,5 @@
-import copy from 'rollup-plugin-copy';
+import { copy } from '@web/rollup-plugin-copy';
+
 const definition = require("./package.json");
 const dependencies = Object.keys(definition.dependencies);
 
