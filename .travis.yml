@@ -8,11 +8,7 @@ language: node_js
 node_js:
 - '14'
 install:
-- ls
-- ls node_modules/
 - npm install --loglevel verbose
-- ls
-- ls node_modules/
 script:
 - npm run coveralls
 deploy:
