@@ -10,6 +10,7 @@ node_js:
 install:
 - npm install rollup rollup-plugin-copy -g 
 - travis_wait 20 npm install -g
+- travis_wait 20 npm install -g --only=dev
 script:
 - npm run coveralls
 deploy:
