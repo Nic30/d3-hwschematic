@@ -9,9 +9,8 @@ language: node_js
 node_js:
 - '14'
 install:
-- npm config set -g production false
+- export NODE_ENV=development
 - NODE_ENV=dev npm install -g --loglevel verbose
-- npm config set -g production true
 script:
 - npm run coveralls
 deploy:
