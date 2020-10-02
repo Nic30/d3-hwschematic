@@ -8,9 +8,8 @@ language: node_js
 node_js:
 - '14'
 install:
-- npm install -g npm
+- npm install -g npm rollup rollup-plugin-copy
 - travis_wait 20 npm install -g
-- travis_wait 20 npm install -g --only=dev
 script:
 - npm run coveralls
 deploy:
