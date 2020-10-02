@@ -234,7 +234,15 @@ export class GenericNodeRenderer {
 				return d.ports || []; 
 			})
 			.enter()
-			.append("g");
+			.append("g")
+			.attr("style", (d) => d.hwMeta.cssStyle)
+			.attr("class", (d) => {
+				if (d.hwMeta.cssStyle) {
+					return "port " + d.hwMeta.cssClass;
+				} else {
+					return "port";
+				}
+			});
 
 		// apply port positions
 		portG
