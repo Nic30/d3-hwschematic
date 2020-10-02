@@ -9,7 +9,7 @@ export function renderLinks(root, edges) {
       .attr("class", function (d) {
 	       var cssClass;
            if (d.hwMeta.parent) {
-	           cssClass = d.hwMeta.parent.cssClass;
+	           cssClass = d.hwMeta.parent.hwMeta.cssClass;
            } else {
 	           cssClass = d.hwMeta.cssClass
            }
@@ -21,7 +21,7 @@ export function renderLinks(root, edges) {
       })
       .attr("style", function (d) {
            if (d.hwMeta.parent) {
-	           return d.hwMeta.parent.cssStyle;
+	           return d.hwMeta.parent.hwMeta.cssStyle;
            } else {
 	           return d.hwMeta.cssStyle
            }
