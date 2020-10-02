@@ -7,14 +7,20 @@ Use `npm install d3-hwschematic --save` to install this library and save it to y
 
 ## Features:
 
-* automatic layout
+* automatic layout with caching
 * hierarchical components expandable on click
-* net selection on click
+* net selection on click, highligh and tooltip on mouse over
 * zoom, drag
-* input is [ELK json](https://www.eclipse.org/elk/documentation/tooldevelopers/graphdatastructure/jsonformat.html) with hwMeta propoperty which contains name and body text for the component
+* css style/class specifiable in input json, d3.js querey as a query language in javascript
+* support for user node renderers and user CSS
+* input is [ELK json](https://www.eclipse.org/elk/documentation/tooldevelopers/graphdatastructure/jsonformat.html) with hwMeta propoperty (described in this document)
 
 ![cdc_pulse_gen](https://github.com/Nic30/d3-hwschematic/raw/master/docs/cdc_pulse_gen.png "cdc_pulse_gen")
 
+## Typical usecase
+
+* A widget in for "synthesis tool" [jupyter_widget_hwt](https://github.com/Nic30/jupyter_widget_hwt)
+* An extension for Sphinx document generator [sphinx-hwt](https://github.com/Nic30/sphinx-hwt)
 
 ## How to use examples
 
@@ -57,7 +63,7 @@ This format is basically a component tree stored in json.
 The json specifies not just the structure of circuit but also how the circuit should be rendered.
 It contains 3 object types `LNode`, `LPort` and `LEdge`.
 
-ELK LNode (component instance)
+ELK `LNode` (component instance)
 ```javascript
 {
   "id": "0",
@@ -83,7 +89,7 @@ ELK LNode (component instance)
 ```
 If the children should be collapsed by default, the children `children` and `edges` property should be renamed to `_children` and `_edges`.
 
-ELK LPort
+ELK `LPort`
 ```javascript
 {
   "id": "1",
@@ -100,7 +106,7 @@ ELK LPort
 }
 ```
 
-ELK LEdge
+ELK `LEdge`
 ```javascript
 { // simple LEdge
   "id": "62",
@@ -131,9 +137,9 @@ ELK LEdge
 }
 ```
 
-LEdge souce destination has to always be directly visible from the LNode where the LEdge is instanciated.
-That means that LEdge may connect only to ports of current LNode or to ports of this LNode direct children LNOdes.
-LNode represents all types of components. Top component ports are also represented as `LNode` because it looks better.
+`LEdge` souce destination has to always be directly visible from the `LNode` where the `LEdge` is instanciated.
+That means that LEdge may connect only to ports of current LNode or to ports of this LNode direct children `LNode`s.
+`LNode` represents all types of components. Top component ports are also represented as `LNode` because it looks better.
 
 
 ## Component shapes
