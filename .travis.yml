@@ -10,6 +10,7 @@ node_js:
 - '14'
 install:
 - npm install -g --loglevel verbose
+- npm install -g --loglevel verbose --only=dev
 script:
 - npm run coveralls
 deploy:
