@@ -6,7 +6,7 @@ cache:
   apt: true
 language: node_js
 node_js:
-- '12'
+- '14'
 install:
 - npm install
 - npm install rollup -g
