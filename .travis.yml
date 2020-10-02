@@ -9,8 +9,9 @@ language: node_js
 node_js:
 - '14'
 install:
-- export NODE_ENV=development
-- NODE_ENV=dev npm install -g --loglevel verbose
+- export NODE_ENV=dev
+- npm install --loglevel verbose
+- npm install --loglevel verbose --only=dev
 script:
 - npm run coveralls
 deploy:
