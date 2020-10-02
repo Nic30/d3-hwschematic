@@ -8,7 +8,6 @@ language: node_js
 node_js:
 - '14'
 install:
-- npm install rollup rollup-plugin-copy -g 
 - npm install -g
 - npm install -g --only=dev
 script:
