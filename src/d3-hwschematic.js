@@ -191,7 +191,7 @@ export default class HwSchematic {
         this.nodeRenderers.render(root, node);
 
         var _this = this;
-        node.on("click", function(d) {
+        node.on("click", function(ev, d) {
             var [children, nextFocusTarget] = toggleHideChildren(d);
             if (!children || children.length == 0) {
                 return; // does not have anything to expand
@@ -238,14 +238,14 @@ export default class HwSchematic {
         });
 		
 		// set highlingt and tooltip on mouser over over the net
-        linkWrap.on("mouseover", function(d) {
+        linkWrap.on("mouseover", function(ev, d) {
             var netWrap = netToLink[getNet(d).id]["wrap"];
             d3.selectAll(netWrap)
                 .classed("link-wrap-activated", true);
 
-            _this.tooltip.show(d3.event, getNameOfEdge(d));
+            _this.tooltip.show(ev, getNameOfEdge(d));
         });
-        linkWrap.on("mouseout", function(d) {
+        linkWrap.on("mouseout", function(ev, d) {
             var netWrap = netToLink[getNet(d).id]["wrap"];
             d3.selectAll(netWrap)
                 .classed("link-wrap-activated", false);
@@ -254,7 +254,7 @@ export default class HwSchematic {
         });
 
 		// set link highlight on net click 
-        function onLinkClick(d) {
+        function onLinkClick(ev, d) {
             var net = getNet(d);
             var doSelect = net.selected = !net.selected;
             // propagate click on all nets with same source
@@ -262,7 +262,7 @@ export default class HwSchematic {
             var netCore = netToLink[net.id]["core"];
             d3.selectAll(netCore)
                 .classed("link-selected", doSelect);
-            d3.event.stopPropagation();
+            ev.stopPropagation();
         }
 
         // Select net on click

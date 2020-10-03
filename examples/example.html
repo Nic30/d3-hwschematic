@@ -52,8 +52,8 @@
 
         var hwSchematic = new d3.HwSchematic(svg);
         var zoom = d3.zoom();
-        zoom.on("zoom", function applyTransform() {
-        	hwSchematic.root.attr("transform", d3.event.transform)
+        zoom.on("zoom", function applyTransform(ev) {
+        	hwSchematic.root.attr("transform", ev.transform)
         });
         
         // disable zoom on doubleclick 
