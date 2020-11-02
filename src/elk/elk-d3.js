@@ -137,8 +137,6 @@ export default class d3elk {
 		if (this.__edgesCache != null)
 			return this.__edgesCache;
 
-		this.__edgesCache = this.graph.edges || [];
-
 		var edgesOfChildren = d3.merge(
 			this.getNodes()
 				.filter(function(n) {
@@ -146,9 +144,10 @@ export default class d3elk {
 				})
 				.map(function(n) {
 					return n.edges || [];
-				}));
+				})
+        );
 
-		this.__edgesCache = this.__edgesCache.concat(edgesOfChildren);
+		this.__edgesCache = edgesOfChildren;
 		return this.__edgesCache;
 	}
 
