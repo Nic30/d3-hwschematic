@@ -24,8 +24,7 @@
       ],
       "properties": {
         "org.eclipse.elk.layered.mergeEdges": 1,
-        "org.eclipse.elk.portConstraints": "FIXED_ORDER",
-        "org.eclipse.elk.randomSeed": 0
+        "org.eclipse.elk.portConstraints": "FIXED_ORDER"
       }
     },
     {
@@ -52,8 +51,7 @@
       ],
       "properties": {
         "org.eclipse.elk.layered.mergeEdges": 1,
-        "org.eclipse.elk.portConstraints": "FIXED_ORDER",
-        "org.eclipse.elk.randomSeed": 0
+        "org.eclipse.elk.portConstraints": "FIXED_ORDER"
       }
     },
     {
@@ -103,8 +101,7 @@
       ],
       "properties": {
         "org.eclipse.elk.layered.mergeEdges": 1,
-        "org.eclipse.elk.portConstraints": "FIXED_ORDER",
-        "org.eclipse.elk.randomSeed": 0
+        "org.eclipse.elk.portConstraints": "FIXED_ORDER"
       }
     },
     {
@@ -154,8 +151,7 @@
       ],
       "properties": {
         "org.eclipse.elk.layered.mergeEdges": 1,
-        "org.eclipse.elk.portConstraints": "FIXED_ORDER",
-        "org.eclipse.elk.randomSeed": 0
+        "org.eclipse.elk.portConstraints": "FIXED_ORDER"
       }
     }
   ],
@@ -182,7 +178,7 @@
     },
     {
       "hwMeta": {
-        "name": "internB"
+        "name": "(a[4:2], sig_1, internB)"
       },
       "id": "15",
       "source": "4",
@@ -192,7 +188,7 @@
     },
     {
       "hwMeta": {
-        "name": "internA"
+        "name": "(a[2:0], sig_0, internA)"
       },
       "id": "16",
       "source": "4",
@@ -209,7 +205,6 @@
   "ports": [],
   "properties": {
     "org.eclipse.elk.layered.mergeEdges": 1,
-    "org.eclipse.elk.portConstraints": "FIXED_ORDER",
-    "org.eclipse.elk.randomSeed": 0
+    "org.eclipse.elk.portConstraints": "FIXED_ORDER"
   }
 }

@@ -49,8 +49,7 @@
           ],
           "properties": {
             "org.eclipse.elk.layered.mergeEdges": 1,
-            "org.eclipse.elk.portConstraints": "FIXED_ORDER",
-            "org.eclipse.elk.randomSeed": 0
+            "org.eclipse.elk.portConstraints": "FIXED_ORDER"
           }
         }
       ],
@@ -133,8 +132,7 @@
       ],
       "properties": {
         "org.eclipse.elk.layered.mergeEdges": 1,
-        "org.eclipse.elk.portConstraints": "FIXED_ORDER",
-        "org.eclipse.elk.randomSeed": 0
+        "org.eclipse.elk.portConstraints": "FIXED_ORDER"
       }
     },
     {
@@ -161,8 +159,7 @@
       ],
       "properties": {
         "org.eclipse.elk.layered.mergeEdges": 1,
-        "org.eclipse.elk.portConstraints": "FIXED_ORDER",
-        "org.eclipse.elk.randomSeed": 0
+        "org.eclipse.elk.portConstraints": "FIXED_ORDER"
       }
     },
     {
@@ -189,8 +186,7 @@
       ],
       "properties": {
         "org.eclipse.elk.layered.mergeEdges": 1,
-        "org.eclipse.elk.portConstraints": "FIXED_ORDER",
-        "org.eclipse.elk.randomSeed": 0
+        "org.eclipse.elk.portConstraints": "FIXED_ORDER"
       }
     },
     {
@@ -217,8 +213,7 @@
       ],
       "properties": {
         "org.eclipse.elk.layered.mergeEdges": 1,
-        "org.eclipse.elk.portConstraints": "FIXED_ORDER",
-        "org.eclipse.elk.randomSeed": 0
+        "org.eclipse.elk.portConstraints": "FIXED_ORDER"
       }
     }
   ],
@@ -262,7 +257,6 @@
   "ports": [],
   "properties": {
     "org.eclipse.elk.layered.mergeEdges": 1,
-    "org.eclipse.elk.portConstraints": "FIXED_ORDER",
-    "org.eclipse.elk.randomSeed": 0
+    "org.eclipse.elk.portConstraints": "FIXED_ORDER"
   }
 }
