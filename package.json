@@ -6,6 +6,7 @@
   "scripts": {
     "init": "eslint --init",
     "build": "NODE_ENV=production rollup -c",
+    "build-windows": "SET NODE_ENV=production && rollup -c",
     "clean": "rm -rf dist/ node_modules/",
     "prepare": "npm run build",
     "pretest": "npm run build",
