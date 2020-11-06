@@ -7,7 +7,7 @@ Use `npm install d3-hwschematic --save` to install this library and save it to y
 
 ## Features:
 
-* automatic layout with caching
+* automatic layout (layered graph with orthogonal routing, created by `elkjs`) with caching
 * hierarchical components expandable on click
 * net selection on click, highligh and tooltip on mouse over
 * zoom, drag
