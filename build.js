@@ -1,11 +1,10 @@
-import {default as util} from 'util';
 import {exec}  from 'child_process';
 import {default as os} from 'os';
 
 function puts(error, stdout, stderr) { 
-    util.puts(stdout);
+    console.log(stdout);
     if (error) {
-        util.puts(stderr);
+        console.log(stderr);
     } 
  }
 
