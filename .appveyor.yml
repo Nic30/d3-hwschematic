@@ -1,9 +1,10 @@
 image: Visual Studio 2019
-configuration: release
 
 environment:
   matrix:
     - nodejs_version: 14
+      configuration: release
+      platform: x64
 
 install:
     # https://www.appveyor.com/docs/lang/nodejs-iojs/#installing-any-version-of-nodejs-or-iojs
