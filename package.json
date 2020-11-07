@@ -11,7 +11,7 @@
     "pretest": "npm run build",
     "test": "run-script-os",
     "test:default": "NODE_ENV=development jest",
-    "test:windows": "SET NODE_ENV=development && jest",
+    "test:windows": "SET NODE_ENV=development&& jest",
     "coveralls": "NODE_ENV=development jest --coverage && cat ./tests/coverage/lcov.info | coveralls",
     "lint": "eslint src test --ignore-pattern tests/coverage*",
     "debug-remote": "NODE_ENV=development node --inspect-brk node_modules/.bin/jest --env=node"
