@@ -16,6 +16,7 @@
     "lint": "eslint src test --ignore-pattern tests/coverage*",
     "debug-remote": "NODE_ENV=development node --inspect-brk node_modules/.bin/jest --env=node"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Nic30/d3-hwschematic.git"
