@@ -16,7 +16,7 @@ export class NodeRendererContainer {
 		var rs = this.renderers;
 		for (var i = 0; i < rs.length; i++) {
 			var r = rs[i];
-			if (r instanceof GenericNodeRenderer) {
+			if (r.constructor === GenericNodeRenderer) {
 				// insert custom renderer before GenericNodeRenderer
 				// to prevent GenericNodeRenderer.selector from prematurely halting renderers.some
 				rs.splice(i, 0, renderer);
