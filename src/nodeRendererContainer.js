@@ -13,10 +13,6 @@ export class NodeRendererContainer {
 
 	// add new renderer
 	registerRenderer(renderer) {
-		this.renderers.push(renderer);
-	}
-	
-	registerCustomRenderer(renderer) {
 		var rs = this.renderers;
 		for (var i = 0; i < rs.length; i++) {
 			var r = rs[i];
