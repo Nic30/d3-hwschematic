@@ -14,6 +14,20 @@ export class NodeRendererContainer {
 	registerRenderer(renderer) {
 		this.renderers.push(renderer);
 	}
+	
+	registerCustomRenderer(renderer) {
+		var rs = this.renderers;
+		for (var i = 0; i < rs.length; i++) {
+			var r = rs[i];
+			if (r instanceof GenericNodeRenderer) {
+				// insert custom renderer before GenericNodeRenderer
+				// to prevent GenericNodeRenderer.selector from prematurely halting renderers.some
+				rs.splice(i, 0, renderer);
+				return;
+			}
+		}
+		rs.push(renderer);
+	}
 
 	// Bind node to renderer recursively
 	prepare(node) {
