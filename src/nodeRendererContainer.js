@@ -1,4 +1,5 @@
 import * as d3 from "d3";
+import { GenericNodeRenderer } from "./node_renderers/generic";
 
 /**
  * Container for node renderer instances.
