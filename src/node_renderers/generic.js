@@ -258,9 +258,27 @@ export class GenericNodeRenderer {
 				});
 			}
 		})
+        // [todo] sort in correct order
+        var port_data = portG.data().sort((a, b) => {
+             if (a.hwMeta.parent === b.hwMeta.parent)
+                return -1;
+             else 
+                return a.hwMeta.y < b.hwMeta.y;
+        });
+        // [DEBUG]
+        port_data.forEach((d) => {
+            console.log(d.hwMeta.name);
+        })
 		// spot port name
 		portG.append("text")
-			.text(function(d) {
+			.text(function(d, i) {
+                var next_d = port_data[i+1];
+                if (next_d && next_d.hwMeta.level > d.hwMeta.level && d.hwMeta.parent === next_d.hwMeta.paren) {
+                    // [TODO] add + to port label
+                    console.log(d.hwMeta.name);
+                    console.log("dsafasdfas");
+                }
+                
 				if (d.ignoreLabel)
 					return "";
 				else if (d.hwMeta.level) {
