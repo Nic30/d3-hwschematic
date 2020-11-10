@@ -176,7 +176,7 @@ function RISING_EDGE(root) {
 
 	  root.append("path")
 	    .attr("d", "M5,20 L12.5,20 L12.5,5 L20,5");
-	}
+}
 
 function FALLING_EDGE(root) {
   // width="25" height="25"
