@@ -81,7 +81,6 @@ ELK `LNode` (component instance)
   "hideChildren": true, // [d3-hwschematic specific] optional flag, if true the body of component is collapsed
   "properties": { // recommended renderer settings
     "org.eclipse.elk.portConstraints": "FIXED_ORDER", // can be also "FREE" or other value accepted by ELK
-    "org.eclipse.elk.randomSeed": 0,
     "org.eclipse.elk.layered.mergeEdges": 1
   },
   "ports": [],    // list of LPort
