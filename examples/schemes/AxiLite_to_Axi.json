@@ -10,9 +10,9 @@
       "id": "1",
       "ports": [
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 0,
             "name": null
           },
           "id": "18",
@@ -36,9 +36,9 @@
       "id": "10",
       "ports": [
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 0,
             "name": null
           },
           "id": "27",
@@ -62,9 +62,9 @@
       "id": "11",
       "ports": [
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 0,
             "name": null
           },
           "id": "28",
@@ -88,9 +88,9 @@
       "id": "12",
       "ports": [
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 0,
             "name": null
           },
           "id": "29",
@@ -114,9 +114,9 @@
       "id": "13",
       "ports": [
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 0,
             "name": null
           },
           "id": "30",
@@ -140,9 +140,9 @@
       "id": "14",
       "ports": [
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 0,
             "name": null
           },
           "id": "31",
@@ -166,9 +166,9 @@
       "id": "15",
       "ports": [
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 0,
             "name": null
           },
           "id": "32",
@@ -192,9 +192,9 @@
       "id": "16",
       "ports": [
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 0,
             "name": "s"
           },
           "id": "33",
@@ -219,9 +219,9 @@
       "id": "17",
       "ports": [
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 1,
             "name": "b.id"
           },
           "id": "34",
@@ -231,9 +231,9 @@
           }
         },
         {
+          "children": null,
           "direction": "INPUT",
           "hwMeta": {
-            "level": 1,
             "name": "w.last"
           },
           "id": "35",
@@ -243,9 +243,9 @@
           }
         },
         {
+          "children": null,
           "direction": "INPUT",
           "hwMeta": {
-            "level": 1,
             "name": "aw.qos"
           },
           "id": "36",
@@ -255,9 +255,9 @@
           }
         },
         {
+          "children": null,
           "direction": "INPUT",
           "hwMeta": {
-            "level": 1,
             "name": "aw.size"
           },
           "id": "37",
@@ -267,9 +267,9 @@
           }
         },
         {
+          "children": null,
           "direction": "INPUT",
           "hwMeta": {
-            "level": 1,
             "name": "aw.lock"
           },
           "id": "38",
@@ -279,9 +279,9 @@
           }
         },
         {
+          "children": null,
           "direction": "INPUT",
           "hwMeta": {
-            "level": 1,
             "name": "aw.len"
           },
           "id": "39",
@@ -291,9 +291,9 @@
           }
         },
         {
+          "children": null,
           "direction": "INPUT",
           "hwMeta": {
-            "level": 1,
             "name": "aw.cache"
           },
           "id": "40",
@@ -303,9 +303,9 @@
           }
         },
         {
+          "children": null,
           "direction": "INPUT",
           "hwMeta": {
-            "level": 1,
             "name": "aw.burst"
           },
           "id": "41",
@@ -315,9 +315,9 @@
           }
         },
         {
+          "children": null,
           "direction": "INPUT",
           "hwMeta": {
-            "level": 1,
             "name": "aw.id"
           },
           "id": "42",
@@ -327,9 +327,9 @@
           }
         },
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 1,
             "name": "r.last"
           },
           "id": "43",
@@ -339,9 +339,9 @@
           }
         },
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 1,
             "name": "r.id"
           },
           "id": "44",
@@ -351,9 +351,9 @@
           }
         },
         {
+          "children": null,
           "direction": "INPUT",
           "hwMeta": {
-            "level": 1,
             "name": "ar.qos"
           },
           "id": "45",
@@ -363,9 +363,9 @@
           }
         },
         {
+          "children": null,
           "direction": "INPUT",
           "hwMeta": {
-            "level": 1,
             "name": "ar.size"
           },
           "id": "46",
@@ -375,9 +375,9 @@
           }
         },
         {
+          "children": null,
           "direction": "INPUT",
           "hwMeta": {
-            "level": 1,
             "name": "ar.lock"
           },
           "id": "47",
@@ -387,9 +387,9 @@
           }
         },
         {
+          "children": null,
           "direction": "INPUT",
           "hwMeta": {
-            "level": 1,
             "name": "ar.len"
           },
           "id": "48",
@@ -399,9 +399,9 @@
           }
         },
         {
+          "children": null,
           "direction": "INPUT",
           "hwMeta": {
-            "level": 1,
             "name": "ar.cache"
           },
           "id": "49",
@@ -411,9 +411,9 @@
           }
         },
         {
+          "children": null,
           "direction": "INPUT",
           "hwMeta": {
-            "level": 1,
             "name": "ar.burst"
           },
           "id": "50",
@@ -423,9 +423,9 @@
           }
         },
         {
+          "children": null,
           "direction": "INPUT",
           "hwMeta": {
-            "level": 1,
             "name": "ar.id"
           },
           "id": "51",
@@ -435,9 +435,226 @@
           }
         },
         {
+          "children": [
+            {
+              "children": null,
+              "direction": "INPUT",
+              "hwMeta": {
+                "name": "ar.id"
+              },
+              "id": "51",
+              "properties": {
+                "index": 17,
+                "side": "WEST"
+              }
+            },
+            {
+              "children": null,
+              "direction": "INPUT",
+              "hwMeta": {
+                "name": "ar.burst"
+              },
+              "id": "50",
+              "properties": {
+                "index": 16,
+                "side": "WEST"
+              }
+            },
+            {
+              "children": null,
+              "direction": "INPUT",
+              "hwMeta": {
+                "name": "ar.cache"
+              },
+              "id": "49",
+              "properties": {
+                "index": 15,
+                "side": "WEST"
+              }
+            },
+            {
+              "children": null,
+              "direction": "INPUT",
+              "hwMeta": {
+                "name": "ar.len"
+              },
+              "id": "48",
+              "properties": {
+                "index": 14,
+                "side": "WEST"
+              }
+            },
+            {
+              "children": null,
+              "direction": "INPUT",
+              "hwMeta": {
+                "name": "ar.lock"
+              },
+              "id": "47",
+              "properties": {
+                "index": 13,
+                "side": "WEST"
+              }
+            },
+            {
+              "children": null,
+              "direction": "INPUT",
+              "hwMeta": {
+                "name": "ar.size"
+              },
+              "id": "46",
+              "properties": {
+                "index": 12,
+                "side": "WEST"
+              }
+            },
+            {
+              "children": null,
+              "direction": "INPUT",
+              "hwMeta": {
+                "name": "ar.qos"
+              },
+              "id": "45",
+              "properties": {
+                "index": 11,
+                "side": "WEST"
+              }
+            },
+            {
+              "children": null,
+              "direction": "OUTPUT",
+              "hwMeta": {
+                "name": "r.id"
+              },
+              "id": "44",
+              "properties": {
+                "index": 10,
+                "side": "WEST"
+              }
+            },
+            {
+              "children": null,
+              "direction": "OUTPUT",
+              "hwMeta": {
+                "name": "r.last"
+              },
+              "id": "43",
+              "properties": {
+                "index": 9,
+                "side": "WEST"
+              }
+            },
+            {
+              "children": null,
+              "direction": "INPUT",
+              "hwMeta": {
+                "name": "aw.id"
+              },
+              "id": "42",
+              "properties": {
+                "index": 8,
+                "side": "WEST"
+              }
+            },
+            {
+              "children": null,
+              "direction": "INPUT",
+              "hwMeta": {
+                "name": "aw.burst"
+              },
+              "id": "41",
+              "properties": {
+                "index": 7,
+                "side": "WEST"
+              }
+            },
+            {
+              "children": null,
+              "direction": "INPUT",
+              "hwMeta": {
+                "name": "aw.cache"
+              },
+              "id": "40",
+              "properties": {
+                "index": 6,
+                "side": "WEST"
+              }
+            },
+            {
+              "children": null,
+              "direction": "INPUT",
+              "hwMeta": {
+                "name": "aw.len"
+              },
+              "id": "39",
+              "properties": {
+                "index": 5,
+                "side": "WEST"
+              }
+            },
+            {
+              "children": null,
+              "direction": "INPUT",
+              "hwMeta": {
+                "name": "aw.lock"
+              },
+              "id": "38",
+              "properties": {
+                "index": 4,
+                "side": "WEST"
+              }
+            },
+            {
+              "children": null,
+              "direction": "INPUT",
+              "hwMeta": {
+                "name": "aw.size"
+              },
+              "id": "37",
+              "properties": {
+                "index": 3,
+                "side": "WEST"
+              }
+            },
+            {
+              "children": null,
+              "direction": "INPUT",
+              "hwMeta": {
+                "name": "aw.qos"
+              },
+              "id": "36",
+              "properties": {
+                "index": 2,
+                "side": "WEST"
+              }
+            },
+            {
+              "children": null,
+              "direction": "INPUT",
+              "hwMeta": {
+                "name": "w.last"
+              },
+              "id": "35",
+              "properties": {
+                "index": 1,
+                "side": "WEST"
+              }
+            },
+            {
+              "children": null,
+              "direction": "OUTPUT",
+              "hwMeta": {
+                "name": "b.id"
+              },
+              "id": "34",
+              "properties": {
+                "index": 0,
+                "side": "WEST"
+              }
+            }
+          ],
           "direction": "INPUT",
           "hwMeta": {
-            "level": 0,
             "name": "m"
           },
           "id": "52",
@@ -462,9 +679,9 @@
       "id": "2",
       "ports": [
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 0,
             "name": null
           },
           "id": "19",
@@ -488,9 +705,9 @@
       "id": "3",
       "ports": [
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 0,
             "name": null
           },
           "id": "20",
@@ -514,9 +731,9 @@
       "id": "4",
       "ports": [
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 0,
             "name": null
           },
           "id": "21",
@@ -540,9 +757,9 @@
       "id": "5",
       "ports": [
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 0,
             "name": null
           },
           "id": "22",
@@ -566,9 +783,9 @@
       "id": "6",
       "ports": [
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 0,
             "name": null
           },
           "id": "23",
@@ -592,9 +809,9 @@
       "id": "7",
       "ports": [
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 0,
             "name": null
           },
           "id": "24",
@@ -618,9 +835,9 @@
       "id": "8",
       "ports": [
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 0,
             "name": null
           },
           "id": "25",
@@ -644,9 +861,9 @@
       "id": "9",
       "ports": [
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 0,
             "name": null
           },
           "id": "26",
