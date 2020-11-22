@@ -169,5 +169,5 @@ The node renderer has function `select` which is used to determine if renderer s
 * [Eclipse Layout Kernel (ELK)](https://github.com/eclipse/elk) - Java, Libary focused on automatic graph drawing.
 * [elkjs](https://github.com/kieler/elkjs) - JS, ELK transpiled to JS, (used in this project)
 * [ogdf](https://github.com/ogdf/ogdf) - C++, Libary focused on automatic graph drawing.
-
+* [hdelk](https://github.com/davidthings/hdelk) - Web-based HDL diagramming tool 
 
