@@ -73,7 +73,7 @@ ELK `LNode` (component instance)
     "name": "compoent instance name", // optional str
     "cls": "compoent (module) name", // optional str
     "bodyText": "", // optional str
-    "maxId": 2, // max id of any object in this node used to avoid re-counting object in expand/collapse
+    "maxId": 2, // max id of any object in this node used to avoid re-counting object if new object is generated
     "isExternalPort": true // optional flag which set component style to external port
     "cssClass": "node-style0", // optional string, css classes separated by space
     "cssStyle": "fill:red", // css style specification separated by ;
@@ -96,7 +96,6 @@ ELK `LPort`
 {
   "id": "1",
   "hwMeta": { // [d3-hwschematic specific]
-    "level": 0, // used to mark nested ports, if level > prev. port.level port is member of prev. port
     "name": "port name",
     "cssClass": "node-style0", // optional string, css classes separated by space
     "cssStyle": "fill:red", // css style specification separated by ;
@@ -106,7 +105,8 @@ ELK `LPort`
     "portSide": "EAST",
     "portIndex": 0 // The order is assumed as clockwise, starting with the leftmost port on the top side.
                    // Required only for components with "org.eclipse.elk.portConstraints": "FIXED_ORDER"
-  }
+  },
+  "children": [], // list of LPort
 }
 ```
 

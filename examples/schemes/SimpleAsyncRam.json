@@ -10,9 +10,9 @@
       "id": "1",
       "ports": [
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 0,
             "name": "addr_in"
           },
           "id": "7",
@@ -37,9 +37,9 @@
       "id": "2",
       "ports": [
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 0,
             "name": "din"
           },
           "id": "8",
@@ -64,9 +64,9 @@
       "id": "3",
       "ports": [
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 0,
             "name": "addr_out"
           },
           "id": "9",
@@ -91,9 +91,9 @@
       "id": "4",
       "ports": [
         {
+          "children": null,
           "direction": "INPUT",
           "hwMeta": {
-            "level": 0,
             "name": "dout"
           },
           "id": "10",
@@ -117,9 +117,9 @@
       "id": "5",
       "ports": [
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 0,
             "name": ""
           },
           "id": "11",
@@ -129,9 +129,9 @@
           }
         },
         {
+          "children": null,
           "direction": "INPUT",
           "hwMeta": {
-            "level": 0,
             "name": ""
           },
           "id": "12",
@@ -141,9 +141,9 @@
           }
         },
         {
+          "children": null,
           "direction": "INPUT",
           "hwMeta": {
-            "level": 0,
             "name": ""
           },
           "id": "13",
@@ -153,9 +153,9 @@
           }
         },
         {
+          "children": null,
           "direction": "INPUT",
           "hwMeta": {
-            "level": 0,
             "name": ""
           },
           "id": "14",
@@ -179,9 +179,9 @@
       "id": "6",
       "ports": [
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 0,
             "name": null
           },
           "id": "15",
@@ -191,9 +191,9 @@
           }
         },
         {
+          "children": null,
           "direction": "INPUT",
           "hwMeta": {
-            "level": 0,
             "name": "index"
           },
           "id": "16",
@@ -203,9 +203,9 @@
           }
         },
         {
+          "children": null,
           "direction": "INPUT",
           "hwMeta": {
-            "level": 0,
             "name": "in"
           },
           "id": "17",

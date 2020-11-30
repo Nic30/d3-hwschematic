@@ -10,9 +10,9 @@
       "id": "1",
       "ports": [
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 0,
             "name": null
           },
           "id": "5",
@@ -36,9 +36,9 @@
       "id": "2",
       "ports": [
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 0,
             "name": null
           },
           "id": "6",
@@ -62,9 +62,9 @@
       "id": "3",
       "ports": [
         {
+          "children": null,
           "direction": "INPUT",
           "hwMeta": {
-            "level": 0,
             "name": "out0"
           },
           "id": "7",
@@ -89,9 +89,9 @@
       "id": "4",
       "ports": [
         {
+          "children": null,
           "direction": "INPUT",
           "hwMeta": {
-            "level": 0,
             "name": "out1"
           },
           "id": "8",
