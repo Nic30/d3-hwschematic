@@ -273,6 +273,7 @@ export class GenericNodeRenderer {
 				});
 			}
 		})
+<<<<<<< HEAD
 		// [todo] sort in correct order
 		/*console.log(portG.data());
         var port_data = portG.data().sort((a, b) => {
@@ -286,16 +287,39 @@ export class GenericNodeRenderer {
         port_data.forEach((d) => {
             console.log(d.hwMeta.parent);
         })*/
+=======
+        // [todo] sort in correct order
+        var port_data = portG.data().sort((a, b) => {
+             if (a.hwMeta.parent === b.hwMeta.parent)
+                return -1;
+             else 
+                return a.hwMeta.y < b.hwMeta.y;
+        });
+        // [DEBUG]
+        port_data.forEach((d) => {
+            console.log(d.hwMeta.name);
+        })
+>>>>>>> origin/master
 		// spot port name
 
 		portG.append("text")
 			.text(function(d, i) {
+<<<<<<< HEAD
                 /*var next_d = port_data[i+1];
                 if (next_d && next_d.hwMeta.level > d.hwMeta.level) {
 					console.log(d.hwMeta.name);
                     //d.hwMeta.name=toString("+");
                 }
                 */
+=======
+                var next_d = port_data[i+1];
+                if (next_d && next_d.hwMeta.level > d.hwMeta.level && d.hwMeta.parent === next_d.hwMeta.paren) {
+                    // [TODO] add + to port label
+                    console.log(d.hwMeta.name);
+                    console.log("dsafasdfas");
+                }
+                
+>>>>>>> origin/master
 				if (d.ignoreLabel)
 					return "";
 				else if (d.parent) {

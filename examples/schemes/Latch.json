@@ -11,9 +11,9 @@
           "id": "2",
           "ports": [
             {
+              "children": null,
               "direction": "OUTPUT",
               "hwMeta": {
-                "level": 0,
                 "name": ""
               },
               "id": "9",
@@ -23,9 +23,9 @@
               }
             },
             {
+              "children": null,
               "direction": "INPUT",
               "hwMeta": {
-                "level": 0,
                 "name": ""
               },
               "id": "10",
@@ -35,9 +35,9 @@
               }
             },
             {
+              "children": null,
               "direction": "INPUT",
               "hwMeta": {
-                "level": 0,
                 "name": ""
               },
               "id": "11",
@@ -94,9 +94,9 @@
       "id": "1",
       "ports": [
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 0,
             "name": "dout"
           },
           "id": "6",
@@ -106,9 +106,9 @@
           }
         },
         {
+          "children": null,
           "direction": "INPUT",
           "hwMeta": {
-            "level": 0,
             "name": "en"
           },
           "id": "7",
@@ -118,9 +118,9 @@
           }
         },
         {
+          "children": null,
           "direction": "INPUT",
           "hwMeta": {
-            "level": 0,
             "name": "din"
           },
           "id": "8",
@@ -145,9 +145,9 @@
       "id": "3",
       "ports": [
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 0,
             "name": "din"
           },
           "id": "12",
@@ -172,9 +172,9 @@
       "id": "4",
       "ports": [
         {
+          "children": null,
           "direction": "INPUT",
           "hwMeta": {
-            "level": 0,
             "name": "dout"
           },
           "id": "13",
@@ -199,9 +199,9 @@
       "id": "5",
       "ports": [
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 0,
             "name": "en"
           },
           "id": "14",

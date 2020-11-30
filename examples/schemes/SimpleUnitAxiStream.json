@@ -10,9 +10,9 @@
       "id": "1",
       "ports": [
         {
+          "children": null,
           "direction": "OUTPUT",
           "hwMeta": {
-            "level": 0,
             "name": "a"
           },
           "id": "3",
@@ -37,9 +37,9 @@
       "id": "2",
       "ports": [
         {
+          "children": null,
           "direction": "INPUT",
           "hwMeta": {
-            "level": 0,
             "name": "b"
           },
           "id": "4",
