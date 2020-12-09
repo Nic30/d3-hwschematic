@@ -35,7 +35,7 @@
 
         var width = viewport().width,
             height = viewport().height;
-		
+
         var svg = d3.select("#scheme-placeholder")
             .attr("width", width)
             .attr("height", height);
@@ -55,8 +55,8 @@
         zoom.on("zoom", function applyTransform(ev) {
         	hwSchematic.root.attr("transform", ev.transform)
         });
-        
-        // disable zoom on doubleclick 
+
+        // disable zoom on doubleclick
         // because it interferes with component expanding/collapsing
         svg.call(zoom)
            .on("dblclick.zoom", null)
@@ -64,7 +64,7 @@
     </script>
     <script>
         // data loanding script
-    
+
         // file open handler
         function readSingleFile(e) {
             var file = e.target.files[0];
@@ -78,18 +78,18 @@
             };
             reader.readAsText(file);
           }
-        
+
           function displayContents(contents) {
             var graph = JSON.parse(contents);
-            if (graph.name)
-                 document.title = graph.name;
+            if (graph.hwMeta && graph.hwMeta.name)
+                 document.title = graph.hwMeta.name;
             // load the data and render the elements
             hwSchematic.bindData(graph);
           }
-        
+
           document.getElementById('file-input')
             .addEventListener('change', readSingleFile, false);
-          
+
           function getParameterByName(name, url) {
               if (!url) url = window.location.href;
               name = name.replace(/[\[\]]/g, '\\$&');
@@ -108,6 +108,10 @@
                        document.title = graph.hwMeta.name;
                    // load the data and render the elements
                    hwSchematic.bindData(graph);
+                }, function(reason) {
+                    svg.append("text")
+                       .text(reason);
+                    throw Error(reason);
                 });
           }
     </script>
