@@ -162,6 +162,7 @@ The node renderer has function `select` which is used to determine if renderer s
 * [Spyce](https://github.com/imec-myhdl/Spyce) - Python, Simple circuit editor, MyHDL output (only prototype)
 * [circuitsandbox](http://bitbucket.org/kwellwood/circuitsandbox) - Java, Boolean network editor and simulator
 * [BreadboardSim](https://github.com/daveshah1/BreadboardSim) - C#, Circuit Simulator with Breadboard UI 
+* [hneemann/Digital](https://github.com/hneemann/Digital) - Java, Circut simulator and editor
 * [adaptagrams](https://github.com/mjwybrow/adaptagrams) - C++, Libraries for constraint-based layout and connector routing for diagrams.
 * [sphinxcontrib-verilog-diagrams](https://github.com/SymbiFlow/sphinxcontrib-verilog-diagrams) - Python, Sphinx Extension which generates various types of diagrams from Verilog code.
 * [logidrom](https://github.com/wavedrom/logidrom) - JS, Digital circuit renderer for some specific circuits
