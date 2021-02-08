@@ -76,4 +76,23 @@ export function initNodeParents(node, parent) {
 	(node._children || []).forEach(function(n) {
 		initNodeParents(n, node);
 	});
+
+}
+export function expandPorts(node) {
+	var portlist=[];
+	node.ports.forEach(function (port) {expandPorts4port(port,portlist)});
+	//node.hwMeta.parent = parent;
+	node.ports=portlist;
+	(node.children || node._children || []).forEach(function(n) {
+		expandPorts(n, node);
+	});
+}
+
+export function expandPorts4port(port, portlist){
+	portlist.push(port);
+	(port.children || []).forEach(function(p) {
+		p.parent=port;
+		expandPorts4port(p, portlist);
+	});
+	
 }

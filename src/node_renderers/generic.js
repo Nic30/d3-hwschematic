@@ -1,5 +1,15 @@
 import * as d3 from "d3";
+import { schemePuBuGn } from "d3";
 import { getIOMarker } from "../markers";
+
+
+function portLevel(port){
+	if(!port.parent) return 0;
+	else{
+		return portLevel(port.parent)+1;
+	}
+
+}
 
 /*
  * Basic renderer which renders node as a box with ports, optionally with the body text
@@ -58,8 +68,8 @@ export class GenericNodeRenderer {
 			d.ports.forEach(function(p) {
 				var t = p.properties.side;
 				var indent = 0;
-				if (p.hwMeta.level > 0)
-					indent = (p.hwMeta.level + 1) * CHAR_WIDTH;
+				if (portLevel(p) > 0)
+					indent = (portLevel(p)+1) * CHAR_WIDTH;
 				var portW = widthOfText(p.hwMeta.name) + indent;
 				var pDim = portDim[t];
 				if (pDim === undefined)
@@ -218,6 +228,11 @@ export class GenericNodeRenderer {
 				}
 			});
 
+		// works
+		node.each((d) => {
+            console.log(d.hwMeta.children);
+		})
+		
 		// spot node body text
 		node.append("text")
 			.call(this.renderTextLines.bind(this));
@@ -258,31 +273,33 @@ export class GenericNodeRenderer {
 				});
 			}
 		})
-        // [todo] sort in correct order
+		// [todo] sort in correct order
+		/*console.log(portG.data());
         var port_data = portG.data().sort((a, b) => {
              if (a.hwMeta.parent === b.hwMeta.parent)
-                return -1;
+				return -1;
              else 
                 return a.hwMeta.y < b.hwMeta.y;
-        });
+		});
+		console.log(portG.data());
         // [DEBUG]
         port_data.forEach((d) => {
-            console.log(d.hwMeta.name);
-        })
+            console.log(d.hwMeta.parent);
+        })*/
 		// spot port name
+
 		portG.append("text")
 			.text(function(d, i) {
-                var next_d = port_data[i+1];
-                if (next_d && next_d.hwMeta.level > d.hwMeta.level && d.hwMeta.parent === next_d.hwMeta.paren) {
-                    // [TODO] add + to port label
-                    console.log(d.hwMeta.name);
-                    console.log("dsafasdfas");
+                /*var next_d = port_data[i+1];
+                if (next_d && next_d.hwMeta.level > d.hwMeta.level) {
+					console.log(d.hwMeta.name);
+                    //d.hwMeta.name=toString("+");
                 }
-                
+                */
 				if (d.ignoreLabel)
 					return "";
-				else if (d.hwMeta.level) {
-					var indent = '-'.repeat(d.hwMeta.level);
+				else if (d.parent) {
+					var indent = '-'.repeat(portLevel(d));
 					var side = d.properties.side;
 					if (side == "WEST") {
 						return indent + d.hwMeta.name;;

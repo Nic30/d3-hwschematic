@@ -9,7 +9,7 @@ import { renderLinks } from "./linkRenderer";
 import { Tooltip } from "./tooltip";
 import {
     hyperEdgesToEdges,
-    getNet, initNodeParents
+    getNet, initNodeParents, expandPorts
 } from "./dataPrepare";
 import { default as d3elk } from "./elk/elk-d3";
 
@@ -134,6 +134,7 @@ export default class HwSchematic {
         }
         hyperEdgesToEdges(graph, graph.hwMeta.maxId);
         initNodeParents(graph, null);
+        expandPorts(graph);
 
         if (this._PERF) {
             var t0 = new Date().getTime();
