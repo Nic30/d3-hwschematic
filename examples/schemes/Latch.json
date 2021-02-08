@@ -11,8 +11,10 @@
           "id": "2",
           "ports": [
             {
+              "children": [],
               "direction": "OUTPUT",
               "hwMeta": {
+                "connectedAsParent": false,
                 "level": 0,
                 "name": ""
               },
@@ -23,8 +25,10 @@
               }
             },
             {
+              "children": [],
               "direction": "INPUT",
               "hwMeta": {
+                "connectedAsParent": false,
                 "level": 0,
                 "name": ""
               },
@@ -35,8 +39,10 @@
               }
             },
             {
+              "children": [],
               "direction": "INPUT",
               "hwMeta": {
+                "connectedAsParent": false,
                 "level": 0,
                 "name": ""
               },
@@ -94,8 +100,10 @@
       "id": "1",
       "ports": [
         {
+          "children": [],
           "direction": "OUTPUT",
           "hwMeta": {
+            "connectedAsParent": false,
             "level": 0,
             "name": "dout"
           },
@@ -106,8 +114,10 @@
           }
         },
         {
+          "children": [],
           "direction": "INPUT",
           "hwMeta": {
+            "connectedAsParent": false,
             "level": 0,
             "name": "en"
           },
@@ -118,8 +128,10 @@
           }
         },
         {
+          "children": [],
           "direction": "INPUT",
           "hwMeta": {
+            "connectedAsParent": false,
             "level": 0,
             "name": "din"
           },
@@ -145,8 +157,10 @@
       "id": "3",
       "ports": [
         {
+          "children": [],
           "direction": "OUTPUT",
           "hwMeta": {
+            "connectedAsParent": false,
             "level": 0,
             "name": "din"
           },
@@ -172,8 +186,10 @@
       "id": "4",
       "ports": [
         {
+          "children": [],
           "direction": "INPUT",
           "hwMeta": {
+            "connectedAsParent": false,
             "level": 0,
             "name": "dout"
           },
@@ -199,8 +215,10 @@
       "id": "5",
       "ports": [
         {
+          "children": [],
           "direction": "OUTPUT",
           "hwMeta": {
+            "connectedAsParent": false,
             "level": 0,
             "name": "en"
           },

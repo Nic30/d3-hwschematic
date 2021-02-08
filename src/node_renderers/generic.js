@@ -1,5 +1,15 @@
 import * as d3 from "d3";
+import { schemePuBuGn } from "d3";
 import { getIOMarker } from "../markers";
+
+
+function portLevel(port){
+	if(!port.parent) return 0;
+	else{
+		return portLevel(port.parent)+1;
+	}
+
+}
 
 /*
  * Basic renderer which renders node as a box with ports, optionally with the body text
@@ -12,7 +22,7 @@ export class GenericNodeRenderer {
 		this.schematic = schematic;
 	}
     /**
-     * check if this selector should be used for this node 
+     * check if this selector should be used for this node
      **/
 	selector(node) {
 		// always return true, because this is a default renderer which just renders a box with ports
@@ -27,9 +37,9 @@ export class GenericNodeRenderer {
 
     /**
      * Init bodyText and resolve size of node from body text and ports
-     * 
+     *
      * @param d component node
-     * 
+     *
      */
 	initNodeSizes(d) {
 		var schematic = this.schematic;
@@ -58,8 +68,8 @@ export class GenericNodeRenderer {
 			d.ports.forEach(function(p) {
 				var t = p.properties.side;
 				var indent = 0;
-				if (p.hwMeta.level > 0)
-					indent = (p.hwMeta.level + 1) * CHAR_WIDTH;
+				if (portLevel(p) > 0)
+					indent = (portLevel(p)+1) * CHAR_WIDTH;
 				var portW = widthOfText(p.hwMeta.name) + indent;
 				var pDim = portDim[t];
 				if (pDim === undefined)
@@ -99,7 +109,7 @@ export class GenericNodeRenderer {
 
     /**
      * Split bodyText of one to lines and resolve dimensions of body text
-     * 
+     *
      * @param d component node
      */
 	initBodyTextLines(d) {
@@ -143,7 +153,7 @@ export class GenericNodeRenderer {
 			var bodyText = d3.select(this)
 			var d = bodyText.data()[0];
 			var bodyTextLines = d.hwMeta.bodyText;
-			var _MBT = [MBT[0] / CHAR_WIDTH, MBT[1] / schematic.CHAR_HEIGHT];
+			var _MBT = [MBT[0] / CHAR_WIDTH, MBT[1] / CHAR_HEIGHT];
 
 			if (bodyTextLines && (!d.children
 				|| d.children.length == 0)) {
@@ -164,7 +174,7 @@ export class GenericNodeRenderer {
 	}
 
     /**
-     * Prepare node before ELK processing 
+     * Prepare node before ELK processing
      * */
 	prepare(node) {
 		this.initNodeSizes(node)
@@ -172,14 +182,14 @@ export class GenericNodeRenderer {
 
     /**
      * Render svg of node
-     * 
+     *
      * @param root root svg element where nodes should be rendered
      * @param nodeG svg g for each node with data binded
      * */
 	render(root, nodeG) {
 		var node = nodeG
 			.attr("class", function(d) {
-				var cssClass; 
+				var cssClass;
 				if (d.hwMeta && d.hwMeta.isExternalPort) {
 					cssClass = "node-external-port";
 				} else {
@@ -218,6 +228,11 @@ export class GenericNodeRenderer {
 				}
 			});
 
+		// works
+		node.each((d) => {
+            console.log(d.hwMeta.children);
+		})
+
 		// spot node body text
 		node.append("text")
 			.call(this.renderTextLines.bind(this));
@@ -230,8 +245,8 @@ export class GenericNodeRenderer {
 		var PORT_HEIGHT = schematic.PORT_HEIGHT;
 		var CHAR_WIDTH = schematic.CHAR_WIDTH;
 		var portG = node.selectAll(".port")
-			.data(function(d) { 
-				return d.ports || []; 
+			.data(function(d) {
+				return d.ports || [];
 			})
 			.enter()
 			.append("g")
@@ -258,13 +273,20 @@ export class GenericNodeRenderer {
 				});
 			}
 		})
+
 		// spot port name
 		portG.append("text")
-			.text(function(d) {
+			.text(function(d, i) {
+                /*var next_d = port_data[i+1];
+                if (next_d && next_d.hwMeta.level > d.hwMeta.level) {
+					console.log(d.hwMeta.name);
+                    //d.hwMeta.name=toString("+");
+                }
+                */
 				if (d.ignoreLabel)
 					return "";
-				else if (d.hwMeta.level) {
-					var indent = '-'.repeat(d.hwMeta.level);
+				else if (d.parent) {
+					var indent = '-'.repeat(portLevel(d));
 					var side = d.properties.side;
 					if (side == "WEST") {
 						return indent + d.hwMeta.name;;
@@ -281,9 +303,6 @@ export class GenericNodeRenderer {
 				if (side == "WEST") {
 					return 7;
 				} else if (side == "EAST") {
-					//if (d.hwMeta.name === null || d.hwMeta.name.length == 0) {
-					//    return 0;
-					//}
 					if (typeof this.getBBox == "undefined") {
 						// JSDOM under nodejs
 						return -this.textContent.length * CHAR_WIDTH - CHAR_WIDTH / 2

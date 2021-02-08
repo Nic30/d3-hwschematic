@@ -10,8 +10,10 @@
       "id": "1",
       "ports": [
         {
+          "children": [],
           "direction": "OUTPUT",
           "hwMeta": {
+            "connectedAsParent": false,
             "level": 0,
             "name": "a"
           },
@@ -37,8 +39,10 @@
       "id": "2",
       "ports": [
         {
+          "children": [],
           "direction": "INPUT",
           "hwMeta": {
+            "connectedAsParent": false,
             "level": 0,
             "name": "b"
           },
@@ -63,8 +67,10 @@
       "id": "3",
       "ports": [
         {
+          "children": [],
           "direction": "OUTPUT",
           "hwMeta": {
+            "connectedAsParent": false,
             "level": 0,
             "name": null
           },
@@ -75,8 +81,10 @@
           }
         },
         {
+          "children": [],
           "direction": "INPUT",
           "hwMeta": {
+            "connectedAsParent": false,
             "level": 0,
             "name": "[4:2]"
           },
@@ -87,8 +95,10 @@
           }
         },
         {
+          "children": [],
           "direction": "INPUT",
           "hwMeta": {
+            "connectedAsParent": false,
             "level": 0,
             "name": "[2:0]"
           },
@@ -113,8 +123,10 @@
       "id": "4",
       "ports": [
         {
+          "children": [],
           "direction": "OUTPUT",
           "hwMeta": {
+            "connectedAsParent": false,
             "level": 0,
             "name": "[2:0]"
           },
@@ -125,8 +137,10 @@
           }
         },
         {
+          "children": [],
           "direction": "OUTPUT",
           "hwMeta": {
+            "connectedAsParent": false,
             "level": 0,
             "name": "[4:2]"
           },
@@ -137,8 +151,10 @@
           }
         },
         {
+          "children": [],
           "direction": "INPUT",
           "hwMeta": {
+            "connectedAsParent": false,
             "level": 0,
             "name": ""
           },
@@ -168,7 +184,7 @@
     },
     {
       "hwMeta": {
-        "name": "Concat(internA, internB)"
+        "name": "Concat(internB, internA)"
       },
       "id": "14",
       "source": "3",

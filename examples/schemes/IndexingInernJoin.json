@@ -10,8 +10,10 @@
       "id": "1",
       "ports": [
         {
+          "children": [],
           "direction": "OUTPUT",
           "hwMeta": {
+            "connectedAsParent": false,
             "level": 0,
             "name": "a"
           },
@@ -37,8 +39,10 @@
       "id": "2",
       "ports": [
         {
+          "children": [],
           "direction": "OUTPUT",
           "hwMeta": {
+            "connectedAsParent": false,
             "level": 0,
             "name": "b"
           },
@@ -64,8 +68,10 @@
       "id": "3",
       "ports": [
         {
+          "children": [],
           "direction": "INPUT",
           "hwMeta": {
+            "connectedAsParent": false,
             "level": 0,
             "name": "c"
           },
@@ -91,8 +97,10 @@
       "id": "4",
       "ports": [
         {
+          "children": [],
           "direction": "INPUT",
           "hwMeta": {
+            "connectedAsParent": false,
             "level": 0,
             "name": "d"
           },
@@ -117,8 +125,10 @@
       "id": "5",
       "ports": [
         {
+          "children": [],
           "direction": "OUTPUT",
           "hwMeta": {
+            "connectedAsParent": false,
             "level": 0,
             "name": null
           },
@@ -129,8 +139,10 @@
           }
         },
         {
+          "children": [],
           "direction": "INPUT",
           "hwMeta": {
+            "connectedAsParent": false,
             "level": 0,
             "name": "[1]"
           },
@@ -141,8 +153,10 @@
           }
         },
         {
+          "children": [],
           "direction": "INPUT",
           "hwMeta": {
+            "connectedAsParent": false,
             "level": 0,
             "name": "[0]"
           },
@@ -167,8 +181,10 @@
       "id": "6",
       "ports": [
         {
+          "children": [],
           "direction": "OUTPUT",
           "hwMeta": {
+            "connectedAsParent": false,
             "level": 0,
             "name": "[0]"
           },
@@ -179,8 +195,10 @@
           }
         },
         {
+          "children": [],
           "direction": "OUTPUT",
           "hwMeta": {
+            "connectedAsParent": false,
             "level": 0,
             "name": "[1]"
           },
@@ -191,8 +209,10 @@
           }
         },
         {
+          "children": [],
           "direction": "INPUT",
           "hwMeta": {
+            "connectedAsParent": false,
             "level": 0,
             "name": ""
           },

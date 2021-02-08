@@ -28,10 +28,10 @@ function hyperEdgeListToEdges(eList, newEdges, idOffset) {
 
 /**
  * Convert hyperedges to edges in whole graph
- * 
+ *
  * @param n root node
  * @param idOffset int, max id in graph, used for generating
- *                 of new edges from hyperedges 
+ *                 of new edges from hyperedges
  **/
 export function hyperEdgesToEdges(n, idOffset) {
 	if (n.edges) {
@@ -76,4 +76,26 @@ export function initNodeParents(node, parent) {
 	(node._children || []).forEach(function(n) {
 		initNodeParents(n, node);
 	});
+
+}
+export function expandPorts(node) {
+	var portlist = [];
+	node.ports.forEach(function (port) {expandPorts4port(port, portlist)});
+	//node.hwMeta.parent = parent;
+	node.ports = portlist;
+	(node.children || node._children || []).forEach(function(n) {
+		expandPorts(n, node);
+	});
+}
+
+export function expandPorts4port(port, portlist){
+    if (port.hwMeta.connectedAsParent) {
+        return;
+    }
+	portlist.push(port);
+	(port.children || []).forEach(function(p) {
+		p.parent = port;
+		expandPorts4port(p, portlist);
+	});
+
 }

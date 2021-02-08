@@ -73,7 +73,7 @@ ELK `LNode` (component instance)
     "name": "compoent instance name", // optional str
     "cls": "compoent (module) name", // optional str
     "bodyText": "", // optional str
-    "maxId": 2, // max id of any object in this node used to avoid re-counting object in expand/collapse
+    "maxId": 2, // max id of any object in this node used to avoid re-counting object if new object is generated
     "isExternalPort": true // optional flag which set component style to external port
     "cssClass": "node-style0", // optional string, css classes separated by space
     "cssStyle": "fill:red", // css style specification separated by ;
@@ -84,8 +84,9 @@ ELK `LNode` (component instance)
     "org.eclipse.elk.layered.mergeEdges": 1
   },
   "ports": [],    // list of LPort
-  "children": [], // list of LNode
   "edges": [],    // list of LEdge
+  "children": [], // list of LNode, if the node should be collapsed rename this property
+                  // to "_children" and "edges" to "_edges"
 }
 ```
 If the children should be collapsed by default, the children `children` and `edges` property should be renamed to `_children` and `_edges`.
@@ -95,17 +96,19 @@ ELK `LPort`
 {
   "id": "1",
   "hwMeta": { // [d3-hwschematic specific]
-    "level": 0, // used to mark nested ports, if level > prev. port.level port is member of prev. port
     "name": "port name",
     "cssClass": "node-style0", // optional string, css classes separated by space
     "cssStyle": "fill:red", // css style specification separated by ;
+    "connectedAsParent": true, // an optional flag that notes that this port
+                               // has no connections but it is connected as its parent port
   },
   "direction": "OUTPUT", // [d3-hwschematic specific] controlls direction marker
   "properties": {
     "portSide": "EAST",
     "portIndex": 0 // The order is assumed as clockwise, starting with the leftmost port on the top side.
                    // Required only for components with "org.eclipse.elk.portConstraints": "FIXED_ORDER"
-  }
+  },
+  "children": [], // list of LPort, if the port should be collapsed rename this property to "_children"
 }
 ```
 
@@ -113,9 +116,9 @@ ELK `LEdge`
 ```javascript
 { // simple LEdge
   "id": "62",
-  "source": "2", // id of component 
+  "source": "2", // id of component
   "sourcePort": "23", // id of component port
-  "target": "4", // id of component 
+  "target": "4", // id of component
   "targetPort": "29", // id of component port
   "hwMeta": { // [d3-hwschematic specific]
     "name": null // optional string, displayed on mouse over
@@ -132,7 +135,7 @@ ELK `LEdge`
     [ "18", "346"],  // id of component, id of port
     [ "21", "354"],
   ],
-  "hwMeta": { // [d3-hwschematic specific] 
+  "hwMeta": { // [d3-hwschematic specific]
     "name": "wr_ptr",
     "cssClass": "link-style0", // optional string, css classes separated by space
     "cssStyle": "stroke:red", // css style specification separated by ;
@@ -159,10 +162,10 @@ The node renderer has function `select` which is used to determine if renderer s
 * [pyVhdl2Sch](https://github.com/LaurentCabaret/pyVhdl2Sch) -  Python based VHDL to (pdf) schematic converter
 * [verilog-dot](https://github.com/ben-marshall/verilog-dot) - Python, A simple dot file / graph generator for Verilog syntax trees.
 * [diagrammer](https://github.com/freechipsproject/diagrammer) - Scala, Very simple visualizer for chisel3.
-* [hwstudio](https://github.com/umarcor/hwstudio) - GDScript, GUI editor for hardware description designs 
+* [hwstudio](https://github.com/umarcor/hwstudio) - GDScript, GUI editor for hardware description designs
 * [Spyce](https://github.com/imec-myhdl/Spyce) - Python, Simple circuit editor, MyHDL output (only prototype)
 * [circuitsandbox](http://bitbucket.org/kwellwood/circuitsandbox) - Java, Boolean network editor and simulator
-* [BreadboardSim](https://github.com/daveshah1/BreadboardSim) - C#, Circuit Simulator with Breadboard UI 
+* [BreadboardSim](https://github.com/daveshah1/BreadboardSim) - C#, Circuit Simulator with Breadboard UI
 * [hneemann/Digital](https://github.com/hneemann/Digital) - Java, Circut simulator and editor
 * [adaptagrams](https://github.com/mjwybrow/adaptagrams) - C++, Libraries for constraint-based layout and connector routing for diagrams.
 * [sphinxcontrib-verilog-diagrams](https://github.com/SymbiFlow/sphinxcontrib-verilog-diagrams) - Python, Sphinx Extension which generates various types of diagrams from Verilog code.
@@ -172,5 +175,5 @@ The node renderer has function `select` which is used to determine if renderer s
 * [elkjs](https://github.com/kieler/elkjs) - JS, ELK transpiled to JS, (used in this project)
 * [ogdf](https://github.com/ogdf/ogdf) - C++, Libary focused on automatic graph drawing.
 * [hdelk](https://github.com/davidthings/hdelk) - Web-based HDL diagramming tool
-* [Siva](https://github.com/jasonpjacobs/Siva) - Python, Qt based scheme editor 
+* [Siva](https://github.com/jasonpjacobs/Siva) - Python, Qt based scheme editor
 

@@ -9,7 +9,7 @@ import { renderLinks } from "./linkRenderer";
 import { Tooltip } from "./tooltip";
 import {
     hyperEdgesToEdges,
-    getNet, initNodeParents
+    getNet, initNodeParents, expandPorts
 } from "./dataPrepare";
 import { default as d3elk } from "./elk/elk-d3";
 
@@ -54,7 +54,7 @@ function toggleHideChildren(node) {
 
 /**
  * HwScheme builds scheme diagrams after bindData(data) is called
- * 
+ *
  * @param svg: root svg element where scheme will be rendered
  * @attention zoom is not applied it is only used for focusing on objects
  * @note do specify size of svg to have optimal result
@@ -80,7 +80,7 @@ export default class HwSchematic {
         this._nodes = null;
         this._edges = null;
 
-        // graph layouter to resovbe posiions of elements 
+        // graph layouter to resovbe posiions of elements
         this.layouter = new d3elk();
         this.layouter
             .options({
@@ -123,13 +123,18 @@ export default class HwSchematic {
 
     /**
      * Set bind graph data to graph rendering engine
-     * 
+     *
      * @return promise for this job
      */
     bindData(graph) {
         this.removeGraph();
+        var postCompaction = "layered.compaction.postCompaction.strategy";
+        if (!graph.properties[postCompaction]) {
+            graph.properties[postCompaction] = "EDGE_LENGTH";
+        }
         hyperEdgesToEdges(graph, graph.hwMeta.maxId);
         initNodeParents(graph, null);
+        expandPorts(graph);
 
         if (this._PERF) {
             var t0 = new Date().getTime();
@@ -210,11 +215,11 @@ export default class HwSchematic {
         });
         this._applyLayoutLinks();
     }
-    
+
     _applyLayoutLinks(root, edges) {
         var _this = this;
         var edges = this._edges;
-        
+
         var [link, linkWrap, junctionPoint] = renderLinks(this.root, edges);
         // build netToLink
         var netToLink = {};
@@ -236,7 +241,7 @@ export default class HwSchematic {
                 netToLink[getNet(e).id]["core"].push(l);
             });
         });
-		
+
 		// set highlingt and tooltip on mouser over over the net
         linkWrap.on("mouseover", function(ev, d) {
             var netWrap = netToLink[getNet(d).id]["wrap"];
@@ -253,7 +258,7 @@ export default class HwSchematic {
             _this.tooltip.hide();
         });
 
-		// set link highlight on net click 
+		// set link highlight on net click
         function onLinkClick(ev, d) {
             var net = getNet(d);
             var doSelect = net.selected = !net.selected;

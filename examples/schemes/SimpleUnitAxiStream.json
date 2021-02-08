@@ -4,14 +4,87 @@
       "hwMeta": {
         "cls": null,
         "isExternalPort": true,
-        "maxId": 4,
+        "maxId": 14,
         "name": "a"
       },
       "id": "1",
       "ports": [
         {
+          "children": [
+            {
+              "children": [],
+              "direction": "OUTPUT",
+              "hwMeta": {
+                "connectedAsParent": true,
+                "level": 1,
+                "name": "data"
+              },
+              "id": "4",
+              "properties": {
+                "index": 1,
+                "side": "EAST"
+              }
+            },
+            {
+              "children": [],
+              "direction": "OUTPUT",
+              "hwMeta": {
+                "connectedAsParent": true,
+                "level": 1,
+                "name": "strb"
+              },
+              "id": "5",
+              "properties": {
+                "index": 2,
+                "side": "EAST"
+              }
+            },
+            {
+              "children": [],
+              "direction": "OUTPUT",
+              "hwMeta": {
+                "connectedAsParent": true,
+                "level": 1,
+                "name": "last"
+              },
+              "id": "6",
+              "properties": {
+                "index": 3,
+                "side": "EAST"
+              }
+            },
+            {
+              "children": [],
+              "direction": "INPUT",
+              "hwMeta": {
+                "connectedAsParent": true,
+                "level": 1,
+                "name": "ready"
+              },
+              "id": "7",
+              "properties": {
+                "index": 4,
+                "side": "EAST"
+              }
+            },
+            {
+              "children": [],
+              "direction": "OUTPUT",
+              "hwMeta": {
+                "connectedAsParent": true,
+                "level": 1,
+                "name": "valid"
+              },
+              "id": "8",
+              "properties": {
+                "index": 5,
+                "side": "EAST"
+              }
+            }
+          ],
           "direction": "OUTPUT",
           "hwMeta": {
+            "connectedAsParent": false,
             "level": 0,
             "name": "a"
           },
@@ -31,20 +104,93 @@
       "hwMeta": {
         "cls": null,
         "isExternalPort": true,
-        "maxId": 4,
+        "maxId": 14,
         "name": "b"
       },
       "id": "2",
       "ports": [
         {
+          "children": [
+            {
+              "children": [],
+              "direction": "INPUT",
+              "hwMeta": {
+                "connectedAsParent": true,
+                "level": 1,
+                "name": "data"
+              },
+              "id": "10",
+              "properties": {
+                "index": 0,
+                "side": "WEST"
+              }
+            },
+            {
+              "children": [],
+              "direction": "INPUT",
+              "hwMeta": {
+                "connectedAsParent": true,
+                "level": 1,
+                "name": "strb"
+              },
+              "id": "11",
+              "properties": {
+                "index": 1,
+                "side": "WEST"
+              }
+            },
+            {
+              "children": [],
+              "direction": "INPUT",
+              "hwMeta": {
+                "connectedAsParent": true,
+                "level": 1,
+                "name": "last"
+              },
+              "id": "12",
+              "properties": {
+                "index": 2,
+                "side": "WEST"
+              }
+            },
+            {
+              "children": [],
+              "direction": "OUTPUT",
+              "hwMeta": {
+                "connectedAsParent": true,
+                "level": 1,
+                "name": "ready"
+              },
+              "id": "13",
+              "properties": {
+                "index": 3,
+                "side": "WEST"
+              }
+            },
+            {
+              "children": [],
+              "direction": "INPUT",
+              "hwMeta": {
+                "connectedAsParent": true,
+                "level": 1,
+                "name": "valid"
+              },
+              "id": "14",
+              "properties": {
+                "index": 4,
+                "side": "WEST"
+              }
+            }
+          ],
           "direction": "INPUT",
           "hwMeta": {
+            "connectedAsParent": false,
             "level": 0,
             "name": "b"
           },
-          "id": "4",
+          "id": "9",
           "properties": {
-            "index": 0,
+            "index": 5,
             "side": "WEST"
           }
         }
@@ -60,16 +206,16 @@
       "hwMeta": {
         "name": null
       },
-      "id": "5",
+      "id": "15",
       "source": "1",
       "sourcePort": "3",
       "target": "2",
-      "targetPort": "4"
+      "targetPort": "9"
     }
   ],
   "hwMeta": {
     "cls": null,
-    "maxId": 5,
+    "maxId": 15,
     "name": "SimpleUnitAxiStream"
   },
   "ports": [],
