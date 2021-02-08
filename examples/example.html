@@ -71,6 +71,7 @@
             if (!file) {
               return;
             }
+            setUrlParameterByName("schematic", "schemes/" + file.name);
             var reader = new FileReader();
             reader.onload = function(e) {
               var contents = e.target.result;
@@ -90,17 +91,21 @@
           document.getElementById('file-input')
             .addEventListener('change', readSingleFile, false);
 
-          function getParameterByName(name, url) {
+          function getUrlParameterByName(name, url) {
               if (!url) url = window.location.href;
-              name = name.replace(/[\[\]]/g, '\\$&');
-              var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-                  results = regex.exec(url);
-              if (!results) return null;
-              if (!results[2]) return '';
-              return decodeURIComponent(results[2].replace(/\+/g, ' '));
+              url = new URL(url);
+              var search_params = url.searchParams;
+              return search_params.get(name);
+          }
+          function setUrlParameterByName(name, value, url) {
+              if (!url) url = window.location.href;
+              url = new URL(url);
+              var searchParams = url.searchParams;
+              searchParams.set(name, value);
+              window.history.replaceState({} , value, url.toString());
           }
 
-          var schematic_url = getParameterByName("schematic");
+          var schematic_url = getUrlParameterByName("schematic");
           if (schematic_url != null) {
              d3.json(schematic_url)
                .then(function(graph) {
