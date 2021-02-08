@@ -22,7 +22,7 @@ export class GenericNodeRenderer {
 		this.schematic = schematic;
 	}
     /**
-     * check if this selector should be used for this node 
+     * check if this selector should be used for this node
      **/
 	selector(node) {
 		// always return true, because this is a default renderer which just renders a box with ports
@@ -37,9 +37,9 @@ export class GenericNodeRenderer {
 
     /**
      * Init bodyText and resolve size of node from body text and ports
-     * 
+     *
      * @param d component node
-     * 
+     *
      */
 	initNodeSizes(d) {
 		var schematic = this.schematic;
@@ -109,7 +109,7 @@ export class GenericNodeRenderer {
 
     /**
      * Split bodyText of one to lines and resolve dimensions of body text
-     * 
+     *
      * @param d component node
      */
 	initBodyTextLines(d) {
@@ -153,7 +153,7 @@ export class GenericNodeRenderer {
 			var bodyText = d3.select(this)
 			var d = bodyText.data()[0];
 			var bodyTextLines = d.hwMeta.bodyText;
-			var _MBT = [MBT[0] / CHAR_WIDTH, MBT[1] / schematic.CHAR_HEIGHT];
+			var _MBT = [MBT[0] / CHAR_WIDTH, MBT[1] / CHAR_HEIGHT];
 
 			if (bodyTextLines && (!d.children
 				|| d.children.length == 0)) {
@@ -174,7 +174,7 @@ export class GenericNodeRenderer {
 	}
 
     /**
-     * Prepare node before ELK processing 
+     * Prepare node before ELK processing
      * */
 	prepare(node) {
 		this.initNodeSizes(node)
@@ -182,14 +182,14 @@ export class GenericNodeRenderer {
 
     /**
      * Render svg of node
-     * 
+     *
      * @param root root svg element where nodes should be rendered
      * @param nodeG svg g for each node with data binded
      * */
 	render(root, nodeG) {
 		var node = nodeG
 			.attr("class", function(d) {
-				var cssClass; 
+				var cssClass;
 				if (d.hwMeta && d.hwMeta.isExternalPort) {
 					cssClass = "node-external-port";
 				} else {
@@ -232,7 +232,7 @@ export class GenericNodeRenderer {
 		node.each((d) => {
             console.log(d.hwMeta.children);
 		})
-		
+
 		// spot node body text
 		node.append("text")
 			.call(this.renderTextLines.bind(this));
@@ -245,8 +245,8 @@ export class GenericNodeRenderer {
 		var PORT_HEIGHT = schematic.PORT_HEIGHT;
 		var CHAR_WIDTH = schematic.CHAR_WIDTH;
 		var portG = node.selectAll(".port")
-			.data(function(d) { 
-				return d.ports || []; 
+			.data(function(d) {
+				return d.ports || [];
 			})
 			.enter()
 			.append("g")
@@ -273,21 +273,8 @@ export class GenericNodeRenderer {
 				});
 			}
 		})
-		// [todo] sort in correct order
-		/*console.log(portG.data());
-        var port_data = portG.data().sort((a, b) => {
-             if (a.hwMeta.parent === b.hwMeta.parent)
-				return -1;
-             else 
-                return a.hwMeta.y < b.hwMeta.y;
-		});
-		console.log(portG.data());
-        // [DEBUG]
-        port_data.forEach((d) => {
-            console.log(d.hwMeta.parent);
-        })*/
-		// spot port name
 
+		// spot port name
 		portG.append("text")
 			.text(function(d, i) {
                 /*var next_d = port_data[i+1];
@@ -316,9 +303,6 @@ export class GenericNodeRenderer {
 				if (side == "WEST") {
 					return 7;
 				} else if (side == "EAST") {
-					//if (d.hwMeta.name === null || d.hwMeta.name.length == 0) {
-					//    return 0;
-					//}
 					if (typeof this.getBBox == "undefined") {
 						// JSDOM under nodejs
 						return -this.textContent.length * CHAR_WIDTH - CHAR_WIDTH / 2
