@@ -11,9 +11,11 @@
           "id": "2",
           "ports": [
             {
-              "children": null,
+              "children": [],
               "direction": "OUTPUT",
               "hwMeta": {
+                "connectedAsParent": false,
+                "level": 0,
                 "name": ""
               },
               "id": "26",
@@ -23,9 +25,11 @@
               }
             },
             {
-              "children": null,
+              "children": [],
               "direction": "INPUT",
               "hwMeta": {
+                "connectedAsParent": false,
+                "level": 0,
                 "name": ""
               },
               "id": "27",
@@ -35,9 +39,11 @@
               }
             },
             {
-              "children": null,
+              "children": [],
               "direction": "INPUT",
               "hwMeta": {
+                "connectedAsParent": false,
+                "level": 0,
                 "name": ""
               },
               "id": "28",
@@ -47,9 +53,11 @@
               }
             },
             {
-              "children": null,
+              "children": [],
               "direction": "INPUT",
               "hwMeta": {
+                "connectedAsParent": false,
+                "level": 0,
                 "name": ""
               },
               "id": "29",
@@ -73,9 +81,11 @@
           "id": "3",
           "ports": [
             {
-              "children": null,
+              "children": [],
               "direction": "OUTPUT",
               "hwMeta": {
+                "connectedAsParent": false,
+                "level": 0,
                 "name": null
               },
               "id": "30",
@@ -85,9 +95,11 @@
               }
             },
             {
-              "children": null,
+              "children": [],
               "direction": "INPUT",
               "hwMeta": {
+                "connectedAsParent": false,
+                "level": 0,
                 "name": null
               },
               "id": "31",
@@ -97,9 +109,11 @@
               }
             },
             {
-              "children": null,
+              "children": [],
               "direction": "INPUT",
               "hwMeta": {
+                "connectedAsParent": false,
+                "level": 0,
                 "name": null
               },
               "id": "32",
@@ -124,9 +138,11 @@
           "id": "4",
           "ports": [
             {
-              "children": null,
+              "children": [],
               "direction": "OUTPUT",
               "hwMeta": {
+                "connectedAsParent": false,
+                "level": 0,
                 "name": null
               },
               "id": "33",
@@ -150,9 +166,11 @@
           "id": "5",
           "ports": [
             {
-              "children": null,
+              "children": [],
               "direction": "OUTPUT",
               "hwMeta": {
+                "connectedAsParent": false,
+                "level": 0,
                 "name": null
               },
               "id": "34",
@@ -175,9 +193,11 @@
           "id": "6",
           "ports": [
             {
-              "children": null,
+              "children": [],
               "direction": "OUTPUT",
               "hwMeta": {
+                "connectedAsParent": false,
+                "level": 0,
                 "name": "o"
               },
               "id": "35",
@@ -187,9 +207,11 @@
               }
             },
             {
-              "children": null,
+              "children": [],
               "direction": "INPUT",
               "hwMeta": {
+                "connectedAsParent": false,
+                "level": 0,
                 "name": "i"
               },
               "id": "36",
@@ -199,9 +221,11 @@
               }
             },
             {
-              "children": null,
+              "children": [],
               "direction": "INPUT",
               "hwMeta": {
+                "connectedAsParent": false,
+                "level": 0,
                 "name": "clk"
               },
               "id": "37",
@@ -225,9 +249,11 @@
           "id": "7",
           "ports": [
             {
-              "children": null,
+              "children": [],
               "direction": "OUTPUT",
               "hwMeta": {
+                "connectedAsParent": false,
+                "level": 0,
                 "name": null
               },
               "id": "38",
@@ -237,9 +263,11 @@
               }
             },
             {
-              "children": null,
+              "children": [],
               "direction": "INPUT",
               "hwMeta": {
+                "connectedAsParent": false,
+                "level": 0,
                 "name": null
               },
               "id": "39",
@@ -356,9 +384,11 @@
       "id": "1",
       "ports": [
         {
-          "children": null,
+          "children": [],
           "direction": "OUTPUT",
           "hwMeta": {
+            "connectedAsParent": false,
+            "level": 0,
             "name": "cntr_bin_reg"
           },
           "id": "22",
@@ -368,9 +398,11 @@
           }
         },
         {
-          "children": null,
+          "children": [],
           "direction": "INPUT",
           "hwMeta": {
+            "connectedAsParent": false,
+            "level": 0,
             "name": "rst_n"
           },
           "id": "23",
@@ -380,9 +412,11 @@
           }
         },
         {
-          "children": null,
+          "children": [],
           "direction": "INPUT",
           "hwMeta": {
+            "connectedAsParent": false,
+            "level": 0,
             "name": "cntr_bin_reg_next"
           },
           "id": "24",
@@ -392,9 +426,11 @@
           }
         },
         {
-          "children": null,
+          "children": [],
           "direction": "INPUT",
           "hwMeta": {
+            "connectedAsParent": false,
+            "level": 0,
             "name": "clk"
           },
           "id": "25",
@@ -419,9 +455,11 @@
       "id": "14",
       "ports": [
         {
-          "children": null,
+          "children": [],
           "direction": "OUTPUT",
           "hwMeta": {
+            "connectedAsParent": false,
+            "level": 0,
             "name": "clk"
           },
           "id": "55",
@@ -446,9 +484,11 @@
       "id": "15",
       "ports": [
         {
-          "children": null,
+          "children": [],
           "direction": "OUTPUT",
           "hwMeta": {
+            "connectedAsParent": false,
+            "level": 0,
             "name": "rst_n"
           },
           "id": "56",
@@ -473,9 +513,11 @@
       "id": "16",
       "ports": [
         {
-          "children": null,
+          "children": [],
           "direction": "OUTPUT",
           "hwMeta": {
+            "connectedAsParent": false,
+            "level": 0,
             "name": "en"
           },
           "id": "57",
@@ -500,9 +542,11 @@
       "id": "17",
       "ports": [
         {
-          "children": null,
+          "children": [],
           "direction": "INPUT",
           "hwMeta": {
+            "connectedAsParent": false,
+            "level": 0,
             "name": "dataOut"
           },
           "id": "58",
@@ -526,9 +570,11 @@
       "id": "18",
       "ports": [
         {
-          "children": null,
+          "children": [],
           "direction": "OUTPUT",
           "hwMeta": {
+            "connectedAsParent": false,
+            "level": 0,
             "name": null
           },
           "id": "59",
@@ -538,9 +584,11 @@
           }
         },
         {
-          "children": null,
+          "children": [],
           "direction": "INPUT",
           "hwMeta": {
+            "connectedAsParent": false,
+            "level": 0,
             "name": null
           },
           "id": "60",
@@ -550,9 +598,11 @@
           }
         },
         {
-          "children": null,
+          "children": [],
           "direction": "INPUT",
           "hwMeta": {
+            "connectedAsParent": false,
+            "level": 0,
             "name": null
           },
           "id": "61",
@@ -576,9 +626,11 @@
       "id": "19",
       "ports": [
         {
-          "children": null,
+          "children": [],
           "direction": "OUTPUT",
           "hwMeta": {
+            "connectedAsParent": false,
+            "level": 0,
             "name": null
           },
           "id": "62",
@@ -588,10 +640,12 @@
           }
         },
         {
-          "children": null,
+          "children": [],
           "direction": "INPUT",
           "hwMeta": {
-            "name": "[4:1]"
+            "connectedAsParent": false,
+            "level": 0,
+            "name": "[3]"
           },
           "id": "63",
           "properties": {
@@ -600,10 +654,12 @@
           }
         },
         {
-          "children": null,
+          "children": [],
           "direction": "INPUT",
           "hwMeta": {
-            "name": "[0]"
+            "connectedAsParent": false,
+            "level": 0,
+            "name": "[3:0]"
           },
           "id": "64",
           "properties": {
@@ -627,9 +683,11 @@
       "id": "20",
       "ports": [
         {
-          "children": null,
+          "children": [],
           "direction": "OUTPUT",
           "hwMeta": {
+            "connectedAsParent": false,
+            "level": 0,
             "name": null
           },
           "id": "65",
@@ -652,9 +710,11 @@
       "id": "21",
       "ports": [
         {
-          "children": null,
+          "children": [],
           "direction": "OUTPUT",
           "hwMeta": {
+            "connectedAsParent": false,
+            "level": 0,
             "name": "[4:1]"
           },
           "id": "66",
@@ -664,9 +724,11 @@
           }
         },
         {
-          "children": null,
+          "children": [],
           "direction": "INPUT",
           "hwMeta": {
+            "connectedAsParent": false,
+            "level": 0,
             "name": ""
           },
           "id": "67",
@@ -692,9 +754,11 @@
           "id": "10",
           "ports": [
             {
-              "children": null,
+              "children": [],
               "direction": "OUTPUT",
               "hwMeta": {
+                "connectedAsParent": false,
+                "level": 0,
                 "name": null
               },
               "id": "45",
@@ -704,9 +768,11 @@
               }
             },
             {
-              "children": null,
+              "children": [],
               "direction": "INPUT",
               "hwMeta": {
+                "connectedAsParent": false,
+                "level": 0,
                 "name": null
               },
               "id": "46",
@@ -716,9 +782,11 @@
               }
             },
             {
-              "children": null,
+              "children": [],
               "direction": "INPUT",
               "hwMeta": {
+                "connectedAsParent": false,
+                "level": 0,
                 "name": null
               },
               "id": "47",
@@ -742,9 +810,11 @@
           "id": "11",
           "ports": [
             {
-              "children": null,
+              "children": [],
               "direction": "OUTPUT",
               "hwMeta": {
+                "connectedAsParent": false,
+                "level": 0,
                 "name": null
               },
               "id": "48",
@@ -754,9 +824,11 @@
               }
             },
             {
-              "children": null,
+              "children": [],
               "direction": "INPUT",
               "hwMeta": {
+                "connectedAsParent": false,
+                "level": 0,
                 "name": null
               },
               "id": "49",
@@ -781,9 +853,11 @@
           "id": "12",
           "ports": [
             {
-              "children": null,
+              "children": [],
               "direction": "OUTPUT",
               "hwMeta": {
+                "connectedAsParent": false,
+                "level": 0,
                 "name": null
               },
               "id": "50",
@@ -806,9 +880,11 @@
           "id": "13",
           "ports": [
             {
-              "children": null,
+              "children": [],
               "direction": "OUTPUT",
               "hwMeta": {
+                "connectedAsParent": false,
+                "level": 0,
                 "name": ""
               },
               "id": "51",
@@ -818,9 +894,11 @@
               }
             },
             {
-              "children": null,
+              "children": [],
               "direction": "INPUT",
               "hwMeta": {
+                "connectedAsParent": false,
+                "level": 0,
                 "name": ""
               },
               "id": "52",
@@ -830,9 +908,11 @@
               }
             },
             {
-              "children": null,
+              "children": [],
               "direction": "INPUT",
               "hwMeta": {
+                "connectedAsParent": false,
+                "level": 0,
                 "name": ""
               },
               "id": "53",
@@ -842,9 +922,11 @@
               }
             },
             {
-              "children": null,
+              "children": [],
               "direction": "INPUT",
               "hwMeta": {
+                "connectedAsParent": false,
+                "level": 0,
                 "name": ""
               },
               "id": "54",
@@ -868,9 +950,11 @@
           "id": "9",
           "ports": [
             {
-              "children": null,
+              "children": [],
               "direction": "OUTPUT",
               "hwMeta": {
+                "connectedAsParent": false,
+                "level": 0,
                 "name": null
               },
               "id": "43",
@@ -880,9 +964,11 @@
               }
             },
             {
-              "children": null,
+              "children": [],
               "direction": "INPUT",
               "hwMeta": {
+                "connectedAsParent": false,
+                "level": 0,
                 "name": null
               },
               "id": "44",
@@ -991,9 +1077,11 @@
       "id": "8",
       "ports": [
         {
-          "children": null,
+          "children": [],
           "direction": "OUTPUT",
           "hwMeta": {
+            "connectedAsParent": false,
+            "level": 0,
             "name": "cntr_bin_reg_next"
           },
           "id": "40",
@@ -1003,9 +1091,11 @@
           }
         },
         {
-          "children": null,
+          "children": [],
           "direction": "INPUT",
           "hwMeta": {
+            "connectedAsParent": false,
+            "level": 0,
             "name": "en"
           },
           "id": "41",
@@ -1015,9 +1105,11 @@
           }
         },
         {
-          "children": null,
+          "children": [],
           "direction": "INPUT",
           "hwMeta": {
+            "connectedAsParent": false,
+            "level": 0,
             "name": "cntr_bin_reg"
           },
           "id": "42",
@@ -1122,21 +1214,21 @@
     },
     {
       "hwMeta": {
-        "name": "(cntr_bin_reg[4:1], sig_0)"
+        "name": "<BitsVal 0>"
       },
       "id": "91",
-      "source": "21",
-      "sourcePort": "66",
+      "source": "20",
+      "sourcePort": "65",
       "target": "19",
       "targetPort": "63"
     },
     {
       "hwMeta": {
-        "name": "<BitsVal 0>"
+        "name": "(cntr_bin_reg[4:1], sig_0)"
       },
       "id": "92",
-      "source": "20",
-      "sourcePort": "65",
+      "source": "21",
+      "sourcePort": "66",
       "target": "19",
       "targetPort": "64"
     }

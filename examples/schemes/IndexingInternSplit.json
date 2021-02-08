@@ -10,9 +10,11 @@
       "id": "1",
       "ports": [
         {
-          "children": null,
+          "children": [],
           "direction": "OUTPUT",
           "hwMeta": {
+            "connectedAsParent": false,
+            "level": 0,
             "name": "a"
           },
           "id": "5",
@@ -37,9 +39,11 @@
       "id": "2",
       "ports": [
         {
-          "children": null,
+          "children": [],
           "direction": "INPUT",
           "hwMeta": {
+            "connectedAsParent": false,
+            "level": 0,
             "name": "b"
           },
           "id": "6",
@@ -63,9 +67,11 @@
       "id": "3",
       "ports": [
         {
-          "children": null,
+          "children": [],
           "direction": "OUTPUT",
           "hwMeta": {
+            "connectedAsParent": false,
+            "level": 0,
             "name": null
           },
           "id": "7",
@@ -75,9 +81,11 @@
           }
         },
         {
-          "children": null,
+          "children": [],
           "direction": "INPUT",
           "hwMeta": {
+            "connectedAsParent": false,
+            "level": 0,
             "name": "[1]"
           },
           "id": "8",
@@ -87,9 +95,11 @@
           }
         },
         {
-          "children": null,
+          "children": [],
           "direction": "INPUT",
           "hwMeta": {
+            "connectedAsParent": false,
+            "level": 0,
             "name": "[0]"
           },
           "id": "9",
@@ -113,9 +123,11 @@
       "id": "4",
       "ports": [
         {
-          "children": null,
+          "children": [],
           "direction": "OUTPUT",
           "hwMeta": {
+            "connectedAsParent": false,
+            "level": 0,
             "name": "[0]"
           },
           "id": "10",
@@ -125,9 +137,11 @@
           }
         },
         {
-          "children": null,
+          "children": [],
           "direction": "OUTPUT",
           "hwMeta": {
+            "connectedAsParent": false,
+            "level": 0,
             "name": "[1]"
           },
           "id": "11",
@@ -137,9 +151,11 @@
           }
         },
         {
-          "children": null,
+          "children": [],
           "direction": "INPUT",
           "hwMeta": {
+            "connectedAsParent": false,
+            "level": 0,
             "name": ""
           },
           "id": "12",
@@ -168,7 +184,7 @@
     },
     {
       "hwMeta": {
-        "name": "Concat(internA, internB)"
+        "name": "Concat(internB, internA)"
       },
       "id": "14",
       "source": "3",
@@ -200,7 +216,7 @@
   "hwMeta": {
     "cls": null,
     "maxId": 16,
-    "name": "IndexingInernSplit"
+    "name": "IndexingInternSplit"
   },
   "ports": [],
   "properties": {
