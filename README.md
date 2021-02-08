@@ -54,7 +54,7 @@ It has multiple solution
 python3 -m http.server 8888
 ```
 
-Now you should be able to view the example application on http://0.0.0.0:8888/examples/example.html?schematic=/examples/schemes/Crc.json.
+Now you should be able to view the example application on http://0.0.0.0:8888/examples/example.html?schematic=/examples/schemes/Cdc.json.
 Where part after schematic= is path to json file where schematic is stored.
 
 
