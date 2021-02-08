@@ -102,7 +102,7 @@
               url = new URL(url);
               var searchParams = url.searchParams;
               searchParams.set(name, value);
-              window.history.replaceState({} , value, url.toString());
+              window.history.replaceState({}, value, url.toString());
           }
 
           var schematic_url = getUrlParameterByName("schematic");
