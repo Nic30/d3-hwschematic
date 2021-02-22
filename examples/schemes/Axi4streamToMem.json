@@ -7862,7 +7862,7 @@
       "_edges": [
         {
           "hwMeta": {
-            "name": "Concat(Bits(1, force_vector=True).from_py(0), (lenRem_reg._reinterpret_cast(Bits(7, signed=False)) - 1)._reinterpret_cast(Bits(7)))"
+            "name": "Concat(Bits(1).from_py(0), (lenRem_reg._reinterpret_cast(Bits(7, signed=False)) - 1)._reinterpret_cast(Bits(7)))"
           },
           "id": "1065",
           "source": "111",
@@ -7984,7 +7984,7 @@
         }
       ],
       "hwMeta": {
-        "bodyText": "If(lenRem_reg > 16,\n    axi_aw_len(15)\n).Else(\n    axi_aw_len(Concat(Bits(1, force_vector=True).from_py(0), (lenRem_reg._reinterpret_cast(Bits(7, signed=False)) - 1)._reinterpret_cast(Bits(7))))\n)",
+        "bodyText": "If(lenRem_reg > 16,\n    axi_aw_len(15)\n).Else(\n    axi_aw_len(Concat(Bits(1).from_py(0), (lenRem_reg._reinterpret_cast(Bits(7, signed=False)) - 1)._reinterpret_cast(Bits(7))))\n)",
         "cls": "Process",
         "maxId": 1075,
         "name": null
@@ -9417,7 +9417,7 @@
         },
         {
           "hwMeta": {
-            "name": "Concat(Bits(1, force_vector=True).from_py(0), lenRem_reg)"
+            "name": "Concat(Bits(1).from_py(0), lenRem_reg)"
           },
           "id": "1094",
           "source": "141",
@@ -9509,7 +9509,7 @@
         }
       ],
       "hwMeta": {
-        "bodyText": "Switch(state_reg)\\\n    .Case(state_type.writeData,\n        If((state_reg._eq(state_type.writeData) | state_reg._eq(state_type.writeDataLast)) & dataIn_vld._eq(1) & axi_w_ready._eq(1),\n            actualLenRem_reg_next((actualLenRem_reg._reinterpret_cast(Bits(8, signed=False)) - 1)._reinterpret_cast(Bits(8)))\n        ).Else(\n            actualLenRem_reg_next(actualLenRem_reg)\n        ))\\\n    .Case(state_type.writeDataLast,\n        If((state_reg._eq(state_type.writeData) | state_reg._eq(state_type.writeDataLast)) & dataIn_vld._eq(1) & axi_w_ready._eq(1),\n            actualLenRem_reg_next(0)\n        ).Else(\n            actualLenRem_reg_next(actualLenRem_reg)\n        ))\\\n    .Default(\n        If(lenRem_reg > 16,\n            actualLenRem_reg_next(16)\n        ).Else(\n            actualLenRem_reg_next(Concat(Bits(1, force_vector=True).from_py(0), lenRem_reg))\n        ))",
+        "bodyText": "Switch(state_reg)\\\n    .Case(state_type.writeData,\n        If((state_reg._eq(state_type.writeData) | state_reg._eq(state_type.writeDataLast)) & dataIn_vld._eq(1) & axi_w_ready._eq(1),\n            actualLenRem_reg_next((actualLenRem_reg._reinterpret_cast(Bits(8, signed=False)) - 1)._reinterpret_cast(Bits(8)))\n        ).Else(\n            actualLenRem_reg_next(actualLenRem_reg)\n        ))\\\n    .Case(state_type.writeDataLast,\n        If((state_reg._eq(state_type.writeData) | state_reg._eq(state_type.writeDataLast)) & dataIn_vld._eq(1) & axi_w_ready._eq(1),\n            actualLenRem_reg_next(0)\n        ).Else(\n            actualLenRem_reg_next(actualLenRem_reg)\n        ))\\\n    .Default(\n        If(lenRem_reg > 16,\n            actualLenRem_reg_next(16)\n        ).Else(\n            actualLenRem_reg_next(Concat(Bits(1).from_py(0), lenRem_reg))\n        ))",
         "cls": "Process",
         "maxId": 1101,
         "name": null

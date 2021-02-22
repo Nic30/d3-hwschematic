@@ -7420,7 +7420,7 @@
         },
         {
           "hwMeta": {
-            "name": "Concat(Bits(1, force_vector=True).from_py(0), sig_fifo_size._reinterpret_cast(Bits(4)))._reinterpret_cast(Bits(5, signed=False))"
+            "name": "Concat(Bits(1).from_py(0), sig_fifo_size._reinterpret_cast(Bits(4)))._reinterpret_cast(Bits(5, signed=False))"
           },
           "id": "1202",
           "source": "98",
@@ -7616,7 +7616,7 @@
         },
         {
           "hwMeta": {
-            "name": "Concat(Bits(1, force_vector=True).from_py(0), sig_fifo_size._reinterpret_cast(Bits(4)))"
+            "name": "Concat(Bits(1).from_py(0), sig_fifo_size._reinterpret_cast(Bits(4)))"
           },
           "id": "1218",
           "source": "99",

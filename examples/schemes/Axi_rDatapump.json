@@ -83991,7 +83991,7 @@
     },
     {
       "hwMeta": {
-        "name": "driver_req_rem._eq(0)._ternary(Bits(4, signed=False).from_py(8), Concat(Bits(1, force_vector=True).from_py(0), driver_req_rem)) > 8 - Concat(Bits(1, force_vector=True).from_py(0), sig_0)._reinterpret_cast(Bits(4, signed=False))"
+        "name": "driver_req_rem._eq(0)._ternary(Bits(4, signed=False).from_py(8), Concat(Bits(1).from_py(0), driver_req_rem)) > 8 - Concat(Bits(1).from_py(0), sig_0)._reinterpret_cast(Bits(4, signed=False))"
       },
       "id": "5906",
       "source": "1019",
@@ -84283,7 +84283,7 @@
     },
     {
       "hwMeta": {
-        "name": "8 - Concat(Bits(1, force_vector=True).from_py(0), sig_0)._reinterpret_cast(Bits(4, signed=False))"
+        "name": "8 - Concat(Bits(1).from_py(0), sig_0)._reinterpret_cast(Bits(4, signed=False))"
       },
       "id": "5924",
       "source": "1026",
@@ -84293,7 +84293,7 @@
     },
     {
       "hwMeta": {
-        "name": "driver_req_rem._eq(0)._ternary(Bits(4, signed=False).from_py(8), Concat(Bits(1, force_vector=True).from_py(0), driver_req_rem))"
+        "name": "driver_req_rem._eq(0)._ternary(Bits(4, signed=False).from_py(8), Concat(Bits(1).from_py(0), driver_req_rem))"
       },
       "id": "5925",
       "source": "1020",
@@ -84303,7 +84303,7 @@
     },
     {
       "hwMeta": {
-        "name": "Concat(Bits(1, force_vector=True).from_py(0), driver_req_rem)"
+        "name": "Concat(Bits(1).from_py(0), driver_req_rem)"
       },
       "id": "5926",
       "source": "1024",
@@ -84403,7 +84403,7 @@
     },
     {
       "hwMeta": {
-        "name": "Concat(Bits(1, force_vector=True).from_py(0), sig_0)._reinterpret_cast(Bits(4, signed=False))"
+        "name": "Concat(Bits(1).from_py(0), sig_0)._reinterpret_cast(Bits(4, signed=False))"
       },
       "id": "5932",
       "source": "1027",
@@ -84413,7 +84413,7 @@
     },
     {
       "hwMeta": {
-        "name": "Concat(Bits(1, force_vector=True).from_py(0), sig_0)"
+        "name": "Concat(Bits(1).from_py(0), sig_0)"
       },
       "id": "5933",
       "source": "1028",

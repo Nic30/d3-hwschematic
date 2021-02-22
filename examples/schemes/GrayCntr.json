@@ -1194,7 +1194,7 @@
     },
     {
       "hwMeta": {
-        "name": "Concat(Bits(1, force_vector=True).from_py(0), sig_0) ^ cntr_bin_reg"
+        "name": "Concat(Bits(1).from_py(0), sig_0) ^ cntr_bin_reg"
       },
       "id": "89",
       "source": "18",
@@ -1204,7 +1204,7 @@
     },
     {
       "hwMeta": {
-        "name": "Concat(Bits(1, force_vector=True).from_py(0), sig_0)"
+        "name": "Concat(Bits(1).from_py(0), sig_0)"
       },
       "id": "90",
       "source": "19",

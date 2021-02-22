@@ -85748,7 +85748,7 @@
         },
         {
           "hwMeta": {
-            "name": "Concat(Bits(1, force_vector=True).from_py(0), driver_req_len)"
+            "name": "Concat(Bits(1).from_py(0), driver_req_len)"
           },
           "id": "5001",
           "source": "218",
