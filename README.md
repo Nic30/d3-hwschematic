@@ -17,7 +17,7 @@ Use `npm install d3-hwschematic --save` to install this library and save it to y
 * support for user node renderers and user CSS
 * input is [ELK json](https://www.eclipse.org/elk/documentation/tooldevelopers/graphdatastructure/jsonformat.html) with hwMeta propoperty (described in this document)
 
-![cdc_pulse_gen](https://github.com/Nic30/d3-hwschematic/raw/master/docs/cdc_pulse_gen.png "cdc_pulse_gen")
+![cdc_pulse_gen](https://github.com/Nic30/d3-hwschematic/raw/master/doc/cdc_pulse_gen.png "cdc_pulse_gen")
 
 ## Typical usecase
 
