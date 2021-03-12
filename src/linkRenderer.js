@@ -2,6 +2,28 @@ import {section2svgPath} from "./elk/elk-d3-utils.js";
 
 export function renderLinks(root, edges) {
     var junctionPoints = [];
+
+    var link = root.selectAll(".link")
+      .data(edges)
+      .enter()
+      .append("path")
+      .attr("class", "link")
+      .attr("d", function(d) {
+          if (!d.sections) {
+              d._svgPath = "";
+              return "";
+          }
+          if (d.bendpoints || d.sections.length > 1) {
+              throw new Error("NotImplemented");
+          }
+          if(d.junctionPoints)
+              d.junctionPoints.forEach(function (jp) {
+                  junctionPoints.push(jp);
+              });
+          d._svgPath = section2svgPath(d.sections[0]);
+          return d._svgPath;
+      });
+
     var linkWrap = root.selectAll(".link-wrap")
       .data(edges)
       .enter()
@@ -26,27 +48,6 @@ export function renderLinks(root, edges) {
 	           return d.hwMeta.cssStyle
            }
       })
-      .attr("d", function(d) {
-          if (!d.sections) {
-              d._svgPath = "";
-              return "";
-          }
-          if (d.bendpoints || d.sections.length > 1) {
-              throw new Error("NotImplemented");
-          }
-          if(d.junctionPoints)
-              d.junctionPoints.forEach(function (jp) {
-                  junctionPoints.push(jp);
-              });
-          d._svgPath = section2svgPath(d.sections[0]);
-          return d._svgPath;
-      });
-
-    var link = root.selectAll(".link")
-      .data(edges)
-      .enter()
-      .append("path")
-      .attr("class", "link")
       .attr("d", function(d) {
           return d._svgPath;
       });
