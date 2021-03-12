@@ -46,7 +46,6 @@
 
 .d3-hwschematic .link {
 	stroke: #000;
-	stroke-opacity: .6;
 	fill: none;
 }
 
@@ -58,7 +57,8 @@
 .d3-hwschematic .link-wrap {
 	stroke-width: 8;
 	fill: none;
-	stroke: transparent;
+    stroke: transparent;
+    stroke-opacity: .6;
 }
 .d3-hwschematic .link-wrap.link-wrap-activated {
 	stroke: deepskyblue;
