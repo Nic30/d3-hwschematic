@@ -189,6 +189,8 @@ export default class HwSchematic {
     _applyLayout() {
         var root = this.root;
 
+        this._applyLayoutLinks();
+        
         var node = root.selectAll(".node")
             .data(this._nodes)
             .enter()
@@ -213,7 +215,6 @@ export default class HwSchematic {
                 }
             );
         });
-        this._applyLayoutLinks();
     }
 
     _applyLayoutLinks(root, edges) {

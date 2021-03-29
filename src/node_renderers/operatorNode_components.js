@@ -76,7 +76,7 @@ function NAND(root) {
 }
 
 
-var OR_SHAPE_PATH = "M3,0 A30 25 0 0 1 3,25 A30 25 0 0 0 33,12.5 A30 25 0 0 0 3,0";
+var OR_SHAPE_PATH = "M3,0 A30 25 0 0 1 3,25 A30 25 0 0 0 33,12.5 A30 25 0 0 0 3,0 z";
 /**
  * Draw a OR gate symbol
  */
