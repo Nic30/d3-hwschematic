@@ -188,15 +188,13 @@ export default class HwSchematic {
      */
     _applyLayout() {
         var root = this.root;
-
-        this._applyLayoutLinks();
         
         var node = root.selectAll(".node")
-            .data(this._nodes)
-            .enter()
-            .append("g");
+        .data(this._nodes)
+        .enter()
+        .append("g");
         this.nodeRenderers.render(root, node);
-
+        
         var _this = this;
         node.on("click", function(ev, d) {
             var [children, nextFocusTarget] = toggleHideChildren(d);
@@ -213,8 +211,10 @@ export default class HwSchematic {
                     // Error while applying of layout
                     throw e;
                 }
-            );
-        });
+                );
+            });
+            
+        this._applyLayoutLinks();
     }
 
     _applyLayoutLinks(root, edges) {
