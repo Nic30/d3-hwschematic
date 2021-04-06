@@ -165,6 +165,7 @@ The node renderer has function `select` which is used to determine if renderer s
 * [hwstudio](https://github.com/umarcor/hwstudio) - GDScript, GUI editor for hardware description designs
 * [Spyce](https://github.com/imec-myhdl/Spyce) - Python, Simple circuit editor, MyHDL output (only prototype)
 * [circuitsandbox](http://bitbucket.org/kwellwood/circuitsandbox) - Java, Boolean network editor and simulator
+* [CuFlow](https://github.com/jamesbowman/cuflow) - Python, experimental procedural PCB layout program 
 * [BreadboardSim](https://github.com/daveshah1/BreadboardSim) - C#, Circuit Simulator with Breadboard UI
 * [hneemann/Digital](https://github.com/hneemann/Digital) - Java, Circut simulator and editor
 * [adaptagrams](https://github.com/mjwybrow/adaptagrams) - C++, Libraries for constraint-based layout and connector routing for diagrams.
