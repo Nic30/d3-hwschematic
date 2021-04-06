@@ -173,9 +173,9 @@ The node renderer has function `select` which is used to determine if renderer s
 * [logidrom](https://github.com/wavedrom/logidrom) - JS, Digital circuit renderer for some specific circuits
 * [dkilfoyle/logic](https://github.com/dkilfoyle/logic) - JS, IDE for digital circuit simulation
 * [Eclipse Layout Kernel (ELK)](https://github.com/eclipse/elk) - Java, Libary focused on automatic graph drawing.
+* [electric-circuits](https://github.com/symbench/electric-circuits) - JS, Electric Circuits Domain for webGME 
 * [elkjs](https://github.com/kieler/elkjs) - JS, ELK transpiled to JS, (used in this project)
 * [ogdf](https://github.com/ogdf/ogdf) - C++, Libary focused on automatic graph drawing.
 * [hdelk](https://github.com/davidthings/hdelk) - Web-based HDL diagramming tool
 * [schemdraw](https://bitbucket.org/cdelker/schemdraw) - Python, manual layout electrical circuit schematic diagrams
 * [Siva](https://github.com/jasonpjacobs/Siva) - Python, Qt based scheme editor
-
