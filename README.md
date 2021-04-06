@@ -175,5 +175,6 @@ The node renderer has function `select` which is used to determine if renderer s
 * [elkjs](https://github.com/kieler/elkjs) - JS, ELK transpiled to JS, (used in this project)
 * [ogdf](https://github.com/ogdf/ogdf) - C++, Libary focused on automatic graph drawing.
 * [hdelk](https://github.com/davidthings/hdelk) - Web-based HDL diagramming tool
+* [schemdraw](https://bitbucket.org/cdelker/schemdraw) - Python, manual layout electrical circuit schematic diagrams
 * [Siva](https://github.com/jasonpjacobs/Siva) - Python, Qt based scheme editor
 
