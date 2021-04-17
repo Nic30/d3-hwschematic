@@ -179,3 +179,4 @@ The node renderer has function `select` which is used to determine if renderer s
 * [hdelk](https://github.com/davidthings/hdelk) - Web-based HDL diagramming tool
 * [schemdraw](https://bitbucket.org/cdelker/schemdraw) - Python, manual layout electrical circuit schematic diagrams
 * [Siva](https://github.com/jasonpjacobs/Siva) - Python, Qt based scheme editor
+* [HAL](https://github.com/emsec/hal) - Python, The Hardware Analyzer 
