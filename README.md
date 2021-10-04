@@ -165,7 +165,7 @@ The node renderer has function `select` which is used to determine if renderer s
 * [hwstudio](https://github.com/umarcor/hwstudio) - GDScript, GUI editor for hardware description designs
 * [Spyce](https://github.com/imec-myhdl/Spyce) - Python, Simple circuit editor, MyHDL output (only prototype)
 * [circuitsandbox](http://bitbucket.org/kwellwood/circuitsandbox) - Java, Boolean network editor and simulator
-* [CuFlow](https://github.com/jamesbowman/cuflow) - Python, experimental procedural PCB layout program 
+* [CuFlow](https://github.com/jamesbowman/cuflow) - Python, experimental procedural PCB layout program
 * [BreadboardSim](https://github.com/daveshah1/BreadboardSim) - C#, Circuit Simulator with Breadboard UI
 * [hneemann/Digital](https://github.com/hneemann/Digital) - Java, Circut simulator and editor
 * [adaptagrams](https://github.com/mjwybrow/adaptagrams) - C++, Libraries for constraint-based layout and connector routing for diagrams.
@@ -173,10 +173,11 @@ The node renderer has function `select` which is used to determine if renderer s
 * [logidrom](https://github.com/wavedrom/logidrom) - JS, Digital circuit renderer for some specific circuits
 * [dkilfoyle/logic](https://github.com/dkilfoyle/logic) - JS, IDE for digital circuit simulation
 * [Eclipse Layout Kernel (ELK)](https://github.com/eclipse/elk) - Java, Libary focused on automatic graph drawing.
-* [electric-circuits](https://github.com/symbench/electric-circuits) - JS, Electric Circuits Domain for webGME 
+* [electric-circuits](https://github.com/symbench/electric-circuits) - JS, Electric Circuits Domain for webGME
 * [elkjs](https://github.com/kieler/elkjs) - JS, ELK transpiled to JS, (used in this project)
 * [ogdf](https://github.com/ogdf/ogdf) - C++, Libary focused on automatic graph drawing.
 * [hdelk](https://github.com/davidthings/hdelk) - Web-based HDL diagramming tool
 * [schemdraw](https://bitbucket.org/cdelker/schemdraw) - Python, manual layout electrical circuit schematic diagrams
 * [Siva](https://github.com/jasonpjacobs/Siva) - Python, Qt based scheme editor
-* [HAL](https://github.com/emsec/hal) - Python, The Hardware Analyzer 
+* [HAL](https://github.com/emsec/hal) - Python, The Hardware Analyzer
+* [VSRTL](https://github.com/mortbopet/VSRTL/) - C++, Visual Simulation of Register Transfer Logic
