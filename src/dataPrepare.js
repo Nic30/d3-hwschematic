@@ -4,20 +4,32 @@ function hyperEdgeListToEdges(eList, newEdges, idOffset) {
 		var e = eList[ei];
 		var isHyperEdge = typeof e.sources !== "undefined";
 		if (isHyperEdge) {
-			for (var s = 0; s < e.sources.length; s++) {
-				var src = e.sources[s];
-				for (var t = 0; t < e.targets.length; t++) {
-					var dst = e.targets[t];
-					idOffset += 1;
-					newEdges.push({
-						"hwMeta": { "parent": e },
-						"id": "" + idOffset,
-						"source": src[0],
-						"sourcePort": src[1],
-						"target": dst[0],
-						"targetPort": dst[1],
-					});
-				}
+		    if (e.sources.length == 1 && e.targets.length == 1) {
+    		    var src = e.sources[0];
+                var dst = e.targets[0];
+                e.source = src[0];
+                e.sourcePort = src[1];
+                e.target = dst[0];
+                e.targetPort = dst[1];
+                delete e.sources;
+                delete e.targets;
+                newEdges.push(e);
+		    } else {
+    			for (var s = 0; s < e.sources.length; s++) {
+    				var src = e.sources[s];
+    				for (var t = 0; t < e.targets.length; t++) {
+    					var dst = e.targets[t];
+    					idOffset += 1;
+    					newEdges.push({
+    						"hwMeta": { "parent": e },
+    						"id": "" + idOffset,
+    						"source": src[0],
+    						"sourcePort": src[1],
+    						"target": dst[0],
+    						"targetPort": dst[1],
+    					});
+    				}
+    			}
 			}
 		} else {
 			newEdges.push(e);
@@ -80,7 +92,8 @@ export function initNodeParents(node, parent) {
 }
 export function expandPorts(node) {
 	var portlist = [];
-	node.ports.forEach(function (port) {expandPorts4port(port, portlist)});
+	if (node.ports)
+    	node.ports.forEach(function (port) {expandPorts4port(port, portlist)});
 	//node.hwMeta.parent = parent;
 	node.ports = portlist;
 	(node.children || node._children || []).forEach(function(n) {

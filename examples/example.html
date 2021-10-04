@@ -7,6 +7,7 @@
   <!-- <script type="text/javascript" src="../node_modules/d3/dist/d3.min.js"></script>  -->
   <script type="text/javascript" src="../node_modules/elkjs/lib/elk.bundled.js"></script>
   <script type="text/javascript" src="../dist/d3-hwschematic.js"></script>
+  <script type="text/javascript" src="./netlistsvgTod3Hwschematic.js"></script>
   <link href="../dist/d3-hwschematic.css" rel="stylesheet">
   <style>
   	body {
@@ -15,7 +16,15 @@
   </style>
 </head>
 <body>
-    <input type="file" id="file-input" />
+    <label>
+        Open schematic:
+        <input type="file" id="file-input" />
+    </label>
+    <label>
+        Open netlistsvg schematic:
+        <input type="file" id="file-input-netlistsvg" />
+    </label>
+
     <svg id="scheme-placeholder"></svg>
     <script>
         // schematic rendering script
@@ -71,17 +80,24 @@
             if (!file) {
               return;
             }
+            var transformation = null;
+            if (e.target.id == 'file-input-netlistsvg') {
+               transformation = netlistsvgToD3Hwschematic;
+            }
             setUrlParameterByName("schematic", "schemes/" + file.name);
             var reader = new FileReader();
             reader.onload = function(e) {
               var contents = e.target.result;
-              displayContents(contents);
+              displayContents(contents, transformation);
             };
             reader.readAsText(file);
           }
 
-          function displayContents(contents) {
+          function displayContents(contents, transformation) {
             var graph = JSON.parse(contents);
+            if (transformation) {
+                graph = transformation(graph);
+            }
             if (graph.hwMeta && graph.hwMeta.name)
                  document.title = graph.hwMeta.name;
             // load the data and render the elements
@@ -90,6 +106,10 @@
 
           document.getElementById('file-input')
             .addEventListener('change', readSingleFile, false);
+
+          document.getElementById('file-input-netlistsvg')
+            .addEventListener('change', readSingleFile, false);
+
 
           function getUrlParameterByName(name, url) {
               if (!url) url = window.location.href;
