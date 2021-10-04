@@ -7,6 +7,14 @@ This involves:
 
 */
 
+function netlistsvgToD3HwschematicGetName(obj) {
+    var name = obj.id;
+    var labels = obj.labels;
+    if (labels && labels.length) {
+        name = labels[0].text
+    }
+    return name;
+}
 
 function netlistsvgToD3HwschematicCollectParentsOfPorts(netlistsvgJson, res) {
     (netlistsvgJson.ports || []).forEach(p => {
@@ -20,15 +28,11 @@ function netlistsvgToD3HwschematicCollectParentsOfPorts(netlistsvgJson, res) {
 function netlistsvgToD3HwschematicPort(netlistsvgPort) {
     netlistsvgPort.children = [];
     netlistsvgPort.direction = netlistsvgPort.x <= 0 ? "INPUT" : "OUTPUT";
-    var name = netlistsvgPort.id;
-    var labels = netlistsvgPort.labels;
-    if (labels && labels.length) {
-        name = labels[0].text
-    }
+
     netlistsvgPort.hwMeta = {
         "connectedAsParent": false,
         "level": 0,
-        "name": name,
+        "name": netlistsvgToD3HwschematicGetName(netlistsvgPort),
     };
     netlistsvgPort.properties = netlistsvgPort.layoutOptions || {};
     netlistsvgPort.properties.side  = netlistsvgPort.x <= 0 ? "WEST" : "EAST";
@@ -41,6 +45,9 @@ function netlistsvgToD3HwschematicPort(netlistsvgPort) {
 function netlistsvgToD3HwschematicEdge(netlistsvgEdge, parentsOfPorts) {
     netlistsvgEdge.sources = netlistsvgEdge.sources.map(s => [parentsOfPorts[s], s]);
     netlistsvgEdge.targets = netlistsvgEdge.targets.map(t => [parentsOfPorts[t], t]);
+    netlistsvgEdge.hwMeta = {
+        "name": netlistsvgToD3HwschematicGetName(netlistsvgEdge),
+    };
     return netlistsvgEdge;
 }
 
@@ -51,13 +58,8 @@ function _netlistsvgToD3Hwschematic(netlistsvgJson, parentsOfPorts) {
         netlistsvgJson.children = children.map(c => _netlistsvgToD3Hwschematic(c, parentsOfPorts));
     }
 
-    var name = netlistsvgJson.id;
-    var labels = netlistsvgJson.labels;
-    if (labels && labels.length)
-        labels = labels[0].text;
-
     netlistsvgJson.hwMeta = {
-        "name": name,
+        "name": netlistsvgToD3HwschematicGetName(netlistsvgJson),
         "maxId": 0,
     };
 
