@@ -228,11 +228,6 @@ export class GenericNodeRenderer {
 				}
 			});
 
-		// works
-		node.each((d) => {
-            console.log(d.hwMeta.children);
-		})
-
 		// spot node body text
 		node.append("text")
 			.call(this.renderTextLines.bind(this));
