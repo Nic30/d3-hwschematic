@@ -104,8 +104,8 @@ ELK `LPort`
   },
   "direction": "OUTPUT", // [d3-hwschematic specific] controlls direction marker
   "properties": {
-    "portSide": "EAST",
-    "portIndex": 0 // The order is assumed as clockwise, starting with the leftmost port on the top side.
+    "side": "EAST",
+    "index": 0 // The order is assumed as clockwise, starting with the leftmost port on the top side.
                    // Required only for LNodes with "org.eclipse.elk.portConstraints": "FIXED_ORDER"
   },
   "children": [], // list of LPort, if the port should be collapsed rename this property to "_children"
