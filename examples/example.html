@@ -7,7 +7,8 @@
   <!-- <script type="text/javascript" src="../node_modules/d3/dist/d3.min.js"></script>  -->
   <script type="text/javascript" src="../node_modules/elkjs/lib/elk.bundled.js"></script>
   <script type="text/javascript" src="../dist/d3-hwschematic.js"></script>
-  <script type="text/javascript" src="./netlistsvgTod3Hwschematic.js"></script>
+  <script type="text/javascript" src="./netlistsvgToD3Hwschematic.js"></script>
+  <script type="text/javascript" src="./yosysToD3Hwschematic.js"></script>
   <link href="../dist/d3-hwschematic.css" rel="stylesheet">
   <style>
   	body {
@@ -24,7 +25,10 @@
         Open netlistsvg schematic:
         <input type="file" id="file-input-netlistsvg" />
     </label>
-
+    <label>
+        Open yosys schematic:
+        <input type="file" id="file-input-yosys" />
+    </label>
     <svg id="scheme-placeholder"></svg>
     <script>
         // schematic rendering script
@@ -83,6 +87,8 @@
             var transformation = null;
             if (e.target.id == 'file-input-netlistsvg') {
                transformation = netlistsvgToD3Hwschematic;
+            } else if (e.target.id == 'file-input-yosys') {
+               transformation = yosysToD3Hwschematic;
             }
             setUrlParameterByName("schematic", "schemes/" + file.name);
             var reader = new FileReader();
@@ -108,6 +114,9 @@
             .addEventListener('change', readSingleFile, false);
 
           document.getElementById('file-input-netlistsvg')
+            .addEventListener('change', readSingleFile, false);
+            
+          document.getElementById('file-input-yosys')
             .addEventListener('change', readSingleFile, false);
 
 
