@@ -74,11 +74,11 @@ ELK `LNode` (component instance)
     "cls": "compoent (module) name", // optional str
     "bodyText": "", // optional str
     "maxId": 2, // max id of any object in this node used to avoid re-counting object if new object is generated
-    "isExternalPort": true // optional flag which set component style to external port
+    "isExternalPort": true, // optional flag which set LNode style to external LPort
     "cssClass": "node-style0", // optional string, css classes separated by space
     "cssStyle": "fill:red", // css style specification separated by ;
   },
-  "hideChildren": true, // [d3-hwschematic specific] optional flag, if true the body of component is collapsed
+  "hideChildren": true, // [d3-hwschematic specific] optional flag, if true the body of LNode is collapsed
   "properties": { // recommended renderer settings
     "org.eclipse.elk.portConstraints": "FIXED_ORDER", // can be also "FREE" or other value accepted by ELK
     "org.eclipse.elk.layered.mergeEdges": 1
@@ -99,14 +99,14 @@ ELK `LPort`
     "name": "port name",
     "cssClass": "node-style0", // optional string, css classes separated by space
     "cssStyle": "fill:red", // css style specification separated by ;
-    "connectedAsParent": true, // an optional flag that notes that this port
-                               // has no connections but it is connected as its parent port
+    "connectedAsParent": true, // an optional flag that notes that this LPort
+                               // has no connections but it is connected as its parent LPort
   },
   "direction": "OUTPUT", // [d3-hwschematic specific] controlls direction marker
   "properties": {
     "portSide": "EAST",
     "portIndex": 0 // The order is assumed as clockwise, starting with the leftmost port on the top side.
-                   // Required only for components with "org.eclipse.elk.portConstraints": "FIXED_ORDER"
+                   // Required only for LNodes with "org.eclipse.elk.portConstraints": "FIXED_ORDER"
   },
   "children": [], // list of LPort, if the port should be collapsed rename this property to "_children"
 }
@@ -116,10 +116,10 @@ ELK `LEdge`
 ```javascript
 { // simple LEdge
   "id": "62",
-  "source": "2", // id of component
-  "sourcePort": "23", // id of component port
-  "target": "4", // id of component
-  "targetPort": "29", // id of component port
+  "source": "2", // id of LNode
+  "sourcePort": "23", // id of LPort
+  "target": "4", // id of LNode
+  "targetPort": "29", // id of LPort
   "hwMeta": { // [d3-hwschematic specific]
     "name": null // optional string, displayed on mouse over
     "cssClass": "link-style0", // optional string, css classes separated by space
@@ -129,10 +129,10 @@ ELK `LEdge`
 { // hyper LEdge
   "id": "1119",
   "sources": [
-    ["17", "343"]  // id of component, id of port
+    ["17", "343"]  // id of LNode, id of LPort
   ],
   "targets": [
-    [ "18", "346"],  // id of component, id of port
+    [ "18", "346"],  // id of LNode, id of LPort
     [ "21", "354"],
   ],
   "hwMeta": { // [d3-hwschematic specific]
@@ -144,8 +144,8 @@ ELK `LEdge`
 ```
 
 `LEdge` souce destination has to always be directly visible from the `LNode` where the `LEdge` is instanciated.
-That means that LEdge may connect only to ports of current LNode or to ports of this LNode direct children `LNode`s.
-`LNode` represents all types of components. Top component ports are also represented as `LNode` because it looks better.
+That means that LEdge may connect only to LPorts of current LNode or to LPorts of this LNode direct children `LNode`s.
+`LNode` represents all types of components. Top LPorts are also represented as `LNode` because it looks better.
 
 
 ## Component shapes
