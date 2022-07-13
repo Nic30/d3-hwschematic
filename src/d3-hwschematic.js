@@ -7,6 +7,7 @@ import { SliceNodeRenderer } from "./node_renderers/sliceNode";
 import { GenericNodeRenderer } from "./node_renderers/generic";
 import { renderLinks } from "./linkRenderer";
 import { Tooltip } from "./tooltip";
+import { yosysToD3Hwschematic } from "./yosysToD3Hwschematic";
 import {
     hyperEdgesToEdges,
     getNet, initNodeParents, expandPorts
@@ -274,6 +275,10 @@ export default class HwSchematic {
         // Select net on click
         link.on("click", onLinkClick);
         linkWrap.on("click", onLinkClick);
+    }
+
+    static fromYosys(yosysJson) {
+        return yosysToD3Hwschematic(yosysJson);
     }
 
     terminate() {

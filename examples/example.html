@@ -9,7 +9,6 @@
   <script type="text/javascript" src="../node_modules/elkjs/lib/elk.bundled.js"></script>
   <script type="text/javascript" src="../dist/d3-hwschematic.js"></script>
   <script type="text/javascript" src="./netlistsvgToD3Hwschematic.js"></script>
-  <script type="text/javascript" src="./yosysToD3Hwschematic.js"></script>
   <link href="../dist/d3-hwschematic.css" rel="stylesheet">
   <style>
     body {
@@ -92,7 +91,7 @@
         transformation = netlistsvgToD3Hwschematic;
         exampleDir = "schemes_netlistsvg/";
       } else if (e.target.id == 'file-input-yosys') {
-        transformation = yosysToD3Hwschematic;
+        transformation = d3.HwSchematic.fromYosys;
         exampleDir = "schemes_yosys/";
       }
       setUrlParameterByName("schematic", exampleDir + file.name);
@@ -149,7 +148,7 @@
           else if (schematic_url.startsWith("schemes_netlistsvg/")) {
             var transformation = netlistsvgToD3Hwschematic;
           } else if (schematic_url.startsWith("schemes_yosys/")) {
-            var transformation = yosysToD3Hwschematic;
+            var transformation = d3.HwSchematic.fromYosys;
           }
           else {
             throw new Error("Unknown example dir " + schematic_url);

@@ -1,0 +1,281 @@
+{
+  "creator": "Yosys 0.9 (git sha1 1979e0b)",
+  "modules": {
+    "mux2x1": {
+      "attributes": {
+        "cells_not_processed": 1,
+        "src": "mux4.v:1"
+      },
+      "ports": {
+        "a": {
+          "direction": "input",
+          "bits": [ 2 ]
+        },
+        "b": {
+          "direction": "input",
+          "bits": [ 3 ]
+        },
+        "s": {
+          "direction": "input",
+          "bits": [ 4 ]
+        },
+        "out": {
+          "direction": "output",
+          "bits": [ 5 ]
+        }
+      },
+      "cells": {
+        "$ternary$mux4.v:5$1": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": 1
+          },
+          "attributes": {
+            "src": "mux4.v:5"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 3 ],
+            "B": [ 2 ],
+            "S": [ 4 ],
+            "Y": [ 5 ]
+          }
+        }
+      },
+      "netnames": {
+        "$ternary$mux4.v:5$1_Y": {
+          "hide_name": 1,
+          "bits": [ 5 ],
+          "attributes": {
+            "src": "mux4.v:5"
+          }
+        },
+        "a": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "src": "mux4.v:2"
+          }
+        },
+        "and_1": {
+          "hide_name": 0,
+          "bits": [ 6 ],
+          "attributes": {
+            "src": "mux4.v:3"
+          }
+        },
+        "and_2": {
+          "hide_name": 0,
+          "bits": [ 7 ],
+          "attributes": {
+            "src": "mux4.v:3"
+          }
+        },
+        "b": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+            "src": "mux4.v:2"
+          }
+        },
+        "out": {
+          "hide_name": 0,
+          "bits": [ 5 ],
+          "attributes": {
+            "src": "mux4.v:4"
+          }
+        },
+        "s": {
+          "hide_name": 0,
+          "bits": [ 4 ],
+          "attributes": {
+            "src": "mux4.v:2"
+          }
+        },
+        "s_c": {
+          "hide_name": 0,
+          "bits": [ 8 ],
+          "attributes": {
+            "src": "mux4.v:3"
+          }
+        }
+      }
+    },
+    "mux4x2": {
+      "attributes": {
+        "top": 1,
+        "cells_not_processed": 1,
+        "src": "mux4.v:8"
+      },
+      "ports": {
+        "i0": {
+          "direction": "input",
+          "bits": [ 2 ]
+        },
+        "i1": {
+          "direction": "input",
+          "bits": [ 3 ]
+        },
+        "i2": {
+          "direction": "input",
+          "bits": [ 4 ]
+        },
+        "i3": {
+          "direction": "input",
+          "bits": [ 5 ]
+        },
+        "s1": {
+          "direction": "input",
+          "bits": [ 6 ]
+        },
+        "s0": {
+          "direction": "input",
+          "bits": [ 7 ]
+        },
+        "out": {
+          "direction": "output",
+          "bits": [ 8 ]
+        }
+      },
+      "cells": {
+        "mux_1": {
+          "hide_name": 0,
+          "type": "mux2x1",
+          "parameters": {
+          },
+          "attributes": {
+            "module_not_derived": 1,
+            "src": "mux4.v:12"
+          },
+          "port_directions": {
+            "$1": "output",
+            "$2": "output",
+            "$3": "output",
+            "$4": "output"
+          },
+          "connections": {
+            "$1": [ 2 ],
+            "$2": [ 3 ],
+            "$3": [ 6 ],
+            "$4": [ 9 ]
+          }
+        },
+        "mux_2": {
+          "hide_name": 0,
+          "type": "mux2x1",
+          "parameters": {
+          },
+          "attributes": {
+            "module_not_derived": 1,
+            "src": "mux4.v:13"
+          },
+          "port_directions": {
+            "$1": "output",
+            "$2": "output",
+            "$3": "output",
+            "$4": "output"
+          },
+          "connections": {
+            "$1": [ 4 ],
+            "$2": [ 5 ],
+            "$3": [ 6 ],
+            "$4": [ 10 ]
+          }
+        },
+        "mux_3": {
+          "hide_name": 0,
+          "type": "mux2x1",
+          "parameters": {
+          },
+          "attributes": {
+            "module_not_derived": 1,
+            "src": "mux4.v:14"
+          },
+          "port_directions": {
+            "$1": "output",
+            "$2": "output",
+            "$3": "output",
+            "$4": "output"
+          },
+          "connections": {
+            "$1": [ 9 ],
+            "$2": [ 10 ],
+            "$3": [ 7 ],
+            "$4": [ 8 ]
+          }
+        }
+      },
+      "netnames": {
+        "i0": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "src": "mux4.v:9"
+          }
+        },
+        "i1": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+            "src": "mux4.v:9"
+          }
+        },
+        "i2": {
+          "hide_name": 0,
+          "bits": [ 4 ],
+          "attributes": {
+            "src": "mux4.v:9"
+          }
+        },
+        "i3": {
+          "hide_name": 0,
+          "bits": [ 5 ],
+          "attributes": {
+            "src": "mux4.v:9"
+          }
+        },
+        "mux1": {
+          "hide_name": 0,
+          "bits": [ 9 ],
+          "attributes": {
+            "src": "mux4.v:11"
+          }
+        },
+        "mux2": {
+          "hide_name": 0,
+          "bits": [ 10 ],
+          "attributes": {
+            "src": "mux4.v:11"
+          }
+        },
+        "out": {
+          "hide_name": 0,
+          "bits": [ 8 ],
+          "attributes": {
+            "src": "mux4.v:10"
+          }
+        },
+        "s0": {
+          "hide_name": 0,
+          "bits": [ 7 ],
+          "attributes": {
+            "src": "mux4.v:9"
+          }
+        },
+        "s1": {
+          "hide_name": 0,
+          "bits": [ 6 ],
+          "attributes": {
+            "src": "mux4.v:9"
+          }
+        }
+      }
+    }
+  }
+}

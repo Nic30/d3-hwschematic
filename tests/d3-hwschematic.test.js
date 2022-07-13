@@ -9,6 +9,7 @@ import * as glob from 'glob';
 import * as path from 'path';
 
 const EXAMPLES = __dirname + "/../examples/schemes"
+const YOSYS_EXAMPLES = __dirname + "/../examples/schemes_yosys"
 
 function initSvg() {
 	var svg = d3.select("body")
@@ -21,6 +22,7 @@ function initSvg() {
 }
 
 jest.setTimeout(10000);
+
 describe('Testing scheme rendering', () => {
 	it("SVG has root g and markers", function() {
 		var svg = initSvg();
@@ -99,3 +101,22 @@ test('Testing component expansion', () => {
 	);
 
 });
+
+describe("Testing yosys", () => {
+	var testFiles = ["comparator.json", "mux2.json", "mux4.json"]
+	for (const testFile of testFiles) {
+		it("Testing file: " + testFile, () => {
+			var f = YOSYS_EXAMPLES + "/" + testFile;
+			var graphData = JSON.parse(fs.readFileSync(f));
+			var output = HwSchematic.fromYosys(graphData);
+			var refF = __dirname + "/data/" + testFile;
+			//fs.writeFileSync(refF, JSON.stringify(output, null, 2)); //create refFiles
+			var refGraphData = JSON.parse(fs.readFileSync(refF));
+			expect(output).toEqual(refGraphData);
+		})
+
+
+	}
+
+})
+
