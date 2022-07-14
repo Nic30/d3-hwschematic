@@ -63,14 +63,10 @@ function fillChildren(node, yosysModule, idCounter, yosysModules) {
   for (const [cellName, cellObj] of Object.entries(yosysModule.cells)) { // iterate all cells and lookup for modules and construct them recursively,
     // yosysModule = modules[name]
     var type = cellObj.type; //module name
-    if (type.startsWith("$")) { // cell without module definition
-      var [subNode, idCounter] = makeLNode(cellName, null, idCounter, null);
+    var cellModuleObj = yosysModules[type];
+    var [subNode, idCounter] = makeLNode(cellName, cellModuleObj, idCounter, yosysModules);
+    if (cellModuleObj === undefined) {
       idCounter = fillPorts(subNode, cellObj.port_directions, idCounter, "cells")
-
-    }
-    else { //cell with existing module
-      var cellModuleObj = yosysModules[type];
-      var [subNode, idCounter] = makeLNode(cellName, cellModuleObj, idCounter, yosysModules);
     }
     node.children.push(subNode);
   }
@@ -78,7 +74,46 @@ function fillChildren(node, yosysModule, idCounter, yosysModules) {
   return idCounter;
 }
 
-function fillEdges(node, yosysModule, idCounter, yosysModules) {
+function addBitNode(node, bit, idCounter, bitNodeDict) {
+  var [subNode, idCounter] = makeLNode(bit, null, idCounter, null);
+  var [port, idCounter] = makeLPort("O0", "output", idCounter);
+  subNode.children.push(port);
+  node.children.push(subNode);
+  bitNodeDict[subNode.id] = 1;
+
+  return [subNode, port, idCounter, bitNodeDict];
+}
+
+function iterNetnameBits(netnames, fn) {
+  for (const [netname, netObj] of Object.entries(netnames)) {
+    for (const bit of netObj.bits) {
+      fn(netname, bit, Number.isInteger(bit), typeof (bit) == "string");
+    }
+  }
+}
+
+function getNetNamesDict(yosysModule) {
+  var netnamesDict = {}; // yosys bits (netId): netname
+
+  iterNetnameBits(yosysModule.netnames, (netname, bit, isInt, isStr) => {
+    if (isInt) {
+      netnamesDict[bit] = netname;
+    } else if (!isStr) {
+      throw new Error("Invalid type in bits: " + typeof (bit));
+    }
+  });
+  return netnamesDict;
+}
+
+function constructConstNodesForNetnames(yosysModule) {
+  iterNetnameBits(yosysModule.netnames, (netname, bit, isInt, isStr) => {
+    if (isStr) {
+      throw new Error("[Todo]: Connect constant port to net");
+    }
+  });
+}
+
+function getEdgeDictFromPorts(node, yosysModule, idCounter, bitNodeDict) {
   var edgeDict = {}; // yosys bits (netId): LEdge
 
   var nodeId = node.id;
@@ -87,34 +122,49 @@ function fillEdges(node, yosysModule, idCounter, yosysModules) {
     var port = node.ports[portI++];
     port.properties.index = portI;
     var portId = port.id;
-    for (var i = 0; i < portObj.bits.length; i++) {
-      var index = portObj.bits[i];
-      var [edge, idCounter] = makeLEdge(portName, idCounter);
+    for (const bit of portObj.bits) {
+      var edge = edgeDict[bit];
+      if (edge === undefined)// create edge if it is not in edgeDict
+      { 
+        var [edge, idCounter] = makeLEdge(portName, idCounter);
+        edgeDict[bit] = edge;
+
+        if (typeof (bit) == "string") { //create node with constant
+          var [subNode, port, idCounter, bitNodeDict] = addBitNode(node, bit, idCounter, bitNodeDict);
+          edge.sources.push([subNode.id, port.id]);
+        }
+      }
+
+
+      var _nodeId = nodeId;
+      var _portId = portId;
 
       if (portObj.direction === "input") {
-        edge.sources.push([nodeId, portId]);
+        edge.sources.push([_nodeId, _portId]);
 
       } else if (portObj.direction === "output") {
-        edge.targets.push([nodeId, portId]);
+        edge.targets.push([_nodeId, _portId]);
 
       } else {
         throw new Error("Unknown direction " + portObj.direction);
       }
-      edgeDict[index] = edge;
 
     }
 
-
   }
+  return [edgeDict, idCounter, bitNodeDict];
+}
+function fillEdges(node, yosysModule, idCounter) {
+  var bitNodeDict = {};
+  var [edgeDict, idCounter, bitNodeDict] = getEdgeDictFromPorts(node, yosysModule, idCounter, bitNodeDict);
+  var netnamesDict = getNetNamesDict(yosysModule); 
+  constructConstNodesForNetnames(yosysModule);
 
-  var netnamesDict = {}; // yosys bits (netId): netname
-  for (const [netname, netObj] of Object.entries(yosysModule.netnames)) {
-    netObj.bits.forEach(netId => {
-      netnamesDict[netId] = netname;
-    });
-  }
-  for (var i = 0; i < node.children.length; ++i) {
+  for (var i = 0; i < node.children.length; i++) {
     const subNode = node.children[i];
+    if (bitNodeDict[subNode.id] === 1) {
+      continue;
+    }
     var cell = yosysModule.cells[subNode.hwMeta.name];
     var connections = cell.connections;
     var portDirections = cell.port_directions;
@@ -124,32 +174,37 @@ function fillEdges(node, yosysModule, idCounter, yosysModules) {
     }
 
     var portI = 0;
-    for (const [portName, netArray] of Object.entries(connections)) {
-      //console.log(portI, subNode.ports);
+    for (const [portName, bits] of Object.entries(connections)) {
       var portObj = subNode.ports[portI++];
       portObj.properties.index = portI;
 
-      for (var i2 = 0; i2 < netArray.length; i2++) {
-        var indexToSearch = netArray[i2];
-        var edge = edgeDict[indexToSearch];
+      for (const bit of bits) {
+        var edge = edgeDict[bit];
         if (edge === undefined) {
-          var [edge, idCounter] = makeLEdge(netnamesDict[indexToSearch], idCounter);
-          edgeDict[indexToSearch] = edge;
+          var [edge, idCounter] = makeLEdge(netnamesDict[bit], idCounter);
+          edgeDict[bit] = edge;
+          if (typeof (bit) == "string") { //create node with constant
+            var [constSubNode, port, idCounter, bitNodeDict] = addBitNode(node, bit, idCounter, bitNodeDict);
+            edge.sources.push([constSubNode.id, port.id]);
+  
+          }
         }
+        var _nodeId = subNode.id;
+        var _portId = portObj.id;
+        
+
 
         if (portName.startsWith("$")) {
           //console.log("stop: " + portName)
-          var direction = portObj.direction.toLowerCase();
+          var direction = portObj.direction.toLowerCase(); //use direction from module port definition
         } else {
           var direction = portDirections[portName];
         }
 
-
-
         if (direction === "output") {
-          edge.sources.push([subNode.id, portObj.id]);
+          edge.sources.push([_nodeId, _portId]);
         } else if (direction === "input") {
-          edge.targets.push([subNode.id, portObj.id]);
+          edge.targets.push([_nodeId, _portId]);
 
         } else {
           throw new Error("Unknown direction " + direction);
@@ -189,7 +244,6 @@ function makeLNode(name, yosysModule, idCounter, yosysModules) {
       "cls": "", // optional str
       "maxId": 2, // max id of any object in this node used to avoid re-counting object if new object is generated
     },
-    "hideChildren": true, // [d3-hwschematic specific] optional flag, if true the body of component is collapsed
     "properties": { // recommended renderer settings
       "org.eclipse.elk.portConstraints": "FIXED_ORDER", // can be also "FREE" or other value accepted by ELK
       "org.eclipse.elk.layered.mergeEdges": 1
@@ -200,18 +254,19 @@ function makeLNode(name, yosysModule, idCounter, yosysModules) {
   };
 
   idCounter++;
-  if (yosysModule === null) { //yosysModule == null for root
-  }
-  else if (yosysModule === undefined) {
-    throw new Error("cannot find module " + name);
-  }
-  else {
+  if (yosysModule) {
+    // cell with module definition, load ports, edges and children from module def. recursively
     idCounter = fillPorts(node, yosysModule.ports, idCounter, "modules")
     idCounter = fillChildren(node, yosysModule, idCounter, yosysModules)
-    idCounter = fillEdges(node, yosysModule, idCounter, yosysModules)
+    idCounter = fillEdges(node, yosysModule, idCounter)
 
   }
-
+  if (yosysModule !== null && node.children.length === 0) {
+    node._children = node.children;
+    node.children = undefined;
+    node._edges = node.edges;
+    node.edges = undefined;
+  }
 
 
 
@@ -288,8 +343,8 @@ function setIcons(node) {
   }
 
 
-
-  node.children.forEach(setIcons);
+  if (node.children !== undefined)
+    node.children.forEach(setIcons);
 
 }
 //node.hwMeta.cls == "Operator"
