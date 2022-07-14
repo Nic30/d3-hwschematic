@@ -78,7 +78,6 @@ ELK `LNode` (component instance)
     "cssClass": "node-style0", // optional string, css classes separated by space
     "cssStyle": "fill:red", // css style specification separated by ;
   },
-  "hideChildren": true, // [d3-hwschematic specific] optional flag, if true the body of LNode is collapsed
   "properties": { // recommended renderer settings
     "org.eclipse.elk.portConstraints": "FIXED_ORDER", // can be also "FREE" or other value accepted by ELK
     "org.eclipse.elk.layered.mergeEdges": 1
