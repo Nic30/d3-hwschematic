@@ -103,7 +103,7 @@ test('Testing component expansion', () => {
 });
 
 describe("Testing yosys", () => {
-	var testFiles = ["comparator.json", "mux2.json", "mux4.json"]
+	var testFiles = ["comparator.json", "mux2.json", "mux4.json", "constAdder.json"]
 	for (const testFile of testFiles) {
 		it("Testing file: " + testFile, () => {
 			var f = YOSYS_EXAMPLES + "/" + testFile;

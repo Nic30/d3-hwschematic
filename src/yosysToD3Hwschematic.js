@@ -2,15 +2,10 @@
 function makeLEdge(name, idCounter) {
   return [{
     "id": idCounter.toString(),
-    "sources": [
-
-    ],
-    "targets": [// id of LNode, id of LPort
-
-    ],
+    "sources": [],
+    "targets": [], // [id of LNode, id of LPort]
     "hwMeta": { // [d3-hwschematic specific]
       "name": name, // optional string, displayed on mouse over
-
     }
   }, idCounter + 1];
 }
@@ -38,18 +33,16 @@ function makeLPort(name, direction, idCounter) {
   }, idCounter + 1];
 }
 
-
-function fillPorts(node, ports, idCounter, option) {
-  for (const [portName, portObj] of Object.entries(ports)) { //option === modules: portObj = modules[name].ports
-    //option === cells: portObj = modules[name].cells.port_directions
-    if (option === "modules") {
+function fillPorts(node, ports, idCounter, objType) {
+  for (const [portName, portObj] of Object.entries(ports)) { //objType === ports: portObj = modules[name].ports
+    //objType === port_directions: portObj = 
+    // modules[name].cells.port_directions
+    if (objType === "ports") {
       var direction = portObj.direction;
-    }
-    else if (option === "cells") {
+    } else if (objType === "port_directions") {
       var direction = portObj;
-    }
-    else {
-      throw new Error("Invalid option: " + option)
+    } else {
+      throw new Error("Invalid objType: " + objType)
     }
     var [port, idCounter] = makeLPort(portName, direction, idCounter);
     node.ports.push(port);
@@ -58,15 +51,14 @@ function fillPorts(node, ports, idCounter, option) {
   return idCounter;
 }
 
-
 function fillChildren(node, yosysModule, idCounter, yosysModules) {
-  for (const [cellName, cellObj] of Object.entries(yosysModule.cells)) { // iterate all cells and lookup for modules and construct them recursively,
-    // yosysModule = modules[name]
-    var type = cellObj.type; //module name
-    var cellModuleObj = yosysModules[type];
+  // iterate all cells and lookup for modules and construct them recursively
+  for (const [cellName, cellObj] of Object.entries(yosysModule.cells)) {
+    var moduleName = cellObj.type; //module name
+    var cellModuleObj = yosysModules[moduleName];
     var [subNode, idCounter] = makeLNode(cellName, cellModuleObj, idCounter, yosysModules);
     if (cellModuleObj === undefined) {
-      idCounter = fillPorts(subNode, cellObj.port_directions, idCounter, "cells")
+      idCounter = fillPorts(subNode, cellObj.port_directions, idCounter, "port_directions")
     }
     node.children.push(subNode);
   }
@@ -113,52 +105,79 @@ function constructConstNodesForNetnames(yosysModule) {
   });
 }
 
+
+/*
+ * Iterate bits representing yosys net names, which are used to get edges from the edgeDict.
+ * If edges are not present in the dictionary, they are created and inserted into it. Eventually,
+ * nodes are completed by filling sources and targets properties of LEdge.
+ */
+function loadNets(bits, getPortName, nodeId, portId, getSourceAndTarget, edgeDict, bitNodeDict, idCounter, direction, node, edgeArray) {
+  for (const bit of bits) {
+    const portName = getPortName(bit);
+    var edge = edgeDict[bit];
+    var netIsConst = typeof (bit) == "string";
+    if (netIsConst || edge === undefined) {
+      // create edge if it is not in edgeDict
+      var [edge, idCounter] = makeLEdge(portName, idCounter);
+      edgeDict[bit] = edge;
+      edgeArray.push(edge);
+      if (netIsConst) {
+        // If bit is a constant, create a node with constant
+        var [constSubNode, port, idCounter, bitNodeDict] = addBitNode(node, bit, idCounter, bitNodeDict);
+        edge.sources.push([constSubNode.id, port.id]);
+      }
+    }
+
+    var [a, b] = getSourceAndTarget(edge);
+    if (direction === "input") {
+      a.push([nodeId, portId]);
+    } else if (direction === "output") {
+      b.push([nodeId, portId]);
+    } else {
+      throw new Error("Unknown direction " + direction);
+    }
+  }
+
+  return idCounter;
+}
+
+function getSourceAndTarget2(edge) {
+  return [edge.sources, edge.targets];
+}
+
 function getEdgeDictFromPorts(node, yosysModule, idCounter, bitNodeDict) {
   var edgeDict = {}; // yosys bits (netId): LEdge
-
+  var edgeArray = [];
   var nodeId = node.id;
   var portI = 0;
   for (const [portName, portObj] of Object.entries(yosysModule.ports)) {
     var port = node.ports[portI++];
     port.properties.index = portI;
     var portId = port.id;
-    for (const bit of portObj.bits) {
-      var edge = edgeDict[bit];
-      if (edge === undefined)// create edge if it is not in edgeDict
-      { 
-        var [edge, idCounter] = makeLEdge(portName, idCounter);
-        edgeDict[bit] = edge;
 
-        if (typeof (bit) == "string") { //create node with constant
-          var [subNode, port, idCounter, bitNodeDict] = addBitNode(node, bit, idCounter, bitNodeDict);
-          edge.sources.push([subNode.id, port.id]);
-        }
-      }
-
-
-      var _nodeId = nodeId;
-      var _portId = portId;
-
-      if (portObj.direction === "input") {
-        edge.sources.push([_nodeId, _portId]);
-
-      } else if (portObj.direction === "output") {
-        edge.targets.push([_nodeId, _portId]);
-
-      } else {
-        throw new Error("Unknown direction " + portObj.direction);
-      }
-
+    function getPortName2(bit) {
+      return portName;
     }
 
+    idCounter = loadNets(portObj.bits, getPortName2, nodeId, portId, getSourceAndTarget2, edgeDict,
+      bitNodeDict, idCounter, portObj.direction, node, edgeArray)
+
   }
-  return [edgeDict, idCounter, bitNodeDict];
+  return [edgeDict, edgeArray, idCounter, bitNodeDict];
 }
+
+function getSourceAndTargetForCell(edge) {
+  return [edge.targets, edge.sources];
+}
+
 function fillEdges(node, yosysModule, idCounter) {
   var bitNodeDict = {};
-  var [edgeDict, idCounter, bitNodeDict] = getEdgeDictFromPorts(node, yosysModule, idCounter, bitNodeDict);
-  var netnamesDict = getNetNamesDict(yosysModule); 
+  var [edgeDict, edgeArray, idCounter, bitNodeDict] = getEdgeDictFromPorts(node, yosysModule, idCounter, bitNodeDict);
+  var netnamesDict = getNetNamesDict(yosysModule);
   constructConstNodesForNetnames(yosysModule);
+  function getPortName(bit) {
+    return netnamesDict[bit];
+  }
 
   for (var i = 0; i < node.children.length; i++) {
     const subNode = node.children[i];
@@ -178,63 +197,29 @@ function fillEdges(node, yosysModule, idCounter) {
       var portObj = subNode.ports[portI++];
       portObj.properties.index = portI;
 
-      for (const bit of bits) {
-        var edge = edgeDict[bit];
-        if (edge === undefined) {
-          var [edge, idCounter] = makeLEdge(netnamesDict[bit], idCounter);
-          edgeDict[bit] = edge;
-          if (typeof (bit) == "string") { //create node with constant
-            var [constSubNode, port, idCounter, bitNodeDict] = addBitNode(node, bit, idCounter, bitNodeDict);
-            edge.sources.push([constSubNode.id, port.id]);
-  
-          }
-        }
-        var _nodeId = subNode.id;
-        var _portId = portObj.id;
-        
-
-
-        if (portName.startsWith("$")) {
-          //console.log("stop: " + portName)
-          var direction = portObj.direction.toLowerCase(); //use direction from module port definition
-        } else {
-          var direction = portDirections[portName];
-        }
-
-        if (direction === "output") {
-          edge.sources.push([_nodeId, _portId]);
-        } else if (direction === "input") {
-          edge.targets.push([_nodeId, _portId]);
-
-        } else {
-          throw new Error("Unknown direction " + direction);
-        }
+      if (portName.startsWith("$")) {
+        var direction = portObj.direction.toLowerCase(); //use direction from module port definition
+      } else {
+        var direction = portDirections[portName];
       }
 
-
-
-
-      //if not in modules:
-
-
-
+      idCounter = loadNets(bits, getPortName, subNode.id, portObj.id, getSourceAndTargetForCell,
+        edgeDict, bitNodeDict, idCounter, direction, node, edgeArray);
     }
-
   }
 
   var edgeSet = {}; // [sources, targets]: true
-  for (const [edgeIndex, edge] of Object.entries(edgeDict)) {
+  for (const edge of edgeArray) {
     var key = [edge.sources, edge.targets]
     if (!edgeSet[key]) // filter duplicities
     {
       edgeSet[key] = true;
       node.edges.push(edge);
     }
-
   }
-
   return idCounter;
 }
+
 function makeLNode(name, yosysModule, idCounter, yosysModules) {
 
   var node = {
@@ -254,13 +239,14 @@ function makeLNode(name, yosysModule, idCounter, yosysModules) {
   };
 
   idCounter++;
-  if (yosysModule) {
+
+  if (yosysModule != null) {
     // cell with module definition, load ports, edges and children from module def. recursively
-    idCounter = fillPorts(node, yosysModule.ports, idCounter, "modules")
+    idCounter = fillPorts(node, yosysModule.ports, idCounter, "ports")
     idCounter = fillChildren(node, yosysModule, idCounter, yosysModules)
     idCounter = fillEdges(node, yosysModule, idCounter)
-
   }
+
   if (yosysModule !== null && node.children.length === 0) {
     node._children = node.children;
     delete node.children
@@ -268,12 +254,8 @@ function makeLNode(name, yosysModule, idCounter, yosysModules) {
     delete node.edges;
   }
 
-
-
-
   //coutner maxId should be idCounter - 1
   node.hwMeta.maxId = idCounter;
-
   return [node, idCounter];
 }
 
@@ -286,6 +268,7 @@ function getTopModuleName(yosysJson) {
 
     }
   }
+
   if (topModuleName === undefined) {
     throw new Error("Cannot find top");
   }
@@ -299,9 +282,7 @@ function setIcons(node) {
   if (name.startsWith("$ternary$")) {
     meta.cls = "Operator";
     meta.name = "MUX";
-  }
-
-  else if (name.startsWith("$gt$")) {
+  } else if (name.startsWith("$gt$")) {
     meta.cls = "Operator";
     meta.name = "GT";
   } else if (name.startsWith("$lt$")) {
@@ -313,16 +294,13 @@ function setIcons(node) {
   } else if (name.startsWith("$le$")) {
     meta.cls = "Operator";
     meta.name = "LE";
-  }
-  else if (name.startsWith("$not$")) {
+  } else if (name.startsWith("$not$")) {
     meta.cls = "Operator";
     meta.name = "NOT";
-  }
-  else if (name.startsWith("$logic_and$")) {
+  } else if (name.startsWith("$logic_and$")) {
     meta.cls = "Operator";
     meta.name = "AND";
-  }
-  else if (name.startsWith("$eq$")) {
+  } else if (name.startsWith("$eq$")) {
     meta.cls = "Operator";
     meta.name = "EQ";
   } else if (name.startsWith("$ne$")) {
@@ -342,13 +320,10 @@ function setIcons(node) {
     meta.name = "DIV";
   }
 
-
   if (node.children !== undefined)
     node.children.forEach(setIcons);
-
 }
-//node.hwMeta.cls == "Operator"
-//node.hwMeta.name === "MUX
+
 export function yosysToD3Hwschematic(yosysJson) {
   var idCounter = 0;
   var [output, idCounter] = makeLNode("root", null, idCounter, null);

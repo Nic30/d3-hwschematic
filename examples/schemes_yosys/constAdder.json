@@ -1,0 +1,85 @@
+{
+  "creator": "Yosys 0.9 (git sha1 1979e0b)",
+  "modules": {
+    "constAdder": {
+      "attributes": {
+        "top": 1,
+        "src": "constAdder.v:1"
+      },
+      "ports": {
+        "in": {
+          "direction": "input",
+          "bits": [ 2, 3 ]
+        },
+        "out": {
+          "direction": "output",
+          "bits": [ 4, 5 ]
+        }
+      },
+      "cells": {
+        "$auto$alumacc.cc:474:replace_alu$2": {
+          "hide_name": 1,
+          "type": "$alu",
+          "parameters": {
+            "A_SIGNED": 0,
+            "A_WIDTH": 2,
+            "B_SIGNED": 0,
+            "B_WIDTH": 2,
+            "Y_WIDTH": 2
+          },
+          "attributes": {
+            "src": "constAdder.v:2"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "BI": "input",
+            "CI": "input",
+            "CO": "output",
+            "X": "output",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "1", "1" ],
+            "B": [ 2, 3 ],
+            "BI": [ "0" ],
+            "CI": [ "0" ],
+            "CO": [ 6, 7 ],
+            "X": [ 8, 9 ],
+            "Y": [ 4, 5 ]
+          }
+        }
+      },
+      "netnames": {
+        "$auto$alumacc.cc:490:replace_alu$3": {
+          "hide_name": 1,
+          "bits": [ 8, 9 ],
+          "attributes": {
+            "unused_bits": "0 1"
+          }
+        },
+        "$auto$alumacc.cc:491:replace_alu$4": {
+          "hide_name": 1,
+          "bits": [ 6, 7 ],
+          "attributes": {
+            "unused_bits": "0 1"
+          }
+        },
+        "in": {
+          "hide_name": 0,
+          "bits": [ 2, 3 ],
+          "attributes": {
+            "src": "constAdder.v:1"
+          }
+        },
+        "out": {
+          "hide_name": 0,
+          "bits": [ 4, 5 ],
+          "attributes": {
+            "src": "constAdder.v:1"
+          }
+        }
+      }
+    }
+  }
+}
