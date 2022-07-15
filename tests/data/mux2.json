@@ -17,7 +17,7 @@
       "hwMeta": {
         "name": "mux2x1",
         "cls": "",
-        "maxId": 15
+        "maxId": 14
       },
       "properties": {
         "org.eclipse.elk.portConstraints": "FIXED_ORDER",
@@ -153,7 +153,7 @@
           "hwMeta": {
             "name": "MUX",
             "cls": "Operator",
-            "maxId": 7
+            "maxId": 6
           },
           "properties": {
             "org.eclipse.elk.portConstraints": "FIXED_ORDER",

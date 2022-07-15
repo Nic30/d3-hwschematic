@@ -17,7 +17,7 @@
       "hwMeta": {
         "name": "constAdder",
         "cls": "",
-        "maxId": 32
+        "maxId": 31
       },
       "properties": {
         "org.eclipse.elk.portConstraints": "FIXED_ORDER",
@@ -100,7 +100,9 @@
               "5"
             ]
           ],
-          "hwMeta": {}
+          "hwMeta": {
+            "name": "1"
+          }
         },
         {
           "id": "19",
@@ -116,7 +118,9 @@
               "5"
             ]
           ],
-          "hwMeta": {}
+          "hwMeta": {
+            "name": "1"
+          }
         },
         {
           "id": "22",
@@ -132,7 +136,9 @@
               "7"
             ]
           ],
-          "hwMeta": {}
+          "hwMeta": {
+            "name": "0"
+          }
         },
         {
           "id": "25",
@@ -148,7 +154,9 @@
               "8"
             ]
           ],
-          "hwMeta": {}
+          "hwMeta": {
+            "name": "0"
+          }
         },
         {
           "id": "28",
@@ -183,7 +191,7 @@
           "hwMeta": {
             "name": "$auto$alumacc.cc:474:replace_alu$2",
             "cls": "",
-            "maxId": 5
+            "maxId": 4
           },
           "properties": {
             "org.eclipse.elk.portConstraints": "FIXED_ORDER",
@@ -283,7 +291,7 @@
           "hwMeta": {
             "name": "1",
             "cls": "",
-            "maxId": 18
+            "maxId": 17
           },
           "properties": {
             "org.eclipse.elk.portConstraints": "FIXED_ORDER",
@@ -311,7 +319,7 @@
           "hwMeta": {
             "name": "1",
             "cls": "",
-            "maxId": 21
+            "maxId": 20
           },
           "properties": {
             "org.eclipse.elk.portConstraints": "FIXED_ORDER",
@@ -339,7 +347,7 @@
           "hwMeta": {
             "name": "0",
             "cls": "",
-            "maxId": 24
+            "maxId": 23
           },
           "properties": {
             "org.eclipse.elk.portConstraints": "FIXED_ORDER",
@@ -367,7 +375,7 @@
           "hwMeta": {
             "name": "0",
             "cls": "",
-            "maxId": 27
+            "maxId": 26
           },
           "properties": {
             "org.eclipse.elk.portConstraints": "FIXED_ORDER",

@@ -1,5 +1,9 @@
 
 function makeLEdge(name, idCounter) {
+  if (name === undefined) {
+    throw new Error("Name is undefined");
+  }
+
   return [{
     "id": idCounter.toString(),
     "sources": [],
@@ -16,6 +20,9 @@ function makeLPort(name, direction, idCounter) {
     var portSide = "WEST";
   } else {
     throw new Error("Unknown direction " + direction);
+  }
+  if (name === undefined) {
+    throw new Error("Name is undefined");
   }
 
   return [{
@@ -58,7 +65,13 @@ function fillChildren(node, yosysModule, idCounter, yosysModules) {
     var cellModuleObj = yosysModules[moduleName];
     var [subNode, idCounter] = makeLNode(cellName, cellModuleObj, idCounter, yosysModules);
     if (cellModuleObj === undefined) {
+      if (cellObj.port_directions === undefined)
+      {
+        throw new Error("[Todo] if modules does not have definition in modules and its name does not \
+                         start with $, then it does not have port_directions. Must add port to sources and targets of an edge")
+      }
       idCounter = fillPorts(subNode, cellObj.port_directions, idCounter, "port_directions")
+
     }
     node.children.push(subNode);
   }
@@ -113,11 +126,17 @@ function constructConstNodesForNetnames(yosysModule) {
  */
 function loadNets(bits, getPortName, nodeId, portId, getSourceAndTarget, edgeDict, bitNodeDict, idCounter, direction, node, edgeArray) {
   for (const bit of bits) {
-    const portName = getPortName(bit);
+    var portName = getPortName(bit);
     var edge = edgeDict[bit];
     var netIsConst = typeof (bit) == "string";
     if (netIsConst || edge === undefined) {
       // create edge if it is not in edgeDict
+      if (portName === undefined) {
+        if (!netIsConst) {
+          throw new Error("Netname is undefined");
+        }
+        portName = bit;
+      }
       var [edge, idCounter] = makeLEdge(portName, idCounter);
       edgeDict[bit] = edge;
       edgeArray.push(edge);
@@ -221,6 +240,9 @@ function fillEdges(node, yosysModule, idCounter) {
 }
 
 function makeLNode(name, yosysModule, idCounter, yosysModules) {
+  if (name === undefined) {
+    throw new Error("Name is undefined");
+  }
 
   var node = {
     "id": idCounter.toString(), //generate, each component has unique id
@@ -254,8 +276,7 @@ function makeLNode(name, yosysModule, idCounter, yosysModules) {
     delete node.edges;
   }
 
-  //coutner maxId should be idCounter - 1
-  node.hwMeta.maxId = idCounter;
+  node.hwMeta.maxId = idCounter - 1;
   return [node, idCounter];
 }
 

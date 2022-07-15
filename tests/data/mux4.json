@@ -17,7 +17,7 @@
       "hwMeta": {
         "name": "mux4x2",
         "cls": "",
-        "maxId": 60
+        "maxId": 59
       },
       "properties": {
         "org.eclipse.elk.portConstraints": "FIXED_ORDER",
@@ -283,7 +283,7 @@
           "hwMeta": {
             "name": "mux_1",
             "cls": "",
-            "maxId": 23
+            "maxId": 22
           },
           "properties": {
             "org.eclipse.elk.portConstraints": "FIXED_ORDER",
@@ -419,7 +419,7 @@
               "hwMeta": {
                 "name": "MUX",
                 "cls": "Operator",
-                "maxId": 15
+                "maxId": 14
               },
               "properties": {
                 "org.eclipse.elk.portConstraints": "FIXED_ORDER",
@@ -485,7 +485,7 @@
           "hwMeta": {
             "name": "mux_2",
             "cls": "",
-            "maxId": 37
+            "maxId": 36
           },
           "properties": {
             "org.eclipse.elk.portConstraints": "FIXED_ORDER",
@@ -621,7 +621,7 @@
               "hwMeta": {
                 "name": "MUX",
                 "cls": "Operator",
-                "maxId": 29
+                "maxId": 28
               },
               "properties": {
                 "org.eclipse.elk.portConstraints": "FIXED_ORDER",
@@ -687,7 +687,7 @@
           "hwMeta": {
             "name": "mux_3",
             "cls": "",
-            "maxId": 51
+            "maxId": 50
           },
           "properties": {
             "org.eclipse.elk.portConstraints": "FIXED_ORDER",
@@ -823,7 +823,7 @@
               "hwMeta": {
                 "name": "MUX",
                 "cls": "Operator",
-                "maxId": 43
+                "maxId": 42
               },
               "properties": {
                 "org.eclipse.elk.portConstraints": "FIXED_ORDER",
