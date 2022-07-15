@@ -263,9 +263,9 @@ function makeLNode(name, yosysModule, idCounter, yosysModules) {
   }
   if (yosysModule !== null && node.children.length === 0) {
     node._children = node.children;
-    node.children = undefined;
+    delete node.children
     node._edges = node.edges;
-    node.edges = undefined;
+    delete node.edges;
   }
 
 

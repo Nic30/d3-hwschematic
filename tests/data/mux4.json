@@ -5,7 +5,6 @@
     "cls": "",
     "maxId": 60
   },
-  "hideChildren": true,
   "properties": {
     "org.eclipse.elk.portConstraints": "FIXED_ORDER",
     "org.eclipse.elk.layered.mergeEdges": 1
@@ -20,7 +19,6 @@
         "cls": "",
         "maxId": 60
       },
-      "hideChildren": true,
       "properties": {
         "org.eclipse.elk.portConstraints": "FIXED_ORDER",
         "org.eclipse.elk.layered.mergeEdges": 1
@@ -287,7 +285,6 @@
             "cls": "",
             "maxId": 23
           },
-          "hideChildren": true,
           "properties": {
             "org.eclipse.elk.portConstraints": "FIXED_ORDER",
             "org.eclipse.elk.layered.mergeEdges": 1
@@ -424,7 +421,6 @@
                 "cls": "Operator",
                 "maxId": 15
               },
-              "hideChildren": true,
               "properties": {
                 "org.eclipse.elk.portConstraints": "FIXED_ORDER",
                 "org.eclipse.elk.layered.mergeEdges": 1
@@ -479,8 +475,8 @@
                   "children": []
                 }
               ],
-              "edges": [],
-              "children": []
+              "_children": [],
+              "_edges": []
             }
           ]
         },
@@ -491,7 +487,6 @@
             "cls": "",
             "maxId": 37
           },
-          "hideChildren": true,
           "properties": {
             "org.eclipse.elk.portConstraints": "FIXED_ORDER",
             "org.eclipse.elk.layered.mergeEdges": 1
@@ -628,7 +623,6 @@
                 "cls": "Operator",
                 "maxId": 29
               },
-              "hideChildren": true,
               "properties": {
                 "org.eclipse.elk.portConstraints": "FIXED_ORDER",
                 "org.eclipse.elk.layered.mergeEdges": 1
@@ -683,8 +677,8 @@
                   "children": []
                 }
               ],
-              "edges": [],
-              "children": []
+              "_children": [],
+              "_edges": []
             }
           ]
         },
@@ -695,7 +689,6 @@
             "cls": "",
             "maxId": 51
           },
-          "hideChildren": true,
           "properties": {
             "org.eclipse.elk.portConstraints": "FIXED_ORDER",
             "org.eclipse.elk.layered.mergeEdges": 1
@@ -832,7 +825,6 @@
                 "cls": "Operator",
                 "maxId": 43
               },
-              "hideChildren": true,
               "properties": {
                 "org.eclipse.elk.portConstraints": "FIXED_ORDER",
                 "org.eclipse.elk.layered.mergeEdges": 1
@@ -887,8 +879,8 @@
                   "children": []
                 }
               ],
-              "edges": [],
-              "children": []
+              "_children": [],
+              "_edges": []
             }
           ]
         }
