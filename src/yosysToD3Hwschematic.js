@@ -59,24 +59,28 @@ function fillPorts(node, ports, idCounter, objType) {
 }
 
 function fillChildren(node, yosysModule, idCounter, yosysModules) {
+  var childrenWithoutPortArray = [];
   // iterate all cells and lookup for modules and construct them recursively
   for (const [cellName, cellObj] of Object.entries(yosysModule.cells)) {
     var moduleName = cellObj.type; //module name
     var cellModuleObj = yosysModules[moduleName];
     var [subNode, idCounter] = makeLNode(cellName, cellModuleObj, idCounter, yosysModules);
+    node.children.push(subNode);
     if (cellModuleObj === undefined) {
-      if (cellObj.port_directions === undefined)
-      {
-        throw new Error("[Todo] if modules does not have definition in modules and its name does not \
-                         start with $, then it does not have port_directions. Must add port to sources and targets of an edge")
+      if (cellObj.port_directions === undefined) {
+        //throw new Error("[Todo] if modules does not have definition in modules and its name does not \
+        //                 start with $, then it does not have port_directions. Must add port to sources and targets of an edge")
+
+        childrenWithoutPortArray.push([cellObj, subNode]);
+        continue;
       }
       idCounter = fillPorts(subNode, cellObj.port_directions, idCounter, "port_directions")
 
     }
-    node.children.push(subNode);
+
   }
 
-  return idCounter;
+  return [idCounter, childrenWithoutPortArray];
 }
 
 function addBitNode(node, bit, idCounter, bitNodeDict) {
@@ -189,7 +193,7 @@ function getSourceAndTargetForCell(edge) {
   return [edge.targets, edge.sources];
 }
 
-function fillEdges(node, yosysModule, idCounter) {
+function fillEdges(node, yosysModule, idCounter, childrenWithoutPortArray) {
   var bitNodeDict = {};
   var [edgeDict, edgeArray, idCounter, bitNodeDict] = getEdgeDictFromPorts(node, yosysModule, idCounter, bitNodeDict);
   var netnamesDict = getNetNamesDict(yosysModule);
@@ -203,9 +207,15 @@ function fillEdges(node, yosysModule, idCounter) {
     if (bitNodeDict[subNode.id] === 1) {
       continue;
     }
+
     var cell = yosysModule.cells[subNode.hwMeta.name];
+    if (cell.port_directions == undefined)
+    {
+      continue;
+    }
     var connections = cell.connections;
     var portDirections = cell.port_directions;
+
 
     if (connections === undefined) {
       throw new Error("Cannot find cell for subnode" + subNode.hwMeta.name);
@@ -225,6 +235,34 @@ function fillEdges(node, yosysModule, idCounter) {
       idCounter = loadNets(bits, getPortName, subNode.id, portObj.id, getSourceAndTargetForCell,
         edgeDict, bitNodeDict, idCounter, direction, node, edgeArray);
     }
+  }
+  // source null target null == direction is output
+
+  for (const [cellObj, subNode] of childrenWithoutPortArray) {
+    for (const [portName, bits] of Object.entries(cellObj.connections)) {
+      for (var bit of bits) {
+        var edge = edgeDict[bit];
+        if (edge === undefined) {
+          throw new Error("[Todo] create edge");
+        }
+        if (edge.sources.length === 0 && edge.targets.length == 0) {
+          var direction = "output";
+          var edgePoints = edge.sources;
+        } else if (edge.sources.length === 0) {
+          // no sources -> add as source
+          var direction = "output";
+          var edgePoints = edge.sources;
+        } else {
+          var direction = "input";
+          var edgePoints = edge.targets;
+        }
+
+        var [port, idCounter] = makeLPort(portName, direction, idCounter);
+        subNode.ports.push(port);
+        edgePoints.push([subNode.id, port.id]);
+      }
+    }
+
   }
 
   var edgeSet = {}; // [sources, targets]: true
@@ -265,8 +303,8 @@ function makeLNode(name, yosysModule, idCounter, yosysModules) {
   if (yosysModule != null) {
     // cell with module definition, load ports, edges and children from module def. recursively
     idCounter = fillPorts(node, yosysModule.ports, idCounter, "ports")
-    idCounter = fillChildren(node, yosysModule, idCounter, yosysModules)
-    idCounter = fillEdges(node, yosysModule, idCounter)
+    var [idCounter, childrenWithoutPortArray] = fillChildren(node, yosysModule, idCounter, yosysModules)
+    idCounter = fillEdges(node, yosysModule, idCounter, childrenWithoutPortArray)
   }
 
   if (yosysModule !== null && node.children.length === 0) {
