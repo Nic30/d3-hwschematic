@@ -297,9 +297,7 @@
             "org.eclipse.elk.portConstraints": "FIXED_ORDER",
             "org.eclipse.elk.layered.mergeEdges": 1
           },
-          "ports": [],
-          "edges": [],
-          "children": [
+          "ports": [
             {
               "id": "18",
               "hwMeta": {
@@ -312,7 +310,9 @@
               },
               "children": []
             }
-          ]
+          ],
+          "edges": [],
+          "children": []
         },
         {
           "id": "20",
@@ -325,9 +325,7 @@
             "org.eclipse.elk.portConstraints": "FIXED_ORDER",
             "org.eclipse.elk.layered.mergeEdges": 1
           },
-          "ports": [],
-          "edges": [],
-          "children": [
+          "ports": [
             {
               "id": "21",
               "hwMeta": {
@@ -340,7 +338,9 @@
               },
               "children": []
             }
-          ]
+          ],
+          "edges": [],
+          "children": []
         },
         {
           "id": "23",
@@ -353,9 +353,7 @@
             "org.eclipse.elk.portConstraints": "FIXED_ORDER",
             "org.eclipse.elk.layered.mergeEdges": 1
           },
-          "ports": [],
-          "edges": [],
-          "children": [
+          "ports": [
             {
               "id": "24",
               "hwMeta": {
@@ -368,7 +366,9 @@
               },
               "children": []
             }
-          ]
+          ],
+          "edges": [],
+          "children": []
         },
         {
           "id": "26",
@@ -381,9 +381,7 @@
             "org.eclipse.elk.portConstraints": "FIXED_ORDER",
             "org.eclipse.elk.layered.mergeEdges": 1
           },
-          "ports": [],
-          "edges": [],
-          "children": [
+          "ports": [
             {
               "id": "27",
               "hwMeta": {
@@ -396,7 +394,9 @@
               },
               "children": []
             }
-          ]
+          ],
+          "edges": [],
+          "children": []
         }
       ]
     }

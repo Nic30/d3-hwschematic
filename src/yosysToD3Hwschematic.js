@@ -86,7 +86,7 @@ function fillChildren(node, yosysModule, idCounter, yosysModules) {
 function addBitNode(node, bit, idCounter, bitNodeDict) {
   var [subNode, idCounter] = makeLNode(bit, null, idCounter, null);
   var [port, idCounter] = makeLPort("O0", "output", idCounter);
-  subNode.children.push(port);
+  subNode.ports.push(port);
   node.children.push(subNode);
   bitNodeDict[subNode.id] = 1;
 
@@ -114,13 +114,7 @@ function getNetNamesDict(yosysModule) {
   return netnamesDict;
 }
 
-function constructConstNodesForNetnames(yosysModule) {
-  iterNetnameBits(yosysModule.netnames, (netname, bit, isInt, isStr) => {
-    if (isStr) {
-      throw new Error("[Todo]: Connect constant port to net");
-    }
-  });
-}
+
 
 
 /*
@@ -197,7 +191,6 @@ function fillEdges(node, yosysModule, idCounter, childrenWithoutPortArray) {
   var bitNodeDict = {};
   var [edgeDict, edgeArray, idCounter, bitNodeDict] = getEdgeDictFromPorts(node, yosysModule, idCounter, bitNodeDict);
   var netnamesDict = getNetNamesDict(yosysModule);
-  constructConstNodesForNetnames(yosysModule);
   function getPortName(bit) {
     return netnamesDict[bit];
   }
