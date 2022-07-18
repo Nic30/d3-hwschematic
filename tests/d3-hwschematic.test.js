@@ -103,14 +103,15 @@ test('Testing component expansion', () => {
 });
 
 describe("Testing yosys", () => {
-	var testFiles = ["comparator.json", "mux2.json", "mux4.json", "constAdder.json", "subModuleBlackbox.json"]
+	var testFiles = ["comparator", "mux2", "mux4", "constAdder", "subModuleBlackbox", 
+					 "partialConstDriver0", "partialConstDriver1", "partialConstDriver2"];
 	for (const testFile of testFiles) {
 		it("Testing file: " + testFile, () => {
-			var f = YOSYS_EXAMPLES + "/" + testFile;
+			var f = YOSYS_EXAMPLES + "/" + testFile + ".json";
 			var graphData = JSON.parse(fs.readFileSync(f));
 			var output = HwSchematic.fromYosys(graphData);
-			var refF = __dirname + "/data/" + testFile;
-			//fs.writeFileSync(refF, JSON.stringify(output, null, 2)); //create refFiles
+			var refF = __dirname + "/data/" + testFile + ".json";
+			fs.writeFileSync(refF, JSON.stringify(output, null, 2)); //create refFiles
 			var refGraphData = JSON.parse(fs.readFileSync(refF));
 			expect(output).toEqual(refGraphData);
 		})
@@ -119,4 +120,3 @@ describe("Testing yosys", () => {
 	}
 
 })
-

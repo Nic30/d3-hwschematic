@@ -83,8 +83,8 @@ function fillChildren(node, yosysModule, idCounter, yosysModules) {
   return [idCounter, childrenWithoutPortArray];
 }
 
-function addBitNode(node, bit, idCounter, bitNodeDict) {
-  var [subNode, idCounter] = makeLNode(bit, null, idCounter, null);
+function addBitNode(node, nodeName, idCounter, bitNodeDict) {
+  var [subNode, idCounter] = makeLNode(nodeName, null, idCounter, null);
   var [port, idCounter] = makeLPort("O0", "output", idCounter);
   subNode.ports.push(port);
   node.children.push(subNode);
@@ -96,7 +96,7 @@ function addBitNode(node, bit, idCounter, bitNodeDict) {
 function iterNetnameBits(netnames, fn) {
   for (const [netname, netObj] of Object.entries(netnames)) {
     for (const bit of netObj.bits) {
-      fn(netname, bit, Number.isInteger(bit), typeof (bit) == "string");
+      fn(netname, bit, Number.isInteger(bit), isConst(bit));
     }
   }
 }
@@ -108,14 +108,17 @@ function getNetNamesDict(yosysModule) {
     if (isInt) {
       netnamesDict[bit] = netname;
     } else if (!isStr) {
-      throw new Error("Invalid type in bits: " + typeof (bit));
+      throw new Error("Invalid type in bits: " + typeof bit);
     }
   });
   return netnamesDict;
 }
 
 
-
+function isConst(val)
+{
+  return (typeof val === "string");
+}
 
 /*
  * Iterate bits representing yosys net names, which are used to get edges from the edgeDict.
@@ -123,10 +126,11 @@ function getNetNamesDict(yosysModule) {
  * nodes are completed by filling sources and targets properties of LEdge.
  */
 function loadNets(bits, getPortName, nodeId, portId, getSourceAndTarget, edgeDict, bitNodeDict, idCounter, direction, node, edgeArray) {
-  for (const bit of bits) {
+  for (var i = 0; i < bits.length; ++i) {
+    var bit = bits[i];
     var portName = getPortName(bit);
     var edge = edgeDict[bit];
-    var netIsConst = typeof (bit) == "string";
+    var netIsConst = isConst(bit);
     if (netIsConst || edge === undefined) {
       // create edge if it is not in edgeDict
       if (portName === undefined) {
@@ -139,8 +143,26 @@ function loadNets(bits, getPortName, nodeId, portId, getSourceAndTarget, edgeDic
       edgeDict[bit] = edge;
       edgeArray.push(edge);
       if (netIsConst) {
+        var nameArray = [];
+        for (i; i < bits.length; ++i)
+        {
+          var bit = bits[i];
+          if (isConst(bit))
+          {
+            nameArray.push(bit);
+          }
+          else
+          { 
+            --i;
+            break;
+          }
+        }
         // If bit is a constant, create a node with constant
-        var [constSubNode, port, idCounter, bitNodeDict] = addBitNode(node, bit, idCounter, bitNodeDict);
+        nodeName = nameArray.reverse().join("");
+        var nodeName = ["0b", nodeName].join("");
+        var res = BigInt(nodeName).toString(16);
+        nodeName = ["0x", res].join("");
+        var [constSubNode, port, idCounter, bitNodeDict] = addBitNode(node, nodeName, idCounter, bitNodeDict);
         edge.sources.push([constSubNode.id, port.id]);
       }
     }
@@ -198,6 +220,7 @@ function fillEdges(node, yosysModule, idCounter, childrenWithoutPortArray) {
   for (var i = 0; i < node.children.length; i++) {
     const subNode = node.children[i];
     if (bitNodeDict[subNode.id] === 1) {
+      //skip constants to iterate original cells
       continue;
     }
 
@@ -300,6 +323,7 @@ function makeLNode(name, yosysModule, idCounter, yosysModules) {
     idCounter = fillEdges(node, yosysModule, idCounter, childrenWithoutPortArray)
   }
 
+  //todo hide based on hierarchy level
   if (yosysModule !== null && node.children.length === 0) {
     node._children = node.children;
     delete node.children
