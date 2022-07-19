@@ -111,7 +111,7 @@ describe("Testing yosys", () => {
 			var graphData = JSON.parse(fs.readFileSync(f));
 			var output = HwSchematic.fromYosys(graphData);
 			var refF = __dirname + "/data/" + testFile + ".json";
-			fs.writeFileSync(refF, JSON.stringify(output, null, 2)); //create refFiles
+			//fs.writeFileSync(refF, JSON.stringify(output, null, 2)); //create refFiles
 			var refGraphData = JSON.parse(fs.readFileSync(refF));
 			expect(output).toEqual(refGraphData);
 		})
