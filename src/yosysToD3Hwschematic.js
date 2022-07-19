@@ -420,8 +420,7 @@ export function yosysToD3Hwschematic(yosysJson) {
   var topModuleName = getTopModuleName(yosysJson);
   var [node, idCounter] = makeLNode(topModuleName, yosysJson.modules[topModuleName], idCounter, yosysJson.modules);
   output.children.push(node);
-  ////to do ? max id = idCounter - 1
-  output.hwMeta.maxId = idCounter;
+  output.hwMeta.maxId = idCounter - 1;
   setIcons(output);
   //print output to console
   //console.log(JSON.stringify(output, null, 2));
