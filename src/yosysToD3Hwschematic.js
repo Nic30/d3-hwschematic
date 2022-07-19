@@ -13,19 +13,9 @@ function makeLEdge(name, idCounter) {
     }
   }, idCounter + 1];
 }
-function makeLPort(name, direction, idCounter) {
-  if (direction === "output") {
-    var portSide = "EAST";
-  } else if (direction === "input") {
-    var portSide = "WEST";
-  } else {
-    throw new Error("Unknown direction " + direction);
-  }
-  if (name === undefined) {
-    throw new Error("Name is undefined");
-  }
 
-  return [{
+function makePort(name, direction, portSide, idCounter) {
+  return {
     "id": idCounter.toString(),
     "hwMeta": { // [d3-hwschematic specific]
       "name": name,
@@ -37,7 +27,25 @@ function makeLPort(name, direction, idCounter) {
       // Required only for components with "org.eclipse.elk.portConstraints": "FIXED_ORDER"
     },
     "children": [], // list of LPort, if the port should be collapsed rename this property to "_children"
-  }, idCounter + 1];
+  }
+}
+function getPortSide(direction) {
+  if (direction === "output") {
+    return "EAST";
+  } if (direction === "input") {
+    return "WEST";
+  }
+  throw new Error("Unknown direction " + direction);
+}
+
+function makeLPort(name, direction, idCounter) {
+  if (name === undefined) {
+    throw new Error("Name is undefined");
+  }
+
+  var portSide = getPortSide(direction);
+  
+  return [makePort(name, direction, portSide, idCounter), idCounter + 1];
 }
 
 function fillPorts(node, ports, idCounter, objType) {
@@ -187,18 +195,17 @@ function getSourceAndTarget2(edge) {
 function getEdgeDictFromPorts(node, yosysModule, idCounter, bitNodeDict) {
   var edgeDict = {}; // yosys bits (netId): LEdge
   var edgeArray = [];
-  var nodeId = node.id;
-  var portI = 0;
+  var portsIndex = 0;
   for (const [portName, portObj] of Object.entries(yosysModule.ports)) {
-    var port = node.ports[portI++];
-    port.properties.index = portI;
-    var portId = port.id;
+    var port = node.ports[portsIndex];
+    port.properties.index = portsIndex;
+    portsIndex++;
 
     function getPortName2(bit) {
       return portName;
     }
 
-    idCounter = loadNets(portObj.bits, getPortName2, nodeId, portId, getSourceAndTarget2, edgeDict,
+    idCounter = loadNets(portObj.bits, getPortName2, node.id, port.id, getSourceAndTarget2, edgeDict,
       bitNodeDict, idCounter, portObj.direction, node, edgeArray)
 
   }
@@ -293,12 +300,17 @@ function fillEdges(node, yosysModule, idCounter, childrenWithoutPortArray) {
   return idCounter;
 }
 
-function makeLNode(name, yosysModule, idCounter, yosysModules) {
-  if (name === undefined) {
-    throw new Error("Name is undefined");
+function hideChildrenAndNodes(node, yosysModule) {
+  if (yosysModule !== null && node.children.length === 0) {
+    node._children = node.children;
+    delete node.children
+    node._edges = node.edges;
+    delete node.edges;
   }
+}
 
-  var node = {
+function makeNode(name, idCounter) {
+  return {
     "id": idCounter.toString(), //generate, each component has unique id
     "hwMeta": { // [d3-hwschematic specific]
       "name": name, // optional str
@@ -313,7 +325,13 @@ function makeLNode(name, yosysModule, idCounter, yosysModules) {
     "edges": [],    // list of LEdge
     "children": [], // list of LNode
   };
+}
+function makeLNode(name, yosysModule, idCounter, yosysModules) {
+  if (name === undefined) {
+    throw new Error("Name is undefined");
+  }
 
+  var node = makeNode(name, idCounter);
   idCounter++;
 
   if (yosysModule != null) {
@@ -324,13 +342,8 @@ function makeLNode(name, yosysModule, idCounter, yosysModules) {
   }
 
   //todo hide based on hierarchy level
-  if (yosysModule !== null && node.children.length === 0) {
-    node._children = node.children;
-    delete node.children
-    node._edges = node.edges;
-    delete node.edges;
-  }
-
+  hideChildrenAndNodes(node, yosysModule);
+  
   node.hwMeta.maxId = idCounter - 1;
   return [node, idCounter];
 }
@@ -407,6 +420,7 @@ export function yosysToD3Hwschematic(yosysJson) {
   var topModuleName = getTopModuleName(yosysJson);
   var [node, idCounter] = makeLNode(topModuleName, yosysJson.modules[topModuleName], idCounter, yosysJson.modules);
   output.children.push(node);
+  ////to do ? max id = idCounter - 1
   output.hwMeta.maxId = idCounter;
   setIcons(output);
   //print output to console

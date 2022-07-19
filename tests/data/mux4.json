@@ -32,7 +32,7 @@
           "direction": "INPUT",
           "properties": {
             "side": "WEST",
-            "index": 1
+            "index": 0
           },
           "children": []
         },
@@ -44,7 +44,7 @@
           "direction": "INPUT",
           "properties": {
             "side": "WEST",
-            "index": 2
+            "index": 1
           },
           "children": []
         },
@@ -56,7 +56,7 @@
           "direction": "INPUT",
           "properties": {
             "side": "WEST",
-            "index": 3
+            "index": 2
           },
           "children": []
         },
@@ -68,7 +68,7 @@
           "direction": "INPUT",
           "properties": {
             "side": "WEST",
-            "index": 4
+            "index": 3
           },
           "children": []
         },
@@ -80,7 +80,7 @@
           "direction": "INPUT",
           "properties": {
             "side": "WEST",
-            "index": 5
+            "index": 4
           },
           "children": []
         },
@@ -92,7 +92,7 @@
           "direction": "INPUT",
           "properties": {
             "side": "WEST",
-            "index": 6
+            "index": 5
           },
           "children": []
         },
@@ -104,7 +104,7 @@
           "direction": "OUTPUT",
           "properties": {
             "side": "EAST",
-            "index": 7
+            "index": 6
           },
           "children": []
         }

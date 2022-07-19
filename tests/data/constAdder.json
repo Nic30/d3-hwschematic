@@ -32,7 +32,7 @@
           "direction": "INPUT",
           "properties": {
             "side": "WEST",
-            "index": 1
+            "index": 0
           },
           "children": []
         },
@@ -44,7 +44,7 @@
           "direction": "OUTPUT",
           "properties": {
             "side": "EAST",
-            "index": 2
+            "index": 1
           },
           "children": []
         }
