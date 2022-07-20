@@ -1,0 +1,39 @@
+{
+  "creator": "Yosys 0.9 (git sha1 1979e0b)",
+  "modules": {
+    "wireModule": {
+      "attributes": {
+        "top": 1,
+        "src": "wireModule.v:1"
+      },
+      "ports": {
+        "in": {
+          "direction": "input",
+          "bits": [ 2, 3, 4, 5, 6, 7, 8, 9 ]
+        },
+        "out": {
+          "direction": "output",
+          "bits": [ 2, 3, 4, 5, 6, 7, 8, 9 ]
+        }
+      },
+      "cells": {
+      },
+      "netnames": {
+        "in": {
+          "hide_name": 0,
+          "bits": [ 2, 3, 4, 5, 6, 7, 8, 9 ],
+          "attributes": {
+            "src": "wireModule.v:1"
+          }
+        },
+        "out": {
+          "hide_name": 0,
+          "bits": [ 2, 3, 4, 5, 6, 7, 8, 9 ],
+          "attributes": {
+            "src": "wireModule.v:1"
+          }
+        }
+      }
+    }
+  }
+}

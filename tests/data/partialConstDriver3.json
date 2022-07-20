@@ -3,7 +3,7 @@
   "hwMeta": {
     "name": "root",
     "cls": "",
-    "maxId": 12
+    "maxId": 17
   },
   "properties": {
     "org.eclipse.elk.portConstraints": "FIXED_ORDER",
@@ -15,9 +15,9 @@
     {
       "id": "1",
       "hwMeta": {
-        "name": "partialConstDriver1",
+        "name": "partialConstDriver3",
         "cls": "",
-        "maxId": 12
+        "maxId": 17
       },
       "properties": {
         "org.eclipse.elk.portConstraints": "FIXED_ORDER",
@@ -60,8 +60,8 @@
           ],
           "targets": [
             [
-              "8",
-              "12"
+              "12",
+              "16"
             ]
           ],
           "hwMeta": {
@@ -69,17 +69,17 @@
           }
         },
         {
-          "id": "5",
+          "id": "6",
           "sources": [
             [
-              "6",
-              "7"
+              "7",
+              "8"
             ]
           ],
           "targets": [
             [
-              "8",
-              "11"
+              "12",
+              "17"
             ]
           ],
           "hwMeta": {
@@ -87,11 +87,29 @@
           }
         },
         {
-          "id": "10",
+          "id": "9",
           "sources": [
             [
-              "8",
-              "9"
+              "10",
+              "11"
+            ]
+          ],
+          "targets": [
+            [
+              "12",
+              "15"
+            ]
+          ],
+          "hwMeta": {
+            "name": "out"
+          }
+        },
+        {
+          "id": "14",
+          "sources": [
+            [
+              "12",
+              "13"
             ]
           ],
           "targets": [
@@ -107,11 +125,11 @@
       ],
       "children": [
         {
-          "id": "6",
+          "id": "7",
           "hwMeta": {
-            "name": "0x2d",
+            "name": "0x5",
             "cls": "",
-            "maxId": 6
+            "maxId": 7
           },
           "properties": {
             "org.eclipse.elk.portConstraints": "FIXED_ORDER",
@@ -119,7 +137,7 @@
           },
           "ports": [
             {
-              "id": "7",
+              "id": "8",
               "hwMeta": {
                 "name": "O0"
               },
@@ -133,11 +151,11 @@
           ]
         },
         {
-          "id": "8",
+          "id": "10",
           "hwMeta": {
-            "name": "CONCAT",
+            "name": "0x3",
             "cls": "",
-            "maxId": 8
+            "maxId": 10
           },
           "properties": {
             "org.eclipse.elk.portConstraints": "FIXED_ORDER",
@@ -145,7 +163,33 @@
           },
           "ports": [
             {
-              "id": "9",
+              "id": "11",
+              "hwMeta": {
+                "name": "O0"
+              },
+              "direction": "OUTPUT",
+              "properties": {
+                "side": "EAST",
+                "index": 0
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "12",
+          "hwMeta": {
+            "name": "CONCAT",
+            "cls": "",
+            "maxId": 12
+          },
+          "properties": {
+            "org.eclipse.elk.portConstraints": "FIXED_ORDER",
+            "org.eclipse.elk.layered.mergeEdges": 1
+          },
+          "ports": [
+            {
+              "id": "13",
               "hwMeta": {
                 "name": ""
               },
@@ -157,9 +201,9 @@
               "children": []
             },
             {
-              "id": "11",
+              "id": "15",
               "hwMeta": {
-                "name": "[8:1]"
+                "name": "[8:5]"
               },
               "direction": "INPUT",
               "properties": {
@@ -169,9 +213,21 @@
               "children": []
             },
             {
-              "id": "12",
+              "id": "16",
               "hwMeta": {
-                "name": "[0]"
+                "name": "[5:3]"
+              },
+              "direction": "INPUT",
+              "properties": {
+                "side": "WEST",
+                "index": 0
+              },
+              "children": []
+            },
+            {
+              "id": "17",
+              "hwMeta": {
+                "name": "[3:0]"
               },
               "direction": "INPUT",
               "properties": {

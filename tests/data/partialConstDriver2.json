@@ -3,7 +3,7 @@
   "hwMeta": {
     "name": "root",
     "cls": "",
-    "maxId": 10
+    "maxId": 16
   },
   "properties": {
     "org.eclipse.elk.portConstraints": "FIXED_ORDER",
@@ -17,7 +17,7 @@
       "hwMeta": {
         "name": "partialConstDriver2",
         "cls": "",
-        "maxId": 10
+        "maxId": 16
       },
       "properties": {
         "org.eclipse.elk.portConstraints": "FIXED_ORDER",
@@ -60,8 +60,8 @@
           ],
           "targets": [
             [
-              "1",
-              "3"
+              "11",
+              "15"
             ]
           ],
           "hwMeta": {
@@ -78,8 +78,8 @@
           ],
           "targets": [
             [
-              "1",
-              "3"
+              "11",
+              "16"
             ]
           ],
           "hwMeta": {
@@ -96,12 +96,30 @@
           ],
           "targets": [
             [
+              "11",
+              "14"
+            ]
+          ],
+          "hwMeta": {
+            "name": "out"
+          }
+        },
+        {
+          "id": "13",
+          "sources": [
+            [
+              "11",
+              "12"
+            ]
+          ],
+          "targets": [
+            [
               "1",
               "3"
             ]
           ],
           "hwMeta": {
-            "name": "out"
+            "name": ""
           }
         }
       ],
@@ -130,9 +148,7 @@
               },
               "children": []
             }
-          ],
-          "edges": [],
-          "children": []
+          ]
         },
         {
           "id": "9",
@@ -158,9 +174,69 @@
               },
               "children": []
             }
-          ],
-          "edges": [],
-          "children": []
+          ]
+        },
+        {
+          "id": "11",
+          "hwMeta": {
+            "name": "CONCAT",
+            "cls": "",
+            "maxId": 11
+          },
+          "properties": {
+            "org.eclipse.elk.portConstraints": "FIXED_ORDER",
+            "org.eclipse.elk.layered.mergeEdges": 1
+          },
+          "ports": [
+            {
+              "id": "12",
+              "hwMeta": {
+                "name": ""
+              },
+              "direction": "OUTPUT",
+              "properties": {
+                "side": "EAST",
+                "index": 0
+              },
+              "children": []
+            },
+            {
+              "id": "14",
+              "hwMeta": {
+                "name": "[8:4]"
+              },
+              "direction": "INPUT",
+              "properties": {
+                "side": "WEST",
+                "index": 0
+              },
+              "children": []
+            },
+            {
+              "id": "15",
+              "hwMeta": {
+                "name": "[3]"
+              },
+              "direction": "INPUT",
+              "properties": {
+                "side": "WEST",
+                "index": 0
+              },
+              "children": []
+            },
+            {
+              "id": "16",
+              "hwMeta": {
+                "name": "[3:0]"
+              },
+              "direction": "INPUT",
+              "properties": {
+                "side": "WEST",
+                "index": 0
+              },
+              "children": []
+            }
+          ]
         }
       ]
     }

@@ -104,7 +104,9 @@ test('Testing component expansion', () => {
 
 describe("Testing yosys", () => {
 	var testFiles = ["comparator", "mux2", "mux4", "constAdder", "subModuleBlackbox", 
-					 "partialConstDriver0", "partialConstDriver1", "partialConstDriver2"];
+					 "partialConstDriver0", "partialConstDriver1", "partialConstDriver2",
+					 "partialConstDriver3", "partialConstDriver4", "partialConstDriver5",
+					 "partialConstDriver6", "wireModule"];
 	for (const testFile of testFiles) {
 		it("Testing file: " + testFile, () => {
 			var f = YOSYS_EXAMPLES + "/" + testFile + ".json";

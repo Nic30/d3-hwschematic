@@ -1,0 +1,50 @@
+{
+  "creator": "Yosys 0.9 (git sha1 1979e0b)",
+  "modules": {
+    "partialConstDriver5": {
+      "attributes": {
+        "top": 1,
+        "src": "partialConstDriver5.v:1"
+      },
+      "ports": {
+        "in": {
+          "direction": "input",
+          "bits": [ 2, 3, 4 ]
+        },
+        "out0": {
+          "direction": "output",
+          "bits": [ "1", "0", "1", 2, 3, 4, "1", "0" ]
+        },
+        "out1": {
+          "direction": "output",
+          "bits": [ 2, 3, 4, "1", "0", "1", "1", "0" ]
+        }
+      },
+      "cells": {
+      },
+      "netnames": {
+        "in": {
+          "hide_name": 0,
+          "bits": [ 2, 3, 4 ],
+          "attributes": {
+            "src": "partialConstDriver5.v:1"
+          }
+        },
+        "out0": {
+          "hide_name": 0,
+          "bits": [ "1", "0", "1", 2, 3, 4, "1", "0" ],
+          "attributes": {
+            "src": "partialConstDriver5.v:1"
+          }
+        },
+        "out1": {
+          "hide_name": 0,
+          "bits": [ 2, 3, 4, "1", "0", "1", "1", "0" ],
+          "attributes": {
+            "src": "partialConstDriver5.v:1"
+          }
+        }
+      }
+    }
+  }
+}
