@@ -450,6 +450,24 @@ function filterEdges(edgeDictA, targetDict) {
     }
   }
 }
+
+function arrayHasDifferentTargets(array) {
+  
+  var targetsToCompare = undefined;
+  for (var [edge, width] of array) {
+    var targets = edge.targets;
+    if (targetsToCompare === undefined) {
+      targetsToCompare = targets;
+    }
+    else if (targets.join("") !== targetsToCompare.join("")){
+      return true;
+    }
+  }
+  return false;
+  
+ //return true;
+}
+
 function fillEdges(node, yosysModule, idCounter, childrenWithoutPortArray) {
   var constNodeDict = {};
   var edgeTargetsDict = {};
@@ -541,6 +559,7 @@ function fillEdges(node, yosysModule, idCounter, childrenWithoutPortArray) {
 
   //filterEdges(edgeTargetsDict, true);
   //idCounter = addConcats(node, edgeTargetsDict, idCounter);
+
 
 
   return idCounter;
