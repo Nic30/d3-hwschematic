@@ -13,12 +13,71 @@
         },
         "out": {
           "direction": "output",
-          "bits": [ "1", "0", "1", 2, "1", "0", "1", "1" ]
+          "bits": [ 3, 4, 5, 6, 7, 8, 9, 10 ]
         }
       },
       "cells": {
+        "$auto$splice.cc:135:get_spliced_signal$1": {
+          "hide_name": 1,
+          "type": "$concat",
+          "parameters": {
+            "A_WIDTH": 3,
+            "B_WIDTH": 1
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "1", "0", "1" ],
+            "B": [ 2 ],
+            "Y": [ 11, 12, 13, 14 ]
+          }
+        },
+        "$auto$splice.cc:135:get_spliced_signal$3": {
+          "hide_name": 1,
+          "type": "$concat",
+          "parameters": {
+            "A_WIDTH": 4,
+            "B_WIDTH": 4
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 11, 12, 13, 14 ],
+            "B": [ "1", "0", "1", "1" ],
+            "Y": [ 3, 4, 5, 6, 7, 8, 9, 10 ]
+          }
+        }
       },
       "netnames": {
+        "$auto$splice.cc:140:get_spliced_signal$2": {
+          "hide_name": 1,
+          "bits": [ 11, 12, 13, 14 ],
+          "attributes": {
+          }
+        },
+        "$auto$splice.cc:140:get_spliced_signal$4": {
+          "hide_name": 1,
+          "bits": [ 3, 4, 5, 6, 7, 8, 9, 10 ],
+          "attributes": {
+          }
+        },
+        "$auto$splice.cc:236:run$5": {
+          "hide_name": 1,
+          "bits": [ "1", "0", "1", 2, "1", "0", "1", "1" ],
+          "attributes": {
+            "src": "partialConstDriver2.v:1"
+          }
+        },
         "in": {
           "hide_name": 0,
           "bits": [ 2 ],
@@ -28,7 +87,7 @@
         },
         "out": {
           "hide_name": 0,
-          "bits": [ "1", "0", "1", 2, "1", "0", "1", "1" ],
+          "bits": [ 3, 4, 5, 6, 7, 8, 9, 10 ],
           "attributes": {
             "src": "partialConstDriver2.v:1"
           }

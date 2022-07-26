@@ -1,0 +1,90 @@
+{
+  "id": "0",
+  "hwMeta": {
+    "name": "root",
+    "cls": "",
+    "maxId": 5
+  },
+  "properties": {
+    "org.eclipse.elk.portConstraints": "FIXED_ORDER",
+    "org.eclipse.elk.layered.mergeEdges": 1
+  },
+  "ports": [],
+  "edges": [],
+  "children": [
+    {
+      "id": "1",
+      "hwMeta": {
+        "name": "constPortDriver",
+        "cls": "",
+        "maxId": 5
+      },
+      "properties": {
+        "org.eclipse.elk.portConstraints": "FIXED_ORDER",
+        "org.eclipse.elk.layered.mergeEdges": 1
+      },
+      "ports": [
+        {
+          "id": "2",
+          "hwMeta": {
+            "name": "out"
+          },
+          "direction": "OUTPUT",
+          "properties": {
+            "side": "EAST",
+            "index": 0
+          },
+          "children": []
+        }
+      ],
+      "edges": [
+        {
+          "id": "3",
+          "sources": [
+            [
+              "4",
+              "5"
+            ]
+          ],
+          "targets": [
+            [
+              "1",
+              "2"
+            ]
+          ],
+          "hwMeta": {
+            "name": "out"
+          }
+        }
+      ],
+      "children": [
+        {
+          "id": "4",
+          "hwMeta": {
+            "name": "0x1",
+            "cls": "",
+            "maxId": 4
+          },
+          "properties": {
+            "org.eclipse.elk.portConstraints": "FIXED_ORDER",
+            "org.eclipse.elk.layered.mergeEdges": 1
+          },
+          "ports": [
+            {
+              "id": "5",
+              "hwMeta": {
+                "name": "O0"
+              },
+              "direction": "OUTPUT",
+              "properties": {
+                "side": "EAST",
+                "index": 0
+              },
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

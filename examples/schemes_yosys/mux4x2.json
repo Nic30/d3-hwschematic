@@ -3,8 +3,7 @@
   "modules": {
     "mux2x1": {
       "attributes": {
-        "cells_not_processed": 1,
-        "src": "mux4.v:1"
+        "src": "mux4x2.v:1"
       },
       "ports": {
         "a": {
@@ -25,14 +24,14 @@
         }
       },
       "cells": {
-        "$ternary$mux4.v:5$1": {
+        "$ternary$mux4x2.v:5$1": {
           "hide_name": 1,
           "type": "$mux",
           "parameters": {
             "WIDTH": 1
           },
           "attributes": {
-            "src": "mux4.v:5"
+            "src": "mux4x2.v:5"
           },
           "port_directions": {
             "A": "input",
@@ -49,60 +48,32 @@
         }
       },
       "netnames": {
-        "$ternary$mux4.v:5$1_Y": {
-          "hide_name": 1,
-          "bits": [ 5 ],
-          "attributes": {
-            "src": "mux4.v:5"
-          }
-        },
         "a": {
           "hide_name": 0,
           "bits": [ 2 ],
           "attributes": {
-            "src": "mux4.v:2"
-          }
-        },
-        "and_1": {
-          "hide_name": 0,
-          "bits": [ 6 ],
-          "attributes": {
-            "src": "mux4.v:3"
-          }
-        },
-        "and_2": {
-          "hide_name": 0,
-          "bits": [ 7 ],
-          "attributes": {
-            "src": "mux4.v:3"
+            "src": "mux4x2.v:2"
           }
         },
         "b": {
           "hide_name": 0,
           "bits": [ 3 ],
           "attributes": {
-            "src": "mux4.v:2"
+            "src": "mux4x2.v:2"
           }
         },
         "out": {
           "hide_name": 0,
           "bits": [ 5 ],
           "attributes": {
-            "src": "mux4.v:4"
+            "src": "mux4x2.v:4"
           }
         },
         "s": {
           "hide_name": 0,
           "bits": [ 4 ],
           "attributes": {
-            "src": "mux4.v:2"
-          }
-        },
-        "s_c": {
-          "hide_name": 0,
-          "bits": [ 8 ],
-          "attributes": {
-            "src": "mux4.v:3"
+            "src": "mux4x2.v:2"
           }
         }
       }
@@ -110,8 +81,7 @@
     "mux4x2": {
       "attributes": {
         "top": 1,
-        "cells_not_processed": 1,
-        "src": "mux4.v:8"
+        "src": "mux4x2.v:8"
       },
       "ports": {
         "i0": {
@@ -151,19 +121,19 @@
           },
           "attributes": {
             "module_not_derived": 1,
-            "src": "mux4.v:12"
+            "src": "mux4x2.v:12"
           },
           "port_directions": {
-            "$1": "output",
-            "$2": "output",
-            "$3": "output",
-            "$4": "output"
+            "a": "input",
+            "b": "input",
+            "out": "output",
+            "s": "input"
           },
           "connections": {
-            "$1": [ 2 ],
-            "$2": [ 3 ],
-            "$3": [ 6 ],
-            "$4": [ 9 ]
+            "a": [ 2 ],
+            "b": [ 3 ],
+            "out": [ 9 ],
+            "s": [ 6 ]
           }
         },
         "mux_2": {
@@ -173,19 +143,19 @@
           },
           "attributes": {
             "module_not_derived": 1,
-            "src": "mux4.v:13"
+            "src": "mux4x2.v:13"
           },
           "port_directions": {
-            "$1": "output",
-            "$2": "output",
-            "$3": "output",
-            "$4": "output"
+            "a": "input",
+            "b": "input",
+            "out": "output",
+            "s": "input"
           },
           "connections": {
-            "$1": [ 4 ],
-            "$2": [ 5 ],
-            "$3": [ 6 ],
-            "$4": [ 10 ]
+            "a": [ 4 ],
+            "b": [ 5 ],
+            "out": [ 10 ],
+            "s": [ 6 ]
           }
         },
         "mux_3": {
@@ -195,19 +165,19 @@
           },
           "attributes": {
             "module_not_derived": 1,
-            "src": "mux4.v:14"
+            "src": "mux4x2.v:14"
           },
           "port_directions": {
-            "$1": "output",
-            "$2": "output",
-            "$3": "output",
-            "$4": "output"
+            "a": "input",
+            "b": "input",
+            "out": "output",
+            "s": "input"
           },
           "connections": {
-            "$1": [ 9 ],
-            "$2": [ 10 ],
-            "$3": [ 7 ],
-            "$4": [ 8 ]
+            "a": [ 9 ],
+            "b": [ 10 ],
+            "out": [ 8 ],
+            "s": [ 7 ]
           }
         }
       },
@@ -216,63 +186,63 @@
           "hide_name": 0,
           "bits": [ 2 ],
           "attributes": {
-            "src": "mux4.v:9"
+            "src": "mux4x2.v:9"
           }
         },
         "i1": {
           "hide_name": 0,
           "bits": [ 3 ],
           "attributes": {
-            "src": "mux4.v:9"
+            "src": "mux4x2.v:9"
           }
         },
         "i2": {
           "hide_name": 0,
           "bits": [ 4 ],
           "attributes": {
-            "src": "mux4.v:9"
+            "src": "mux4x2.v:9"
           }
         },
         "i3": {
           "hide_name": 0,
           "bits": [ 5 ],
           "attributes": {
-            "src": "mux4.v:9"
+            "src": "mux4x2.v:9"
           }
         },
         "mux1": {
           "hide_name": 0,
           "bits": [ 9 ],
           "attributes": {
-            "src": "mux4.v:11"
+            "src": "mux4x2.v:11"
           }
         },
         "mux2": {
           "hide_name": 0,
           "bits": [ 10 ],
           "attributes": {
-            "src": "mux4.v:11"
+            "src": "mux4x2.v:11"
           }
         },
         "out": {
           "hide_name": 0,
           "bits": [ 8 ],
           "attributes": {
-            "src": "mux4.v:10"
+            "src": "mux4x2.v:10"
           }
         },
         "s0": {
           "hide_name": 0,
           "bits": [ 7 ],
           "attributes": {
-            "src": "mux4.v:9"
+            "src": "mux4x2.v:9"
           }
         },
         "s1": {
           "hide_name": 0,
           "bits": [ 6 ],
           "attributes": {
-            "src": "mux4.v:9"
+            "src": "mux4x2.v:9"
           }
         }
       }

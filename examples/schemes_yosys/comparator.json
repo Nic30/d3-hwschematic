@@ -3,8 +3,7 @@
   "modules": {
     "comparator": {
       "attributes": {
-      	"top": 1,
-        "cells_not_processed": 1,
+        "top": 1,
         "src": "comparator.v:1"
       },
       "ports": {
@@ -48,13 +47,6 @@
         }
       },
       "netnames": {
-        "$gt$comparator.v:4$1_Y": {
-          "hide_name": 1,
-          "bits": [ 12 ],
-          "attributes": {
-            "src": "comparator.v:4"
-          }
-        },
         "a": {
           "hide_name": 0,
           "bits": [ 2, 3, 4, 5, 6 ],

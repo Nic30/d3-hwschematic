@@ -51,8 +51,11 @@ function makeLPort(name, direction, idCounter) {
   return [makePort(name, direction, portSide, idCounter), idCounter + 1];
 }
 
-function fillPorts(node, ports, idCounter, objType) {
-  for (const [portName, portObj] of Object.entries(ports)) { //objType === ports: portObj = modules[name].ports
+function fillPorts(node, ports, idCounter, objType, cellObj) {
+  var issplit = cellObj !== undefined && cellObj.type === "$slice";
+  var issconcat = cellObj !== undefined && cellObj.type === "$concat"
+
+  for (var [portName, portObj] of Object.entries(ports)) { //objType === ports: portObj = modules[name].ports
     //objType === port_directions: portObj = 
     // modules[name].cells.port_directions
     if (objType === "ports") {
@@ -61,6 +64,29 @@ function fillPorts(node, ports, idCounter, objType) {
       var direction = portObj;
     } else {
       throw new Error("Invalid objType: " + objType)
+    }
+
+    if (issplit) {
+      if (portName === "Y") {
+        portName = "";
+      }
+      else if (portName === "A") {
+        portName = getConcatPortName(cellObj.parameters.OFFSET, cellObj.parameters.Y_WIDTH);
+      }
+    }
+
+    else if (issconcat) {
+      if (portName === "Y") {
+        portName = "";
+      }
+      else if (portName === "A"){
+        portName = getConcatPortName(0, cellObj.parameters.A_WIDTH);
+      }
+
+      else if (portName === "B"){
+        portName = getConcatPortName(cellObj.parameters.A_WIDTH, cellObj.parameters.B_WIDTH);
+      }
+
     }
     var [port, idCounter] = makeLPort(portName, direction, idCounter);
     node.ports.push(port);
@@ -85,7 +111,7 @@ function fillChildren(node, yosysModule, idCounter, yosysModules) {
         childrenWithoutPortArray.push([cellObj, subNode]);
         continue;
       }
-      idCounter = fillPorts(subNode, cellObj.port_directions, idCounter, "port_directions")
+      idCounter = fillPorts(subNode, cellObj.port_directions, idCounter, "port_directions", cellObj)
 
     }
 
@@ -133,8 +159,11 @@ function isConst(val) {
 function getConstNodeName(nameArray) {
   var nodeName = nameArray.reverse().join("");
   nodeName = ["0b", nodeName].join("");
-  var res = BigInt(nodeName).toString(16);
-  return ["0x", res].join("");
+  if (nodeName.match(/^0b[01]+$/g)) {
+    var res = BigInt(nodeName).toString(16);
+    return ["0x", res].join("");
+  }
+  return nodeName;
 }
 
 function addConstNodeToSources(node, bits, sources, i, constNodeDict, idCounter) {
@@ -156,20 +185,21 @@ function addConstNodeToSources(node, bits, sources, i, constNodeDict, idCounter)
   return [idCounter, i];
 }
 
-function addEdge(edge, targetPortId, edgeTargetsDict, startIndex, width) {
-  var edgeArr = edgeTargetsDict[targetPortId];
+function addEdge(edge, portId, edgeDict, startIndex, width) {
+  var edgeArr = edgeDict[portId];
   if (edgeArr === undefined) {
-    edgeArr = edgeTargetsDict[targetPortId] = [];
+    edgeArr = edgeDict[portId] = [];
   }
   edgeArr[startIndex] = [edge, width];
 }
+
 
 /*
  * Iterate bits representing yosys net names, which are used to get edges from the edgeDict.
  * If edges are not present in the dictionary, they are created and inserted into it. Eventually,
  * nodes are completed by filling sources and targets properties of LEdge.
  */
-function loadNets(node, nodeId, portId, bits, direction, edgeDict, constNodeDict, edgeArray, idCounter, getPortName, getSourceAndTarget, edgeTargetsDict) {
+function loadNets(node, nodeId, portId, bits, direction, edgeDict, constNodeDict, edgeArray, idCounter, getPortName, getSourceAndTarget, edgeTargetsDict, edgeSourcesDict) {
   for (var i = 0; i < bits.length; ++i) {
     var startIndex = i;
     var width = 1;
@@ -199,11 +229,16 @@ function loadNets(node, nodeId, portId, bits, direction, edgeDict, constNodeDict
       a.push([nodeId, portId]);
       if (targetA) {
         addEdge(edge, portId, edgeTargetsDict, startIndex, width);
+      } else {
+        addEdge(edge, portId, edgeSourcesDict, startIndex, width)
       }
     } else if (direction === "output") {
       b.push([nodeId, portId]);
       if (targetB) {
         addEdge(edge, portId, edgeTargetsDict, startIndex, width);
+      }
+      else {
+        addEdge(edge, portId, edgeSourcesDict, startIndex, width);
       }
     } else {
       throw new Error("Unknown direction " + direction);
@@ -217,7 +252,7 @@ function getSourceAndTarget2(edge) {
   return [edge.sources, edge.targets, false, true];
 }
 
-function getEdgeDictFromPorts(node, yosysModule, constNodeDict, idCounter, edgeTargetsDict) {
+function getEdgeDictFromPorts(node, yosysModule, constNodeDict, idCounter, edgeTargetsDict, edgeSourcesDict) {
   var edgeDict = {}; // yosys bits (netId): LEdge
   var edgeArray = [];
   var portsIndex = 0;
@@ -230,7 +265,7 @@ function getEdgeDictFromPorts(node, yosysModule, constNodeDict, idCounter, edgeT
       return portName;
     }
     idCounter = loadNets(node, node.id, port.id, portObj.bits, portObj.direction,
-      edgeDict, constNodeDict, edgeArray, idCounter, getPortName2, getSourceAndTarget2, edgeTargetsDict)
+      edgeDict, constNodeDict, edgeArray, idCounter, getPortName2, getSourceAndTarget2, edgeTargetsDict, edgeSourcesDict)
 
   }
   return [edgeDict, edgeArray, constNodeDict, idCounter];
@@ -264,19 +299,16 @@ function getConcatPortName(startIndex, width) {
 }
 function arrayHasMultipleItems(array) {
   var counter = 0;
-  for (const edge of array)
-  { 
-    if (edge === undefined)
-    {
+  for (const edge of array) {
+    if (edge === undefined) {
       continue;
     }
-    
+
     ++counter;
-    if (counter > 1)
-    {
+    if (counter > 1) {
       return true;
     }
-  
+
   }
   return false
 }
@@ -318,29 +350,101 @@ function addConcats(node, edgeTargetsDict, idCounter) {
 
 }
 
-function filterEdgeTargetsDict(edgeTargetsDict)
-{
-  for (var [, edgeArray] of Object.entries(edgeTargetsDict)) {
-    var edgeSourcesDict = {}
+function addSplits(node, edgeSourcesDict, idCounter) {
+  for (const [sourceId, array] of Object.entries(edgeSourcesDict)) {
+    if (arrayHasMultipleItems(array)) {
+      var [subNode, idCounter] = makeLNode("SLICE", undefined, idCounter, null);
+      node.children.push(subNode);
+
+      var [port, idCounter] = makeLPort("", "input", idCounter);
+      subNode.ports.push(port);
+
+      var [edge, idCounter] = makeLEdge("", idCounter);
+      edge.sources.push([node.id, sourceId]);
+      edge.targets.push([subNode.id, port.id]);
+      node.edges.push(edge);
+
+      var prevTargets = undefined;
+      for (var i = 0; i < array.length; ++i) {
+        if (array[i] === undefined) {
+          continue;
+        }
+        var edge = array[i][0];
+        var width = array[i][1];
+
+        if (edge.targets.length === 0) {
+          prevTargets = [];
+          continue;
+        }
+        if (prevTargets === undefined || prevTargets.length === 0 || !(prevTargets[0][0] === edge.targets[0][0] && prevTargets[0][1] === edge.targets[0][1])) {
+          //if (array[i + 1] === undefined || array[i + 1].length === 0 || array[i + 1][0].targets.length === 0 || !(array[i + 1][0].targets[0][0] === edge.targets[0][0] && array[i + 1][0].targets[0][1] === edge.targets[0][1])) {
+
+          var width = 0;
+          var startI = i;
+          var l = i + 1;
+          prevTargets = edge.targets;
+          for (l; l < array.length; ++l) {
+            if (prevTargets !== undefined && prevTargets.length !== 0 && (prevTargets[0][0] === edge.targets[0][0] && prevTargets[0][1] === edge.targets[0][1])) {
+              if (l === array.length - 1 && array[l] != undefined && array[l][0].targets.length !== 0) {
+                ++width;
+              }
+              ++width;
+              prevTargets = array[l][0].targets;
+            }
+            else {
+              break;
+            }
+          }
+
+          var portName = getConcatPortName(startI, width);
+          var [port, idCounter] = makeLPort(portName, "output", idCounter);
+          subNode.ports.push(port);
+
+
+
+        }
+
+        var index = findIndex(edge.sources, [node.id, sourceId]);
+        if (index === -1) {
+          throw new Error("Target not found in array")
+        }
+        edge.sources[index] = [subNode.id, port.id];
+        prevTargets = edge.targets;
+
+
+      }
+
+    }
+  }
+
+  return idCounter;
+
+}
+function filterEdges(edgeDictA, targetDict) {
+  // targetDict is true if edgeDictA is edgeTargetsDict
+  for (var [, edgeArray] of Object.entries(edgeDictA)) {
+    var edgeDictB = {}
     var lastEdgeObj = undefined;
     for (var i = 0; i < edgeArray.length; ++i) {
-      if (edgeArray[i] === undefined)
-      {
+      if (edgeArray[i] === undefined) {
         continue;
       }
       var edge = edgeArray[i][0];
-      
-      if (edgeSourcesDict[edge.sources])
-      {
+
+      if (targetDict) {
+        var key = edge.sources;
+      } else {
+        var key = edge.targets;
+      }
+
+      if (edgeDictB[edge.sources]) {
         edgeArray[i] = undefined;
-        if (lastEdgeObj !== undefined)
-        {
+        if (lastEdgeObj !== undefined) {
           ++lastEdgeObj[1];
         }
       }
-      else
-      {
-        edgeSourcesDict[edge.sources] = true;
+      else {
+        edgeDictB[edge.sources] = true;
         lastEdgeObj = edgeArray[i];
       }
     }
@@ -349,7 +453,8 @@ function filterEdgeTargetsDict(edgeTargetsDict)
 function fillEdges(node, yosysModule, idCounter, childrenWithoutPortArray) {
   var constNodeDict = {};
   var edgeTargetsDict = {};
-  var [edgeDict, edgeArray, constNodeDict, idCounter] = getEdgeDictFromPorts(node, yosysModule, constNodeDict, idCounter, edgeTargetsDict);
+  var edgeSourcesDict = {};
+  var [edgeDict, edgeArray, constNodeDict, idCounter] = getEdgeDictFromPorts(node, yosysModule, constNodeDict, idCounter, edgeTargetsDict, edgeSourcesDict);
   var netnamesDict = getNetNamesDict(yosysModule);
   function getPortName(bit) {
     return netnamesDict[bit];
@@ -363,6 +468,7 @@ function fillEdges(node, yosysModule, idCounter, childrenWithoutPortArray) {
     }
 
     var cell = yosysModule.cells[subNode.hwMeta.name];
+    var isslice = cell.type === "$slice";
     if (cell.port_directions == undefined) {
       continue;
     }
@@ -386,7 +492,7 @@ function fillEdges(node, yosysModule, idCounter, childrenWithoutPortArray) {
       }
 
       idCounter = loadNets(node, subNode.id, portObj.id, bits, direction, edgeDict, constNodeDict,
-        edgeArray, idCounter, getPortName, getSourceAndTargetForCell, edgeTargetsDict)
+        edgeArray, idCounter, getPortName, getSourceAndTargetForCell, edgeTargetsDict, edgeSourcesDict)
     }
   }
   // source null target null == direction is output
@@ -417,8 +523,11 @@ function fillEdges(node, yosysModule, idCounter, childrenWithoutPortArray) {
     }
 
   }
-  
 
+
+  //filterEdges(edgeSourcesDict, false);
+  // split is partially woriking, it is good on split 1-4, but not working on wireModule, partialConstDriver 6-3, constAdder, 
+  //idCounter = addSplits(node, edgeSourcesDict, idCounter)
   var edgeSet = {}; // [sources, targets]: true
   for (const edge of edgeArray) {
     var key = [edge.sources, null, edge.targets]
@@ -429,8 +538,10 @@ function fillEdges(node, yosysModule, idCounter, childrenWithoutPortArray) {
     }
   }
 
-  filterEdgeTargetsDict(edgeTargetsDict);
-  idCounter = addConcats(node, edgeTargetsDict, idCounter);
+
+  //filterEdges(edgeTargetsDict, true);
+  //idCounter = addConcats(node, edgeTargetsDict, idCounter);
+
 
   return idCounter;
 }
@@ -542,6 +653,12 @@ function yosysTranslateIcons(node) {
   } else if (name.startsWith("$div$")) {
     meta.cls = "Operator";
     meta.name = "DIV";
+  } else if (name.startsWith("$auto$splice.cc:78")) {
+    meta.cls = "Operator";
+    meta.name = "SLICE";
+  } else if (name.startsWith("$auto$splice.cc:135")) {
+    meta.cls = "Operator";
+    meta.name = "CONCAT";
   }
 
   if (node.children !== undefined)

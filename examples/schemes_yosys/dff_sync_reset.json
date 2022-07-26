@@ -1,39 +1,60 @@
 {
   "creator": "Yosys 0.9 (git sha1 1979e0b)",
   "modules": {
-    "mux2x1": {
+    "dff_sync_reset": {
       "attributes": {
-        "cells_not_processed": 1,
         "top": 1,
-        "src": "mux2.v:1"
+        "src": "dff_sync_reset.v:7"
       },
       "ports": {
-        "a": {
+        "data": {
           "direction": "input",
           "bits": [ 2 ]
         },
-        "b": {
+        "clk": {
           "direction": "input",
           "bits": [ 3 ]
         },
-        "s": {
+        "reset": {
           "direction": "input",
           "bits": [ 4 ]
         },
-        "out": {
+        "q": {
           "direction": "output",
           "bits": [ 5 ]
         }
       },
       "cells": {
-        "$ternary$mux2.v:4$1": {
+        "$procdff$6": {
+          "hide_name": 1,
+          "type": "$dff",
+          "parameters": {
+            "CLK_POLARITY": 1,
+            "WIDTH": 1
+          },
+          "attributes": {
+            "src": "dff_sync_reset.v:23"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 3 ],
+            "D": [ 6 ],
+            "Q": [ 5 ]
+          }
+        },
+        "$procmux$4": {
           "hide_name": 1,
           "type": "$mux",
           "parameters": {
             "WIDTH": 1
           },
           "attributes": {
-            "src": "mux2.v:4"
+            "full_case": 1,
+            "src": "dff_sync_reset.v:24"
           },
           "port_directions": {
             "A": "input",
@@ -42,47 +63,47 @@
             "Y": "output"
           },
           "connections": {
-            "A": [ 3 ],
+            "A": [ "0" ],
             "B": [ 2 ],
             "S": [ 4 ],
-            "Y": [ 5 ]
+            "Y": [ 6 ]
           }
         }
       },
       "netnames": {
-        "$ternary$mux2.v:4$1_Y": {
+        "$0\\q[0:0]": {
           "hide_name": 1,
-          "bits": [ 5 ],
+          "bits": [ 6 ],
           "attributes": {
-            "src": "mux2.v:4"
+            "src": "dff_sync_reset.v:23"
           }
         },
-        "a": {
-          "hide_name": 0,
-          "bits": [ 2 ],
-          "attributes": {
-            "src": "mux2.v:2"
-          }
-        },
-        "b": {
+        "clk": {
           "hide_name": 0,
           "bits": [ 3 ],
           "attributes": {
-            "src": "mux2.v:2"
+            "src": "dff_sync_reset.v:14"
           }
         },
-        "out": {
+        "data": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "src": "dff_sync_reset.v:14"
+          }
+        },
+        "q": {
           "hide_name": 0,
           "bits": [ 5 ],
           "attributes": {
-            "src": "mux2.v:3"
+            "src": "dff_sync_reset.v:17"
           }
         },
-        "s": {
+        "reset": {
           "hide_name": 0,
           "bits": [ 4 ],
           "attributes": {
-            "src": "mux2.v:2"
+            "src": "dff_sync_reset.v:14"
           }
         }
       }

@@ -17,9 +17,9 @@
         }
       },
       "cells": {
-        "$auto$alumacc.cc:474:replace_alu$2": {
+        "$add$constAdder.v:2$1": {
           "hide_name": 1,
-          "type": "$alu",
+          "type": "$add",
           "parameters": {
             "A_SIGNED": 0,
             "A_WIDTH": 8,
@@ -33,38 +33,16 @@
           "port_directions": {
             "A": "input",
             "B": "input",
-            "BI": "input",
-            "CI": "input",
-            "CO": "output",
-            "X": "output",
             "Y": "output"
           },
           "connections": {
             "A": [ 2, 3, 4, 5, 6, 7, 8, 9 ],
             "B": [ "1", "0", "1", "1", "0", "1", "0", "1" ],
-            "BI": [ "0" ],
-            "CI": [ "0" ],
-            "CO": [ 18, 19, 20, 21, 22, 23, 24, 25 ],
-            "X": [ 26, 27, 28, 29, 30, 31, 32, 33 ],
             "Y": [ 10, 11, 12, 13, 14, 15, 16, 17 ]
           }
         }
       },
       "netnames": {
-        "$auto$alumacc.cc:490:replace_alu$3": {
-          "hide_name": 1,
-          "bits": [ 26, 27, 28, 29, 30, 31, 32, 33 ],
-          "attributes": {
-            "unused_bits": "0 1 2 3 4 5 6 7"
-          }
-        },
-        "$auto$alumacc.cc:491:replace_alu$4": {
-          "hide_name": 1,
-          "bits": [ 18, 19, 20, 21, 22, 23, 24, 25 ],
-          "attributes": {
-            "unused_bits": "0 1 2 3 4 5 6 7"
-          }
-        },
         "in": {
           "hide_name": 0,
           "bits": [ 2, 3, 4, 5, 6, 7, 8, 9 ],

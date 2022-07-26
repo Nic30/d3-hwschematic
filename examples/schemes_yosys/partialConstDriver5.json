@@ -13,16 +13,108 @@
         },
         "out0": {
           "direction": "output",
-          "bits": [ "1", "0", "1", 2, 3, 4, "1", "0" ]
+          "bits": [ 5, 6, 7, 8, 9, 10, 11, 12 ]
         },
         "out1": {
           "direction": "output",
-          "bits": [ 2, 3, 4, "1", "0", "1", "1", "0" ]
+          "bits": [ 13, 14, 15, 16, 17, 18, 19, 20 ]
         }
       },
       "cells": {
+        "$auto$splice.cc:135:get_spliced_signal$1": {
+          "hide_name": 1,
+          "type": "$concat",
+          "parameters": {
+            "A_WIDTH": 3,
+            "B_WIDTH": 3
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "1", "0", "1" ],
+            "B": [ 2, 3, 4 ],
+            "Y": [ 21, 22, 23, 24, 25, 26 ]
+          }
+        },
+        "$auto$splice.cc:135:get_spliced_signal$3": {
+          "hide_name": 1,
+          "type": "$concat",
+          "parameters": {
+            "A_WIDTH": 6,
+            "B_WIDTH": 2
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 21, 22, 23, 24, 25, 26 ],
+            "B": [ "1", "0" ],
+            "Y": [ 5, 6, 7, 8, 9, 10, 11, 12 ]
+          }
+        },
+        "$auto$splice.cc:135:get_spliced_signal$5": {
+          "hide_name": 1,
+          "type": "$concat",
+          "parameters": {
+            "A_WIDTH": 3,
+            "B_WIDTH": 5
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 2, 3, 4 ],
+            "B": [ "1", "0", "1", "1", "0" ],
+            "Y": [ 13, 14, 15, 16, 17, 18, 19, 20 ]
+          }
+        }
       },
       "netnames": {
+        "$auto$splice.cc:140:get_spliced_signal$2": {
+          "hide_name": 1,
+          "bits": [ 21, 22, 23, 24, 25, 26 ],
+          "attributes": {
+          }
+        },
+        "$auto$splice.cc:140:get_spliced_signal$4": {
+          "hide_name": 1,
+          "bits": [ 5, 6, 7, 8, 9, 10, 11, 12 ],
+          "attributes": {
+          }
+        },
+        "$auto$splice.cc:140:get_spliced_signal$6": {
+          "hide_name": 1,
+          "bits": [ 13, 14, 15, 16, 17, 18, 19, 20 ],
+          "attributes": {
+          }
+        },
+        "$auto$splice.cc:236:run$7": {
+          "hide_name": 1,
+          "bits": [ "1", "0", "1", 2, 3, 4, "1", "0" ],
+          "attributes": {
+            "src": "partialConstDriver5.v:1"
+          }
+        },
+        "$auto$splice.cc:236:run$8": {
+          "hide_name": 1,
+          "bits": [ 2, 3, 4, "1", "0", "1", "1", "0" ],
+          "attributes": {
+            "src": "partialConstDriver5.v:1"
+          }
+        },
         "in": {
           "hide_name": 0,
           "bits": [ 2, 3, 4 ],
@@ -32,14 +124,14 @@
         },
         "out0": {
           "hide_name": 0,
-          "bits": [ "1", "0", "1", 2, 3, 4, "1", "0" ],
+          "bits": [ 5, 6, 7, 8, 9, 10, 11, 12 ],
           "attributes": {
             "src": "partialConstDriver5.v:1"
           }
         },
         "out1": {
           "hide_name": 0,
-          "bits": [ 2, 3, 4, "1", "0", "1", "1", "0" ],
+          "bits": [ 13, 14, 15, 16, 17, 18, 19, 20 ],
           "attributes": {
             "src": "partialConstDriver5.v:1"
           }
