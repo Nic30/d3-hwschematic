@@ -55,8 +55,9 @@ function fillPorts(node, ports, idCounter, objType, cellObj) {
   var issplit = cellObj !== undefined && cellObj.type === "$slice";
   var issconcat = cellObj !== undefined && cellObj.type === "$concat"
 
-  for (var [portName, portObj] of Object.entries(ports)) { //objType === ports: portObj = modules[name].ports
-    //objType === port_directions: portObj = 
+  for (var [portName, portObj] of Object.entries(ports)) { 
+    // objType === ports: portObj = modules[name].ports
+    // objType === port_directions: portObj = 
     // modules[name].cells.port_directions
     if (objType === "ports") {
       var direction = portObj.direction;
@@ -71,7 +72,7 @@ function fillPorts(node, ports, idCounter, objType, cellObj) {
         portName = "";
       }
       else if (portName === "A") {
-        portName = getConcatPortName(cellObj.parameters.OFFSET, cellObj.parameters.Y_WIDTH);
+        portName = getPortNameSplice(cellObj.parameters.OFFSET, cellObj.parameters.Y_WIDTH);
       }
     }
 
@@ -80,11 +81,11 @@ function fillPorts(node, ports, idCounter, objType, cellObj) {
         portName = "";
       }
       else if (portName === "A"){
-        portName = getConcatPortName(0, cellObj.parameters.A_WIDTH);
+        portName = getPortNameSplice(0, cellObj.parameters.A_WIDTH);
       }
 
       else if (portName === "B"){
-        portName = getConcatPortName(cellObj.parameters.A_WIDTH, cellObj.parameters.B_WIDTH);
+        portName = getPortNameSplice(cellObj.parameters.A_WIDTH, cellObj.parameters.B_WIDTH);
       }
 
     }
@@ -105,8 +106,8 @@ function fillChildren(node, yosysModule, idCounter, yosysModules) {
     node.children.push(subNode);
     if (cellModuleObj === undefined) {
       if (cellObj.port_directions === undefined) {
-        //throw new Error("[Todo] if modules does not have definition in modules and its name does not \
-        //                 start with $, then it does not have port_directions. Must add port to sources and targets of an edge")
+        // throw new Error("[Todo] if modules does not have definition in modules and its name does not \
+        // start with $, then it does not have port_directions. Must add port to sources and targets of an edge")
 
         childrenWithoutPortArray.push([cellObj, subNode]);
         continue;
@@ -284,7 +285,7 @@ function findIndex(array, val) {
   return -1;
 }
 
-function getConcatPortName(startIndex, width) {
+function getPortNameSplice(startIndex, width) {
   if (width === 1) {
     return `[${startIndex}]`;
   }
@@ -295,131 +296,8 @@ function getConcatPortName(startIndex, width) {
 
   throw new Error("Incorrect width" + width);
 
-
-}
-function arrayHasMultipleItems(array) {
-  var counter = 0;
-  for (const edge of array) {
-    if (edge === undefined) {
-      continue;
-    }
-
-    ++counter;
-    if (counter > 1) {
-      return true;
-    }
-
-  }
-  return false
 }
 
-function addConcats(node, edgeTargetsDict, idCounter) {
-  for (const [targetId, array] of Object.entries(edgeTargetsDict)) {
-    if (arrayHasMultipleItems(array)) {
-      var [subNode, idCounter] = makeLNode("CONCAT", undefined, idCounter, null);
-      node.children.push(subNode);
-
-      var [port, idCounter] = makeLPort("", "output", idCounter);
-      subNode.ports.push(port);
-
-      var [edge, idCounter] = makeLEdge("", idCounter);
-      edge.sources.push([subNode.id, port.id]);
-      edge.targets.push([node.id, targetId]);
-      node.edges.push(edge);
-
-      for (var i = array.length - 1; i >= 0; --i) {
-        if (array[i] === undefined) {
-          continue;
-        }
-        var edge = array[i][0];
-        var width = array[i][1];
-
-        var portName = getConcatPortName(i, width);
-        var [port, idCounter] = makeLPort(portName, "input", idCounter);
-        subNode.ports.push(port);
-        var index = findIndex(edge.targets, [node.id, targetId]);
-        if (index === -1) {
-          throw new Error("Target not found in array")
-        }
-        edge.targets[index] = ([subNode.id, port.id]);
-      }
-    }
-  }
-
-  return idCounter;
-
-}
-
-function addSplits(node, edgeSourcesDict, idCounter) {
-  for (const [sourceId, array] of Object.entries(edgeSourcesDict)) {
-    if (arrayHasMultipleItems(array)) {
-      var [subNode, idCounter] = makeLNode("SLICE", undefined, idCounter, null);
-      node.children.push(subNode);
-
-      var [port, idCounter] = makeLPort("", "input", idCounter);
-      subNode.ports.push(port);
-
-      var [edge, idCounter] = makeLEdge("", idCounter);
-      edge.sources.push([node.id, sourceId]);
-      edge.targets.push([subNode.id, port.id]);
-      node.edges.push(edge);
-
-      var prevTargets = undefined;
-      for (var i = 0; i < array.length; ++i) {
-        if (array[i] === undefined) {
-          continue;
-        }
-        var edge = array[i][0];
-        var width = array[i][1];
-
-        if (edge.targets.length === 0) {
-          prevTargets = [];
-          continue;
-        }
-        if (prevTargets === undefined || prevTargets.length === 0 || !(prevTargets[0][0] === edge.targets[0][0] && prevTargets[0][1] === edge.targets[0][1])) {
-          //if (array[i + 1] === undefined || array[i + 1].length === 0 || array[i + 1][0].targets.length === 0 || !(array[i + 1][0].targets[0][0] === edge.targets[0][0] && array[i + 1][0].targets[0][1] === edge.targets[0][1])) {
-
-          var width = 0;
-          var startI = i;
-          var l = i + 1;
-          prevTargets = edge.targets;
-          for (l; l < array.length; ++l) {
-            if (prevTargets !== undefined && prevTargets.length !== 0 && (prevTargets[0][0] === edge.targets[0][0] && prevTargets[0][1] === edge.targets[0][1])) {
-              if (l === array.length - 1 && array[l] != undefined && array[l][0].targets.length !== 0) {
-                ++width;
-              }
-              ++width;
-              prevTargets = array[l][0].targets;
-            }
-            else {
-              break;
-            }
-          }
-
-          var portName = getConcatPortName(startI, width);
-          var [port, idCounter] = makeLPort(portName, "output", idCounter);
-          subNode.ports.push(port);
-
-
-
-        }
-
-        var index = findIndex(edge.sources, [node.id, sourceId]);
-        if (index === -1) {
-          throw new Error("Target not found in array")
-        }
-        edge.sources[index] = [subNode.id, port.id];
-        prevTargets = edge.targets;
-
-
-      }
-
-    }
-  }
-
-  return idCounter;
-
-}
 function filterEdges(edgeDictA, targetDict) {
   // targetDict is true if edgeDictA is edgeTargetsDict
   for (var [, edgeArray] of Object.entries(edgeDictA)) {
@@ -464,8 +342,6 @@ function arrayHasDifferentTargets(array) {
     }
   }
   return false;
-  
- //return true;
 }
 
 function fillEdges(node, yosysModule, idCounter, childrenWithoutPortArray) {
@@ -542,10 +418,6 @@ function fillEdges(node, yosysModule, idCounter, childrenWithoutPortArray) {
 
   }
 
-
-  //filterEdges(edgeSourcesDict, false);
-  // split is partially woriking, it is good on split 1-4, but not working on wireModule, partialConstDriver 6-3, constAdder, 
-  //idCounter = addSplits(node, edgeSourcesDict, idCounter)
   var edgeSet = {}; // [sources, targets]: true
   for (const edge of edgeArray) {
     var key = [edge.sources, null, edge.targets]
@@ -555,12 +427,6 @@ function fillEdges(node, yosysModule, idCounter, childrenWithoutPortArray) {
       node.edges.push(edge);
     }
   }
-
-
-  //filterEdges(edgeTargetsDict, true);
-  //idCounter = addConcats(node, edgeTargetsDict, idCounter);
-
-
 
   return idCounter;
 }
