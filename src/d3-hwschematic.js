@@ -158,7 +158,7 @@ export default class HwSchematic {
 
         var layouter = this.layouter;
         this._nodes = layouter.getNodes().slice(1); // skip root node
-        this._edges = layouter.getEdges();;
+        this._edges = layouter.getEdges();
 
         if (this._PERF) {
             var t0 = new Date().getTime();
