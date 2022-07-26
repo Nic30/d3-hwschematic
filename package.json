@@ -40,6 +40,10 @@
     "email" : "Nic30original@gmail.com"
   },
   "homepage": "https://github.com/Nic30/d3-hwschematic#readme",
+  "engines" : { 
+    "npm" : ">=8.5.1",
+    "node" : ">=12.22.9"
+  },
   "dependencies": {
     "d3": "^6.5.0",
     "elkjs": "^0.8.1"
