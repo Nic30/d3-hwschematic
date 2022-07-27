@@ -13,7 +13,7 @@
 	font-style: normal;
 	font-family: monospace;
 	fill: black;
-	stroke-width: 0px;
+	stroke-width: 0;
 }
 
 .d3-hwschematic.node-operator {
@@ -27,12 +27,12 @@
 	font-style: normal;
 	font-family: monospace;
 	fill: black;
-	stroke-width: 0px;
+	stroke-width: 0;
 }
 
 .d3-hwschematic .node-external-port {
 	stroke: #000;
-	stroke-width: 0px;
+	stroke-width: 0;
 	fill: #BDBDBD;
 	border: 1px;
 }
@@ -41,7 +41,7 @@
 	font-style: normal;
 	font-family: monospace;
 	fill: black;
-	stroke-width: 0px;
+	stroke-width: 0;
 }
 
 .d3-hwschematic .link {

@@ -1,6 +1,6 @@
 export class Tooltip {
   constructor(root) {
-    var t = this.tooltip = document.createElement("div");
+    let t = this.tooltip = document.createElement("div");
     t.className = "d3-hwschematic-tooltip"
     t.style.display = "none";
     t.style.possition = "absolute"
@@ -8,7 +8,7 @@ export class Tooltip {
   }
   
   show(evt, text) {
-    var t = this.tooltip;
+    let t = this.tooltip;
     t.style.display = "block";
     t.innerHTML = text;
     t.style.left = evt.pageX + 10 + 'px';

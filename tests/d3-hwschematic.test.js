@@ -23,6 +23,7 @@ function initSvg() {
 
 jest.setTimeout(10000);
 
+
 describe('Testing scheme rendering', () => {
 	it("SVG has root g and markers", function() {
 		var svg = initSvg();
@@ -81,13 +82,13 @@ test('Testing component expansion', () => {
 			expect(d._edges).toBeDefined();
 			expect(d.edges).toBeUndefined();
 
-			simulateEvent(procNode.node(), 'click', {});;
+			simulateEvent(procNode.node(), 'click', {});
 			expect(d.children).toBeDefined();
 			expect(d._children).toBeUndefined();
 			expect(d.edges).toBeDefined();
 			expect(d._edges).toBeUndefined();
 
-			simulateEvent(procNode.node(), 'click', {});;
+			simulateEvent(procNode.node(), 'click', {});
 			expect(d._children).toBeDefined();
 			expect(d.children).toBeUndefined();
 			expect(d._edges).toBeDefined();
@@ -102,13 +103,14 @@ test('Testing component expansion', () => {
 
 });
 
+
 describe("Testing yosys", () => {
 	var testFiles = ["comparator", "mux2x1", "mux4x2", "constAdder", "subModuleBlackbox", 
 					 "partialConstDriver0", "partialConstDriver1", "partialConstDriver2",
 					 "partialConstDriver3", "partialConstDriver4", "partialConstDriver5",
 					 "partialConstDriver6", "wireModule", "split0", "split1", "split2", 
 					 "split3", "split4", "split5", "constPortDriver", "dff_sync_reset",
-					 "fifo"];
+					 "fifo", "latchinf"];
 	for (const testFile of testFiles) {
 		it("Testing file: " + testFile, () => {
 			var f = YOSYS_EXAMPLES + "/" + testFile + ".json";
@@ -119,8 +121,5 @@ describe("Testing yosys", () => {
 			var refGraphData = JSON.parse(fs.readFileSync(refF));
 			expect(output).toEqual(refGraphData);
 		})
-
-
 	}
-
-})
+});
