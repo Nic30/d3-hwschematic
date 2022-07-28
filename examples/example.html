@@ -130,17 +130,23 @@
                     let contents = e.target.result;
                     graph = JSON.parse(contents);
                     let exampleDir;
+                    let transformation;
                     if (graph.hwMeta !== undefined) {
                         // native, no conversion need
+                        transformation = null;
                         exampleDir = "schemes/";
                     } else if (graph.creator !== undefined && graph.creator.startsWith("Yosys")) {
                         // convert format from yosys
-                        graph = d3.HwSchematic.fromYosys(graph);
+                        transformation = d3.HwSchematic.fromYosys;
                         exampleDir = "schemes_yosys/";
                     } else {
                         throw new Error("Invalid file format");
                     }
                     setUrlParameterByName("schematic", exampleDir + file.name); //
+                    if (transformation !== null)
+                    {
+                        graph = transformation(graph);
+                    }
                 } catch (e) {
                     hwSchematic.setErrorText(e);
                     throw e;
@@ -198,10 +204,7 @@
                     } else {
                         throw new Error("Unknown example dir " + schematicName);
                     }
-                    if (graph.hwMeta && graph.hwMeta.name)
-                        document.title = graph.hwMeta.name;
-                    // load the data and render the elements
-                    hwSchematic.bindData(graph);
+                    displayContents(graph);
                 } catch (e) {
                     hwSchematic.setErrorText(e);
                     throw e;
