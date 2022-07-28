@@ -214,7 +214,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 1
+                "index": 0
               },
               "children": []
             },
@@ -226,7 +226,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 2
+                "index": 1
               },
               "children": []
             },
@@ -238,7 +238,7 @@
               "direction": "OUTPUT",
               "properties": {
                 "side": "EAST",
-                "index": 3
+                "index": 2
               },
               "children": []
             }
@@ -264,7 +264,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 1
+                "index": 0
               },
               "children": []
             },
@@ -276,7 +276,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 2
+                "index": 1
               },
               "children": []
             },
@@ -288,7 +288,7 @@
               "direction": "OUTPUT",
               "properties": {
                 "side": "EAST",
-                "index": 3
+                "index": 2
               },
               "children": []
             }
@@ -314,7 +314,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 1
+                "index": 0
               },
               "children": []
             },
@@ -326,7 +326,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 2
+                "index": 1
               },
               "children": []
             },
@@ -338,7 +338,7 @@
               "direction": "OUTPUT",
               "properties": {
                 "side": "EAST",
-                "index": 3
+                "index": 2
               },
               "children": []
             }

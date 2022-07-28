@@ -862,7 +862,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 1
+                "index": 0
               },
               "children": []
             },
@@ -874,7 +874,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 2
+                "index": 1
               },
               "children": []
             },
@@ -886,7 +886,7 @@
               "direction": "OUTPUT",
               "properties": {
                 "side": "EAST",
-                "index": 3
+                "index": 2
               },
               "children": []
             }
@@ -912,7 +912,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 1
+                "index": 0
               },
               "children": []
             },
@@ -924,7 +924,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 2
+                "index": 1
               },
               "children": []
             },
@@ -936,7 +936,7 @@
               "direction": "OUTPUT",
               "properties": {
                 "side": "EAST",
-                "index": 3
+                "index": 2
               },
               "children": []
             }
@@ -962,7 +962,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 1
+                "index": 0
               },
               "children": []
             },
@@ -974,7 +974,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 2
+                "index": 1
               },
               "children": []
             },
@@ -986,7 +986,7 @@
               "direction": "OUTPUT",
               "properties": {
                 "side": "EAST",
-                "index": 3
+                "index": 2
               },
               "children": []
             }
@@ -1012,7 +1012,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 1
+                "index": 0
               },
               "children": []
             },
@@ -1024,7 +1024,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 2
+                "index": 1
               },
               "children": []
             },
@@ -1036,7 +1036,7 @@
               "direction": "OUTPUT",
               "properties": {
                 "side": "EAST",
-                "index": 3
+                "index": 2
               },
               "children": []
             }
@@ -1062,7 +1062,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 1
+                "index": 0
               },
               "children": []
             },
@@ -1074,7 +1074,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 2
+                "index": 1
               },
               "children": []
             },
@@ -1086,7 +1086,7 @@
               "direction": "OUTPUT",
               "properties": {
                 "side": "EAST",
-                "index": 3
+                "index": 2
               },
               "children": []
             }
@@ -1112,7 +1112,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 1
+                "index": 0
               },
               "children": []
             },
@@ -1124,7 +1124,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 2
+                "index": 1
               },
               "children": []
             },
@@ -1136,7 +1136,7 @@
               "direction": "OUTPUT",
               "properties": {
                 "side": "EAST",
-                "index": 3
+                "index": 2
               },
               "children": []
             }
@@ -1162,7 +1162,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 1
+                "index": 0
               },
               "children": []
             },
@@ -1174,7 +1174,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 2
+                "index": 1
               },
               "children": []
             },
@@ -1186,7 +1186,7 @@
               "direction": "OUTPUT",
               "properties": {
                 "side": "EAST",
-                "index": 3
+                "index": 2
               },
               "children": []
             }
@@ -1212,7 +1212,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 1
+                "index": 0
               },
               "children": []
             },
@@ -1224,7 +1224,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 2
+                "index": 1
               },
               "children": []
             },
@@ -1236,7 +1236,7 @@
               "direction": "OUTPUT",
               "properties": {
                 "side": "EAST",
-                "index": 3
+                "index": 2
               },
               "children": []
             }
@@ -1262,7 +1262,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 1
+                "index": 0
               },
               "children": []
             },
@@ -1274,7 +1274,7 @@
               "direction": "OUTPUT",
               "properties": {
                 "side": "EAST",
-                "index": 2
+                "index": 1
               },
               "children": []
             }
@@ -1300,7 +1300,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 1
+                "index": 0
               },
               "children": []
             },
@@ -1312,7 +1312,7 @@
               "direction": "OUTPUT",
               "properties": {
                 "side": "EAST",
-                "index": 2
+                "index": 1
               },
               "children": []
             }
@@ -1331,14 +1331,14 @@
           },
           "ports": [
             {
-              "id": "50",
+              "id": "52",
               "hwMeta": {
-                "name": "CLK"
+                "name": "Q"
               },
-              "direction": "INPUT",
+              "direction": "OUTPUT",
               "properties": {
-                "side": "WEST",
-                "index": 1
+                "side": "EAST",
+                "index": 0
               },
               "children": []
             },
@@ -1350,19 +1350,19 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 2
+                "index": 1
               },
               "children": []
             },
             {
-              "id": "52",
+              "id": "50",
               "hwMeta": {
-                "name": "Q"
+                "name": "CLK"
               },
-              "direction": "OUTPUT",
+              "direction": "INPUT",
               "properties": {
-                "side": "EAST",
-                "index": 3
+                "side": "WEST",
+                "index": 2
               },
               "children": []
             }
@@ -1381,14 +1381,14 @@
           },
           "ports": [
             {
-              "id": "54",
+              "id": "56",
               "hwMeta": {
-                "name": "CLK"
+                "name": "Q"
               },
-              "direction": "INPUT",
+              "direction": "OUTPUT",
               "properties": {
-                "side": "WEST",
-                "index": 1
+                "side": "EAST",
+                "index": 0
               },
               "children": []
             },
@@ -1400,19 +1400,19 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 2
+                "index": 1
               },
               "children": []
             },
             {
-              "id": "56",
+              "id": "54",
               "hwMeta": {
-                "name": "Q"
+                "name": "CLK"
               },
-              "direction": "OUTPUT",
+              "direction": "INPUT",
               "properties": {
-                "side": "EAST",
-                "index": 3
+                "side": "WEST",
+                "index": 2
               },
               "children": []
             }
@@ -1431,14 +1431,14 @@
           },
           "ports": [
             {
-              "id": "58",
+              "id": "60",
               "hwMeta": {
-                "name": "CLK"
+                "name": "Q"
               },
-              "direction": "INPUT",
+              "direction": "OUTPUT",
               "properties": {
-                "side": "WEST",
-                "index": 1
+                "side": "EAST",
+                "index": 0
               },
               "children": []
             },
@@ -1450,19 +1450,19 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 2
+                "index": 1
               },
               "children": []
             },
             {
-              "id": "60",
+              "id": "58",
               "hwMeta": {
-                "name": "Q"
+                "name": "CLK"
               },
-              "direction": "OUTPUT",
+              "direction": "INPUT",
               "properties": {
-                "side": "EAST",
-                "index": 3
+                "side": "WEST",
+                "index": 2
               },
               "children": []
             }
@@ -1488,7 +1488,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 1
+                "index": 0
               },
               "children": []
             },
@@ -1500,7 +1500,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 2
+                "index": 1
               },
               "children": []
             },
@@ -1511,8 +1511,8 @@
               },
               "direction": "INPUT",
               "properties": {
-                "side": "WEST",
-                "index": 3
+                "side": "SOUTH",
+                "index": 2
               },
               "children": []
             },
@@ -1524,7 +1524,7 @@
               "direction": "OUTPUT",
               "properties": {
                 "side": "EAST",
-                "index": 4
+                "index": 3
               },
               "children": []
             }
@@ -1550,7 +1550,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 1
+                "index": 0
               },
               "children": []
             },
@@ -1562,7 +1562,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 2
+                "index": 1
               },
               "children": []
             },
@@ -1573,8 +1573,8 @@
               },
               "direction": "INPUT",
               "properties": {
-                "side": "WEST",
-                "index": 3
+                "side": "SOUTH",
+                "index": 2
               },
               "children": []
             },
@@ -1586,7 +1586,7 @@
               "direction": "OUTPUT",
               "properties": {
                 "side": "EAST",
-                "index": 4
+                "index": 3
               },
               "children": []
             }
@@ -1612,7 +1612,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 1
+                "index": 0
               },
               "children": []
             },
@@ -1624,7 +1624,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 2
+                "index": 1
               },
               "children": []
             },
@@ -1635,8 +1635,8 @@
               },
               "direction": "INPUT",
               "properties": {
-                "side": "WEST",
-                "index": 3
+                "side": "SOUTH",
+                "index": 2
               },
               "children": []
             },
@@ -1648,7 +1648,7 @@
               "direction": "OUTPUT",
               "properties": {
                 "side": "EAST",
-                "index": 4
+                "index": 3
               },
               "children": []
             }
@@ -1674,7 +1674,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 1
+                "index": 0
               },
               "children": []
             },
@@ -1686,7 +1686,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 2
+                "index": 1
               },
               "children": []
             },
@@ -1697,8 +1697,8 @@
               },
               "direction": "INPUT",
               "properties": {
-                "side": "WEST",
-                "index": 3
+                "side": "SOUTH",
+                "index": 2
               },
               "children": []
             },
@@ -1710,7 +1710,7 @@
               "direction": "OUTPUT",
               "properties": {
                 "side": "EAST",
-                "index": 4
+                "index": 3
               },
               "children": []
             }
@@ -1736,7 +1736,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 1
+                "index": 0
               },
               "children": []
             },
@@ -1748,7 +1748,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 2
+                "index": 1
               },
               "children": []
             },
@@ -1759,8 +1759,8 @@
               },
               "direction": "INPUT",
               "properties": {
-                "side": "WEST",
-                "index": 3
+                "side": "SOUTH",
+                "index": 2
               },
               "children": []
             },
@@ -1772,7 +1772,7 @@
               "direction": "OUTPUT",
               "properties": {
                 "side": "EAST",
-                "index": 4
+                "index": 3
               },
               "children": []
             }
@@ -1798,7 +1798,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 1
+                "index": 0
               },
               "children": []
             },
@@ -1810,7 +1810,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 2
+                "index": 1
               },
               "children": []
             },
@@ -1821,8 +1821,8 @@
               },
               "direction": "INPUT",
               "properties": {
-                "side": "WEST",
-                "index": 3
+                "side": "SOUTH",
+                "index": 2
               },
               "children": []
             },
@@ -1834,7 +1834,7 @@
               "direction": "OUTPUT",
               "properties": {
                 "side": "EAST",
-                "index": 4
+                "index": 3
               },
               "children": []
             }
@@ -1860,7 +1860,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 1
+                "index": 0
               },
               "children": []
             },
@@ -1872,7 +1872,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 2
+                "index": 1
               },
               "children": []
             },
@@ -1884,7 +1884,7 @@
               "direction": "OUTPUT",
               "properties": {
                 "side": "EAST",
-                "index": 3
+                "index": 2
               },
               "children": []
             },
@@ -1896,7 +1896,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 4
+                "index": 3
               },
               "children": []
             },
@@ -1908,7 +1908,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 5
+                "index": 4
               },
               "children": []
             },
@@ -1920,7 +1920,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 6
+                "index": 5
               },
               "children": []
             },
@@ -1932,7 +1932,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 7
+                "index": 6
               },
               "children": []
             },
@@ -1944,7 +1944,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 8
+                "index": 7
               },
               "children": []
             }

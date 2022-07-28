@@ -33,7 +33,10 @@ function makePort(name, direction, portSide, idCounter) {
     }
 }
 
-function getPortSide(direction) {
+function getPortSide(portName, direction, nodeName) {
+    if (direction === "input" && nodeName === "MUX" && portName === "S") {
+        return "SOUTH";
+    }
     if (direction === "output") {
         return "EAST";
     }
@@ -43,13 +46,16 @@ function getPortSide(direction) {
     throw new Error("Unknown direction " + direction);
 }
 
-function makeLPort(name, direction, idCounter) {
+function makeLPort(portList, name, direction, idCounter, nodeName) {
     if (name === undefined) {
         throw new Error("Name is undefined");
     }
 
-    let portSide = getPortSide(direction);
-    return [makePort(name, direction, portSide, idCounter), idCounter + 1];
+    let portSide = getPortSide(name, direction, nodeName);
+    let port = makePort(name, direction, portSide, idCounter);
+    port.properties.index = portList.length;
+    portList.push(port);
+    return [port, idCounter + 1];
 }
 
 function fillPorts(node, ports, idCounter, objType, cellObj) {
@@ -85,13 +91,31 @@ function fillPorts(node, ports, idCounter, objType, cellObj) {
 
         }
         let port;
-        [port, idCounter] = makeLPort(portName, direction, idCounter);
-        node.ports.push(port);
+        [port, idCounter] = makeLPort(node.ports, portName, direction, idCounter, node.hwMeta.name);
     }
 
     return idCounter;
 }
 
+function orderPorts(node) {
+    let index = 0;
+    for (let port of node.ports) {
+        let dstIndex = index;
+        if (port.hwMeta.name === "CLK") {
+            dstIndex = node.ports.length - 1;
+        } else if (port.hwMeta.name === "ARST") {
+            dstIndex = node.ports.length - 2;
+        }
+        if (index !== dstIndex) {
+            let otherPort = node.ports[dstIndex];
+            node.ports[dstIndex] = port;
+            node.ports[index] = otherPort;
+            otherPort.properties.index = port.properties.index;
+            port.properties.index = dstIndex;
+        }
+        ++index;
+    }
+}
 function fillChildren(node, yosysModule, idCounter, yosysModules) {
     let childrenWithoutPortArray = [];
     let nodeIdToCell = {};
@@ -112,10 +136,9 @@ function fillChildren(node, yosysModule, idCounter, yosysModules) {
                 childrenWithoutPortArray.push([cellObj, subNode]);
                 continue;
             }
-            idCounter = fillPorts(subNode, cellObj.port_directions, idCounter, "port_directions", cellObj)
+            idCounter = fillPorts(subNode, cellObj.port_directions, idCounter, "port_directions", cellObj);
 
         }
-
     }
 
     return [idCounter, childrenWithoutPortArray, nodeIdToCell];
@@ -125,8 +148,7 @@ function addConstNode(node, nodeName, idCounter, constNodeDict) {
     let subNode;
     let port;
     [subNode, idCounter] = makeLNode(nodeName, undefined, idCounter, null);
-    [port, idCounter] = makeLPort("O0", "output", idCounter);
-    subNode.ports.push(port);
+    [port, idCounter] = makeLPort(subNode.ports,"O0", "output", idCounter, subNode.hwMeta.name);
     node.children.push(subNode);
     constNodeDict[subNode.id] = 1;
 
@@ -261,7 +283,6 @@ function getEdgeDictFromPorts(node, yosysModule, constNodeDict, idCounter, edgeT
     let portsIndex = 0;
     for (const [portName, portObj] of Object.entries(yosysModule.ports)) {
         let port = node.ports[portsIndex];
-        port.properties.index = portsIndex;
         portsIndex++;
 
         function getPortName2() {
@@ -326,7 +347,6 @@ function fillEdges(node, yosysModule, idCounter, childrenWithoutPortArray, nodeI
         let portI = 0;
         for (const [portName, bits] of Object.entries(connections)) {
             let portObj = subNode.ports[portI++];
-            portObj.properties.index = portI;
             let direction;
             if (portName.startsWith("$")) {
                 direction = portObj.direction.toLowerCase(); //use direction from module port definition
@@ -363,8 +383,7 @@ function fillEdges(node, yosysModule, idCounter, childrenWithoutPortArray, nodeI
                 }
 
                 if (port === null) {
-                    [port, idCounter] = makeLPort(portName, direction, idCounter);
-                    subNode.ports.push(port);
+                    [port, idCounter] = makeLPort(subNode.ports, portName, direction, idCounter, subNode.hwMeta.name);
                 }
 
                 edgePoints.push([subNode.id, port.id]);
@@ -427,7 +446,12 @@ function makeLNode(name, yosysModule, idCounter, yosysModules) {
         let childrenWithoutPortArray;
         let nodeIdToCell;
         [idCounter, childrenWithoutPortArray, nodeIdToCell] = fillChildren(node, yosysModule, idCounter, yosysModules)
-        idCounter = fillEdges(node, yosysModule, idCounter, childrenWithoutPortArray, nodeIdToCell)
+        idCounter = fillEdges(node, yosysModule, idCounter, childrenWithoutPortArray, nodeIdToCell);
+        for (let child of node.children) {
+            if (child.hwMeta.cls === "Operator" && child.hwMeta.name.startsWith("FF")) {
+                orderPorts(child);
+            }
+        }
     }
 
     //todo hide based on hierarchy level

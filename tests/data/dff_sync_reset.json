@@ -197,14 +197,14 @@
           },
           "ports": [
             {
-              "id": "7",
+              "id": "9",
               "hwMeta": {
-                "name": "CLK"
+                "name": "Q"
               },
-              "direction": "INPUT",
+              "direction": "OUTPUT",
               "properties": {
-                "side": "WEST",
-                "index": 1
+                "side": "EAST",
+                "index": 0
               },
               "children": []
             },
@@ -216,19 +216,19 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 2
+                "index": 1
               },
               "children": []
             },
             {
-              "id": "9",
+              "id": "7",
               "hwMeta": {
-                "name": "Q"
+                "name": "CLK"
               },
-              "direction": "OUTPUT",
+              "direction": "INPUT",
               "properties": {
-                "side": "EAST",
-                "index": 3
+                "side": "WEST",
+                "index": 2
               },
               "children": []
             }
@@ -254,7 +254,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 1
+                "index": 0
               },
               "children": []
             },
@@ -266,7 +266,7 @@
               "direction": "INPUT",
               "properties": {
                 "side": "WEST",
-                "index": 2
+                "index": 1
               },
               "children": []
             },
@@ -277,8 +277,8 @@
               },
               "direction": "INPUT",
               "properties": {
-                "side": "WEST",
-                "index": 3
+                "side": "SOUTH",
+                "index": 2
               },
               "children": []
             },
@@ -290,7 +290,7 @@
               "direction": "OUTPUT",
               "properties": {
                 "side": "EAST",
-                "index": 4
+                "index": 3
               },
               "children": []
             }
