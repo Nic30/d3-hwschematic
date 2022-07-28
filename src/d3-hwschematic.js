@@ -292,6 +292,7 @@ export default class HwSchematic {
     }
 
     setErrorText(msg) {
+        this.root.selectAll("*").remove();
         let errText = this.errorText;
         if (!errText) {
             errText = this.errorText = this.root.append("text")
@@ -299,8 +300,14 @@ export default class HwSchematic {
                 .attr("y", "50%")
                 .attr("dominant-baseline", "middle")
                 .attr("text-anchor", "middle")
+                .style("font-size", "34px");
         }
         errText.text(msg);
+        let t = d3.zoomTransform(this.root.node());
+        t.k = 1;
+        t.x = 0;
+        t.y = 0;
+        this.root.attr("transform", t);
 
     }
 }
