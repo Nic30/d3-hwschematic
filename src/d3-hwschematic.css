@@ -9,6 +9,14 @@
 	border: 2px;
 }
 
+
+.d3-hwschematic .node-0 {
+	fill: white;
+}
+
+.d3-hwschematic .node-1 {
+}
+
 .d3-hwschematic .node text {
 	font-style: normal;
 	font-family: monospace;
