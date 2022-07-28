@@ -78,6 +78,7 @@ export default class HwSchematic {
         svg.classed("d3-hwschematic", true);
         this.defs = svg.append("defs");
         this.root = svg.append("g");
+        this.errorText = null;
         this._nodes = null;
         this._edges = null;
 
@@ -288,5 +289,18 @@ export default class HwSchematic {
         if (this.layouter) {
             this.layouter.terminate();
         }
+    }
+
+    setErrorText(msg) {
+        let errText = this.errorText;
+        if (!errText) {
+            errText = this.errorText = this.root.append("text")
+                .attr("x", "50%")
+                .attr("y", "50%")
+                .attr("dominant-baseline", "middle")
+                .attr("text-anchor", "middle")
+        }
+        errText.text(msg);
+
     }
 }
