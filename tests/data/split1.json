@@ -101,18 +101,6 @@
           },
           "ports": [
             {
-              "id": "5",
-              "hwMeta": {
-                "name": "[5:1]"
-              },
-              "direction": "INPUT",
-              "properties": {
-                "side": "WEST",
-                "index": 0
-              },
-              "children": []
-            },
-            {
               "id": "6",
               "hwMeta": {
                 "name": ""
@@ -120,6 +108,18 @@
               "direction": "OUTPUT",
               "properties": {
                 "side": "EAST",
+                "index": 0
+              },
+              "children": []
+            },
+            {
+              "id": "5",
+              "hwMeta": {
+                "name": "[5:1]"
+              },
+              "direction": "INPUT",
+              "properties": {
+                "side": "WEST",
                 "index": 1
               },
               "children": []

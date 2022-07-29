@@ -155,13 +155,13 @@
           },
           "ports": [
             {
-              "id": "5",
+              "id": "7",
               "hwMeta": {
-                "name": "[3:0]"
+                "name": ""
               },
-              "direction": "INPUT",
+              "direction": "OUTPUT",
               "properties": {
-                "side": "WEST",
+                "side": "EAST",
                 "index": 0
               },
               "children": []
@@ -179,13 +179,13 @@
               "children": []
             },
             {
-              "id": "7",
+              "id": "5",
               "hwMeta": {
-                "name": ""
+                "name": "[3:0]"
               },
-              "direction": "OUTPUT",
+              "direction": "INPUT",
               "properties": {
-                "side": "EAST",
+                "side": "WEST",
                 "index": 2
               },
               "children": []
@@ -205,13 +205,13 @@
           },
           "ports": [
             {
-              "id": "9",
+              "id": "11",
               "hwMeta": {
-                "name": "[4:0]"
+                "name": ""
               },
-              "direction": "INPUT",
+              "direction": "OUTPUT",
               "properties": {
-                "side": "WEST",
+                "side": "EAST",
                 "index": 0
               },
               "children": []
@@ -229,13 +229,13 @@
               "children": []
             },
             {
-              "id": "11",
+              "id": "9",
               "hwMeta": {
-                "name": ""
+                "name": "[4:0]"
               },
-              "direction": "OUTPUT",
+              "direction": "INPUT",
               "properties": {
-                "side": "EAST",
+                "side": "WEST",
                 "index": 2
               },
               "children": []

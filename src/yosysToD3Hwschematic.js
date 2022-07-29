@@ -97,7 +97,7 @@ function fillPorts(node, ports, idCounter, objType, cellObj) {
     return idCounter;
 }
 
-function orderPorts(node) {
+function orderClkAndRstPorts(node) {
     let index = 0;
     for (let port of node.ports) {
         let dstIndex = index;
@@ -432,6 +432,42 @@ function makeNode(name, idCounter) {
     };
 }
 
+function updatePortIndices(ports){
+    let index = 0;
+    for (let port of ports) {
+        port.properties.index = index;
+        ++index;
+    }
+}
+function dividePorts(ports) {
+    let north = [];
+    let east = [];
+    let south = [];
+    let west = [];
+
+    for (let port of ports) {
+        let side = port.properties.side;
+        if (side === "NORTH") {
+            north.push(port);
+        } else if (side === "EAST") {
+            east.push(port);
+        } else if (side === "SOUTH") {
+            south.push(port);
+        } else if (side === "WEST") {
+            west.push(port);
+        } else {
+            throw new Error("Invalid port side: " + side);
+        }
+    }
+
+    return [north, east, south, west];
+}
+function convertPortOrderingFromYosysToElk(node) {
+    let [north, east, south, west] = dividePorts(node.ports);
+    node.ports = north.concat(east, south.reverse(), west.reverse());
+    updatePortIndices(node.ports);
+
+}
 function makeLNode(name, yosysModule, idCounter, yosysModules) {
     if (name === undefined) {
         throw new Error("Name is undefined");
@@ -447,15 +483,20 @@ function makeLNode(name, yosysModule, idCounter, yosysModules) {
         let nodeIdToCell;
         [idCounter, childrenWithoutPortArray, nodeIdToCell] = fillChildren(node, yosysModule, idCounter, yosysModules)
         idCounter = fillEdges(node, yosysModule, idCounter, childrenWithoutPortArray, nodeIdToCell);
-        for (let child of node.children) {
-            if (child.hwMeta.cls === "Operator" && child.hwMeta.name.startsWith("FF")) {
-                orderPorts(child);
-            }
-        }
+
     }
 
     //todo hide based on hierarchy level
     hideChildrenAndNodes(node, yosysModule);
+
+    if (node.children !== undefined) {
+        for (let child of node.children) {
+            convertPortOrderingFromYosysToElk(child);
+            if (child.hwMeta.cls === "Operator" && child.hwMeta.name.startsWith("FF")) {
+                orderClkAndRstPorts(child);
+            }
+        }
+    }
 
     node.hwMeta.maxId = idCounter - 1;
     return [node, idCounter];

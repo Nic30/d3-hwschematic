@@ -131,13 +131,13 @@
           },
           "ports": [
             {
-              "id": "6",
+              "id": "8",
               "hwMeta": {
-                "name": "D"
+                "name": "Q"
               },
-              "direction": "INPUT",
+              "direction": "OUTPUT",
               "properties": {
-                "side": "WEST",
+                "side": "EAST",
                 "index": 0
               },
               "children": []
@@ -155,13 +155,13 @@
               "children": []
             },
             {
-              "id": "8",
+              "id": "6",
               "hwMeta": {
-                "name": "Q"
+                "name": "D"
               },
-              "direction": "OUTPUT",
+              "direction": "INPUT",
               "properties": {
-                "side": "EAST",
+                "side": "WEST",
                 "index": 2
               },
               "children": []

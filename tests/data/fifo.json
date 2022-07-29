@@ -855,13 +855,13 @@
           },
           "ports": [
             {
-              "id": "12",
+              "id": "14",
               "hwMeta": {
-                "name": "A"
+                "name": "Y"
               },
-              "direction": "INPUT",
+              "direction": "OUTPUT",
               "properties": {
-                "side": "WEST",
+                "side": "EAST",
                 "index": 0
               },
               "children": []
@@ -879,13 +879,13 @@
               "children": []
             },
             {
-              "id": "14",
+              "id": "12",
               "hwMeta": {
-                "name": "Y"
+                "name": "A"
               },
-              "direction": "OUTPUT",
+              "direction": "INPUT",
               "properties": {
-                "side": "EAST",
+                "side": "WEST",
                 "index": 2
               },
               "children": []
@@ -905,13 +905,13 @@
           },
           "ports": [
             {
-              "id": "16",
+              "id": "18",
               "hwMeta": {
-                "name": "A"
+                "name": "Y"
               },
-              "direction": "INPUT",
+              "direction": "OUTPUT",
               "properties": {
-                "side": "WEST",
+                "side": "EAST",
                 "index": 0
               },
               "children": []
@@ -929,13 +929,13 @@
               "children": []
             },
             {
-              "id": "18",
+              "id": "16",
               "hwMeta": {
-                "name": "Y"
+                "name": "A"
               },
-              "direction": "OUTPUT",
+              "direction": "INPUT",
               "properties": {
-                "side": "EAST",
+                "side": "WEST",
                 "index": 2
               },
               "children": []
@@ -955,13 +955,13 @@
           },
           "ports": [
             {
-              "id": "20",
+              "id": "22",
               "hwMeta": {
-                "name": "[0]"
+                "name": ""
               },
-              "direction": "INPUT",
+              "direction": "OUTPUT",
               "properties": {
-                "side": "WEST",
+                "side": "EAST",
                 "index": 0
               },
               "children": []
@@ -979,13 +979,13 @@
               "children": []
             },
             {
-              "id": "22",
+              "id": "20",
               "hwMeta": {
-                "name": ""
+                "name": "[0]"
               },
-              "direction": "OUTPUT",
+              "direction": "INPUT",
               "properties": {
-                "side": "EAST",
+                "side": "WEST",
                 "index": 2
               },
               "children": []
@@ -1005,13 +1005,13 @@
           },
           "ports": [
             {
-              "id": "24",
+              "id": "26",
               "hwMeta": {
-                "name": "[2:0]"
+                "name": ""
               },
-              "direction": "INPUT",
+              "direction": "OUTPUT",
               "properties": {
-                "side": "WEST",
+                "side": "EAST",
                 "index": 0
               },
               "children": []
@@ -1029,13 +1029,13 @@
               "children": []
             },
             {
-              "id": "26",
+              "id": "24",
               "hwMeta": {
-                "name": ""
+                "name": "[2:0]"
               },
-              "direction": "OUTPUT",
+              "direction": "INPUT",
               "properties": {
-                "side": "EAST",
+                "side": "WEST",
                 "index": 2
               },
               "children": []
@@ -1055,13 +1055,13 @@
           },
           "ports": [
             {
-              "id": "28",
+              "id": "30",
               "hwMeta": {
-                "name": "[3:0]"
+                "name": ""
               },
-              "direction": "INPUT",
+              "direction": "OUTPUT",
               "properties": {
-                "side": "WEST",
+                "side": "EAST",
                 "index": 0
               },
               "children": []
@@ -1079,13 +1079,13 @@
               "children": []
             },
             {
-              "id": "30",
+              "id": "28",
               "hwMeta": {
-                "name": ""
+                "name": "[3:0]"
               },
-              "direction": "OUTPUT",
+              "direction": "INPUT",
               "properties": {
-                "side": "EAST",
+                "side": "WEST",
                 "index": 2
               },
               "children": []
@@ -1105,13 +1105,13 @@
           },
           "ports": [
             {
-              "id": "32",
+              "id": "34",
               "hwMeta": {
-                "name": "A"
+                "name": "Y"
               },
-              "direction": "INPUT",
+              "direction": "OUTPUT",
               "properties": {
-                "side": "WEST",
+                "side": "EAST",
                 "index": 0
               },
               "children": []
@@ -1129,13 +1129,13 @@
               "children": []
             },
             {
-              "id": "34",
+              "id": "32",
               "hwMeta": {
-                "name": "Y"
+                "name": "A"
               },
-              "direction": "OUTPUT",
+              "direction": "INPUT",
               "properties": {
-                "side": "EAST",
+                "side": "WEST",
                 "index": 2
               },
               "children": []
@@ -1155,13 +1155,13 @@
           },
           "ports": [
             {
-              "id": "36",
+              "id": "38",
               "hwMeta": {
-                "name": "A"
+                "name": "Y"
               },
-              "direction": "INPUT",
+              "direction": "OUTPUT",
               "properties": {
-                "side": "WEST",
+                "side": "EAST",
                 "index": 0
               },
               "children": []
@@ -1179,13 +1179,13 @@
               "children": []
             },
             {
-              "id": "38",
+              "id": "36",
               "hwMeta": {
-                "name": "Y"
+                "name": "A"
               },
-              "direction": "OUTPUT",
+              "direction": "INPUT",
               "properties": {
-                "side": "EAST",
+                "side": "WEST",
                 "index": 2
               },
               "children": []
@@ -1205,13 +1205,13 @@
           },
           "ports": [
             {
-              "id": "40",
+              "id": "42",
               "hwMeta": {
-                "name": "A"
+                "name": "Y"
               },
-              "direction": "INPUT",
+              "direction": "OUTPUT",
               "properties": {
-                "side": "WEST",
+                "side": "EAST",
                 "index": 0
               },
               "children": []
@@ -1229,13 +1229,13 @@
               "children": []
             },
             {
-              "id": "42",
+              "id": "40",
               "hwMeta": {
-                "name": "Y"
+                "name": "A"
               },
-              "direction": "OUTPUT",
+              "direction": "INPUT",
               "properties": {
-                "side": "EAST",
+                "side": "WEST",
                 "index": 2
               },
               "children": []
@@ -1255,18 +1255,6 @@
           },
           "ports": [
             {
-              "id": "44",
-              "hwMeta": {
-                "name": "A"
-              },
-              "direction": "INPUT",
-              "properties": {
-                "side": "WEST",
-                "index": 0
-              },
-              "children": []
-            },
-            {
               "id": "45",
               "hwMeta": {
                 "name": "Y"
@@ -1274,6 +1262,18 @@
               "direction": "OUTPUT",
               "properties": {
                 "side": "EAST",
+                "index": 0
+              },
+              "children": []
+            },
+            {
+              "id": "44",
+              "hwMeta": {
+                "name": "A"
+              },
+              "direction": "INPUT",
+              "properties": {
+                "side": "WEST",
                 "index": 1
               },
               "children": []
@@ -1293,18 +1293,6 @@
           },
           "ports": [
             {
-              "id": "47",
-              "hwMeta": {
-                "name": "A"
-              },
-              "direction": "INPUT",
-              "properties": {
-                "side": "WEST",
-                "index": 0
-              },
-              "children": []
-            },
-            {
               "id": "48",
               "hwMeta": {
                 "name": "Y"
@@ -1312,6 +1300,18 @@
               "direction": "OUTPUT",
               "properties": {
                 "side": "EAST",
+                "index": 0
+              },
+              "children": []
+            },
+            {
+              "id": "47",
+              "hwMeta": {
+                "name": "A"
+              },
+              "direction": "INPUT",
+              "properties": {
+                "side": "WEST",
                 "index": 1
               },
               "children": []
@@ -1481,26 +1481,14 @@
           },
           "ports": [
             {
-              "id": "62",
+              "id": "65",
               "hwMeta": {
-                "name": "A"
+                "name": "Y"
               },
-              "direction": "INPUT",
+              "direction": "OUTPUT",
               "properties": {
-                "side": "WEST",
+                "side": "EAST",
                 "index": 0
-              },
-              "children": []
-            },
-            {
-              "id": "63",
-              "hwMeta": {
-                "name": "B"
-              },
-              "direction": "INPUT",
-              "properties": {
-                "side": "WEST",
-                "index": 1
               },
               "children": []
             },
@@ -1512,18 +1500,30 @@
               "direction": "INPUT",
               "properties": {
                 "side": "SOUTH",
+                "index": 1
+              },
+              "children": []
+            },
+            {
+              "id": "63",
+              "hwMeta": {
+                "name": "B"
+              },
+              "direction": "INPUT",
+              "properties": {
+                "side": "WEST",
                 "index": 2
               },
               "children": []
             },
             {
-              "id": "65",
+              "id": "62",
               "hwMeta": {
-                "name": "Y"
+                "name": "A"
               },
-              "direction": "OUTPUT",
+              "direction": "INPUT",
               "properties": {
-                "side": "EAST",
+                "side": "WEST",
                 "index": 3
               },
               "children": []
@@ -1543,26 +1543,14 @@
           },
           "ports": [
             {
-              "id": "67",
+              "id": "70",
               "hwMeta": {
-                "name": "A"
+                "name": "Y"
               },
-              "direction": "INPUT",
+              "direction": "OUTPUT",
               "properties": {
-                "side": "WEST",
+                "side": "EAST",
                 "index": 0
-              },
-              "children": []
-            },
-            {
-              "id": "68",
-              "hwMeta": {
-                "name": "B"
-              },
-              "direction": "INPUT",
-              "properties": {
-                "side": "WEST",
-                "index": 1
               },
               "children": []
             },
@@ -1574,18 +1562,30 @@
               "direction": "INPUT",
               "properties": {
                 "side": "SOUTH",
+                "index": 1
+              },
+              "children": []
+            },
+            {
+              "id": "68",
+              "hwMeta": {
+                "name": "B"
+              },
+              "direction": "INPUT",
+              "properties": {
+                "side": "WEST",
                 "index": 2
               },
               "children": []
             },
             {
-              "id": "70",
+              "id": "67",
               "hwMeta": {
-                "name": "Y"
+                "name": "A"
               },
-              "direction": "OUTPUT",
+              "direction": "INPUT",
               "properties": {
-                "side": "EAST",
+                "side": "WEST",
                 "index": 3
               },
               "children": []
@@ -1605,26 +1605,14 @@
           },
           "ports": [
             {
-              "id": "72",
+              "id": "75",
               "hwMeta": {
-                "name": "A"
+                "name": "Y"
               },
-              "direction": "INPUT",
+              "direction": "OUTPUT",
               "properties": {
-                "side": "WEST",
+                "side": "EAST",
                 "index": 0
-              },
-              "children": []
-            },
-            {
-              "id": "73",
-              "hwMeta": {
-                "name": "B"
-              },
-              "direction": "INPUT",
-              "properties": {
-                "side": "WEST",
-                "index": 1
               },
               "children": []
             },
@@ -1636,18 +1624,30 @@
               "direction": "INPUT",
               "properties": {
                 "side": "SOUTH",
+                "index": 1
+              },
+              "children": []
+            },
+            {
+              "id": "73",
+              "hwMeta": {
+                "name": "B"
+              },
+              "direction": "INPUT",
+              "properties": {
+                "side": "WEST",
                 "index": 2
               },
               "children": []
             },
             {
-              "id": "75",
+              "id": "72",
               "hwMeta": {
-                "name": "Y"
+                "name": "A"
               },
-              "direction": "OUTPUT",
+              "direction": "INPUT",
               "properties": {
-                "side": "EAST",
+                "side": "WEST",
                 "index": 3
               },
               "children": []
@@ -1667,26 +1667,14 @@
           },
           "ports": [
             {
-              "id": "77",
+              "id": "80",
               "hwMeta": {
-                "name": "A"
+                "name": "Y"
               },
-              "direction": "INPUT",
+              "direction": "OUTPUT",
               "properties": {
-                "side": "WEST",
+                "side": "EAST",
                 "index": 0
-              },
-              "children": []
-            },
-            {
-              "id": "78",
-              "hwMeta": {
-                "name": "B"
-              },
-              "direction": "INPUT",
-              "properties": {
-                "side": "WEST",
-                "index": 1
               },
               "children": []
             },
@@ -1698,18 +1686,30 @@
               "direction": "INPUT",
               "properties": {
                 "side": "SOUTH",
+                "index": 1
+              },
+              "children": []
+            },
+            {
+              "id": "78",
+              "hwMeta": {
+                "name": "B"
+              },
+              "direction": "INPUT",
+              "properties": {
+                "side": "WEST",
                 "index": 2
               },
               "children": []
             },
             {
-              "id": "80",
+              "id": "77",
               "hwMeta": {
-                "name": "Y"
+                "name": "A"
               },
-              "direction": "OUTPUT",
+              "direction": "INPUT",
               "properties": {
-                "side": "EAST",
+                "side": "WEST",
                 "index": 3
               },
               "children": []
@@ -1729,26 +1729,14 @@
           },
           "ports": [
             {
-              "id": "82",
+              "id": "85",
               "hwMeta": {
-                "name": "A"
+                "name": "Y"
               },
-              "direction": "INPUT",
+              "direction": "OUTPUT",
               "properties": {
-                "side": "WEST",
+                "side": "EAST",
                 "index": 0
-              },
-              "children": []
-            },
-            {
-              "id": "83",
-              "hwMeta": {
-                "name": "B"
-              },
-              "direction": "INPUT",
-              "properties": {
-                "side": "WEST",
-                "index": 1
               },
               "children": []
             },
@@ -1760,18 +1748,30 @@
               "direction": "INPUT",
               "properties": {
                 "side": "SOUTH",
+                "index": 1
+              },
+              "children": []
+            },
+            {
+              "id": "83",
+              "hwMeta": {
+                "name": "B"
+              },
+              "direction": "INPUT",
+              "properties": {
+                "side": "WEST",
                 "index": 2
               },
               "children": []
             },
             {
-              "id": "85",
+              "id": "82",
               "hwMeta": {
-                "name": "Y"
+                "name": "A"
               },
-              "direction": "OUTPUT",
+              "direction": "INPUT",
               "properties": {
-                "side": "EAST",
+                "side": "WEST",
                 "index": 3
               },
               "children": []
@@ -1791,26 +1791,14 @@
           },
           "ports": [
             {
-              "id": "87",
+              "id": "90",
               "hwMeta": {
-                "name": "A"
+                "name": "Y"
               },
-              "direction": "INPUT",
+              "direction": "OUTPUT",
               "properties": {
-                "side": "WEST",
+                "side": "EAST",
                 "index": 0
-              },
-              "children": []
-            },
-            {
-              "id": "88",
-              "hwMeta": {
-                "name": "B"
-              },
-              "direction": "INPUT",
-              "properties": {
-                "side": "WEST",
-                "index": 1
               },
               "children": []
             },
@@ -1822,18 +1810,30 @@
               "direction": "INPUT",
               "properties": {
                 "side": "SOUTH",
+                "index": 1
+              },
+              "children": []
+            },
+            {
+              "id": "88",
+              "hwMeta": {
+                "name": "B"
+              },
+              "direction": "INPUT",
+              "properties": {
+                "side": "WEST",
                 "index": 2
               },
               "children": []
             },
             {
-              "id": "90",
+              "id": "87",
               "hwMeta": {
-                "name": "Y"
+                "name": "A"
               },
-              "direction": "OUTPUT",
+              "direction": "INPUT",
               "properties": {
-                "side": "EAST",
+                "side": "WEST",
                 "index": 3
               },
               "children": []
@@ -1853,21 +1853,21 @@
           },
           "ports": [
             {
-              "id": "92",
+              "id": "94",
               "hwMeta": {
-                "name": "RD_ADDR"
+                "name": "RD_DATA"
               },
-              "direction": "INPUT",
+              "direction": "OUTPUT",
               "properties": {
-                "side": "WEST",
+                "side": "EAST",
                 "index": 0
               },
               "children": []
             },
             {
-              "id": "93",
+              "id": "99",
               "hwMeta": {
-                "name": "RD_CLK"
+                "name": "WR_EN"
               },
               "direction": "INPUT",
               "properties": {
@@ -1877,21 +1877,21 @@
               "children": []
             },
             {
-              "id": "94",
+              "id": "98",
               "hwMeta": {
-                "name": "RD_DATA"
+                "name": "WR_DATA"
               },
-              "direction": "OUTPUT",
+              "direction": "INPUT",
               "properties": {
-                "side": "EAST",
+                "side": "WEST",
                 "index": 2
               },
               "children": []
             },
             {
-              "id": "95",
+              "id": "97",
               "hwMeta": {
-                "name": "RD_EN"
+                "name": "WR_CLK"
               },
               "direction": "INPUT",
               "properties": {
@@ -1913,9 +1913,9 @@
               "children": []
             },
             {
-              "id": "97",
+              "id": "95",
               "hwMeta": {
-                "name": "WR_CLK"
+                "name": "RD_EN"
               },
               "direction": "INPUT",
               "properties": {
@@ -1925,9 +1925,9 @@
               "children": []
             },
             {
-              "id": "98",
+              "id": "93",
               "hwMeta": {
-                "name": "WR_DATA"
+                "name": "RD_CLK"
               },
               "direction": "INPUT",
               "properties": {
@@ -1937,9 +1937,9 @@
               "children": []
             },
             {
-              "id": "99",
+              "id": "92",
               "hwMeta": {
-                "name": "WR_EN"
+                "name": "RD_ADDR"
               },
               "direction": "INPUT",
               "properties": {

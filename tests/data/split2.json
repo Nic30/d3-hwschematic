@@ -169,18 +169,6 @@
           },
           "ports": [
             {
-              "id": "7",
-              "hwMeta": {
-                "name": "[4:0]"
-              },
-              "direction": "INPUT",
-              "properties": {
-                "side": "WEST",
-                "index": 0
-              },
-              "children": []
-            },
-            {
               "id": "8",
               "hwMeta": {
                 "name": ""
@@ -188,6 +176,18 @@
               "direction": "OUTPUT",
               "properties": {
                 "side": "EAST",
+                "index": 0
+              },
+              "children": []
+            },
+            {
+              "id": "7",
+              "hwMeta": {
+                "name": "[4:0]"
+              },
+              "direction": "INPUT",
+              "properties": {
+                "side": "WEST",
                 "index": 1
               },
               "children": []
@@ -207,18 +207,6 @@
           },
           "ports": [
             {
-              "id": "10",
-              "hwMeta": {
-                "name": "[6:4]"
-              },
-              "direction": "INPUT",
-              "properties": {
-                "side": "WEST",
-                "index": 0
-              },
-              "children": []
-            },
-            {
               "id": "11",
               "hwMeta": {
                 "name": ""
@@ -226,6 +214,18 @@
               "direction": "OUTPUT",
               "properties": {
                 "side": "EAST",
+                "index": 0
+              },
+              "children": []
+            },
+            {
+              "id": "10",
+              "hwMeta": {
+                "name": "[6:4]"
+              },
+              "direction": "INPUT",
+              "properties": {
+                "side": "WEST",
                 "index": 1
               },
               "children": []
@@ -245,18 +245,6 @@
           },
           "ports": [
             {
-              "id": "13",
-              "hwMeta": {
-                "name": "[8:6]"
-              },
-              "direction": "INPUT",
-              "properties": {
-                "side": "WEST",
-                "index": 0
-              },
-              "children": []
-            },
-            {
               "id": "14",
               "hwMeta": {
                 "name": ""
@@ -264,6 +252,18 @@
               "direction": "OUTPUT",
               "properties": {
                 "side": "EAST",
+                "index": 0
+              },
+              "children": []
+            },
+            {
+              "id": "13",
+              "hwMeta": {
+                "name": "[8:6]"
+              },
+              "direction": "INPUT",
+              "properties": {
+                "side": "WEST",
                 "index": 1
               },
               "children": []
