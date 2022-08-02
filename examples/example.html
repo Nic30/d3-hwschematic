@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <title>d3-hwschematic example</title>
     <script type="text/javascript" src="../node_modules/d3/dist/d3.js"></script>
-    <!-- <script type="text/javascript" src="../node_modules/d3/dist/d3.min.js"></script>  -->
     <script type="text/javascript" src="../node_modules/elkjs/lib/elk.bundled.js"></script>
     <script type="text/javascript" src="../dist/d3-hwschematic.js"></script>
     <link href="../dist/d3-hwschematic.css" rel="stylesheet">
@@ -30,8 +29,18 @@
     Open any schematic:
     <input type="file" id="file-input-any"/>
 </label>
+<label>
+    Root path:
+    <input type="text" id="root-path-input" list="root-path-input-paths"/>
+    <datalist id="root-path-input-paths"></datalist>
+
+    <input type="submit" value="Submit" id="root-path-input-submit" onclick="onSchematicRootSubmit();">
+</label>
+
 <svg id="scheme-placeholder"></svg>
 <script>
+
+
     // schematic rendering script
     function viewport() {
         var e = window,
@@ -64,6 +73,7 @@
     }
 
     let hwSchematic = new d3.HwSchematic(svg);
+    let rootGraph = null;
     let zoom = d3.zoom();
     zoom.on("zoom", function applyTransform(ev) {
         hwSchematic.root.attr("transform", ev.transform)
@@ -93,6 +103,8 @@
                 exampleDir = "schemes_yosys/";
             }
             setUrlParameterByName("schematic", exampleDir + file.name);
+            setUrlParameterByName("schematicRoot", "");
+            rootInput.value = "";
             let reader = new FileReader();
             reader.onload = function (e) {
                 let graph;
@@ -102,6 +114,7 @@
                     if (transformation) {
                         graph = transformation(graph);
                     }
+                    rootGraph = graph;
                 } catch (e) {
                     hwSchematic.setErrorText(e);
                     throw e;
@@ -142,11 +155,13 @@
                     } else {
                         throw new Error("Invalid file format");
                     }
-                    setUrlParameterByName("schematic", exampleDir + file.name); //
-                    if (transformation !== null)
-                    {
+                    setUrlParameterByName("schematic", exampleDir + file.name);
+                    setUrlParameterByName("schematicRoot", "");
+                    rootInput.value = "";
+                    if (transformation !== null) {
                         graph = transformation(graph);
                     }
+                    rootGraph = graph;
                 } catch (e) {
                     hwSchematic.setErrorText(e);
                     throw e;
@@ -164,10 +179,38 @@
         if (graph.hwMeta && graph.hwMeta.name)
             document.title = graph.hwMeta.name;
         // load the data and render the elements
-        hwSchematic.bindData(graph).then(()=> {}, (e) => {
+        hwSchematic.bindData(graph).then(() => {
+        }, (e) => {
             hwSchematic.setErrorText(e);
             throw e;
         });
+
+        // remove old options in rootInputPaths
+        let child = rootInputPaths.lastElementChild;
+        while (child) {
+            rootInputPaths.removeChild(child);
+            child = rootInputPaths.lastElementChild;
+        }
+
+        let allPaths = []
+        getAllPaths(rootGraph.children[0], "/", allPaths);
+        setRootInputPathsOptions(allPaths, rootInputPaths);
+    }
+
+    function onSchematicRootSubmit() {
+        let graph;
+        try {
+            graph = rootGraph;
+            let schematicRoot = rootInput.value;
+            if (schematicRoot !== null) {
+                setUrlParameterByName("schematicRoot", schematicRoot);
+                graph = selectGraphByPath(graph, schematicRoot);
+            }
+        } catch (e) {
+            hwSchematic.setErrorText(e);
+            throw e;
+        }
+        displayContents(graph);
     }
 
     // register file input handlers
@@ -177,12 +220,72 @@
         .addEventListener('change', readSingleFile, false);
     document.getElementById('file-input-any')
         .addEventListener('change', readAnyFile, false);
+    let rootInput = document.getElementById("root-path-input");
+    let rootInputPaths = document.getElementById("root-path-input-paths");
+
+    rootInput.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            onSchematicRootSubmit();
+        }
+    });
+
+    function setRootInputPathsOptions(optionArray, htmlDatasetList) {
+        optionArray.forEach(item => {
+            let option = document.createElement('option');
+            option.value = item;
+            htmlDatasetList.appendChild(option);
+        });
+    }
+
 
     function getUrlParameterByName(name, url) {
         if (!url) url = window.location.href;
         url = new URL(url);
         let searchParams = url.searchParams;
         return searchParams.get(name);
+    }
+
+    function getAllPaths(node, prefix, allPaths) {
+        let children = node.children || node._children;
+        if (children && children.length) {
+            let nodePath = node.hwMeta.name;
+            prefix += nodePath;
+            allPaths.push(prefix);
+
+            for (let child of children) {
+                getAllPaths(child, prefix + "/", allPaths);
+            }
+        }
+    }
+
+    function findGraph(nodeArray, nodeName) {
+        for (let node of nodeArray) {
+            if (node.hwMeta.name === nodeName) {
+                return node
+            }
+        }
+        throw new Error("Node is not found: " + nodeName);
+    }
+
+    function selectGraphByPath(graph, path) {
+        let pathArray = path.split("/");
+        let first = true;
+        let newGraph = graph;
+        for (let nodeName of pathArray) {
+            if (first && nodeName === "") {
+                first = false;
+                continue;
+            }
+            newGraph = findGraph((newGraph.children || newGraph._children), nodeName);
+        }
+        if (graph !== newGraph) {
+            //case if path has nonzero length
+            //copy because we need to make graph immutable because we will need it later
+            graph = Object.assign({}, graph);
+            graph.children = [newGraph];
+        }
+        return graph;
+
     }
 
     function setUrlParameterByName(name, value, url) {
@@ -194,6 +297,11 @@
     }
 
     let schematicName = getUrlParameterByName("schematic");
+    let schematicRoot = getUrlParameterByName("schematicRoot");
+    if (schematicRoot !== null) {
+        rootInput.setAttribute("value", schematicRoot);
+    }
+
     if (schematicName != null) {
         d3.json(schematicName)
             .then(function (graph) {
@@ -203,6 +311,10 @@
                         graph = d3.HwSchematic.fromYosys(graph);
                     } else {
                         throw new Error("Unknown example dir " + schematicName);
+                    }
+                    rootGraph = graph;
+                    if (schematicRoot !== null) {
+                        graph = selectGraphByPath(graph, schematicRoot);
                     }
                     displayContents(graph);
                 } catch (e) {
