@@ -1,0 +1,132 @@
+{
+  "id": "0",
+  "hwMeta": {
+    "name": "root",
+    "cls": "",
+    "maxId": 15
+  },
+  "properties": {
+    "org.eclipse.elk.portConstraints": "FIXED_ORDER",
+    "org.eclipse.elk.layered.mergeEdges": 1
+  },
+  "ports": [],
+  "edges": [],
+  "children": [
+    {
+      "id": "1",
+      "hwMeta": {
+        "name": "split0",
+        "cls": "",
+        "maxId": 15
+      },
+      "properties": {
+        "org.eclipse.elk.portConstraints": "FIXED_ORDER",
+        "org.eclipse.elk.layered.mergeEdges": 1
+      },
+      "ports": [
+        {
+          "id": "2",
+          "hwMeta": {
+            "name": "in"
+          },
+          "direction": "INPUT",
+          "properties": {
+            "side": "WEST",
+            "index": 0
+          },
+          "children": []
+        },
+        {
+          "id": "3",
+          "hwMeta": {
+            "name": "out"
+          },
+          "direction": "OUTPUT",
+          "properties": {
+            "side": "EAST",
+            "index": 1
+          },
+          "children": []
+        }
+      ],
+      "edges": [
+        {
+          "id": "7",
+          "sources": [
+            [
+              "1",
+              "2"
+            ]
+          ],
+          "targets": [
+            [
+              "4",
+              "5"
+            ]
+          ],
+          "hwMeta": {
+            "name": "in"
+          }
+        },
+        {
+          "id": "15",
+          "sources": [
+            [
+              "4",
+              "6"
+            ]
+          ],
+          "targets": [
+            [
+              "1",
+              "3"
+            ]
+          ],
+          "hwMeta": {
+            "name": "out"
+          }
+        }
+      ],
+      "children": [
+        {
+          "id": "4",
+          "hwMeta": {
+            "name": "SLICE",
+            "cls": "Operator",
+            "maxId": 4
+          },
+          "properties": {
+            "org.eclipse.elk.portConstraints": "FIXED_ORDER",
+            "org.eclipse.elk.layered.mergeEdges": 1
+          },
+          "ports": [
+            {
+              "id": "6",
+              "hwMeta": {
+                "name": ""
+              },
+              "direction": "OUTPUT",
+              "properties": {
+                "side": "EAST",
+                "index": 0
+              },
+              "children": []
+            },
+            {
+              "id": "5",
+              "hwMeta": {
+                "name": "[3]"
+              },
+              "direction": "INPUT",
+              "properties": {
+                "side": "WEST",
+                "index": 1
+              },
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

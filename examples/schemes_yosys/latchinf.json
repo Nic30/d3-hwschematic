@@ -1,0 +1,71 @@
+{
+  "creator": "Yosys 0.9 (git sha1 1979e0b)",
+  "modules": {
+    "latchinf": {
+      "attributes": {
+        "top": 1,
+        "src": "latchinf.v:2"
+      },
+      "ports": {
+        "enable": {
+          "direction": "input",
+          "bits": [ 2 ]
+        },
+        "data": {
+          "direction": "input",
+          "bits": [ 3 ]
+        },
+        "q": {
+          "direction": "output",
+          "bits": [ 4 ]
+        }
+      },
+      "cells": {
+        "$auto$proc_dlatch.cc:409:proc_dlatch$14": {
+          "hide_name": 1,
+          "type": "$dlatch",
+          "parameters": {
+            "EN_POLARITY": 1,
+            "WIDTH": 1
+          },
+          "attributes": {
+            "src": "latchinf.v:6"
+          },
+          "port_directions": {
+            "D": "input",
+            "EN": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "D": [ 3 ],
+            "EN": [ 2 ],
+            "Q": [ 4 ]
+          }
+        }
+      },
+      "netnames": {
+        "data": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+            "src": "latchinf.v:3"
+          }
+        },
+        "enable": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "src": "latchinf.v:3"
+          }
+        },
+        "q": {
+          "hide_name": 0,
+          "bits": [ 4 ],
+          "attributes": {
+            "src": "latchinf.v:4"
+          }
+        }
+      }
+    }
+  }
+}

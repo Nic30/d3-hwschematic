@@ -1,9 +1,9 @@
 import {section2svgPath} from "./elk/elk-d3-utils.js";
 
 export function renderLinks(root, edges) {
-    var junctionPoints = [];
+    let junctionPoints = [];
 
-    var link = root.selectAll(".link")
+    let link = root.selectAll(".link")
       .data(edges)
       .enter()
       .append("path")
@@ -24,12 +24,12 @@ export function renderLinks(root, edges) {
           return d._svgPath;
       });
 
-    var linkWrap = root.selectAll(".link-wrap")
+    let linkWrap = root.selectAll(".link-wrap")
       .data(edges)
       .enter()
       .append("path")
       .attr("class", function (d) {
-	       var cssClass;
+          let cssClass;
            if (d.hwMeta.parent) {
 	           cssClass = d.hwMeta.parent.hwMeta.cssClass;
            } else {
@@ -51,8 +51,8 @@ export function renderLinks(root, edges) {
       .attr("d", function(d) {
           return d._svgPath;
       });
-   
-    var junctionPoint = root.selectAll(".junction-point")
+
+    let junctionPoint = root.selectAll(".junction-point")
       .data(junctionPoints)
       .enter()
       .append("circle")

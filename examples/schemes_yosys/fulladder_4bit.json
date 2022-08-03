@@ -1,0 +1,743 @@
+{
+  "creator": "Yosys 0.9 (git sha1 1979e0b)",
+  "modules": {
+    "fulladd": {
+      "attributes": {
+        "src": "fulladder_4bit.v:1"
+      },
+      "ports": {
+        "s": {
+          "direction": "output",
+          "bits": [ 2 ]
+        },
+        "c_out": {
+          "direction": "output",
+          "bits": [ 3 ]
+        },
+        "ain": {
+          "direction": "input",
+          "bits": [ 4 ]
+        },
+        "bin": {
+          "direction": "input",
+          "bits": [ 5 ]
+        },
+        "c_in": {
+          "direction": "input",
+          "bits": [ 6 ]
+        }
+      },
+      "cells": {
+        "$and$fulladder_4bit.v:5$3": {
+          "hide_name": 1,
+          "type": "$and",
+          "parameters": {
+            "A_SIGNED": 0,
+            "A_WIDTH": 1,
+            "B_SIGNED": 0,
+            "B_WIDTH": 1,
+            "Y_WIDTH": 1
+          },
+          "attributes": {
+            "src": "fulladder_4bit.v:5"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 4 ],
+            "B": [ 5 ],
+            "Y": [ 7 ]
+          }
+        },
+        "$and$fulladder_4bit.v:5$4": {
+          "hide_name": 1,
+          "type": "$and",
+          "parameters": {
+            "A_SIGNED": 0,
+            "A_WIDTH": 1,
+            "B_SIGNED": 0,
+            "B_WIDTH": 1,
+            "Y_WIDTH": 1
+          },
+          "attributes": {
+            "src": "fulladder_4bit.v:5"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 5 ],
+            "B": [ 6 ],
+            "Y": [ 8 ]
+          }
+        },
+        "$and$fulladder_4bit.v:5$6": {
+          "hide_name": 1,
+          "type": "$and",
+          "parameters": {
+            "A_SIGNED": 0,
+            "A_WIDTH": 1,
+            "B_SIGNED": 0,
+            "B_WIDTH": 1,
+            "Y_WIDTH": 1
+          },
+          "attributes": {
+            "src": "fulladder_4bit.v:5"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 6 ],
+            "B": [ 4 ],
+            "Y": [ 9 ]
+          }
+        },
+        "$or$fulladder_4bit.v:5$5": {
+          "hide_name": 1,
+          "type": "$or",
+          "parameters": {
+            "A_SIGNED": 0,
+            "A_WIDTH": 1,
+            "B_SIGNED": 0,
+            "B_WIDTH": 1,
+            "Y_WIDTH": 1
+          },
+          "attributes": {
+            "src": "fulladder_4bit.v:5"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 7 ],
+            "B": [ 8 ],
+            "Y": [ 10 ]
+          }
+        },
+        "$or$fulladder_4bit.v:5$7": {
+          "hide_name": 1,
+          "type": "$or",
+          "parameters": {
+            "A_SIGNED": 0,
+            "A_WIDTH": 1,
+            "B_SIGNED": 0,
+            "B_WIDTH": 1,
+            "Y_WIDTH": 1
+          },
+          "attributes": {
+            "src": "fulladder_4bit.v:5"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 10 ],
+            "B": [ 9 ],
+            "Y": [ 3 ]
+          }
+        },
+        "$xor$fulladder_4bit.v:4$1": {
+          "hide_name": 1,
+          "type": "$xor",
+          "parameters": {
+            "A_SIGNED": 0,
+            "A_WIDTH": 1,
+            "B_SIGNED": 0,
+            "B_WIDTH": 1,
+            "Y_WIDTH": 1
+          },
+          "attributes": {
+            "src": "fulladder_4bit.v:4"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 4 ],
+            "B": [ 5 ],
+            "Y": [ 11 ]
+          }
+        },
+        "$xor$fulladder_4bit.v:4$2": {
+          "hide_name": 1,
+          "type": "$xor",
+          "parameters": {
+            "A_SIGNED": 0,
+            "A_WIDTH": 1,
+            "B_SIGNED": 0,
+            "B_WIDTH": 1,
+            "Y_WIDTH": 1
+          },
+          "attributes": {
+            "src": "fulladder_4bit.v:4"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 11 ],
+            "B": [ 6 ],
+            "Y": [ 2 ]
+          }
+        }
+      },
+      "netnames": {
+        "$and$fulladder_4bit.v:5$3_Y": {
+          "hide_name": 1,
+          "bits": [ 7 ],
+          "attributes": {
+            "src": "fulladder_4bit.v:5"
+          }
+        },
+        "$and$fulladder_4bit.v:5$4_Y": {
+          "hide_name": 1,
+          "bits": [ 8 ],
+          "attributes": {
+            "src": "fulladder_4bit.v:5"
+          }
+        },
+        "$and$fulladder_4bit.v:5$6_Y": {
+          "hide_name": 1,
+          "bits": [ 9 ],
+          "attributes": {
+            "src": "fulladder_4bit.v:5"
+          }
+        },
+        "$or$fulladder_4bit.v:5$5_Y": {
+          "hide_name": 1,
+          "bits": [ 10 ],
+          "attributes": {
+            "src": "fulladder_4bit.v:5"
+          }
+        },
+        "$xor$fulladder_4bit.v:4$1_Y": {
+          "hide_name": 1,
+          "bits": [ 11 ],
+          "attributes": {
+            "src": "fulladder_4bit.v:4"
+          }
+        },
+        "ain": {
+          "hide_name": 0,
+          "bits": [ 4 ],
+          "attributes": {
+            "src": "fulladder_4bit.v:3"
+          }
+        },
+        "bin": {
+          "hide_name": 0,
+          "bits": [ 5 ],
+          "attributes": {
+            "src": "fulladder_4bit.v:3"
+          }
+        },
+        "c_in": {
+          "hide_name": 0,
+          "bits": [ 6 ],
+          "attributes": {
+            "src": "fulladder_4bit.v:3"
+          }
+        },
+        "c_out": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+            "src": "fulladder_4bit.v:2"
+          }
+        },
+        "s": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "src": "fulladder_4bit.v:2"
+          }
+        }
+      }
+    },
+    "fulladder_4bit": {
+      "attributes": {
+        "top": 1,
+        "src": "fulladder_4bit.v:8"
+      },
+      "ports": {
+        "sum": {
+          "direction": "output",
+          "bits": [ 2, 3, 4, 5 ]
+        },
+        "cout": {
+          "direction": "output",
+          "bits": [ 6 ]
+        },
+        "a": {
+          "direction": "input",
+          "bits": [ 7, 8, 9, 10 ]
+        },
+        "b": {
+          "direction": "input",
+          "bits": [ 11, 12, 13, 14 ]
+        },
+        "cin": {
+          "direction": "input",
+          "bits": [ 15 ]
+        }
+      },
+      "cells": {
+        "$auto$splice.cc:135:get_spliced_signal$24": {
+          "hide_name": 1,
+          "type": "$concat",
+          "parameters": {
+            "A_WIDTH": 1,
+            "B_WIDTH": 1
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 16 ],
+            "B": [ 17 ],
+            "Y": [ 18, 19 ]
+          }
+        },
+        "$auto$splice.cc:135:get_spliced_signal$26": {
+          "hide_name": 1,
+          "type": "$concat",
+          "parameters": {
+            "A_WIDTH": 2,
+            "B_WIDTH": 1
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 18, 19 ],
+            "B": [ 20 ],
+            "Y": [ 21, 22, 23 ]
+          }
+        },
+        "$auto$splice.cc:135:get_spliced_signal$28": {
+          "hide_name": 1,
+          "type": "$concat",
+          "parameters": {
+            "A_WIDTH": 3,
+            "B_WIDTH": 1
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 21, 22, 23 ],
+            "B": [ 24 ],
+            "Y": [ 2, 3, 4, 5 ]
+          }
+        },
+        "$auto$splice.cc:78:get_sliced_signal$10": {
+          "hide_name": 1,
+          "type": "$slice",
+          "parameters": {
+            "A_WIDTH": 4,
+            "OFFSET": 0,
+            "Y_WIDTH": 1
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 11, 12, 13, 14 ],
+            "Y": [ 25 ]
+          }
+        },
+        "$auto$splice.cc:78:get_sliced_signal$12": {
+          "hide_name": 1,
+          "type": "$slice",
+          "parameters": {
+            "A_WIDTH": 4,
+            "OFFSET": 1,
+            "Y_WIDTH": 1
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 7, 8, 9, 10 ],
+            "Y": [ 26 ]
+          }
+        },
+        "$auto$splice.cc:78:get_sliced_signal$14": {
+          "hide_name": 1,
+          "type": "$slice",
+          "parameters": {
+            "A_WIDTH": 4,
+            "OFFSET": 1,
+            "Y_WIDTH": 1
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 11, 12, 13, 14 ],
+            "Y": [ 27 ]
+          }
+        },
+        "$auto$splice.cc:78:get_sliced_signal$16": {
+          "hide_name": 1,
+          "type": "$slice",
+          "parameters": {
+            "A_WIDTH": 4,
+            "OFFSET": 2,
+            "Y_WIDTH": 1
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 7, 8, 9, 10 ],
+            "Y": [ 28 ]
+          }
+        },
+        "$auto$splice.cc:78:get_sliced_signal$18": {
+          "hide_name": 1,
+          "type": "$slice",
+          "parameters": {
+            "A_WIDTH": 4,
+            "OFFSET": 2,
+            "Y_WIDTH": 1
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 11, 12, 13, 14 ],
+            "Y": [ 29 ]
+          }
+        },
+        "$auto$splice.cc:78:get_sliced_signal$20": {
+          "hide_name": 1,
+          "type": "$slice",
+          "parameters": {
+            "A_WIDTH": 4,
+            "OFFSET": 3,
+            "Y_WIDTH": 1
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 7, 8, 9, 10 ],
+            "Y": [ 30 ]
+          }
+        },
+        "$auto$splice.cc:78:get_sliced_signal$22": {
+          "hide_name": 1,
+          "type": "$slice",
+          "parameters": {
+            "A_WIDTH": 4,
+            "OFFSET": 3,
+            "Y_WIDTH": 1
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 11, 12, 13, 14 ],
+            "Y": [ 31 ]
+          }
+        },
+        "$auto$splice.cc:78:get_sliced_signal$8": {
+          "hide_name": 1,
+          "type": "$slice",
+          "parameters": {
+            "A_WIDTH": 4,
+            "OFFSET": 0,
+            "Y_WIDTH": 1
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 7, 8, 9, 10 ],
+            "Y": [ 32 ]
+          }
+        },
+        "f0": {
+          "hide_name": 0,
+          "type": "fulladd",
+          "parameters": {
+          },
+          "attributes": {
+            "module_not_derived": 1,
+            "src": "fulladder_4bit.v:16"
+          },
+          "port_directions": {
+            "ain": "input",
+            "bin": "input",
+            "c_in": "input",
+            "c_out": "output",
+            "s": "output"
+          },
+          "connections": {
+            "ain": [ 32 ],
+            "bin": [ 25 ],
+            "c_in": [ 15 ],
+            "c_out": [ 33 ],
+            "s": [ 16 ]
+          }
+        },
+        "f1": {
+          "hide_name": 0,
+          "type": "fulladd",
+          "parameters": {
+          },
+          "attributes": {
+            "module_not_derived": 1,
+            "src": "fulladder_4bit.v:17"
+          },
+          "port_directions": {
+            "ain": "input",
+            "bin": "input",
+            "c_in": "input",
+            "c_out": "output",
+            "s": "output"
+          },
+          "connections": {
+            "ain": [ 26 ],
+            "bin": [ 27 ],
+            "c_in": [ 33 ],
+            "c_out": [ 34 ],
+            "s": [ 17 ]
+          }
+        },
+        "f2": {
+          "hide_name": 0,
+          "type": "fulladd",
+          "parameters": {
+          },
+          "attributes": {
+            "module_not_derived": 1,
+            "src": "fulladder_4bit.v:18"
+          },
+          "port_directions": {
+            "ain": "input",
+            "bin": "input",
+            "c_in": "input",
+            "c_out": "output",
+            "s": "output"
+          },
+          "connections": {
+            "ain": [ 28 ],
+            "bin": [ 29 ],
+            "c_in": [ 34 ],
+            "c_out": [ 35 ],
+            "s": [ 20 ]
+          }
+        },
+        "f3": {
+          "hide_name": 0,
+          "type": "fulladd",
+          "parameters": {
+          },
+          "attributes": {
+            "module_not_derived": 1,
+            "src": "fulladder_4bit.v:19"
+          },
+          "port_directions": {
+            "ain": "input",
+            "bin": "input",
+            "c_in": "input",
+            "c_out": "output",
+            "s": "output"
+          },
+          "connections": {
+            "ain": [ 30 ],
+            "bin": [ 31 ],
+            "c_in": [ 35 ],
+            "c_out": [ 6 ],
+            "s": [ 24 ]
+          }
+        }
+      },
+      "netnames": {
+        "$auto$splice.cc:140:get_spliced_signal$25": {
+          "hide_name": 1,
+          "bits": [ 18, 19 ],
+          "attributes": {
+          }
+        },
+        "$auto$splice.cc:140:get_spliced_signal$27": {
+          "hide_name": 1,
+          "bits": [ 21, 22, 23 ],
+          "attributes": {
+          }
+        },
+        "$auto$splice.cc:140:get_spliced_signal$29": {
+          "hide_name": 1,
+          "bits": [ 2, 3, 4, 5 ],
+          "attributes": {
+          }
+        },
+        "$auto$splice.cc:236:run$30": {
+          "hide_name": 1,
+          "bits": [ 16, 17, 20, 24 ],
+          "attributes": {
+            "src": "fulladder_4bit.v:10"
+          }
+        },
+        "$auto$splice.cc:83:get_sliced_signal$11": {
+          "hide_name": 1,
+          "bits": [ 25 ],
+          "attributes": {
+          }
+        },
+        "$auto$splice.cc:83:get_sliced_signal$13": {
+          "hide_name": 1,
+          "bits": [ 26 ],
+          "attributes": {
+          }
+        },
+        "$auto$splice.cc:83:get_sliced_signal$15": {
+          "hide_name": 1,
+          "bits": [ 27 ],
+          "attributes": {
+          }
+        },
+        "$auto$splice.cc:83:get_sliced_signal$17": {
+          "hide_name": 1,
+          "bits": [ 28 ],
+          "attributes": {
+          }
+        },
+        "$auto$splice.cc:83:get_sliced_signal$19": {
+          "hide_name": 1,
+          "bits": [ 29 ],
+          "attributes": {
+          }
+        },
+        "$auto$splice.cc:83:get_sliced_signal$21": {
+          "hide_name": 1,
+          "bits": [ 30 ],
+          "attributes": {
+          }
+        },
+        "$auto$splice.cc:83:get_sliced_signal$23": {
+          "hide_name": 1,
+          "bits": [ 31 ],
+          "attributes": {
+          }
+        },
+        "$auto$splice.cc:83:get_sliced_signal$9": {
+          "hide_name": 1,
+          "bits": [ 32 ],
+          "attributes": {
+          }
+        },
+        "a": {
+          "hide_name": 0,
+          "bits": [ 7, 8, 9, 10 ],
+          "attributes": {
+            "src": "fulladder_4bit.v:12"
+          }
+        },
+        "b": {
+          "hide_name": 0,
+          "bits": [ 11, 12, 13, 14 ],
+          "attributes": {
+            "src": "fulladder_4bit.v:12"
+          }
+        },
+        "c1": {
+          "hide_name": 0,
+          "bits": [ 33 ],
+          "attributes": {
+            "src": "fulladder_4bit.v:14"
+          }
+        },
+        "c2": {
+          "hide_name": 0,
+          "bits": [ 34 ],
+          "attributes": {
+            "src": "fulladder_4bit.v:14"
+          }
+        },
+        "c3": {
+          "hide_name": 0,
+          "bits": [ 35 ],
+          "attributes": {
+            "src": "fulladder_4bit.v:14"
+          }
+        },
+        "cin": {
+          "hide_name": 0,
+          "bits": [ 15 ],
+          "attributes": {
+            "src": "fulladder_4bit.v:13"
+          }
+        },
+        "cout": {
+          "hide_name": 0,
+          "bits": [ 6 ],
+          "attributes": {
+            "src": "fulladder_4bit.v:11"
+          }
+        },
+        "sum": {
+          "hide_name": 0,
+          "bits": [ 2, 3, 4, 5 ],
+          "attributes": {
+            "src": "fulladder_4bit.v:10"
+          }
+        }
+      }
+    }
+  }
+}

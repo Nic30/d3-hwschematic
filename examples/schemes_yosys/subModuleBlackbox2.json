@@ -1,0 +1,41 @@
+{
+  "creator": "Yosys 0.9 (git sha1 1979e0b)",
+  "modules": {
+    "subModuleBlackbox2": {
+      "attributes": {
+        "top": 1,
+        "src": "subModuleBlackbox2.v:1"
+      },
+      "ports": {
+        "out": {
+          "direction": "output",
+          "bits": [ 2 ]
+        }
+      },
+      "cells": {
+        "b": {
+          "hide_name": 0,
+          "type": "subSubModuleBlackbox",
+          "parameters": {
+          },
+          "attributes": {
+            "module_not_derived": 1,
+            "src": "subModuleBlackbox2.v:2"
+          },
+          "connections": {
+            "$1": [ 2 ]
+          }
+        }
+      },
+      "netnames": {
+        "out": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "src": "subModuleBlackbox2.v:1"
+          }
+        }
+      }
+    }
+  }
+}

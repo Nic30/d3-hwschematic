@@ -1,25 +1,27 @@
 import * as d3 from "d3";
-import { addMarkers } from "./markers";
-import { NodeRendererContainer } from "./nodeRendererContainer";
-import { OperatorNodeRenderer } from "./node_renderers/operatorNode";
-import { MuxNodeRenderer } from "./node_renderers/muxNode";
-import { SliceNodeRenderer } from "./node_renderers/sliceNode";
-import { GenericNodeRenderer } from "./node_renderers/generic";
-import { renderLinks } from "./linkRenderer";
-import { Tooltip } from "./tooltip";
+import {addMarkers} from "./markers";
+import {NodeRendererContainer} from "./nodeRendererContainer";
+import {OperatorNodeRenderer} from "./node_renderers/operatorNode";
+import {MuxNodeRenderer} from "./node_renderers/muxNode";
+import {SliceNodeRenderer} from "./node_renderers/sliceNode";
+import {GenericNodeRenderer} from "./node_renderers/generic";
+import {renderLinks} from "./linkRenderer";
+import {Tooltip} from "./tooltip";
+import {yosys} from "./yosys.js";
 import {
     hyperEdgesToEdges,
     getNet, initNodeParents, expandPorts
 } from "./dataPrepare";
-import { default as d3elk } from "./elk/elk-d3";
+import {default as d3elk} from "./elk/elk-d3";
+import {selectGraphRootByPath} from "./hierarchySelection.js";
 
 function getNameOfEdge(e) {
-    var name = "<tspan>unnamed</tspan>";
+    let name = "<tspan>unnamed</tspan>";
     if (e.hwMeta) {
         if (typeof e.hwMeta.name === "undefined") {
-            var p = e.hwMeta.parent;
-            var pIsHyperedge = typeof p.sources !== "undefined"
-            if (pIsHyperedge && p.hwMeta) {
+            let p = e.hwMeta.parent;
+            let pIsHyperEdge = typeof p.sources !== "undefined"
+            if (pIsHyperEdge && p.hwMeta) {
                 name = p.hwMeta.name;
             }
         } else {
@@ -30,8 +32,8 @@ function getNameOfEdge(e) {
 }
 
 function toggleHideChildren(node) {
-    var children;
-    var nextFocusTarget;
+    let children;
+    let nextFocusTarget;
     if (node.children) {
         // children are visible, will collapse
         children = node.children;
@@ -42,10 +44,10 @@ function toggleHideChildren(node) {
         nextFocusTarget = node;
     }
 
-    var tmpChildren = node.children;
+    let tmpChildren = node.children;
     node.children = node._children;
     node._children = tmpChildren;
-    var tmpEdges = node.edges;
+    let tmpEdges = node.edges;
     node.edges = node._edges;
     node._edges = tmpEdges;
     node.hwMeta.renderer.prepare(node);
@@ -77,10 +79,11 @@ export default class HwSchematic {
         svg.classed("d3-hwschematic", true);
         this.defs = svg.append("defs");
         this.root = svg.append("g");
+        this.errorText = null;
         this._nodes = null;
         this._edges = null;
 
-        // graph layouter to resovbe posiions of elements
+        // graph layouter to resolve positions of elements
         this.layouter = new d3elk();
         this.layouter
             .options({
@@ -94,7 +97,7 @@ export default class HwSchematic {
         // renderer instances responsible for rendering of component nodes
         this.nodeRenderers = new NodeRendererContainer();
         addMarkers(this.defs, this.PORT_PIN_SIZE);
-        var rs = this.nodeRenderers;
+        let rs = this.nodeRenderers;
         rs.registerRenderer(new OperatorNodeRenderer(this));
         rs.registerRenderer(new MuxNodeRenderer(this));
         rs.registerRenderer(new SliceNodeRenderer(this));
@@ -114,8 +117,8 @@ export default class HwSchematic {
     }
 
     updateGlobalSize() {
-        var width = parseInt(this.svg.style("width") || this.svg.attr("width"), 10);
-        var height = parseInt(this.svg.style("height") || this.svg.attr("height"), 10);
+        let width = parseInt(this.svg.style("width") || this.svg.attr("width"), 10);
+        let height = parseInt(this.svg.style("height") || this.svg.attr("height"), 10);
 
         this.layouter
             .size([width, height]);
@@ -128,7 +131,7 @@ export default class HwSchematic {
      */
     bindData(graph) {
         this.removeGraph();
-        var postCompaction = "layered.compaction.postCompaction.strategy";
+        let postCompaction = "layered.compaction.postCompaction.strategy";
         if (!graph.properties[postCompaction]) {
             graph.properties[postCompaction] = "EDGE_LENGTH";
         }
@@ -137,17 +140,23 @@ export default class HwSchematic {
         expandPorts(graph);
 
         if (this._PERF) {
-            var t0 = new Date().getTime();
-        }
-        // nodes are ordered, childeren at the end
-        this.nodeRenderers.prepare(graph);
-        if (this._PERF) {
-            var t1 = new Date().getTime();
+            let t0 = new Date().getTime();
+            this.nodeRenderers.prepare(graph);
+            let t1 = new Date().getTime();
             console.log("> nodeRenderers.prepare() : " + (t1 - t0) + " ms");
+        } else {
+            // nodes are ordered, children at the end
+            this.nodeRenderers.prepare(graph);
         }
         this.layouter
             .kgraph(graph);
         return this._draw();
+    }
+    /*
+    * @returns subnode selected by path wrapped in a new root
+    * */
+    static selectGraphRootByPath(graph, path) {
+        return selectGraphRootByPath(graph, path);
     }
     /*
      * Resolve layout and draw a component graph from layout data
@@ -155,117 +164,118 @@ export default class HwSchematic {
     _draw() {
         this.updateGlobalSize();
 
-        var layouter = this.layouter;
+        let layouter = this.layouter;
         this._nodes = layouter.getNodes().slice(1); // skip root node
-        this._edges = layouter.getEdges();;
-
+        this._edges = layouter.getEdges();
+        let t0;
         if (this._PERF) {
-            var t0 = new Date().getTime();
+            t0 = new Date().getTime();
         }
-        var _this = this;
+        let _this = this;
         return layouter.start()
             .then(
-                function(g) {
+                function (g) {
                     if (_this._PERF) {
-                        var t1 = new Date().getTime();
+                        let t1 = new Date().getTime();
                         console.log("> layouter.start() : " + (t1 - t0) + " ms");
                         t0 = t1;
                     }
                     _this._applyLayout(g);
                     if (_this._PERF) {
-                        var t1 = new Date().getTime();
+                        let t1 = new Date().getTime();
                         console.log("> HwSchematic._applyLayout() : " + (t1 - t0) + " ms");
                     }
                 },
-                function(e) {
-                    // Error while running d3-elkjs layourter
+                function (e) {
+                    // Error while running d3-elkjs layouter
                     throw e;
                 }
             );
     }
+
     /**
      * Draw a component graph from layout data
      */
     _applyLayout() {
-        var root = this.root;
-        
-        var node = root.selectAll(".node")
-        .data(this._nodes)
-        .enter()
-        .append("g");
+        let root = this.root;
+
+        let node = root.selectAll(".node")
+            .data(this._nodes)
+            .enter()
+            .append("g");
         this.nodeRenderers.render(root, node);
-        
-        var _this = this;
-        node.on("click", function(ev, d) {
-            var [children, nextFocusTarget] = toggleHideChildren(d);
-            if (!children || children.length == 0) {
+
+        let _this = this;
+        node.on("click", function (ev, d) {
+            let [children, nextFocusTarget] = toggleHideChildren(d);
+            if (!children || children.length === 0) {
                 return; // does not have anything to expand
             }
             _this.layouter.markLayoutDirty();
             _this.removeGraph();
             _this._draw().then(
-                function() {
+                function () {
                     _this.layouter.zoomToFit(nextFocusTarget);
                 },
-                function(e) {
+                function (e) {
                     // Error while applying of layout
                     throw e;
                 }
-                );
-            });
-            
+            );
+        });
+
         this._applyLayoutLinks();
     }
 
-    _applyLayoutLinks(root, edges) {
-        var _this = this;
-        var edges = this._edges;
+    _applyLayoutLinks() {
+        let _this = this;
+        let edges = this._edges;
 
-        var [link, linkWrap, junctionPoint] = renderLinks(this.root, edges);
+        let [link, linkWrap, _] = renderLinks(this.root, edges);
         // build netToLink
-        var netToLink = {};
-        edges.forEach(function(e) {
+        let netToLink = {};
+        edges.forEach(function (e) {
             netToLink[getNet(e).id] = {
                 "core": [],
                 "wrap": []
             };
         });
-        linkWrap._groups.forEach(function(lg) {
-            lg.forEach(function(l) {
-                var e = d3.select(l).data()[0];
+        linkWrap._groups.forEach(function (lg) {
+            lg.forEach(function (l) {
+                let e = d3.select(l).data()[0];
                 netToLink[getNet(e).id]["wrap"].push(l);
             });
         });
-        link._groups.forEach(function(lg) {
-            lg.forEach(function(l) {
-                var e = d3.select(l).data()[0];
+        link._groups.forEach(function (lg) {
+            lg.forEach(function (l) {
+                let e = d3.select(l).data()[0];
                 netToLink[getNet(e).id]["core"].push(l);
             });
         });
 
-		// set highlingt and tooltip on mouser over over the net
-        linkWrap.on("mouseover", function(ev, d) {
-            var netWrap = netToLink[getNet(d).id]["wrap"];
+        // set highlingt and tooltip on mouser over over the net
+        linkWrap.on("mouseover", function (ev, d) {
+            let netWrap = netToLink[getNet(d).id]["wrap"];
             d3.selectAll(netWrap)
                 .classed("link-wrap-activated", true);
 
             _this.tooltip.show(ev, getNameOfEdge(d));
         });
-        linkWrap.on("mouseout", function(ev, d) {
-            var netWrap = netToLink[getNet(d).id]["wrap"];
+        linkWrap.on("mouseout", function (ev, d) {
+            let netWrap = netToLink[getNet(d).id]["wrap"];
             d3.selectAll(netWrap)
                 .classed("link-wrap-activated", false);
 
             _this.tooltip.hide();
         });
 
-		// set link highlight on net click
+        // set link highlight on net click
         function onLinkClick(ev, d) {
-            var net = getNet(d);
-            var doSelect = net.selected = !net.selected;
+            let net = getNet(d);
+            let doSelect = net.selected = !net.selected;
             // propagate click on all nets with same source
 
-            var netCore = netToLink[net.id]["core"];
+            let netCore = netToLink[net.id]["core"];
             d3.selectAll(netCore)
                 .classed("link-selected", doSelect);
             ev.stopPropagation();
@@ -276,9 +286,33 @@ export default class HwSchematic {
         linkWrap.on("click", onLinkClick);
     }
 
+    static fromYosys(yosysJson) {
+        return yosys(yosysJson);
+    }
+
     terminate() {
         if (this.layouter) {
             this.layouter.terminate();
         }
+    }
+
+    setErrorText(msg) {
+        this.root.selectAll("*").remove();
+        let errText = this.errorText;
+        if (!errText) {
+            errText = this.errorText = this.root.append("text")
+                .attr("x", "50%")
+                .attr("y", "50%")
+                .attr("dominant-baseline", "middle")
+                .attr("text-anchor", "middle")
+                .style("font-size", "34px");
+        }
+        errText.text(msg);
+        let t = d3.zoomTransform(this.root.node());
+        t.k = 1;
+        t.x = 0;
+        t.y = 0;
+        this.root.attr("transform", t);
+
     }
 }

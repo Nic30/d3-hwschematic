@@ -8,7 +8,6 @@ export class OperatorNodeRenderer extends GenericNodeRenderer {
 	constructor(schematic) {
 		super(schematic);
 		this.SHAPES = SHAPES;
-		this.DEFULT_NODE_SIZE = [25, 25];
 		this._defsAdded = false;
 	}
 
@@ -16,19 +15,16 @@ export class OperatorNodeRenderer extends GenericNodeRenderer {
 		if (!this._defsAdded) {
 			var defs = this.schematic.defs;
 			var SHAPES = this.SHAPES;
-			for (var key in SHAPES) {
-				if (SHAPES.hasOwnProperty(key)) {
-					this.addShapeToDefs(defs, key, SHAPES[key]);
-				}
+			for (const [name, [constructorFn, _]] of Object.entries(SHAPES)) {
+				this.addShapeToDefs(defs, name, constructorFn);
 			}
 			this._defsAdded = true;
 		}
-		node.width = this.DEFULT_NODE_SIZE[0];
-		node.height = this.DEFULT_NODE_SIZE[1];
+		[node.width, node.height] =  this.SHAPES[node.hwMeta.name][1];
 	}
 
 	selector(node) {
-		return node.hwMeta.cls == "Operator" && typeof this.SHAPES[node.hwMeta.name] !== "undefined";
+		return node.hwMeta.cls === "Operator" && typeof this.SHAPES[node.hwMeta.name] !== "undefined";
 	}
 
 	addShapeToDefs(defs, id, shape) {

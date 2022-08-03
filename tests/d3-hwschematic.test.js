@@ -9,6 +9,7 @@ import * as glob from 'glob';
 import * as path from 'path';
 
 const EXAMPLES = __dirname + "/../examples/schemes"
+const YOSYS_EXAMPLES = __dirname + "/../examples/schemes_yosys"
 
 function initSvg() {
 	var svg = d3.select("body")
@@ -21,6 +22,8 @@ function initSvg() {
 }
 
 jest.setTimeout(10000);
+
+
 describe('Testing scheme rendering', () => {
 	it("SVG has root g and markers", function() {
 		var svg = initSvg();
@@ -79,13 +82,13 @@ test('Testing component expansion', () => {
 			expect(d._edges).toBeDefined();
 			expect(d.edges).toBeUndefined();
 
-			simulateEvent(procNode.node(), 'click', {});;
+			simulateEvent(procNode.node(), 'click', {});
 			expect(d.children).toBeDefined();
 			expect(d._children).toBeUndefined();
 			expect(d.edges).toBeDefined();
 			expect(d._edges).toBeUndefined();
 
-			simulateEvent(procNode.node(), 'click', {});;
+			simulateEvent(procNode.node(), 'click', {});
 			expect(d._children).toBeDefined();
 			expect(d.children).toBeUndefined();
 			expect(d._edges).toBeDefined();
@@ -99,3 +102,25 @@ test('Testing component expansion', () => {
 	);
 
 });
+
+
+describe("Testing yosys", () => {
+	var testFiles = ["comparator", "mux2x1", "mux4x2", "constAdder", "subModuleBlackbox",
+		"subModuleBlackbox2", "partialConstDriver0", "partialConstDriver1", "partialConstDriver2",
+		"partialConstDriver3", "partialConstDriver4", "partialConstDriver5",
+		"partialConstDriver6", "wireModule", "split0", "split1", "split2",
+		"split3", "split4", "split5", "constPortDriver", "dff_sync_reset",
+		"fifo", "latchinf", "concat0", "concat1", "concat2", "fulladder_4bit"];
+	for (const testFile of testFiles) {
+		it("Testing file: " + testFile, () => {
+			var f = YOSYS_EXAMPLES + "/" + testFile + ".json";
+			var graphData = JSON.parse(fs.readFileSync(f));
+			var output = HwSchematic.fromYosys(graphData);
+			var refF = __dirname + "/data/" + testFile + ".json";
+			//fs.writeFileSync(refF, JSON.stringify(output, null, 2)); //create refFiles
+			var refGraphData = JSON.parse(fs.readFileSync(refF));
+			expect(output).toEqual(refGraphData);
+		})
+	}
+});
+

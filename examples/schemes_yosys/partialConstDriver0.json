@@ -1,0 +1,72 @@
+{
+  "creator": "Yosys 0.9 (git sha1 1979e0b)",
+  "modules": {
+    "partialConstDriver0": {
+      "attributes": {
+        "top": 1,
+        "src": "partialConstDriver0.v:1"
+      },
+      "ports": {
+        "in": {
+          "direction": "input",
+          "bits": [ 2 ]
+        },
+        "out": {
+          "direction": "output",
+          "bits": [ 3, 4, 5, 6, 7, 8, 9, 10 ]
+        }
+      },
+      "cells": {
+        "$auto$splice.cc:135:get_spliced_signal$1": {
+          "hide_name": 1,
+          "type": "$concat",
+          "parameters": {
+            "A_WIDTH": 7,
+            "B_WIDTH": 1
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "1", "0", "1", "1", "0", "1", "0" ],
+            "B": [ 2 ],
+            "Y": [ 3, 4, 5, 6, 7, 8, 9, 10 ]
+          }
+        }
+      },
+      "netnames": {
+        "$auto$splice.cc:140:get_spliced_signal$2": {
+          "hide_name": 1,
+          "bits": [ 3, 4, 5, 6, 7, 8, 9, 10 ],
+          "attributes": {
+          }
+        },
+        "$auto$splice.cc:236:run$3": {
+          "hide_name": 1,
+          "bits": [ "1", "0", "1", "1", "0", "1", "0", 2 ],
+          "attributes": {
+            "src": "partialConstDriver0.v:1"
+          }
+        },
+        "in": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "src": "partialConstDriver0.v:1"
+          }
+        },
+        "out": {
+          "hide_name": 0,
+          "bits": [ 3, 4, 5, 6, 7, 8, 9, 10 ],
+          "attributes": {
+            "src": "partialConstDriver0.v:1"
+          }
+        }
+      }
+    }
+  }
+}

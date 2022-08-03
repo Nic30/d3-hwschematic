@@ -193,7 +193,17 @@ export class GenericNodeRenderer {
 				if (d.hwMeta && d.hwMeta.isExternalPort) {
 					cssClass = "node-external-port";
 				} else {
-					cssClass = "node";
+                    let depth = 0;
+                    let parent = d.hwMeta.parent;
+                    while (parent) {
+                        ++depth;
+                        parent = parent.hwMeta.parent;
+                    }
+                    if (depth % 2 === 0) {
+                        cssClass = "node node-0";
+                    } else {
+                        cssClass = "node node-1";
+                    }
 				}
 				if (d.hwMeta.cssClass) {
 					cssClass += " " + d.hwMeta.cssClass;

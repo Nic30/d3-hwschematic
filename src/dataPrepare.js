@@ -1,12 +1,14 @@
 
 function hyperEdgeListToEdges(eList, newEdges, idOffset) {
-	for (var ei = 0; ei < eList.length; ei++) {
-		var e = eList[ei];
-		var isHyperEdge = typeof e.sources !== "undefined";
+	for (let ei = 0; ei < eList.length; ei++) {
+		let e = eList[ei];
+		let isHyperEdge = typeof e.sources !== "undefined";
 		if (isHyperEdge) {
-		    if (e.sources.length == 1 && e.targets.length == 1) {
-    		    var src = e.sources[0];
-                var dst = e.targets[0];
+			let src;
+			let dst;
+		    if (e.sources.length === 1 && e.targets.length === 1) {
+    		    src = e.sources[0];
+                dst = e.targets[0];
                 e.source = src[0];
                 e.sourcePort = src[1];
                 e.target = dst[0];
@@ -15,10 +17,10 @@ function hyperEdgeListToEdges(eList, newEdges, idOffset) {
                 delete e.targets;
                 newEdges.push(e);
 		    } else {
-    			for (var s = 0; s < e.sources.length; s++) {
-    				var src = e.sources[s];
-    				for (var t = 0; t < e.targets.length; t++) {
-    					var dst = e.targets[t];
+    			for (let s = 0; s < e.sources.length; s++) {
+    				src = e.sources[s];
+    				for (let t = 0; t < e.targets.length; t++) {
+    					dst = e.targets[t];
     					idOffset += 1;
     					newEdges.push({
     						"hwMeta": { "parent": e },
@@ -39,30 +41,31 @@ function hyperEdgeListToEdges(eList, newEdges, idOffset) {
 }
 
 /**
- * Convert hyperedges to edges in whole graph
+ * Convert hyperEdges to edges in whole graph
  *
  * @param n root node
  * @param idOffset int, max id in graph, used for generating
- *                 of new edges from hyperedges
+ *                 of new edges from hyperEdges
  **/
 export function hyperEdgesToEdges(n, idOffset) {
+	let newEdges;
 	if (n.edges) {
-		var newEdges = [];
+		newEdges = [];
 		idOffset = hyperEdgeListToEdges(n.edges, newEdges, idOffset);
 		n.edges = newEdges;
 	}
 	if (n._edges) {
-		var newEdges = [];
+		newEdges = [];
 		idOffset = hyperEdgeListToEdges(n._edges, newEdges, idOffset);
 		n._edges = newEdges;
 	}
 	if (n.children) {
-		for (var i = 0; i < n.children.length; i++) {
+		for (let i = 0; i < n.children.length; i++) {
 			idOffset = hyperEdgesToEdges(n.children[i], idOffset);
 		}
 	}
 	if (n._children) {
-		for (var i = 0; i < n._children.length; i++) {
+		for (let i = 0; i < n._children.length; i++) {
 			idOffset = hyperEdgesToEdges(n._children[i], idOffset);
 		}
 	}
@@ -91,24 +94,24 @@ export function initNodeParents(node, parent) {
 
 }
 export function expandPorts(node) {
-	var portlist = [];
+	let portList = [];
 	if (node.ports)
-    	node.ports.forEach(function (port) {expandPorts4port(port, portlist)});
+    	node.ports.forEach(function (port) {expandPorts4port(port, portList)});
 	//node.hwMeta.parent = parent;
-	node.ports = portlist;
+	node.ports = portList;
 	(node.children || node._children || []).forEach(function(n) {
 		expandPorts(n, node);
 	});
 }
 
-export function expandPorts4port(port, portlist){
+export function expandPorts4port(port, portList){
     if (port.hwMeta.connectedAsParent) {
         return;
     }
-	portlist.push(port);
+	portList.push(port);
 	(port.children || []).forEach(function(p) {
 		p.parent = port;
-		expandPorts4port(p, portlist);
+		expandPorts4port(p, portList);
 	});
 
 }

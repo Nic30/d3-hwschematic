@@ -1,0 +1,178 @@
+{
+  "creator": "Yosys 0.9 (git sha1 1979e0b)",
+  "modules": {
+    "concat2": {
+      "attributes": {
+        "top": 1,
+        "src": "concat2.v:1"
+      },
+      "ports": {
+        "in0": {
+          "direction": "input",
+          "bits": [ 2 ]
+        },
+        "in1": {
+          "direction": "input",
+          "bits": [ 3 ]
+        },
+        "in2": {
+          "direction": "input",
+          "bits": [ 4 ]
+        },
+        "out0": {
+          "direction": "output",
+          "bits": [ 5, 6 ]
+        },
+        "out1": {
+          "direction": "output",
+          "bits": [ 7, 8, 9 ]
+        }
+      },
+      "cells": {
+        "$auto$splice.cc:135:get_spliced_signal$1": {
+          "hide_name": 1,
+          "type": "$concat",
+          "parameters": {
+            "A_WIDTH": 1,
+            "B_WIDTH": 1
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 3 ],
+            "B": [ 4 ],
+            "Y": [ 5, 6 ]
+          }
+        },
+        "$auto$splice.cc:135:get_spliced_signal$3": {
+          "hide_name": 1,
+          "type": "$concat",
+          "parameters": {
+            "A_WIDTH": 1,
+            "B_WIDTH": 1
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 2 ],
+            "B": [ 3 ],
+            "Y": [ 10, 11 ]
+          }
+        },
+        "$auto$splice.cc:135:get_spliced_signal$5": {
+          "hide_name": 1,
+          "type": "$concat",
+          "parameters": {
+            "A_WIDTH": 2,
+            "B_WIDTH": 1
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 10, 11 ],
+            "B": [ 4 ],
+            "Y": [ 7, 8, 9 ]
+          }
+        }
+      },
+      "netnames": {
+        "$auto$splice.cc:140:get_spliced_signal$2": {
+          "hide_name": 1,
+          "bits": [ 5, 6 ],
+          "attributes": {
+          }
+        },
+        "$auto$splice.cc:140:get_spliced_signal$4": {
+          "hide_name": 1,
+          "bits": [ 10, 11 ],
+          "attributes": {
+          }
+        },
+        "$auto$splice.cc:140:get_spliced_signal$6": {
+          "hide_name": 1,
+          "bits": [ 7, 8, 9 ],
+          "attributes": {
+          }
+        },
+        "$auto$splice.cc:236:run$7": {
+          "hide_name": 1,
+          "bits": [ 3, 4 ],
+          "attributes": {
+            "src": "concat2.v:1"
+          }
+        },
+        "$auto$splice.cc:236:run$8": {
+          "hide_name": 1,
+          "bits": [ 2, 3, 4 ],
+          "attributes": {
+            "src": "concat2.v:1"
+          }
+        },
+        "$auto$splice.cc:236:run$9": {
+          "hide_name": 1,
+          "bits": [ 3, 4 ],
+          "attributes": {
+            "src": "concat2.v:2"
+          }
+        },
+        "in0": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "src": "concat2.v:1"
+          }
+        },
+        "in1": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+            "src": "concat2.v:1"
+          }
+        },
+        "in2": {
+          "hide_name": 0,
+          "bits": [ 4 ],
+          "attributes": {
+            "src": "concat2.v:1"
+          }
+        },
+        "out0": {
+          "hide_name": 0,
+          "bits": [ 5, 6 ],
+          "attributes": {
+            "src": "concat2.v:1"
+          }
+        },
+        "out1": {
+          "hide_name": 0,
+          "bits": [ 7, 8, 9 ],
+          "attributes": {
+            "src": "concat2.v:1"
+          }
+        },
+        "x": {
+          "hide_name": 0,
+          "bits": [ 5, 6 ],
+          "attributes": {
+            "src": "concat2.v:2"
+          }
+        }
+      }
+    }
+  }
+}

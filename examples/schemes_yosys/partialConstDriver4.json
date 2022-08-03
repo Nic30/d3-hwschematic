@@ -1,0 +1,98 @@
+{
+  "creator": "Yosys 0.9 (git sha1 1979e0b)",
+  "modules": {
+    "partialConstDriver4": {
+      "attributes": {
+        "top": 1,
+        "src": "partialConstDriver4.v:1"
+      },
+      "ports": {
+        "in": {
+          "direction": "input",
+          "bits": [ 2, 3, 4 ]
+        },
+        "out": {
+          "direction": "output",
+          "bits": [ 5, 6, 7, 8, 9, 10, 11, 12 ]
+        }
+      },
+      "cells": {
+        "$auto$splice.cc:135:get_spliced_signal$1": {
+          "hide_name": 1,
+          "type": "$concat",
+          "parameters": {
+            "A_WIDTH": 3,
+            "B_WIDTH": 3
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "1", "0", "1" ],
+            "B": [ 2, 3, 4 ],
+            "Y": [ 13, 14, 15, 16, 17, 18 ]
+          }
+        },
+        "$auto$splice.cc:135:get_spliced_signal$3": {
+          "hide_name": 1,
+          "type": "$concat",
+          "parameters": {
+            "A_WIDTH": 6,
+            "B_WIDTH": 2
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 13, 14, 15, 16, 17, 18 ],
+            "B": [ "1", "0" ],
+            "Y": [ 5, 6, 7, 8, 9, 10, 11, 12 ]
+          }
+        }
+      },
+      "netnames": {
+        "$auto$splice.cc:140:get_spliced_signal$2": {
+          "hide_name": 1,
+          "bits": [ 13, 14, 15, 16, 17, 18 ],
+          "attributes": {
+          }
+        },
+        "$auto$splice.cc:140:get_spliced_signal$4": {
+          "hide_name": 1,
+          "bits": [ 5, 6, 7, 8, 9, 10, 11, 12 ],
+          "attributes": {
+          }
+        },
+        "$auto$splice.cc:236:run$5": {
+          "hide_name": 1,
+          "bits": [ "1", "0", "1", 2, 3, 4, "1", "0" ],
+          "attributes": {
+            "src": "partialConstDriver4.v:1"
+          }
+        },
+        "in": {
+          "hide_name": 0,
+          "bits": [ 2, 3, 4 ],
+          "attributes": {
+            "src": "partialConstDriver4.v:1"
+          }
+        },
+        "out": {
+          "hide_name": 0,
+          "bits": [ 5, 6, 7, 8, 9, 10, 11, 12 ],
+          "attributes": {
+            "src": "partialConstDriver4.v:1"
+          }
+        }
+      }
+    }
+  }
+}

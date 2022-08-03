@@ -22,10 +22,10 @@ export function addMarkers(defs, PORT_PIN_SIZE) {
     	var rightArrow = "M 0 4  2 4  2 0  7 5  2 10  2 6  0 6 Z";
         var trans = "";
     
-        if (arrowTranslate[0] != 0 || arrowTranslate[1] != 0)
+        if (arrowTranslate[0] !== 0 || arrowTranslate[1] !== 0)
         	trans += "translate(" + arrowTranslate[0] + ", " + arrowTranslate[1] + ")";
     
-        if (arrowRotate != 0)
+        if (arrowRotate !== 0)
         	trans += "rotate(" + arrowRotate + ")";
     
         var cont = defs.append("g");
@@ -41,21 +41,21 @@ export function addMarkers(defs, PORT_PIN_SIZE) {
             .attr("transform", trans);
     }
     
-    var horizYoffet = (PORT_PIN_SIZE[1] - h) * 0.5;
-    var horizYoffet2 = (PORT_PIN_SIZE[1] + h) * 0.5;
+    var horizYOffset = (PORT_PIN_SIZE[1] - h) * 0.5;
+    var horizYOffset2 = (PORT_PIN_SIZE[1] + h) * 0.5;
     
-    var vertXOffet = -(PORT_PIN_SIZE[1] - w) * 0.5;
-    addMarker("westInPortMarker", [0, horizYoffet]);
-    addMarker("westOutPortMarker",[w, horizYoffet2], 180);
+    var vertXOffset = -(PORT_PIN_SIZE[1] - w) * 0.5;
+    addMarker("westInPortMarker", [0, horizYOffset]);
+    addMarker("westOutPortMarker",[w, horizYOffset2], 180);
     
-    addMarker("eastInPortMarker", [w, horizYoffet2], 180);
-    addMarker("eastOutPortMarker",[0, horizYoffet]);
+    addMarker("eastInPortMarker", [w, horizYOffset2], 180);
+    addMarker("eastOutPortMarker",[0, horizYOffset]);
     
-    addMarker("northInPortMarker", [vertXOffet, -w], 90);
-    addMarker("northOutPortMarker",[vertXOffet, 0], 270);
+    addMarker("northInPortMarker", [vertXOffset, -w], 90);
+    addMarker("northOutPortMarker",[vertXOffset, 0], 270);
     
-    addMarker("southInPortMarker", [vertXOffet, w], 270);
-    addMarker("southOutPortMarker",[vertXOffet, 0], 90);
+    addMarker("southInPortMarker", [vertXOffset, w], 270);
+    addMarker("southOutPortMarker",[vertXOffset, 0], 90);
 }
 
 export function getIOMarker(d) {
