@@ -13,6 +13,7 @@ import {
     getNet, initNodeParents, expandPorts
 } from "./dataPrepare";
 import {default as d3elk} from "./elk/elk-d3";
+import {selectGraphRootByPath} from "./hierarchySelection.js";
 
 function getNameOfEdge(e) {
     let name = "<tspan>unnamed</tspan>";
@@ -139,7 +140,6 @@ export default class HwSchematic {
         expandPorts(graph);
 
         if (this._PERF) {
-
             let t0 = new Date().getTime();
             this.nodeRenderers.prepare(graph);
             let t1 = new Date().getTime();
@@ -152,7 +152,12 @@ export default class HwSchematic {
             .kgraph(graph);
         return this._draw();
     }
-
+    /*
+    * @returns subnode selected by path wrapped in a new root
+    * */
+    static selectGraphRootByPath(graph, path) {
+        return selectGraphRootByPath(graph, path);
+    }
     /*
      * Resolve layout and draw a component graph from layout data
      */

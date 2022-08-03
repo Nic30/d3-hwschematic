@@ -39,11 +39,9 @@
 
 <svg id="scheme-placeholder"></svg>
 <script>
-
-
     // schematic rendering script
     function viewport() {
-        var e = window,
+        let e = window,
             a = 'inner';
         if (!('innerWidth' in window)) {
             a = 'client';
@@ -67,7 +65,7 @@
         if (orig)
             orig(ev);
 
-        var w = viewport();
+        let w = viewport();
         svg.attr("width", w.width);
         svg.attr("height", w.height);
     }
@@ -204,7 +202,7 @@
             let schematicRoot = rootInput.value;
             if (schematicRoot !== null) {
                 setUrlParameterByName("schematicRoot", schematicRoot);
-                graph = selectGraphByPath(graph, schematicRoot);
+                graph = d3.HwSchematic.selectGraphRootByPath(graph, schematicRoot);
             }
         } catch (e) {
             hwSchematic.setErrorText(e);
@@ -237,7 +235,6 @@
         });
     }
 
-
     function getUrlParameterByName(name, url) {
         if (!url) url = window.location.href;
         url = new URL(url);
@@ -256,36 +253,6 @@
                 getAllPaths(child, prefix + "/", allPaths);
             }
         }
-    }
-
-    function findGraph(nodeArray, nodeName) {
-        for (let node of nodeArray) {
-            if (node.hwMeta.name === nodeName) {
-                return node
-            }
-        }
-        throw new Error("Node is not found: " + nodeName);
-    }
-
-    function selectGraphByPath(graph, path) {
-        let pathArray = path.split("/");
-        let first = true;
-        let newGraph = graph;
-        for (let nodeName of pathArray) {
-            if (first && nodeName === "") {
-                first = false;
-                continue;
-            }
-            newGraph = findGraph((newGraph.children || newGraph._children), nodeName);
-        }
-        if (graph !== newGraph) {
-            //case if path has nonzero length
-            //copy because we need to make graph immutable because we will need it later
-            graph = Object.assign({}, graph);
-            graph.children = [newGraph];
-        }
-        return graph;
-
     }
 
     function setUrlParameterByName(name, value, url) {
@@ -314,7 +281,7 @@
                     }
                     rootGraph = graph;
                     if (schematicRoot !== null) {
-                        graph = selectGraphByPath(graph, schematicRoot);
+                        graph = d3.HwSchematic.selectGraphRootByPath(graph, schematicRoot);
                     }
                     displayContents(graph);
                 } catch (e) {
