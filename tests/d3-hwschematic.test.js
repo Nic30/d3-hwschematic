@@ -105,12 +105,12 @@ test('Testing component expansion', () => {
 
 
 describe("Testing yosys", () => {
-	var testFiles = ["comparator", "mux2x1", "mux4x2", "constAdder", "subModuleBlackbox", 
-					 "partialConstDriver0", "partialConstDriver1", "partialConstDriver2",
-					 "partialConstDriver3", "partialConstDriver4", "partialConstDriver5",
-					 "partialConstDriver6", "wireModule", "split0", "split1", "split2", 
-					 "split3", "split4", "split5", "constPortDriver", "dff_sync_reset",
-					 "fifo", "latchinf"];
+	var testFiles = ["comparator", "mux2x1", "mux4x2", "constAdder", "subModuleBlackbox",
+		"subModuleBlackbox2", "partialConstDriver0", "partialConstDriver1", "partialConstDriver2",
+		"partialConstDriver3", "partialConstDriver4", "partialConstDriver5",
+		"partialConstDriver6", "wireModule", "split0", "split1", "split2",
+		"split3", "split4", "split5", "constPortDriver", "dff_sync_reset",
+		"fifo", "latchinf", "concat0", "concat1", "concat2", "fulladder_4bit"];
 	for (const testFile of testFiles) {
 		it("Testing file: " + testFile, () => {
 			var f = YOSYS_EXAMPLES + "/" + testFile + ".json";
@@ -123,3 +123,4 @@ describe("Testing yosys", () => {
 		})
 	}
 });
+
