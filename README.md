@@ -180,3 +180,4 @@ The node renderer has function `select` which is used to determine if renderer s
 * [Siva](https://github.com/jasonpjacobs/Siva) - Python, Qt based scheme editor
 * [HAL](https://github.com/emsec/hal) - Python, The Hardware Analyzer
 * [VSRTL](https://github.com/mortbopet/VSRTL/) - C++, Visual Simulation of Register Transfer Logic
+* [digitaljs](https://github.com/tilk/digitaljs) - JS, Simulator with Yosys synthesis and ElkJS interactive scheme
