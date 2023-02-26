@@ -19,6 +19,7 @@ export default {
     copy({
       targets: [
         { src: `src/${definition.name}.css`, dest: `dist/` },
+        { src: `src/${definition.name}-dark.css`, dest: `dist/` },
       ]
     }),
   ]
