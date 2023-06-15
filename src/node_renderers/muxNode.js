@@ -64,7 +64,12 @@ export class MuxNodeRenderer extends GenericNodeRenderer {
             }
             return "translate(" + d.x + " " + d.y + ")"
         })
-        .attr("class", (d) => d.hwMeta.cssClass)
+        .attr("class", (d) => {
+			if (d.hwMeta.cssClass)
+			    return 'node ' + d.hwMeta.cssClass;
+			else 
+				return 'node';
+			})
         .attr("style", (d) => d.hwMeta.cssStyle)
         .append("use")
         .attr("href", function (d) {

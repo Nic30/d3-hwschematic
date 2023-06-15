@@ -12,7 +12,12 @@ export class SliceNodeRenderer extends GenericNodeRenderer {
 	
 	render(root, nodeG) {
         nodeG
-            .attr("class", (d) => d.hwMeta.cssClass)
+            .attr("class", (d) => {
+              if (d.hwMeta.cssClass)
+                  return 'node ' + d.hwMeta.cssClass;
+              else 
+                return 'node';
+              })
             .attr("style", (d) => d.hwMeta.cssStyle);
         
         // spot node main body and set dimensions and style of node
