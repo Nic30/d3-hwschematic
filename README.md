@@ -160,7 +160,6 @@ The node renderer has function `select` which is used to determine if renderer s
 * [adaptagrams](https://github.com/mjwybrow/adaptagrams) - C++, Libraries for constraint-based layout and connector routing for diagrams.
 * [BreadboardSim](https://github.com/daveshah1/BreadboardSim) - C#, Circuit Simulator with Breadboard UI
 * [circuitsandbox](http://bitbucket.org/kwellwood/circuitsandbox) - Java, Boolean network editor and simulator
-* [CuFlow](https://github.com/jamesbowman/cuflow) - Python, experimental procedural PCB layout program
 * [diagrammer](https://github.com/freechipsproject/diagrammer) - Scala, Very simple visualizer for chisel3.
 * [Digital](https://github.com/hneemann/Digital) - Java, Simulator and design tool with GUI.
 * [digitaljs](https://github.com/tilk/digitaljs) - JS, Simulator with Yosys synthesis and ElkJS interactive scheme
@@ -183,3 +182,9 @@ The node renderer has function `select` which is used to determine if renderer s
 * [Spyce](https://github.com/imec-myhdl/Spyce) - Python, Simple circuit editor, MyHDL output (only prototype)
 * [verilog-dot](https://github.com/ben-marshall/verilog-dot) - Python, A simple dot file / graph generator for Verilog syntax trees.
 * [VSRTL](https://github.com/mortbopet/VSRTL/) - C++, Visual Simulation of Register Transfer Logic
+
+## Related opensource for electronic circuits electronic
+
+* [CuFlow](https://github.com/jamesbowman/cuflow) - Python, experimental procedural PCB layout program
+* [skidl](https://github.com/devbisme/skidl) library for circuit design
+* [kiutils](https://github.com/mvnmgrx/kiutils) kicad file parser
