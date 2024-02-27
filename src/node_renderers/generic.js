@@ -257,7 +257,7 @@ export class GenericNodeRenderer {
 			.append("g")
 			.attr("style", (d) => d.hwMeta.cssStyle)
 			.attr("class", (d) => {
-				if (d.hwMeta.cssStyle) {
+				if (d.hwMeta.cssClass) {
 					return "port " + d.hwMeta.cssClass;
 				} else {
 					return "port";
