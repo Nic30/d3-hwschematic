@@ -29,10 +29,8 @@ Use `npm install d3-hwschematic --save` to install this library and save it to y
 * Online: Documentation of [hwtLib](https://hwtlib.readthedocs.io/en/latest/?badge=latest).
   (Look for scheme href under component name.)
 
-* [jupyter_widget_hwt](https://github.com/Nic30/jupyter_widget_hwt) - Jupyter widgets for hw developement.
-
-* [vscode-extension-digitalcircuitanalysis](https://github.com/Nic30/vscode-extension-digitalcircuitanalysis) - vscode plugin containing d3-hwschematic
-
+* [vscode-extension-digitalcircuitanalysis](https://github.com/Nic30/vscode-extension-digitalcircuitanalysis) - vscode plugin for hw developement integrating d3-hwschematic.
+* [jupyter_widget_hwt](https://github.com/Nic30/jupyter_widget_hwt) - Jupyter widgets for hw developement integrating d3-hwschematic.
 ### From this git
 
 1. download dependencies and build this library
