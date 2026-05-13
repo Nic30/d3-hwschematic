@@ -180,7 +180,7 @@ export default class d3elk {
 		if (!this._transformGroup) {
 			return;
 		}
-		if (node === null) {
+		if (!node) {
 			node = this.graph;
 		}
 		zoomToFit(node, this.width, this.height, this._transformGroup);
