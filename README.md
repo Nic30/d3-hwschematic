@@ -182,6 +182,8 @@ The node renderer has function `select` which is used to determine if renderer s
 * [Spyce](https://github.com/imec-myhdl/Spyce) - Python, Simple circuit editor, MyHDL output (only prototype)
 * [verilog-dot](https://github.com/ben-marshall/verilog-dot) - Python, A simple dot file / graph generator for Verilog syntax trees.
 * [VSRTL](https://github.com/mortbopet/VSRTL/) - C++, Visual Simulation of Register Transfer Logic
+* [theano/d3viz](https://github.com/Theano/Theano/tree/master/theano/d3viz) - Python+js, Visualization of Theano ML graphs
+* [tapa-visualizer](https://github.com/tuna/tapa/tree/main/tapa-visualizer)
 
 ## Related opensource for electronic circuits electronic
 
