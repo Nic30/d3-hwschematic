@@ -4271,7 +4271,7 @@
             },
             {
               "hwMeta": {
-                "name": "<AxiStream, name=dataIn, _masterDir=DIRECTION.OUT>"
+                "name": "<Axi4Stream, name=dataIn, _masterDir=DIRECTION.OUT>"
               },
               "id": "4728",
               "source": "2",
@@ -14054,7 +14054,7 @@
             },
             {
               "hwMeta": {
-                "name": "<AxiStream, name=dataOut, _masterDir=DIRECTION.OUT>"
+                "name": "<Axi4Stream, name=dataOut, _masterDir=DIRECTION.OUT>"
               },
               "id": "5094",
               "source": "279",

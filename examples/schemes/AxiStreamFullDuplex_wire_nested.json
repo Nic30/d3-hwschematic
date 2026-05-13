@@ -388,7 +388,7 @@
         },
         {
           "hwMeta": {
-            "name": "<AxiStreamFullDuplex, name=dataIn, _masterDir=DIRECTION.OUT>"
+            "name": "<Axi4StreamFullDuplex, name=dataIn, _masterDir=DIRECTION.OUT>"
           },
           "id": "75",
           "source": "1",
@@ -398,7 +398,7 @@
         },
         {
           "hwMeta": {
-            "name": "<AxiStreamFullDuplex, name=dataOut, _masterDir=DIRECTION.OUT>"
+            "name": "<Axi4StreamFullDuplex, name=dataOut, _masterDir=DIRECTION.OUT>"
           },
           "id": "76",
           "source": "3",
@@ -1104,7 +1104,7 @@
   "hwMeta": {
     "cls": null,
     "maxId": 78,
-    "name": "AxiStreamFullDuplex_wire_nested"
+    "name": "Axi4StreamFullDuplex_wire_nested"
   },
   "ports": [],
   "properties": {

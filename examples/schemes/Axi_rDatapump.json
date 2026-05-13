@@ -81746,7 +81746,7 @@
             },
             {
               "hwMeta": {
-                "name": "<AxiStream, name=dataIn, _masterDir=DIRECTION.OUT>"
+                "name": "<Axi4Stream, name=dataIn, _masterDir=DIRECTION.OUT>"
               },
               "id": "4837",
               "source": "85",
@@ -83519,7 +83519,7 @@
         },
         {
           "hwMeta": {
-            "name": "<AxiStream, name=dataOut, _masterDir=DIRECTION.OUT>"
+            "name": "<Axi4Stream, name=dataOut, _masterDir=DIRECTION.OUT>"
           },
           "id": "5660",
           "source": "786",
@@ -83529,7 +83529,7 @@
         },
         {
           "hwMeta": {
-            "name": "<AxiStream, name=dataIn_0, _masterDir=DIRECTION.OUT>"
+            "name": "<Axi4Stream, name=dataIn_0, _masterDir=DIRECTION.OUT>"
           },
           "id": "5661",
           "source": "84",
