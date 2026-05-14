@@ -187,10 +187,12 @@ export default class d3elk {
 	}
 
 	terminate() {
-		if (this.layouter)
-			this.layouter.terminateWorker();
+    if (this.layouter) {
+        try {
+					this.layouter.terminateWorker();
+				} catch(e) {}
+    }
 	}
-
 	/**
      * Clean all layout possitions from nodes, nets and ports
      */

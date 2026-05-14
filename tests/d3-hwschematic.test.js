@@ -49,7 +49,7 @@ describe('Testing scheme rendering', () => {
 			expect(graphData).not.toBeNull();
 			return sch.bindData(graphData).then(
 				() => {
-					expect(applyLayoutSpy).toBeCalled();
+					expect(applyLayoutSpy).toHaveBeenCalled();
 					sch.terminate();
 				},
 				(reason) => {
